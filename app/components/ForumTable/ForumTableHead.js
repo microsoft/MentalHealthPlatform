@@ -1,5 +1,13 @@
-var React = require('react');
-var ReactDom = require('react-dom');
+const React = require('react');
+const ReactDom = require('react-dom');
+
+const forumTableHeaderStyle = {
+    border: "1px solid #ddd",
+    padding: "12px 8px",
+    textAlign: "left",
+    backgroundColor: "#4CAF50",
+    color: "white"
+};
 
 class ForumTableHead extends React.Component {
 
@@ -11,10 +19,10 @@ class ForumTableHead extends React.Component {
     }
 
     createHeaders() {
-        var headers = [];
-        for (var i = 0; i < this.state.headers.length; i++) {
+        const headers = [];
+        for (let i = 0; i < this.state.headers.length; i++) {
             headers.push(
-                <th key={"header-" + i}>
+                <th key={"header-" + i} style={forumTableHeaderStyle}>
                     {this.state.headers[i]}
                 </th>
             );

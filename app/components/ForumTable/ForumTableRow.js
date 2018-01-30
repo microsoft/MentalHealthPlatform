@@ -1,30 +1,44 @@
-var React = require('react');
-var ReactDom = require('react-dom');
+const React = require('react');
+const ReactDom = require('react-dom');
+
+const forumTableRowOddStyle = {
+    backgroundColor: "#f2f2f2"
+};
+
+const forumTableRowEvenStyle = {
+    backgroundColor: "#ffffff"
+};
+
+const forumTableCellStyle = {
+    border: "1px solid #ddd",
+    padding: "8px"
+};
 
 class ForumTableRow extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            rowIndex: this.props.rowIndex,
             discussionPreview: this.props.discussionPreview
         };
     }
 
-    createColumns() {
-        var columns = [];
-        var keys = Object.keys(this.state.discussionPreview);
-        for (var i = 0; i < keys.length; i++) {
-            columns.push(
-                <td key={"col-" + i}>
+    createCells() {
+        const cells = [];
+        const keys = Object.keys(this.state.discussionPreview);
+        for (let i = 0; i < keys.length; i++) {
+            cells.push(
+                <td key={"cell-" + i} style={forumTableCellStyle}>
                     {this.state.discussionPreview[keys[i]].toString()}
                 </td>
             );
         }
-        return columns;
+        return cells;
     }
 
     render() {
-        return <tr>{this.createColumns()}</tr>;
+        return <tr style={this.state.rowIndex % 2 == 0 ? forumTableRowEvenStyle : forumTableRowOddStyle}>{this.createCells()}</tr>;
     }
 }
 

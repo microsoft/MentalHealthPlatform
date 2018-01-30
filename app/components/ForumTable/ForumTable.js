@@ -1,8 +1,14 @@
-var React = require('react');
-var ReactDom = require('react-dom');
+const React = require('react');
+const ReactDom = require('react-dom');
 
-var ForumTableHead = require('./ForumTableHead');
-var ForumTableBody = require('./ForumTableBody');
+const ForumTableHead = require('./ForumTableHead');
+const ForumTableBody = require('./ForumTableBody');
+
+const forumTableStyle = {
+    fontFamily: "Arial",
+    borderCollapse: "collapse",
+    width: "100%"
+};
 
 class ForumTable extends React.Component {
 
@@ -15,7 +21,7 @@ class ForumTable extends React.Component {
 
     createForumTable() {
         return (
-            <table>
+            <table style={forumTableStyle}>
                 <ForumTableHead headers={this.state.data.headers} />
                 <ForumTableBody discussionPreviews={this.state.data.discussionPreviews} />
             </table>

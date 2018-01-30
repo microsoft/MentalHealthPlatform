@@ -1,7 +1,7 @@
-var React = require('react');
-var ReactDom = require('react-dom');
+const React = require('react');
+const ReactDom = require('react-dom');
 
-var App = require('./components/App');
+const App = require('./components/App');
 
 ReactDom.render(
 	<App />,

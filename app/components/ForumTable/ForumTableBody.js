@@ -1,7 +1,7 @@
-var React = require('react');
-var ReactDom = require('react-dom');
+const React = require('react');
+const ReactDom = require('react-dom');
 
-var ForumTableRow = require('./ForumTableRow');
+const ForumTableRow = require('./ForumTableRow');
 
 class ForumTableBody extends React.Component {
 
@@ -13,11 +13,12 @@ class ForumTableBody extends React.Component {
     }
 
     createRows() {
-        var rows = [];
-        for (var i = 0; i < this.state.discussionPreviews.length; i++) {
+        const rows = [];
+        for (let i = 0; i < this.state.discussionPreviews.length; i++) {
             rows.push(
                 <ForumTableRow
                     key={"row-" + i}
+                    rowIndex={i}
                     discussionPreview={this.state.discussionPreviews[i]}
                 />
             );

@@ -1,14 +1,14 @@
-var React = require('react');
-var ReactDom = require('react-dom');
+const React = require('react');
+const ReactDom = require('react-dom');
 
-var ForumTable = require('./ForumTable/ForumTable');
+const ForumTable = require('./ForumTable/ForumTable');
 
 class App extends React.Component {
     
     generateData() {
-        var discussionPreviews = [];
-        for (var i = 0; i < 10; i++) {
-            var discussionPreview = {
+        const discussionPreviews = [];
+        for (let i = 0; i < 10; i++) {
+            const discussionPreview = {
                 topic: "topic",
                 author: "author",
                 date: new Date(),
@@ -19,9 +19,9 @@ class App extends React.Component {
             discussionPreviews.push(discussionPreview);
         };
 
-        var headers = ["Topic", "Author", "Date", "Last Comment Author", "Replies", "Views"];
+        const headers = ["Topic", "Author", "Date", "Last Comment Author", "Replies", "Views"];
 
-        var data = {
+        const data = {
             headers: headers,
             discussionPreviews: discussionPreviews
         }

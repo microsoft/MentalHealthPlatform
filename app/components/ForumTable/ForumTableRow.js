@@ -24,16 +24,59 @@ class ForumTableRow extends React.Component {
         };
     }
 
+    createTopicCell(i, cellData) {
+        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "70%"});
+        const topicStyle = {
+            fontWeight: "bold",
+            fontSize: "large"
+        };
+                
+        return (
+            <td key={"cell-" + i} style={cellStyle}>
+                <a href="#"><span style={topicStyle}>{cellData.topic}</span></a>
+                <br />
+                by <a href="#">{cellData.author}</a>
+            </td>
+        );
+    }
+
+    createLastCommentCell(i, cellData) {
+        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "20%"});
+        return (
+            <td key={"cell-" + i} style={cellStyle}>
+                {cellData.date.toLocaleString()}
+                <br />
+                by <a href="#">{cellData.author}</a>
+            </td>
+        );
+    }
+
+    createRepliesCell(i, cellData) {
+        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "5%", textAlign: "center"});
+        return (
+            <td key={"cell-" + i} style={cellStyle}>
+                {cellData.numberOfReplies}
+            </td>
+        );
+    }
+
+    createViewsCell(i, cellData) {
+        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "5%", textAlign: "center"});
+        return (
+            <td key={"cell-" + i} style={cellStyle}>
+                {cellData.numberOfViews}
+            </td>
+        );
+    }
+
     createCells() {
         const cells = [];
-        const keys = Object.keys(this.state.discussionPreview);
-        for (let i = 0; i < keys.length; i++) {
-            cells.push(
-                <td key={"cell-" + i} style={forumTableCellStyle}>
-                    {this.state.discussionPreview[keys[i]].toString()}
-                </td>
-            );
-        }
+        cells.push(
+            this.createTopicCell(0, this.state.discussionPreview.topic),
+            this.createLastCommentCell(1, this.state.discussionPreview.lastComment),
+            this.createRepliesCell(2, this.state.discussionPreview.replies),
+            this.createViewsCell(2, this.state.discussionPreview.views)
+        );
         return cells;
     }
 

@@ -9,17 +9,25 @@ class App extends React.Component {
         const discussionPreviews = [];
         for (let i = 0; i < 10; i++) {
             const discussionPreview = {
-                topic: "topic",
-                author: "author",
-                date: new Date(),
-                lastCommentAuthor: "lastCommentAuthor",
-                numberOfReplies: 12,
-                numberOfViews: 123,
+                topic: {
+                    topic: "Topic",
+                    author: "author"
+                },
+                lastComment: {
+                    date: new Date(),
+                    author: "author"
+                },                
+                replies: {
+                    numberOfReplies: 12
+                },
+                views: {
+                    numberOfViews: 123,
+                }
             };
             discussionPreviews.push(discussionPreview);
         };
 
-        const headers = ["Topic", "Author", "Date", "Last Comment Author", "Replies", "Views"];
+        const headers = ["Topic", "Last Comment", "Replies", "Views"];
 
         const data = {
             headers: headers,

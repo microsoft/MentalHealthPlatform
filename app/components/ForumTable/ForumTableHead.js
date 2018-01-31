@@ -4,7 +4,6 @@ const ReactDom = require('react-dom');
 const forumTableHeaderStyle = {
     border: "1px solid #ddd",
     padding: "12px 8px",
-    textAlign: "left",
     backgroundColor: "#4CAF50",
     color: "white"
 };
@@ -21,8 +20,11 @@ class ForumTableHead extends React.Component {
     createHeaders() {
         const headers = [];
         for (let i = 0; i < this.state.headers.length; i++) {
+            const textAlign = (i == 0 | i == 1) ? "left" : "center";
+            const headerStyle = Object.assign({}, forumTableHeaderStyle, {textAlign: textAlign});
+            
             headers.push(
-                <th key={"header-" + i} style={forumTableHeaderStyle}>
+                <th key={"header-" + i} style={headerStyle}>
                     {this.state.headers[i]}
                 </th>
             );

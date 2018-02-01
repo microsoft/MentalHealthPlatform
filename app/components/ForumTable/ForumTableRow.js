@@ -14,6 +14,10 @@ const forumTableCellStyle = {
     padding: "8px"
 };
 
+const cellLinkStyle = {
+    color: "#000000"
+};
+
 class ForumTableRow extends React.Component {
 
     constructor(props) {
@@ -33,9 +37,9 @@ class ForumTableRow extends React.Component {
                 
         return (
             <td key={"cell-" + i} style={cellStyle}>
-                <a href="#"><span style={topicStyle}>{cellData.topic}</span></a>
+                <a href="#" style={cellLinkStyle}><span style={topicStyle}>{cellData.topic}</span></a>
                 <br />
-                by <a href="#">{cellData.author}</a>
+                by <a href="#" style={cellLinkStyle}>{cellData.author}</a>
             </td>
         );
     }
@@ -46,7 +50,7 @@ class ForumTableRow extends React.Component {
             <td key={"cell-" + i} style={cellStyle}>
                 {cellData.date.toLocaleString()}
                 <br />
-                by <a href="#">{cellData.author}</a>
+                by <a href="#" style={cellLinkStyle}>{cellData.author}</a>
             </td>
         );
     }

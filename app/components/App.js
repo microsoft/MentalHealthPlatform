@@ -1,11 +1,11 @@
 const React = require('react');
 const ReactDom = require('react-dom');
 
-const BasicPage = require('./BasicPage');
+const NavigationBarPage = require('./NavigationBarPage');
 
 class App extends React.Component {
     render() {
-        return <BasicPage />;
+        return <NavigationBarPage />;
     }
 }
 

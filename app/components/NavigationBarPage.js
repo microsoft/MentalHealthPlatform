@@ -8,7 +8,7 @@ const containerStyle = {
     padding: "25px"
 };
 
-class BasicPage extends React.Component {
+class NavigationBarPage extends React.Component {
     render() {
         return (
             <div>
@@ -21,4 +21,4 @@ class BasicPage extends React.Component {
     }
 }
 
-module.exports = BasicPage;
+module.exports = NavigationBarPage;

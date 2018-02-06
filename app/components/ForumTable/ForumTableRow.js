@@ -79,7 +79,7 @@ class ForumTableRow extends React.Component {
             this.createTopicCell(0, this.state.discussionPreview.topic),
             this.createLastCommentCell(1, this.state.discussionPreview.lastComment),
             this.createRepliesCell(2, this.state.discussionPreview.replies),
-            this.createViewsCell(2, this.state.discussionPreview.views)
+            this.createViewsCell(3, this.state.discussionPreview.views)
         );
         return cells;
     }

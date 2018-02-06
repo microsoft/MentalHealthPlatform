@@ -1,11 +1,20 @@
-const React = require('react');
-const ReactDom = require('react-dom');
+import React from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
 
-const NavigationBarPage = require('./NavigationBarPage');
+import NavigationBarPage from './NavigationBarPage';
 
 class App extends React.Component {
     render() {
-        return <NavigationBarPage />;
+        return (
+            <BrowserRouter history={hashHistory}>
+                <div>
+                    <Route path='/' component={NavigationBarPage}>
+                        <Route path='/index' component={NavigationBarPage} />
+                    </Route>
+                </div>
+            </BrowserRouter>
+        );
     }
 }
 

@@ -1,8 +1,9 @@
-const React = require('react');
-const ReactDom = require('react-dom');
+import React from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
 
-const ForumTableHead = require('./ForumTableHead');
-const ForumTableBody = require('./ForumTableBody');
+import ForumTableHead from './ForumTableHead';
+import ForumTableBody from './ForumTableBody';
 
 const forumTableStyle = {
     fontFamily: "Arial",

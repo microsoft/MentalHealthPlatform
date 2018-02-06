@@ -1,8 +1,9 @@
-const React = require('react');
-const ReactDom = require('react-dom');
+import React from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
 
-const Forum = require('./Forum');
-const NavigationBar = require('./NavigationBar');
+import Forum from './Forum';
+import NavigationBar from './NavigationBar';
 
 const containerStyle = {
     padding: "25px"

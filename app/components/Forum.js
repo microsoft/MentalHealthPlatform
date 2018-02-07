@@ -44,10 +44,14 @@ class Forum extends React.Component {
         return data;
     }
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <div>
-                <h1 style={forumTitleStyle}>Forum Title</h1>
+                <h1 style={forumTitleStyle}>{this.props.location.state.forumTitle}</h1>
                 <ForumTable data={this.generateData()} />
             </div>
         );

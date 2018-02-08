@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import Forum from './Forum';
+import Discussion from './Discussion';
 
 const forumTableStyle = {
     margin: "0 auto",
@@ -76,7 +77,6 @@ class Topics extends React.Component {
             pathname: `${this.state.match.url}/${topic.path}`,
             forumTitle: topic.title
         };
-        console.log(this.state.hoveredCellIndex);
         return (
             <td
                 key={"cell-" + cellIndex}
@@ -92,7 +92,10 @@ class Topics extends React.Component {
     cellOnClickHandler(linkProps) {    
         this.props.history.push({
             pathname: linkProps.pathname,
-            state: { forumTitle: linkProps.forumTitle }
+            state: {
+                match: this.state.match,
+                forumTitle: linkProps.forumTitle
+            }
         });
     }
 
@@ -118,10 +121,11 @@ class Topics extends React.Component {
                         </tbody>
                     </table>
                 )}/>
-                <Route path={`${this.state.match.url}/:forumId`} component={Forum} />
+                <Route exact path={`${this.state.match.url}/:forumId`} component={Forum} />
+                <Route path={`${this.state.match.url}/:forumId/:discussionId`} component={Discussion} />
             </div>
         );
     }
 }
 
-module.exports = Topics;
+module.exports = withRouter(Topics);

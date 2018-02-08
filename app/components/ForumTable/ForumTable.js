@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import ForumTableHead from './ForumTableHead';
 import ForumTableBody from './ForumTableBody';
@@ -16,6 +16,7 @@ class ForumTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            match: this.props.match,
             data: this.props.data
         };
     }
@@ -24,7 +25,7 @@ class ForumTable extends React.Component {
         return (
             <table style={forumTableStyle}>
                 <ForumTableHead headers={this.state.data.headers} />
-                <ForumTableBody discussionPreviews={this.state.data.discussionPreviews} />
+                <ForumTableBody match={this.state.match} discussionPreviews={this.state.data.discussionPreviews} />
             </table>
         );
     }
@@ -34,4 +35,4 @@ class ForumTable extends React.Component {
     }
 }
 
-module.exports = ForumTable;
+module.exports = withRouter(ForumTable);

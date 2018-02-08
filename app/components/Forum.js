@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import ForumTable from './ForumTable/ForumTable';
 
@@ -16,8 +16,8 @@ class Forum extends React.Component {
         const discussionPreviews = [];
         for (let i = 0; i < 10; i++) {
             const discussionPreview = {
-                topic: {
-                    topic: "Topic",
+                discussion: {
+                    discussion: "Discussion " + i,
                     author: "author"
                 },
                 lastComment: {
@@ -34,7 +34,7 @@ class Forum extends React.Component {
             discussionPreviews.push(discussionPreview);
         };
 
-        const headers = ["Topic", "Last Comment", "Replies", "Views"];
+        const headers = ["Discussion", "Last Comment", "Replies", "Views"];
 
         const data = {
             headers: headers,
@@ -46,16 +46,19 @@ class Forum extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            match: this.props.match
+        };
     }
 
     render() {
         return (
             <div>
                 <h1 style={forumTitleStyle}>{this.props.location.state.forumTitle}</h1>
-                <ForumTable data={this.generateData()} />
+                <ForumTable match={this.state.match} data={this.generateData()} />
             </div>
         );
     }
 }
 
-module.exports = Forum;
+module.exports = withRouter(Forum);

@@ -4,10 +4,11 @@ import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } f
 
 const discussionTableHeaderStyle = {
     border: "1px solid #ddd",
-    padding: "12px 8px",
+    padding: "8px",
     backgroundColor: "#CCCCCC",
-    color: "white",
-    textAlign: "left"
+    color: "#333333",
+    textAlign: "right",
+    fontSize: "small"
 };
 
 class DiscussionTableHead extends React.Component {
@@ -22,7 +23,7 @@ class DiscussionTableHead extends React.Component {
     createHeaders() {
         return (
             <th key={"header-" + 0} colSpan={2} style={discussionTableHeaderStyle}>
-                {this.state.date}
+                {this.state.date.toLocaleString()}
             </th>
         );
     }

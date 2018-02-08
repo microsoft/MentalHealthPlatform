@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } f
 
 const forumTableHeaderStyle = {
     border: "1px solid #ddd",
-    padding: "12px 8px",
+    padding: "10px",
     backgroundColor: "#4CAF50",
     color: "white"
 };

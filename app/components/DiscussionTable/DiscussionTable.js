@@ -26,7 +26,7 @@ class DiscussionTable extends React.Component {
     createDiscussionTable() {
         return (
             <table key={"table-" + this.state.index} style={discussionTableStyle}>
-                <DiscussionTableHead headers={this.state.post.date} />
+                <DiscussionTableHead date={this.state.post.date} />
                 <DiscussionTableBody match={this.state.match} post={this.state.post} />
             </table>
         );

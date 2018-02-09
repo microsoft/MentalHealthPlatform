@@ -29,9 +29,22 @@ class Topics extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
+            navigationPath: this.updateNavigationPath(this.props.navigationPath, "Topics"),
             numberOfColumns: 3,
             hoveredCellIndex: -1
         };
+    }
+
+    updateNavigationPath(navigationPath, title) {
+        const segment = {
+            title: title,
+            url: this.props.match.url
+        };
+        if (navigationPath) {
+            navigationPath.push(segment);
+            return navigationPath;
+        }
+        return [segment];
     }
     
     generateData() {
@@ -39,7 +52,7 @@ class Topics extends React.Component {
         for (let i = 0; i < 10; i++) {
             const topic = {
                 path: "forum" + i,
-                title: "TOPIC " + i                
+                title: "Topic " + i                
             };
             topics.push(topic);
         };
@@ -94,6 +107,7 @@ class Topics extends React.Component {
             pathname: linkProps.pathname,
             state: {
                 match: this.state.match,
+                navigationPath: this.state.navigationPath,
                 forumTitle: linkProps.forumTitle
             }
         });

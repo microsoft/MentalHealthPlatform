@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
 
+import NavigationPath from './NavigationPath';
 import DiscussionTable from './DiscussionTable/DiscussionTable';
 
 const discussionTitleStyle = {
@@ -13,7 +14,6 @@ const discussionTitleStyle = {
 class Discussion extends React.Component {
     
     generateData() {
-
         let postContent = "";
         for (let a = 0; a < 100; a++) {
             postContent += "text ";
@@ -47,8 +47,22 @@ class Discussion extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
+            navigationPath: this.updateNavigationPath(this.props.location.state.navigationPath, this.props.location.state.discussionTitle),
             discussionTitle: this.props.location.state.discussionTitle
         };
+    }
+
+    updateNavigationPath(navigationPath, title) {
+        console.log(this.props);
+        const segment = {
+            title: title,
+            url: this.props.match.url
+        };
+        if (navigationPath) {
+            navigationPath.push(segment);
+            return navigationPath;
+        }
+        return [segment];
     }
 
     createDiscussionTables(data) {
@@ -64,6 +78,7 @@ class Discussion extends React.Component {
     render() {
         return (
             <div>
+                <NavigationPath navigationPath={this.state.navigationPath} />
                 <h1 style={discussionTitleStyle}>{this.state.discussionTitle}</h1>
                 {this.createDiscussionTables(this.generateData())}
             </div>

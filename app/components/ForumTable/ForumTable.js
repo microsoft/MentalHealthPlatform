@@ -17,6 +17,7 @@ class ForumTable extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
+            navigationPath: this.props.navigationPath,
             data: this.props.data
         };
     }
@@ -25,7 +26,7 @@ class ForumTable extends React.Component {
         return (
             <table style={forumTableStyle}>
                 <ForumTableHead headers={this.state.data.headers} />
-                <ForumTableBody match={this.state.match} discussionPreviews={this.state.data.discussionPreviews} />
+                <ForumTableBody match={this.state.match} navigationPath={this.state.navigationPath} discussionPreviews={this.state.data.discussionPreviews} />
             </table>
         );
     }

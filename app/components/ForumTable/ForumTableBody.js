@@ -10,6 +10,7 @@ class ForumTableBody extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
+            navigationPath: this.props.navigationPath,
             discussionPreviews: this.props.discussionPreviews
         };
     }
@@ -20,6 +21,7 @@ class ForumTableBody extends React.Component {
             rows.push(
                 <ForumTableRow
                     match={this.state.match}
+                    navigationPath={this.state.navigationPath}
                     key={"row-" + i}
                     rowIndex={i}
                     discussionPreview={this.state.discussionPreviews[i]}

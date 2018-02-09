@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
+import NavigationPath from './NavigationPath';
 import ForumTable from './ForumTable/ForumTable';
 
 const forumTitleStyle = {
@@ -47,15 +48,30 @@ class Forum extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            match: this.props.match
+            match: this.props.match,
+            navigationPath: this.updateNavigationPath(this.props.location.state.navigationPath, this.props.location.state.forumTitle)
         };
+    }
+
+    updateNavigationPath(navigationPath, title) {
+        console.log(this.props);
+        const segment = {
+            title: title,
+            url: this.props.match.url
+        };
+        if (navigationPath) {
+            navigationPath.push(segment);
+            return navigationPath;
+        }
+        return [segment];
     }
 
     render() {
         return (
             <div>
+                <NavigationPath navigationPath={this.state.navigationPath} />
                 <h1 style={forumTitleStyle}>{this.props.location.state.forumTitle}</h1>
-                <ForumTable match={this.state.match} data={this.generateData()} />
+                <ForumTable match={this.state.match} navigationPath={this.state.navigationPath} data={this.generateData()} />
             </div>
         );
     }

@@ -27,6 +27,7 @@ class ForumTableRow extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
+            navigationPath: this.props.navigationPath,
             rowIndex: this.props.rowIndex,
             discussionPreview: this.props.discussionPreview
         };
@@ -43,6 +44,7 @@ class ForumTableRow extends React.Component {
 
         const discussionLinkProps = {
             pathname: `${this.state.match.url}/${cellData.discussion.replace(" ", "")}`,
+            navigationPath: this.state.navigationPath,
             discussionTitle: cellData.discussion
         }; 
                 
@@ -96,11 +98,12 @@ class ForumTableRow extends React.Component {
         return cells;
     }
 
-    discussionLinkOnClickHandler(linkProps) {   
+    discussionLinkOnClickHandler(linkProps) {
         this.props.history.push({
             pathname: linkProps.pathname,
             state: {
                 match: this.state.match,
+                navigationPath: linkProps.navigationPath,
                 discussionTitle: linkProps.discussionTitle
             }
         });

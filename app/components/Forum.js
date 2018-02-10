@@ -49,17 +49,23 @@ class Forum extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
-            navigationPath: this.updateNavigationPath(this.props.location.state.navigationPath, this.props.location.state.forumTitle)
+            navigationPath: this.updateNavigationPath(this.props.location.state.navigationPath, "forum", this.props.location.state.forumTitle)
         };
     }
 
-    updateNavigationPath(navigationPath, title) {
-        console.log(this.props);
+    updateNavigationPath(navigationPath, pageType, title) {
         const segment = {
             title: title,
+            pageType: pageType,
             url: this.props.match.url
         };
         if (navigationPath) {
+            for (let i = 0; i < navigationPath.length; i++) {
+                if (navigationPath[i].pageType.indexOf(pageType) >= 0) {
+                    navigationPath[i] = segment;
+                    return navigationPath;
+                }
+            }
             navigationPath.push(segment);
             return navigationPath;
         }

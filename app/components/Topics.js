@@ -29,18 +29,25 @@ class Topics extends React.Component {
         super(props);
         this.state = {
             match: this.props.match,
-            navigationPath: this.updateNavigationPath(this.props.navigationPath, "Topics"),
+            navigationPath: this.updateNavigationPath(this.props.navigationPath, "topics", "Topics"),
             numberOfColumns: 3,
             hoveredCellIndex: -1
         };
     }
 
-    updateNavigationPath(navigationPath, title) {
+    updateNavigationPath(navigationPath, pageType, title) {
         const segment = {
             title: title,
+            pageType: pageType,
             url: this.props.match.url
         };
         if (navigationPath) {
+            for (let i = 0; i < navigationPath.length; i++) {
+                if (navigationPath[i].pageType.indexOf(pageType) >= 0) {
+                    navigationPath[i] = segment;
+                    return navigationPath;
+                }
+            }
             navigationPath.push(segment);
             return navigationPath;
         }

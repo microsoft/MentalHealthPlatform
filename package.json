@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MentalHealthCommunity/website#readme",
   "dependencies": {
+    "mysql": "^2.15.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^2.8.1",

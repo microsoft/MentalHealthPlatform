@@ -23,5 +23,12 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true
 	},
-	plugins: [HTMLWebpackPluginConfig]
+	plugins: [HTMLWebpackPluginConfig],
+	node: {
+		console: 'empty',
+		fs: 'empty',
+		net: 'empty',
+		tls: 'empty',
+		console: true
+	}
 };

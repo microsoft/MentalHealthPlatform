@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
+import TopicsSearchBar from './TopicsSearchBar';
 import Forum from './Forum';
 import Discussion from './Discussion';
 
@@ -136,11 +137,14 @@ class Topics extends React.Component {
         return (
             <div>
                 <Route exact path={`${this.state.match.url}`} render={() => (
-                    <table style={forumTableStyle}>
-                        <tbody>
-                            {this.createRows(this.generateData())}
-                        </tbody>
-                    </table>
+                    <div>
+                        <TopicsSearchBar />
+                        <table style={forumTableStyle}>
+                            <tbody>
+                                {this.createRows(this.generateData())}
+                            </tbody>
+                        </table>
+                    </div>
                 )}/>
                 <Route exact path={`${this.state.match.url}/:forumId`} component={Forum} />
                 <Route path={`${this.state.match.url}/:forumId/:discussionId`} component={Discussion} />

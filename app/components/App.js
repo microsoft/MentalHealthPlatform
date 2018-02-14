@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, Redirect, hashHistory, browserHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, IndexRoute, Redirect, hashHistory, browserHistory } from 'react-router-dom';
 
-import Forum from './Forum';
 import Topics from './Topics';
+import SignupLogin from './SignupLogin';
 import NavigationBar from './NavigationBar';
 
 const containerStyle = {
@@ -20,7 +20,10 @@ class App extends React.Component {
                     <Route path='/'>
                         <div>
                             <Route path='/topics' component={Topics} />
-                            <Redirect from="/" to="/topics" />
+                            <Route path='/login' component={SignupLogin} />
+                            <Switch>
+                                <Route exact path="/" component={Topics} />
+                            </Switch>
                         </div>
                     </Route>
                 </div>

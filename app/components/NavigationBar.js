@@ -41,7 +41,7 @@ class NavigationBar extends React.Component {
         return (
             <div style={navigationBarStyle}>
                 <div style={navigationBarLeftStyle}>                
-                    <Link to="/index" onClick={() => history.push('index')} style={navigationBarTitleLink}>Mental Health Community</Link>                    
+                    <Link to="/" onClick={() => history.push('/')} style={navigationBarTitleLink}>Mental Health Community</Link>                    
                 </div>
                 <div style={navigationBarRightStyle}>
                     <a href="./login" style={navigationBarLoginLink}>Login</a>

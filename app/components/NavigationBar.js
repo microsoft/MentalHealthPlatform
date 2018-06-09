@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 
 const navigationBarStyle = {
     display: "flex",
@@ -38,14 +39,16 @@ const navigationBarLoginLink = {
 class NavigationBar extends React.Component {
     createNavigationBar() {
         return (
-            <div style={navigationBarStyle}>
-                <div style={navigationBarLeftStyle}>                
-                    <a href="./" style={navigationBarTitleLink}>Mental Health Community</a>
+            <BrowserRouter>
+                <div style={navigationBarStyle}>
+                    <div style={navigationBarLeftStyle}>                
+                        <NavLink exact to="./" style={navigationBarTitleLink}>Mental Health Community</NavLink>
+                    </div>
+                    <div style={navigationBarRightStyle}>
+                        <NavLink exact to="./login" style={navigationBarLoginLink}>Login</NavLink>
+                    </div>
                 </div>
-                <div style={navigationBarRightStyle}>
-                    <a href="./login" style={navigationBarLoginLink}>Login</a>
-                </div>
-            </div>
+            </BrowserRouter>
         );
     }
     

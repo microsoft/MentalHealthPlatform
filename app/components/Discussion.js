@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
 
-import NavigationPath from './NavigationPath';
 import DiscussionTable from './DiscussionTable/DiscussionTable';
 
 const discussionTitleStyle = {
@@ -46,36 +44,15 @@ class Discussion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            match: this.props.match,
-            navigationPath: this.updateNavigationPath(this.props.location.state.navigationPath, "discussion", this.props.location.state.discussionTitle),
             discussionTitle: this.props.location.state.discussionTitle
         };
-    }
-
-    updateNavigationPath(navigationPath, pageType, title) {
-        const segment = {
-            title: title,
-            pageType: pageType,
-            url: this.props.match.url
-        };
-        if (navigationPath) {
-            for (let i = 0; i < navigationPath.length; i++) {
-                if (navigationPath[i].pageType.indexOf(pageType) >= 0) {
-                    navigationPath[i] = segment;
-                    return navigationPath;
-                }
-            }
-            navigationPath.push(segment);
-            return navigationPath;
-        }
-        return [segment];
     }
 
     createDiscussionTables(data) {
         const discussionTables = [];
         for (let i = 0; i < data.posts.length; i++) {
             discussionTables.push(
-                <DiscussionTable match={this.state.match} index={i} post={data.posts[i]} />
+                <DiscussionTable index={i} post={data.posts[i]} />
             );
         }
         return discussionTables;
@@ -84,7 +61,6 @@ class Discussion extends React.Component {
     render() {
         return (
             <div>
-                <NavigationPath navigationPath={this.state.navigationPath} />
                 <h1 style={discussionTitleStyle}>{this.state.discussionTitle}</h1>
                 {this.createDiscussionTables(this.generateData())}
             </div>

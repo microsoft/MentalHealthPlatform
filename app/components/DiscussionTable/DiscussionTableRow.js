@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import Discussion from './../Discussion'
 
@@ -23,8 +22,7 @@ class DiscussionTableRow extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            match: this.props.match,            
+        this.state = {     
             post: this.props.post
         };
     }
@@ -68,4 +66,4 @@ class DiscussionTableRow extends React.Component {
     }
 }
 
-module.exports = withRouter(DiscussionTableRow);
+module.exports = DiscussionTableRow;

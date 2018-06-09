@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import Discussion from './../Discussion'
 
@@ -26,8 +25,6 @@ class ForumTableRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            match: this.props.match,
-            navigationPath: this.props.navigationPath,
             rowIndex: this.props.rowIndex,
             discussionPreview: this.props.discussionPreview
         };
@@ -43,15 +40,12 @@ class ForumTableRow extends React.Component {
         };
 
         const discussionLinkProps = {
-            pathname: `${this.state.match.url}/${cellData.discussion.replace(" ", "")}`,
-            navigationPath: this.state.navigationPath,
             discussionTitle: cellData.discussion
         }; 
                 
         return (
             <td key={"cell-" + i} style={cellStyle}>
                 <span onClick={() => this.discussionLinkOnClickHandler(discussionLinkProps)} style={discussionStyle}>{cellData.discussion}</span>
-                <Route path={`${this.state.match.url}/:discussionId`} component={Discussion} />
                 <br />
                 by <a href="#" style={cellLinkStyle}>{cellData.author}</a>
             </td>
@@ -99,14 +93,6 @@ class ForumTableRow extends React.Component {
     }
 
     discussionLinkOnClickHandler(linkProps) {
-        this.props.history.push({
-            pathname: linkProps.pathname,
-            state: {
-                match: this.state.match,
-                navigationPath: linkProps.navigationPath,
-                discussionTitle: linkProps.discussionTitle
-            }
-        });
     }
 
     render() {
@@ -114,4 +100,4 @@ class ForumTableRow extends React.Component {
     }
 }
 
-module.exports = withRouter(ForumTableRow);
+module.exports = ForumTableRow;

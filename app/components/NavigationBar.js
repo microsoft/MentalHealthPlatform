@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router-dom';
 
 const navigationBarStyle = {
     display: "flex",
@@ -41,7 +40,7 @@ class NavigationBar extends React.Component {
         return (
             <div style={navigationBarStyle}>
                 <div style={navigationBarLeftStyle}>                
-                    <Link to="/" onClick={() => history.push('/')} style={navigationBarTitleLink}>Mental Health Community</Link>                    
+                    <a href="./" style={navigationBarTitleLink}>Mental Health Community</a>
                 </div>
                 <div style={navigationBarRightStyle}>
                     <a href="./login" style={navigationBarLoginLink}>Login</a>

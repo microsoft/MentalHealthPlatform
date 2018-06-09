@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import searchIcon from './../images/search_icon.png';
 
@@ -29,7 +28,6 @@ class TopicsSearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
         };
     }
 
@@ -43,4 +41,4 @@ class TopicsSearchBar extends React.Component {
     }
 }
 
-module.exports = withRouter(TopicsSearchBar);
+module.exports = TopicsSearchBar;

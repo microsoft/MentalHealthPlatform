@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 const signupLoginFormStyle = {
     display: "flex",
@@ -145,4 +144,4 @@ class SignupLogin extends React.Component {
     }
 }
 
-module.exports = withRouter(SignupLogin);
+module.exports = SignupLogin;

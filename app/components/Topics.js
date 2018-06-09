@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
 import Forum from './Forum';
@@ -29,37 +28,15 @@ class Topics extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            match: this.props.match,
-            navigationPath: this.updateNavigationPath(this.props.navigationPath, "topics", "Topics"),
             numberOfColumns: 3,
             hoveredCellIndex: -1
         };
-    }
-
-    updateNavigationPath(navigationPath, pageType, title) {
-        const segment = {
-            title: title,
-            pageType: pageType,
-            url: this.props.match.url
-        };
-        if (navigationPath) {
-            for (let i = 0; i < navigationPath.length; i++) {
-                if (navigationPath[i].pageType.indexOf(pageType) >= 0) {
-                    navigationPath[i] = segment;
-                    return navigationPath;
-                }
-            }
-            navigationPath.push(segment);
-            return navigationPath;
-        }
-        return [segment];
     }
     
     generateData() {
         const topics = [];
         for (let i = 0; i < 10; i++) {
             const topic = {
-                path: "forum" + i,
                 title: "Topic " + i                
             };
             topics.push(topic);
@@ -95,7 +72,6 @@ class Topics extends React.Component {
 
     createCell(cellIndex, overallIndex, topic) {
         const linkProps = {
-            pathname: `${this.state.match.url}/${topic.path}`,
             forumTitle: topic.title
         };
         return (
@@ -111,14 +87,6 @@ class Topics extends React.Component {
     }
 
     cellOnClickHandler(linkProps) {    
-        this.props.history.push({
-            pathname: linkProps.pathname,
-            state: {
-                match: this.state.match,
-                navigationPath: this.state.navigationPath,
-                forumTitle: linkProps.forumTitle
-            }
-        });
     }
 
     cellOnMouseover(overallIndex) {
@@ -136,21 +104,15 @@ class Topics extends React.Component {
     render() {
         return (
             <div>
-                <Route exact path={`${this.state.match.url}`} render={() => (
-                    <div>
-                        <TopicsSearchBar />
-                        <table style={forumTableStyle}>
-                            <tbody>
-                                {this.createRows(this.generateData())}
-                            </tbody>
-                        </table>
-                    </div>
-                )}/>
-                <Route exact path={`${this.state.match.url}/:forumId`} component={Forum} />
-                <Route path={`${this.state.match.url}/:forumId/:discussionId`} component={Discussion} />
+                <TopicsSearchBar />
+                <table style={forumTableStyle}>
+                    <tbody>
+                        {this.createRows(this.generateData())}
+                    </tbody>
+                </table>
             </div>
         );
     }
 }
 
-module.exports = withRouter(Topics);
+module.exports = Topics;

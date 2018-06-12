@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const navigationBarStyle = {
     display: "flex",

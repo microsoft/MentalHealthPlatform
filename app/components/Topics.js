@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
 import Forum from './Forum';
@@ -25,7 +26,6 @@ const forumTableCellOnMouseoutStyle = Object.assign({}, forumTableCellStyle, {ba
 const forumTableCellOnMouseoverStyle = Object.assign({}, forumTableCellStyle, {backgroundColor: "#CCCCCC"});
 
 class Topics extends React.Component {
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +46,8 @@ class Topics extends React.Component {
         return topics;
     }
 
-    createRows(topics) {
+    // Populates table with all rows
+    createAllRows(topics) {
         const rows = [];
         for (let i = 0; i < topics.length; i += this.state.numberOfColumns) {
             const rowTopics = [];
@@ -58,12 +59,19 @@ class Topics extends React.Component {
         return rows;
     }
 
+    /* 
+        Create individual row
+        rowIndex: key that's required by React
+        rowTopics: actual data that's rendered
+    */
     createRow(rowIndex, rowTopics) {
         const row = [];
+        var path = "";
         for (let i = 0; i < this.state.numberOfColumns; i++) {
             if (!rowTopics[i]) {
                 break;
             }
+
             row.push(this.createCell(i, rowIndex * this.state.numberOfColumns + i, rowTopics[i]));
         }
         return (
@@ -71,18 +79,22 @@ class Topics extends React.Component {
         );
     }
 
-    createCell(cellIndex, overallIndex, topic) {
+    /* 
+
+    */
+    createCell(cellKeyIndex, overallIndex, topic) {
         const linkProps = {
             forumTitle: topic.title
         };
+
         return (
             <td
-                key={"cell-" + cellIndex}
+                key={"cell-" + cellKeyIndex}
                 onClick={() => this.cellOnClickHandler(linkProps)}
                 onMouseOver={() => this.cellOnMouseover(overallIndex)}
                 onMouseOut={() => this.cellOnMouseout()}
                 style={this.state.hoveredCellIndex == overallIndex ? forumTableCellOnMouseoverStyle : forumTableCellOnMouseoutStyle}>
-                {topic.title}
+                <NavLink to={`/topic${overallIndex}`}>{topic.title}</NavLink>
             </td>
         );
     }
@@ -104,14 +116,14 @@ class Topics extends React.Component {
 
     render() {
         return (
-            <div>
-                <TopicsSearchBar />
-                <table style={forumTableStyle}>
-                    <tbody>
-                        {this.createRows(this.generateData())}
-                    </tbody>
-                </table>
-            </div>
+                <div>
+                    <TopicsSearchBar />
+                    <table style={forumTableStyle}>
+                        <tbody>
+                            {this.createAllRows(this.generateData())}
+                        </tbody>
+                    </table>
+                </div>
         );
     }
 }

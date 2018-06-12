@@ -133,7 +133,7 @@ class SignupLogin extends React.Component {
             <div style={signupLoginFormStyle}>
                 {this.createSignupPane()}
                 {this.createLoginPane()}
-            </div>            
+            </div>
         );
     }
 

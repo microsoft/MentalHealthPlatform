@@ -27,6 +27,12 @@ class DiscussionTableRow extends React.Component {
         };
     }
 
+    /**
+     * Renders cell in the discussion table that includes details about the author for the corresponding post
+     * @param   {number}            i           Index of cell per row of the discussion table used for defining the cell key
+     * @param   {any}               cellData    Discussion data associated for an individual cell in the discussion table
+     * @return  {React.Component}               Rendered component
+     */
     createAuthorCell(i, cellData) {
         const cellStyle = Object.assign({}, discussionTableCellStyle, {width: "20%"});
                 
@@ -41,6 +47,12 @@ class DiscussionTableRow extends React.Component {
         );
     }
 
+    /**
+     * Renders cell in the discussion table that includes details about the corresponding post
+     * @param   {number}            i           Index of cell per row of the discussion table used for defining the cell key
+     * @param   {any}               cellData    Discussion data associated for an individual cell in the discussion table
+     * @return  {React.Component}               Rendered component
+     */
     createPostCell(i, cellData) {
         const cellStyle = Object.assign({}, discussionTableCellStyle, {width: "80%"});
         return (
@@ -52,6 +64,10 @@ class DiscussionTableRow extends React.Component {
         );
     }
 
+    /**
+     * Renders all cells that populate a row in a discussion table
+     * @return  {React.Component}   Rendered component
+     */
     createCells() {
         const cells = [];
         cells.push(
@@ -61,6 +77,10 @@ class DiscussionTableRow extends React.Component {
         return cells;
     }
 
+    /**
+     * Renders an individual row component in discussion table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <tr key={"row-" + 0} style={discussionTableRowStyle}>{this.createCells()}</tr>;
     }

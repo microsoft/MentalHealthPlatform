@@ -12,6 +12,10 @@ class ForumTableBody extends React.Component {
         };
     }
 
+    /**
+     * Renders all rows in a forum table
+     * @return  {React.Component}   Rendered component
+     */
     createRows() {
         const rows = [];
         for (let i = 0; i < this.state.discussionPreviews.length; i++) {
@@ -26,6 +30,10 @@ class ForumTableBody extends React.Component {
         return rows;
     }
 
+    /**
+     * Renders table body component for forum table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <tbody>{this.createRows()}</tbody>
     }

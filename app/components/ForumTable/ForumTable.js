@@ -19,6 +19,10 @@ class ForumTable extends React.Component {
         };
     }
 
+    /**
+     * Renders forum table
+     * @return  {React.Component}   Rendered component
+     */
     createForumTable() {
         return (
             <table style={forumTableStyle}>
@@ -28,6 +32,10 @@ class ForumTable extends React.Component {
         );
     }
 
+    /**
+     * Renders forum table component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return this.createForumTable();
     }

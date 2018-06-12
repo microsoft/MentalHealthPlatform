@@ -31,6 +31,10 @@ class TopicsSearchBar extends React.Component {
         };
     }
 
+    /**
+     * Renders topics search bar component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return (
             <div style={topicsSearchBarStyle}>

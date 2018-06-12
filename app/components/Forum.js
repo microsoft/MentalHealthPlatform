@@ -11,6 +11,10 @@ const forumTitleStyle = {
 
 class Forum extends React.Component {
     
+    /**
+     * Temporary function that generates stub forum data
+     * @return  {any}   Stub forum data
+     */
     generateData() {
         const discussionPreviews = [];
         for (let i = 0; i < 10; i++) {
@@ -47,6 +51,10 @@ class Forum extends React.Component {
         super(props);
     }
 
+    /**
+     * Renders forum component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return (
             <div>

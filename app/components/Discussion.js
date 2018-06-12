@@ -11,6 +11,10 @@ const discussionTitleStyle = {
 
 class Discussion extends React.Component {
     
+    /**
+     * Temporary function that generates stub discussion data
+     * @return  {any}   Stub discussion data
+     */
     generateData() {
         let postContent = "";
         for (let a = 0; a < 100; a++) {
@@ -48,6 +52,11 @@ class Discussion extends React.Component {
         };
     }
 
+    /**
+     * Renders all discussion tables for a single discussion thread
+     * @param   {any}               data    Discussion data
+     * @return  {React.Component}           Rendered component
+     */
     createDiscussionTables(data) {
         const discussionTables = [];
         for (let i = 0; i < data.posts.length; i++) {
@@ -58,6 +67,10 @@ class Discussion extends React.Component {
         return discussionTables;
     }
 
+    /**
+     * Renders an entire discussion thread component that includes header and individual discussion tables
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return (
             <div>

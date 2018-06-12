@@ -21,6 +21,10 @@ class DiscussionTable extends React.Component {
         };
     }
 
+    /**
+     * Renders discussion table
+     * @return  {React.Component}   Rendered component
+     */
     createDiscussionTable() {
         return (
             <table key={"table-" + this.state.index} style={discussionTableStyle}>
@@ -30,6 +34,10 @@ class DiscussionTable extends React.Component {
         );
     }
 
+    /**
+     * Renders discussion table component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return this.createDiscussionTable();
     }

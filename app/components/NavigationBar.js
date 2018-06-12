@@ -36,19 +36,27 @@ const navigationBarLoginLink = {
 };
 
 class NavigationBar extends React.Component {
+    /**
+     * Renders navigation bar
+     * @return  {React.Component}   Rendered component
+     */
     createNavigationBar() {
         return (
-                <div style={navigationBarStyle}>
-                    <div style={navigationBarLeftStyle}>                
-                        <NavLink exact to="/" style={navigationBarTitleLink}>Mental Health Forum</NavLink>
-                    </div>
-                    <div style={navigationBarRightStyle}>
-                        <NavLink exact to="/login" style={navigationBarLoginLink}>Login</NavLink>
-                    </div>
+            <div style={navigationBarStyle}>
+                <div style={navigationBarLeftStyle}>                
+                    <NavLink exact to="/" style={navigationBarTitleLink}>Mental Health Forum</NavLink>
                 </div>
+                <div style={navigationBarRightStyle}>
+                    <NavLink exact to="/login" style={navigationBarLoginLink}>Login</NavLink>
+                </div>
+            </div>
         );
     }
     
+    /**
+     * Renders navigation bar component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return this.createNavigationBar();
     }

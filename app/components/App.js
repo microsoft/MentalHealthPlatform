@@ -6,6 +6,10 @@ const containerStyle = {
 };
 
 class App extends React.Component {
+    /**
+     * Renders overall application component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <div style={containerStyle}></div>;
     }

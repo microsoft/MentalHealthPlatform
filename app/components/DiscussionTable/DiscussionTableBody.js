@@ -12,6 +12,10 @@ class DiscussionTableBody extends React.Component {
         };
     }
 
+    /**
+     * Renders all rows in a discussion table
+     * @return  {React.Component}   Rendered component
+     */
     createRows() {
         return (
             <DiscussionTableRow
@@ -21,6 +25,10 @@ class DiscussionTableBody extends React.Component {
         );
     }
 
+    /**
+     * Renders table body component for discussion table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <tbody>{this.createRows()}</tbody>
     }

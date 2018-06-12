@@ -17,6 +17,10 @@ class ForumTableHead extends React.Component {
         };
     }
 
+    /**
+     * Renders table header for forum table
+     * @return  {React.Component}   Rendered component
+     */
     createHeaders() {
         const headers = [];
         for (let i = 0; i < this.state.headers.length; i++) {
@@ -32,6 +36,10 @@ class ForumTableHead extends React.Component {
         return headers;
     }
 
+    /**
+     * Renders table header component for forum table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <thead><tr>{this.createHeaders()}</tr></thead>
     }

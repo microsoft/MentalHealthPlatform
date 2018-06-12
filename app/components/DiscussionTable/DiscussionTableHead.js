@@ -19,6 +19,10 @@ class DiscussionTableHead extends React.Component {
         };
     }
 
+    /**
+     * Renders table header for discussion table
+     * @return  {React.Component}   Rendered component
+     */
     createHeaders() {
         return (
             <th key={"header-" + 0} colSpan={2} style={discussionTableHeaderStyle}>
@@ -27,6 +31,10 @@ class DiscussionTableHead extends React.Component {
         );
     }
 
+    /**
+     * Renders table header component for discussion table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <thead><tr>{this.createHeaders()}</tr></thead>
     }

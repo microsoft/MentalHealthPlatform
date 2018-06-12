@@ -30,6 +30,12 @@ class ForumTableRow extends React.Component {
         };
     }
 
+    /**
+     * Renders cell in the forum table that includes details about the topic for the corresponding discussion
+     * @param   {number}            i           Index of cell per row of the forum table used for defining the cell key
+     * @param   {any}               cellData    Forum data associated for an individual cell in the forum table
+     * @return  {React.Component}               Rendered component
+     */
     createTopicCell(i, cellData) {
         const cellStyle = Object.assign({}, forumTableCellStyle, {width: "70%"});
         const discussionStyle = {
@@ -52,6 +58,12 @@ class ForumTableRow extends React.Component {
         );
     }
 
+    /**
+     * Renders cell in the forum table that includes details about the last comment for the corresponding discussion
+     * @param   {number}            i           Index of cell per row of the forum table used for defining the cell key
+     * @param   {any}               cellData    Forum data associated for an individual cell in the forum table
+     * @return  {React.Component}               Rendered component
+     */
     createLastCommentCell(i, cellData) {
         const cellStyle = Object.assign({}, forumTableCellStyle, {width: "20%"});
         return (
@@ -63,6 +75,12 @@ class ForumTableRow extends React.Component {
         );
     }
 
+    /**
+     * Renders cell in the forum table that includes details about the replies for the post
+     * @param   {number}            i           Index of cell per row of the forum table used for defining the cell key
+     * @param   {any}               cellData    Forum data associated for an individual cell in the forum table
+     * @return  {React.Component}               Rendered component
+     */
     createRepliesCell(i, cellData) {
         const cellStyle = Object.assign({}, forumTableCellStyle, {width: "5%", textAlign: "center"});
         return (
@@ -72,6 +90,12 @@ class ForumTableRow extends React.Component {
         );
     }
 
+    /**
+     * Renders cell in the forum table that includes details about the views for the post
+     * @param   {number}            i           Index of cell per row of the forum table used for defining the cell key
+     * @param   {any}               cellData    Forum data associated for an individual cell in the forum table
+     * @return  {React.Component}               Rendered component
+     */
     createViewsCell(i, cellData) {
         const cellStyle = Object.assign({}, forumTableCellStyle, {width: "5%", textAlign: "center"});
         return (
@@ -81,6 +105,10 @@ class ForumTableRow extends React.Component {
         );
     }
 
+    /**
+     * Renders all cells that populate a row in a forum table
+     * @return  {React.Component}   Rendered component
+     */
     createCells() {
         const cells = [];
         cells.push(
@@ -92,9 +120,17 @@ class ForumTableRow extends React.Component {
         return cells;
     }
 
+    /**
+     * Onclick handler for a discussion link
+     * @return  {any}   linkProps   Properties associated with discussion corresponding to clicked link
+     */
     discussionLinkOnClickHandler(linkProps) {
     }
 
+    /**
+     * Renders a row component in forum table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return <tr style={this.state.rowIndex % 2 == 0 ? forumTableRowEvenStyle : forumTableRowOddStyle}>{this.createCells()}</tr>;
     }

@@ -34,6 +34,10 @@ class Topics extends React.Component {
         };
     }
     
+    /**
+     * Temporary function that generates stub topics data
+     * @return  {any}   Stub topics data
+     */
     generateData() {
         const topics = [];
         for (let i = 0; i < 10; i++) {
@@ -46,7 +50,11 @@ class Topics extends React.Component {
         return topics;
     }
 
-    // Populates table with all rows
+    /**
+     * Renders all rows in a topics table
+     * @param   {any}               rowTopics   Topics data used to populate topics table
+     * @return  {React.Component}               All rows in topics table
+     */
     createAllRows(topics) {
         const rows = [];
         for (let i = 0; i < topics.length; i += this.state.numberOfColumns) {
@@ -59,11 +67,12 @@ class Topics extends React.Component {
         return rows;
     }
 
-    /* 
-        Create individual row
-        rowIndex: key that's required by React
-        rowTopics: actual data that's rendered
-    */
+    /**
+     * Renders a single rows in a topics table
+     * @param   {number}            rowIndex    Index of each row in topics table; used to define the key of the row
+     * @param   {any}               rowTopics   Topics data used to populate entire row in topics table
+     * @return  {React.Component}               Single row in topics table
+     */
     createRow(rowIndex, rowTopics) {
         const row = [];
         var path = "";
@@ -79,9 +88,13 @@ class Topics extends React.Component {
         );
     }
 
-    /* 
-
-    */
+    /**
+     * Renders a single cell in a topics table row
+     * @param   {number}            cellKeyIndex    Index of cell in respect to topics row; used to define key of the cell 
+     * @param   {number}            overallIndex    Index of cell in respect to entire topics table
+     * @param   {any}               topic           Topic data
+     * @return  {React.Component}                   Single cell in topics table
+     */
     createCell(cellKeyIndex, overallIndex, topic) {
         const linkProps = {
             forumTitle: topic.title
@@ -99,31 +112,48 @@ class Topics extends React.Component {
         );
     }
 
+    /**
+     * Onclick handler for a cell in the topics table
+     * @param   {any}   linkProps    Properties associated with cell
+     */
     cellOnClickHandler(linkProps) {    
     }
 
+    /**
+     * Onmouseover handler for a cell in the topics table to update state to indicate that the cell is being hovered upon
+     * Implements onhover background colour changing effect
+     * @param   {number}    overallIndex    Index of cell in respect to entire topics table
+     */
     cellOnMouseover(overallIndex) {
         this.setState({
             hoveredCellIndex: overallIndex
         });
     }
 
+    /**
+     * Onmouseout handler for a cell in the topics table to update state to indicate that all cells are not being hovered upon
+     * Implements onhover background colour changing effect
+     */
     cellOnMouseout() {
         this.setState({
             hoveredCellIndex: -1
         });
     }
 
+    /**
+     * Renders topics component including search bar and topics table
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return (
-                <div>
-                    <TopicsSearchBar />
-                    <table style={forumTableStyle}>
-                        <tbody>
-                            {this.createAllRows(this.generateData())}
-                        </tbody>
-                    </table>
-                </div>
+            <div>
+                <TopicsSearchBar />
+                <table style={forumTableStyle}>
+                    <tbody>
+                        {this.createAllRows(this.generateData())}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }

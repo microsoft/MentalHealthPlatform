@@ -63,10 +63,13 @@ class SignupLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
         };
     }
 
+    /**
+     * Renders sign up panel in overall sign-up/login form
+     * @return  {React.Component}   Rendered component
+     */
     createSignupPane() {
         const agreementContainerStyle = {
             marginTop: "20px"
@@ -101,6 +104,10 @@ class SignupLogin extends React.Component {
         )
     }
     
+    /**
+     * Renders login panel in overall sign-up/login form
+     * @return  {React.Component}   Rendered component
+     */
     createLoginPane() {
         const loginPaneStyle = Object.assign({}, paneStyle, {
             borderLeft: "1px solid #CCCCCC"
@@ -128,6 +135,10 @@ class SignupLogin extends React.Component {
         )
     }
 
+    /**
+     * Renders form that includes sign up and login panels
+     * @return  {React.Component}   Rendered component
+     */
     createSignupLoginForm() {
         return (
             <div style={signupLoginFormStyle}>
@@ -137,6 +148,10 @@ class SignupLogin extends React.Component {
         );
     }
 
+    /**
+     * Renders sign-up/login form component
+     * @return  {React.Component}   Rendered component
+     */
     render() {
         return (
             this.createSignupLoginForm()

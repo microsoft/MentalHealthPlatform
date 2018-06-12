@@ -1,9 +1,25 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import App from './components/App';
+import NavigationBar from './components/NavigationBar';
+import Topics from './components/Topics';
+import SignupLogin from './components/SignupLogin';
+
+const containerStyle = {
+    padding: "25px"
+};
 
 ReactDom.render(
-	<App />,
+	<BrowserRouter>
+		<div>
+			<NavigationBar />
+			<App />
+			
+			<Route exact path="/" component={Topics}/>
+			<Route path="/login" component={SignupLogin} />
+		</div>
+	</BrowserRouter>,
 	document.getElementById('app')
 );

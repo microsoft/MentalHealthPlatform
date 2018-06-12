@@ -93,7 +93,7 @@ class SignupLogin extends React.Component {
                         <button type="submit" style={formButtonStyle}>Sign Up</button>
                     </div>
                     <div style={agreementContainerStyle}>
-                        <input type="checkbox" checked="checked" name="agree" style={agreementCheckboxStyle} />
+                        <input type="checkbox" name="agree" style={agreementCheckboxStyle} />
                         <span style={agreementTextStyle}>By creating an account you agree to our <a href="#" style={formLinkStyle}>Terms & Privacy</a>.</span>
                     </div>                
                 </form>

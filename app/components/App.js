@@ -1,9 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-
-import Topics from './Topics';
-import SignupLogin from './SignupLogin';
-import NavigationBar from './NavigationBar';
+import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 
 const containerStyle = {
     padding: "25px"
@@ -11,14 +7,7 @@ const containerStyle = {
 
 class App extends React.Component {
     render() {
-        return (
-            <div>
-                <NavigationBar />
-                <div style={containerStyle}>
-                    <Topics />
-                </div>
-            </div>
-        );
+        return <div style={containerStyle}></div>;
     }
 }
 

@@ -4,6 +4,7 @@ import ReactDom from 'react-dom';
 import TopicsSearchBar from './TopicsSearchBar';
 import Forum from './Forum';
 import Discussion from './Discussion';
+import NavigationBar from './NavigationBar';
 
 const forumTableStyle = {
     margin: "0 auto",

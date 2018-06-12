@@ -40,7 +40,7 @@ class NavigationBar extends React.Component {
         return (
                 <div style={navigationBarStyle}>
                     <div style={navigationBarLeftStyle}>                
-                        <NavLink exact to="/" style={navigationBarTitleLink}>Mental Health Community</NavLink>
+                        <NavLink exact to="/" style={navigationBarTitleLink}>Mental Health Forum</NavLink>
                     </div>
                     <div style={navigationBarRightStyle}>
                         <NavLink exact to="/login" style={navigationBarLoginLink}>Login</NavLink>

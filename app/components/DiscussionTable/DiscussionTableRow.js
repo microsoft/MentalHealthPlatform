@@ -1,22 +1,6 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
-import Discussion from './../Discussion'
-
-const discussionTableRowStyle = {
-    backgroundColor: "#ffffff"
-};
-
-const discussionTableCellStyle = {
-    border: "1px solid #ddd",
-    padding: "8px"
-};
-
-const cellLinkStyle = {
-    color: "#000000",
-    fontWeight: "bold",
-    fontSize: "large"
-};
+import DiscussionTableStyles from "./DiscussionTableStyles";
 
 class DiscussionTableRow extends React.Component {
 
@@ -34,11 +18,11 @@ class DiscussionTableRow extends React.Component {
      * @return  {React.Component}               Rendered component
      */
     createAuthorCell(i, cellData) {
-        const cellStyle = Object.assign({}, discussionTableCellStyle, {width: "20%"});
+        const cellStyle = Object.assign({}, DiscussionTableStyles.discussionTableCellStyle, {width: "20%"});
                 
         return (
             <td key={"cell-" + i} style={cellStyle}>
-                <a href="#" style={cellLinkStyle}>{cellData.author}</a>
+                <a href="#" style={DiscussionTableStyles.cellLinkStyle}>{cellData.author}</a>
                 <br /><br />
                 {"Member Since: " + cellData.memberSince.toDateString()}
                 <br />
@@ -54,7 +38,7 @@ class DiscussionTableRow extends React.Component {
      * @return  {React.Component}               Rendered component
      */
     createPostCell(i, cellData) {
-        const cellStyle = Object.assign({}, discussionTableCellStyle, {width: "80%"});
+        const cellStyle = Object.assign({}, DiscussionTableStyles.discussionTableCellStyle, {width: "80%"});
         return (
             <td key={"cell-" + i} style={cellStyle}>
                 {cellData.content}
@@ -82,7 +66,7 @@ class DiscussionTableRow extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     render() {
-        return <tr key={"row-" + 0} style={discussionTableRowStyle}>{this.createCells()}</tr>;
+        return <tr key={"row-" + 0} style={DiscussionTableStyles.discussionTableRowStyle}>{this.createCells()}</tr>;
     }
 }
 

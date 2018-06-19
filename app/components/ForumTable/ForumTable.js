@@ -1,14 +1,9 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
 import ForumTableHead from './ForumTableHead';
 import ForumTableBody from './ForumTableBody';
 
-const forumTableStyle = {
-    fontFamily: "Arial",
-    borderCollapse: "collapse",
-    width: "100%"
-};
+import ForumTableStyles from "./ForumTableStyles";
 
 class ForumTable extends React.Component {
 
@@ -25,7 +20,7 @@ class ForumTable extends React.Component {
      */
     createForumTable() {
         return (
-            <table style={forumTableStyle}>
+            <table style={ForumTableStyles.forumTableStyle}>
                 <ForumTableHead headers={this.state.data.headers} />
                 <ForumTableBody discussionPreviews={this.state.data.discussionPreviews} />
             </table>

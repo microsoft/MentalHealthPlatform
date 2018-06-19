@@ -1,39 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const navigationBarStyle = {
-    display: "flex",
-    flexDirection: "row",
-    height: "50px",
-    padding: "0px 25px",
-    lineHeight: "50px",
-    fontSize: "x-large",
-    fontFamily: "Calibri",
-    color: "#FFFFFF",
-    backgroundColor: "#333333",
-    boxShadow: "0px 0px 20px #1A1A1A"
-};
-
-const navigationBarLeftStyle = {
-    display: "flex",
-    flex: "1 1 auto"
-}
-
-const navigationBarTitleLink = {
-    textDecoration: "none",
-    color: "#FFFFFF",
-    fontWeight: "bold"
-};
-
-const navigationBarRightStyle = {
-    display: "flex",
-    flex: "0 1 auto"
-}
-
-const navigationBarLoginLink = {
-    textDecoration: "none",
-    color: "#FFFFFF"
-};
+import NavigationBarStyles from './NavigationBarStyles';
 
 class NavigationBar extends React.Component {
     /**
@@ -42,12 +10,12 @@ class NavigationBar extends React.Component {
      */
     createNavigationBar() {
         return (
-            <div style={navigationBarStyle}>
-                <div style={navigationBarLeftStyle}>                
-                    <NavLink exact to="/" style={navigationBarTitleLink}>Mental Health Forum</NavLink>
+            <div style={NavigationBarStyles.navigationBarStyle}>
+                <div style={NavigationBarStyles.navigationBarLeftStyle}>                
+                    <NavLink exact to="/" style={NavigationBarStyles.navigationBarTitleLink}>Mental Health Forum</NavLink>
                 </div>
-                <div style={navigationBarRightStyle}>
-                    <NavLink exact to="/login" style={navigationBarLoginLink}>Login</NavLink>
+                <div style={NavigationBarStyles.navigationBarRightStyle}>
+                    <NavLink exact to="/login" style={NavigationBarStyles.navigationBarLoginLink}>Login</NavLink>
                 </div>
             </div>
         );

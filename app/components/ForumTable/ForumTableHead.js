@@ -1,12 +1,6 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
-const forumTableHeaderStyle = {
-    border: "1px solid #ddd",
-    padding: "10px",
-    backgroundColor: "#4CAF50",
-    color: "white"
-};
+import ForumTableStyles from "./ForumTableStyles";
 
 class ForumTableHead extends React.Component {
 
@@ -25,7 +19,7 @@ class ForumTableHead extends React.Component {
         const headers = [];
         for (let i = 0; i < this.state.headers.length; i++) {
             const textAlign = (i == 0 | i == 1) ? "left" : "center";
-            const headerStyle = Object.assign({}, forumTableHeaderStyle, {textAlign: textAlign});
+            const headerStyle = Object.assign({}, ForumTableStyles.forumTableHeaderStyle, {textAlign: textAlign});
             
             headers.push(
                 <th key={"header-" + i} style={headerStyle}>

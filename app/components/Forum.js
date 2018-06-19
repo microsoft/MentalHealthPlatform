@@ -1,13 +1,7 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
 import ForumTable from './ForumTable/ForumTable';
-
-const forumTitleStyle = {
-    fontFamily: "Calibri",
-    textAlign: "center",
-    color: "#181818"
-};
+import ForumStyles from './ForumStyles';
 
 class Forum extends React.Component {
     
@@ -58,8 +52,8 @@ class Forum extends React.Component {
     render() {
         return (
             <div>
-                {/* <h1 style={forumTitleStyle}>{this.props.location.state.forumTitle}</h1> */}
-                <h1 style={forumTitleStyle}>TEST</h1>
+                {/* <h1 style={ForumStyles.forumTitleStyle}>{this.props.location.state.forumTitle}</h1> */}
+                <h1 style={ForumStyles.forumTitleStyle}>TEST</h1>
                 <ForumTable data={this.generateData()} />
             </div>
         );

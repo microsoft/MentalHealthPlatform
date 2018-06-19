@@ -1,9 +1,6 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 
-const containerStyle = {
-    padding: "25px"
-};
+import AppStyles from "./AppStyles";
 
 class App extends React.Component {
     /**
@@ -11,7 +8,7 @@ class App extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     render() {
-        return <div style={containerStyle}></div>;
+        return <div style={AppStyles.containerStyle}></div>;
     }
 }
 

@@ -1,13 +1,7 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
 import DiscussionTable from './DiscussionTable/DiscussionTable';
-
-const discussionTitleStyle = {
-    fontFamily: "Calibri",
-    textAlign: "center",
-    color: "#181818"
-};
+import DiscussionStyles from './DiscussionStyles';
 
 class Discussion extends React.Component {
     
@@ -74,7 +68,7 @@ class Discussion extends React.Component {
     render() {
         return (
             <div>
-                <h1 style={discussionTitleStyle}>{this.state.discussionTitle}</h1>
+                <h1 style={DiscussionStyles.discussionTitleStyle}>{this.state.discussionTitle}</h1>
                 {this.createDiscussionTables(this.generateData())}
             </div>
         );

@@ -1,24 +1,6 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
-import Discussion from './../Discussion'
-
-const forumTableRowOddStyle = {
-    backgroundColor: "#f2f2f2"
-};
-
-const forumTableRowEvenStyle = {
-    backgroundColor: "#ffffff"
-};
-
-const forumTableCellStyle = {
-    border: "1px solid #ddd",
-    padding: "8px"
-};
-
-const cellLinkStyle = {
-    color: "#000000"
-};
+import ForumTableStyles from "./ForumTableStyles";
 
 class ForumTableRow extends React.Component {
 
@@ -37,23 +19,17 @@ class ForumTableRow extends React.Component {
      * @return  {React.Component}               Rendered component
      */
     createTopicCell(i, cellData) {
-        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "70%"});
-        const discussionStyle = {
-            fontWeight: "bold",
-            fontSize: "large",
-            cursor: "pointer",
-            textDecoration: "underline"
-        };
-
+        const cellStyle = Object.assign({}, ForumTableStyles.forumTableCellStyle, {width: "70%"});
+        
         const discussionLinkProps = {
             discussionTitle: cellData.discussion
         }; 
                 
         return (
             <td key={"cell-" + i} style={cellStyle}>
-                <span onClick={() => this.discussionLinkOnClickHandler(discussionLinkProps)} style={discussionStyle}>{cellData.discussion}</span>
+                <span onClick={() => this.discussionLinkOnClickHandler(discussionLinkProps)} style={ForumTableStyles.discussionStyle}>{cellData.discussion}</span>
                 <br />
-                by <a href="#" style={cellLinkStyle}>{cellData.author}</a>
+                by <a href="#" style={ForumTableStyles.cellLinkStyle}>{cellData.author}</a>
             </td>
         );
     }
@@ -65,12 +41,12 @@ class ForumTableRow extends React.Component {
      * @return  {React.Component}               Rendered component
      */
     createLastCommentCell(i, cellData) {
-        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "20%"});
+        const cellStyle = Object.assign({}, ForumTableStyles.forumTableCellStyle, {width: "20%"});
         return (
             <td key={"cell-" + i} style={cellStyle}>
                 {cellData.date.toLocaleString()}
                 <br />
-                by <a href="#" style={cellLinkStyle}>{cellData.author}</a>
+                by <a href="#" style={ForumTableStyles.cellLinkStyle}>{cellData.author}</a>
             </td>
         );
     }
@@ -82,7 +58,7 @@ class ForumTableRow extends React.Component {
      * @return  {React.Component}               Rendered component
      */
     createRepliesCell(i, cellData) {
-        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "5%", textAlign: "center"});
+        const cellStyle = Object.assign({}, ForumTableStyles.forumTableCellStyle, {width: "5%", textAlign: "center"});
         return (
             <td key={"cell-" + i} style={cellStyle}>
                 {cellData.numberOfReplies}
@@ -97,7 +73,7 @@ class ForumTableRow extends React.Component {
      * @return  {React.Component}               Rendered component
      */
     createViewsCell(i, cellData) {
-        const cellStyle = Object.assign({}, forumTableCellStyle, {width: "5%", textAlign: "center"});
+        const cellStyle = Object.assign({}, ForumTableStyles.forumTableCellStyle, {width: "5%", textAlign: "center"});
         return (
             <td key={"cell-" + i} style={cellStyle}>
                 {cellData.numberOfViews}
@@ -132,7 +108,7 @@ class ForumTableRow extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     render() {
-        return <tr style={this.state.rowIndex % 2 == 0 ? forumTableRowEvenStyle : forumTableRowOddStyle}>{this.createCells()}</tr>;
+        return <tr style={this.state.rowIndex % 2 == 0 ? ForumTableStyles.forumTableRowEvenStyle : ForumTableStyles.forumTableRowOddStyle}>{this.createCells()}</tr>;
     }
 }
 

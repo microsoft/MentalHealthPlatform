@@ -1,29 +1,11 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import { BrowserRouter, NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
-import Forum from './Forum';
-import Discussion from './Discussion';
-import NavigationBar from './NavigationBar';
+import TopicsStyles from './TopicsStyles';
 
-const forumTableStyle = {
-    margin: "0 auto",
-    fontFamily: "Calibri",
-    borderSpacing: "20px"
-};
-
-const forumTableCellStyle = {
-    width: "300px",
-    height: "300px",
-    fontSize: "xx-large",
-    textAlign: "center",
-    color: "#333333",
-    fontWeight: "bold",
-    cursor: "pointer"
-};
-const forumTableCellOnMouseoutStyle = Object.assign({}, forumTableCellStyle, {backgroundColor: "#E8E8E8"});
-const forumTableCellOnMouseoverStyle = Object.assign({}, forumTableCellStyle, {backgroundColor: "#CCCCCC"});
+const forumTableCellOnMouseoutStyle = Object.assign({}, TopicsStyles.forumTableCellStyle, {backgroundColor: "#E8E8E8"});
+const forumTableCellOnMouseoverStyle = Object.assign({}, TopicsStyles.forumTableCellStyle, {backgroundColor: "#CCCCCC"});
 
 class Topics extends React.Component {
     constructor(props) {
@@ -148,7 +130,7 @@ class Topics extends React.Component {
         return (
             <div>
                 <TopicsSearchBar />
-                <table style={forumTableStyle}>
+                <table style={TopicsStyles.forumTableStyle}>
                     <tbody>
                         {this.createAllRows(this.generateData())}
                     </tbody>

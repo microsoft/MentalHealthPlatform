@@ -1,15 +1,8 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
 import DiscussionTableHead from './DiscussionTableHead';
 import DiscussionTableBody from './DiscussionTableBody';
-
-const discussionTableStyle = {
-    fontFamily: "Arial",
-    borderCollapse: "collapse",
-    width: "100%",
-    marginBottom: "20px"
-};
+import DiscussionTableStyles from "./DiscussionTableStyles";
 
 class DiscussionTable extends React.Component {
 
@@ -27,7 +20,7 @@ class DiscussionTable extends React.Component {
      */
     createDiscussionTable() {
         return (
-            <table key={"table-" + this.state.index} style={discussionTableStyle}>
+            <table key={"table-" + this.state.index} style={DiscussionTableStyles.discussionTableStyle}>
                 <DiscussionTableHead date={this.state.post.date} />
                 <DiscussionTableBody post={this.state.post} />
             </table>

@@ -1,14 +1,6 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
-const discussionTableHeaderStyle = {
-    border: "1px solid #ddd",
-    padding: "8px",
-    backgroundColor: "#CCCCCC",
-    color: "#333333",
-    textAlign: "right",
-    fontSize: "small"
-};
+import DiscussionTableStyles from "./DiscussionTableStyles";
 
 class DiscussionTableHead extends React.Component {
 
@@ -25,7 +17,7 @@ class DiscussionTableHead extends React.Component {
      */
     createHeaders() {
         return (
-            <th key={"header-" + 0} colSpan={2} style={discussionTableHeaderStyle}>
+            <th key={"header-" + 0} colSpan={2} style={DiscussionTableStyles.discussionTableHeaderStyle}>
                 {this.state.date.toLocaleString()}
             </th>
         );

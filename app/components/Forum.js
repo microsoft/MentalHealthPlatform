@@ -8,13 +8,6 @@ import ForumStyles from './ForumStyles';
 class Forum extends React.Component {
     constructor(props) {
         super(props);
-
-        console.log("Forum props");
-        console.log(props);
-        console.log(this.props.history);
-        console.log(this.props.history && this.props.history.match);
-        console.log(this.props.history && this.props.history.match && this.props.history.match.params);
-        console.log(this.props.history && this.props.history.match && this.props.history.match.params && this.props.history.match.params.topicID);
     }
 
     /**
@@ -63,8 +56,7 @@ class Forum extends React.Component {
 
         return (
             <div>
-                {/* <h1 style={ForumStyles.forumTitleStyle}>{this.props.location.state.forumTitle}</h1> */}
-                <h1 style={ForumStyles.forumTitleStyle}>{this.props.history && this.props.history.match && this.props.history.match.params && this.props.history.match.params.topicID}</h1>
+                <h1 style={ForumStyles.forumTitleStyle}>{this.props.location.state.forumTitle}</h1>
                 <ForumTable data={this.generateData()} />
             </div>
         );

@@ -15,9 +15,6 @@ class Topics extends React.Component {
             numberOfColumns: 3,
             hoveredCellIndex: -1
         };
-
-        console.log("Topics props: ");
-        console.log(props);
     }
     
     /**
@@ -32,9 +29,6 @@ class Topics extends React.Component {
             };
             topics.push(topic);
         };
-
-        console.log(topics);
-
         return topics;
     }
 
@@ -105,9 +99,6 @@ class Topics extends React.Component {
      * @param   {any}   linkProps    Properties associated with cell
      */
     cellOnClickHandler(linkProps) { 
-        console.log("linkProps.forumTitle = " + linkProps.forumTitle);
-        console.log(this.props);
-
         this.props.history.push({
             pathname: linkProps.pathname,
             state: {

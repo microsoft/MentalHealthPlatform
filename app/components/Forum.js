@@ -1,10 +1,15 @@
 import React from 'react';
+// import { NavLink, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import ForumTable from './ForumTable/ForumTable';
 import ForumStyles from './ForumStyles';
 
 class Forum extends React.Component {
-    
+    constructor(props) {
+        super(props);
+    }
+
     /**
      * Temporary function that generates stub forum data
      * @return  {any}   Stub forum data
@@ -41,23 +46,21 @@ class Forum extends React.Component {
         return data;
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     /**
      * Renders forum component
      * @return  {React.Component}   Rendered component
      */
     render() {
+        console.log("Forum history");
+        console.log(this.props.history);
+
         return (
             <div>
-                {/* <h1 style={ForumStyles.forumTitleStyle}>{this.props.location.state.forumTitle}</h1> */}
-                <h1 style={ForumStyles.forumTitleStyle}>TEST</h1>
+                <h1 style={ForumStyles.forumTitleStyle}>{this.props.location.state.forumTitle}</h1>
                 <ForumTable data={this.generateData()} />
             </div>
         );
     }
 }
 
-module.exports = Forum;
+module.exports = withRouter(Forum);

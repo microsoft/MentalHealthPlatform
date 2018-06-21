@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+// import { NavLink, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
 import TopicsStyles from './TopicsStyles';
@@ -14,6 +15,9 @@ class Topics extends React.Component {
             numberOfColumns: 3,
             hoveredCellIndex: -1
         };
+
+        console.log("Topics props: ");
+        console.log(props);
     }
     
     /**
@@ -28,6 +32,8 @@ class Topics extends React.Component {
             };
             topics.push(topic);
         };
+
+        console.log(topics);
 
         return topics;
     }
@@ -98,7 +104,17 @@ class Topics extends React.Component {
      * Onclick handler for a cell in the topics table
      * @param   {any}   linkProps    Properties associated with cell
      */
-    cellOnClickHandler(linkProps) {    
+    cellOnClickHandler(linkProps) { 
+        console.log("linkProps.forumTitle = " + linkProps.forumTitle);
+        console.log(this.props);
+
+        this.props.history.push({
+            pathname: linkProps.pathname,
+            state: {
+                match: this.props.match,
+                forumTitle: linkProps.forumTitle
+            }
+        });
     }
 
     /**
@@ -140,4 +156,4 @@ class Topics extends React.Component {
     }
 }
 
-module.exports = Topics;
+module.exports = withRouter(Topics);

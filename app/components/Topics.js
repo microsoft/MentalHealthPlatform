@@ -12,6 +12,7 @@ class Topics extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            match: this.props.match,
             numberOfColumns: 3,
             hoveredCellIndex: -1
         };
@@ -107,7 +108,7 @@ class Topics extends React.Component {
             }
         });
     }
-
+    
     /**
      * Onmouseover handler for a cell in the topics table to update state to indicate that the cell is being hovered upon
      * Implements onhover background colour changing effect

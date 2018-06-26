@@ -55,7 +55,7 @@ class Discussion extends React.Component {
         const discussionTables = [];
         for (let i = 0; i < data.posts.length; i++) {
             discussionTables.push(
-                <DiscussionTable index={i} post={data.posts[i]} />
+                <DiscussionTable key={"discussionTable-" + i} index={i} post={data.posts[i]} />
             );
         }
         return discussionTables;

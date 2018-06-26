@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import ForumTableRow from './ForumTableRow';
 
@@ -7,6 +8,7 @@ class ForumTableBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            match: this.props.match,
             discussionPreviews: this.props.discussionPreviews
         };
     }
@@ -38,4 +40,4 @@ class ForumTableBody extends React.Component {
     }
 }
 
-module.exports = ForumTableBody;
+module.exports = withRouter(ForumTableBody);

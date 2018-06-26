@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 
 import ForumTableStyles from "./ForumTableStyles";
 
@@ -7,6 +8,7 @@ class ForumTableRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            match: this.props.match,
             rowIndex: this.props.rowIndex,
             discussionPreview: this.props.discussionPreview
         };
@@ -22,9 +24,10 @@ class ForumTableRow extends React.Component {
         const cellStyle = Object.assign({}, ForumTableStyles.forumTableCellStyle, {width: "70%"});
         
         const discussionLinkProps = {
+            pathname: `${this.state.match.url}/${cellData.discussion.replace(" ", "")}`,
             discussionTitle: cellData.discussion
-        }; 
-                
+        };
+
         return (
             <td key={"cell-" + i} style={cellStyle}>
                 <span onClick={() => this.discussionLinkOnClickHandler(discussionLinkProps)} style={ForumTableStyles.discussionStyle}>{cellData.discussion}</span>
@@ -101,6 +104,13 @@ class ForumTableRow extends React.Component {
      * @return  {any}   linkProps   Properties associated with discussion corresponding to clicked link
      */
     discussionLinkOnClickHandler(linkProps) {
+        this.props.history.push({
+            pathname: linkProps.pathname,
+            state: {
+                match: this.state.match,
+                discussionTitle: linkProps.discussionTitle
+            }
+        });
     }
 
     /**
@@ -112,4 +122,4 @@ class ForumTableRow extends React.Component {
     }
 }
 
-module.exports = ForumTableRow;
+module.exports = withRouter(ForumTableRow);

@@ -21,8 +21,11 @@ ReactDom.render(
 			
 			<Route exact path="/" component={Topics}/>
 			<Route exact path="/login" component={SignupLogin} />
+			<Route exact path="/login/" component={SignupLogin} />
 			<Route exact path={`/topic:topicID`} component={Forum} />
+			<Route exact path={`/topic:topicID/`} component={Forum} />
 			<Route exact path={`/topic:topicID/Discussion:discussionID`} component={Discussion} />
+			<Route exact path={`/topic:topicID/Discussion:discussionID/`} component={Discussion} />
 		</div>
 	</BrowserRouter>,
 	document.getElementById('app')

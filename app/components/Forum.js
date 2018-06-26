@@ -8,9 +8,23 @@ import ForumStyles from './ForumStyles';
 class Forum extends React.Component {
     constructor(props) {
         super(props);
+        const forumId = this.obtainForumId(this.props.match.url);
         this.state = {
-            match: this.props.match
+            match: this.props.match,
+            forumId: forumId
         };
+    }
+
+    obtainForumId(url) {
+        var regex = /^\/topic[\d]+[\/]?$/;
+        var anythingButNumRegex = /[\/a-zA-Z]+/g;
+
+        if (regex.test(url)) {
+            // Checking /topic{num}/ or /topic{num} and nothing after
+            return url.replace(anythingButNumRegex, "");
+        }
+
+        return null;
     }
 
     /**
@@ -54,9 +68,12 @@ class Forum extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     render() {
+        const forumId = this.state.forumId;
+        const forumTitle = forumId ? "Topic " + forumId : this.props.location.state.forumTitle;
+
         return (
             <div>
-                <h1 style={ForumStyles.forumTitleStyle}>{this.props.location.state.forumTitle}</h1>
+                <h1 style={ForumStyles.forumTitleStyle}>{forumTitle}</h1>
                 <ForumTable match={this.state.match} data={this.generateData()} />
             </div>
         );

@@ -23,14 +23,14 @@ class ForumTableRow extends React.Component {
     createTopicCell(i, cellData) {
         const cellStyle = Object.assign({}, ForumTableStyles.forumTableCellStyle, {width: "70%"});
         
-        const discussionLinkProps = {
-            pathname: `${this.state.match.url}/${cellData.discussion.replace(" ", "")}`,
-            discussionTitle: cellData.discussion
-        };
+        let baseUrl = this.state.match.url;
+        if (baseUrl.charAt(baseUrl.length - 1) == '/') {
+            baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+        }
 
         return (
             <td key={"cell-" + i} style={cellStyle}>
-                <span onClick={() => this.discussionLinkOnClickHandler(discussionLinkProps)} style={ForumTableStyles.discussionStyle}>{cellData.discussion}</span>
+                <Link to={`${baseUrl}/${cellData.discussion.replace(" ", "").toLowerCase()}`} style={ForumTableStyles.discussionStyle}>{cellData.discussion}</Link>
                 <br />
                 by <a href="#" style={ForumTableStyles.cellLinkStyle}>{cellData.author}</a>
             </td>
@@ -97,20 +97,6 @@ class ForumTableRow extends React.Component {
             this.createViewsCell(3, this.state.discussionPreview.views)
         );
         return cells;
-    }
-
-    /**
-     * Onclick handler for a discussion link
-     * @return  {any}   linkProps   Properties associated with discussion corresponding to clicked link
-     */
-    discussionLinkOnClickHandler(linkProps) {
-        this.props.history.push({
-            pathname: linkProps.pathname,
-            state: {
-                match: this.state.match,
-                discussionTitle: linkProps.discussionTitle
-            }
-        });
     }
 
     /**

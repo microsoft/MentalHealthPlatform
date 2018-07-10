@@ -16,7 +16,7 @@ class Forum extends React.Component {
     }
 
     obtainForumId(url) {
-        var regex = /^\/topic[\d]+[\/]?$/;
+        var regex = /^\/topics\/topic[\d]+[\/]?$/;
         var anythingButNumRegex = /[\/a-zA-Z]+/g;
 
         if (regex.test(url)) {

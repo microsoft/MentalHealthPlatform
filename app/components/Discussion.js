@@ -41,9 +41,15 @@ class Discussion extends React.Component {
 
     constructor(props) {
         super(props);
+        const discussionId = this.obtainDiscussionId(this.props.match.url);
+        const propDiscussionTitle = this.props.location.state && this.props.location.state.discussionTitle;
         this.state = {
-            discussionTitle: this.props.location.state.discussionTitle
+            discussionTitle: propDiscussionTitle ? propDiscussionTitle : discussionId
         };
+    }
+
+    obtainDiscussionId(url) {
+        return url.substr(url.lastIndexOf('/') + 1).replace("discussion", "Discussion ");
     }
 
     /**

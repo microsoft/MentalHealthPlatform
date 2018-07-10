@@ -1,6 +1,6 @@
 import React from 'react';
 // import { NavLink, withRouter } from 'react-router-dom';
-import { BrowserRouter, Route, NavLink, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
 import TopicsStyles from './TopicsStyles';
@@ -83,6 +83,11 @@ class Topics extends React.Component {
             forumTitle: topic.title
         };
 
+        let baseUrl = this.state.match.url;
+        if (baseUrl.charAt(baseUrl.length - 1) == '/') {
+            baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+        }
+
         return (
             <td
                 key={"cell-" + cellKeyIndex}
@@ -90,7 +95,7 @@ class Topics extends React.Component {
                 onMouseOver={() => this.cellOnMouseover(overallIndex)}
                 onMouseOut={() => this.cellOnMouseout()}
                 style={this.state.hoveredCellIndex == overallIndex ? forumTableCellOnMouseoverStyle : forumTableCellOnMouseoutStyle}>
-                <NavLink to={`/topic${overallIndex}`}>{topic.title}</NavLink>
+                <Link to={`${baseUrl}/topic${overallIndex}`}>{topic.title}</Link>
             </td>
         );
     }

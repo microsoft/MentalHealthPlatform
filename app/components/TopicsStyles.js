@@ -11,7 +11,11 @@ const TopicsStyles = {
         textAlign: "center",
         color: "#333333",
         fontWeight: "bold",
-        cursor: "pointer"
+        cursor: "pointer",
+        verticalAlign: "middle"
+    },
+    topicLinkStyle: {
+        textDecoration: "none"
     }
 };
 

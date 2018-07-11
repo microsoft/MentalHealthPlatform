@@ -1,5 +1,4 @@
 import React from 'react';
-// import { NavLink, withRouter } from 'react-router-dom';
 import { Link, withRouter } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
@@ -89,14 +88,16 @@ class Topics extends React.Component {
         }
 
         return (
-            <td
-                key={"cell-" + cellKeyIndex}
-                onClick={() => this.cellOnClickHandler(linkProps)}
-                onMouseOver={() => this.cellOnMouseover(overallIndex)}
-                onMouseOut={() => this.cellOnMouseout()}
-                style={this.state.hoveredCellIndex == overallIndex ? forumTableCellOnMouseoverStyle : forumTableCellOnMouseoutStyle}>
-                <Link to={`${baseUrl}/topic${overallIndex}`}>{topic.title}</Link>
-            </td>
+            <Link key={"cell-" + cellKeyIndex} to={`${baseUrl}/topic${overallIndex}`} style={TopicsStyles.topicLinkStyle}>
+                <td
+                    onClick={() => this.cellOnClickHandler(linkProps)}
+                    onMouseOver={() => this.cellOnMouseover(overallIndex)}
+                    onMouseOut={() => this.cellOnMouseout()}
+                    style={this.state.hoveredCellIndex == overallIndex ? forumTableCellOnMouseoverStyle : forumTableCellOnMouseoutStyle}
+                >
+                    {topic.title}
+                </td>
+            </Link>
         );
     }
 

@@ -1,57 +1,41 @@
-# Component Hierarchies
+# Pages
 
-## Topics Table
+## Topics Page
 
-* Topics Table
-  * Topics Table Head
-  * Topics Table Body
-    * Topics Row 0 (key = 0)
-      * Topics Cell 0 (key = 0)
-      * Topics Cell 1 (key = 1)
-      * Topics Cell 2 (key = 2)
-    * Topics Row 1 (key = 1)
-      * Topics Cell 3 (key = 0)
-      * Topics Cell 4 (key = 1)
-      * Topics Cell 5 (key = 2)
-    * Topics Row 2 (key = 2)
-      * Topics Cell 6 (key = 0)
-      * Topics Cell 7 (key = 1)
-      * Topics Cell 8 (key = 2)
-    * Topics Row 3 (key = 3)
-        * Topics Cell 9 (key = 0)
+The Topics page will act as the home page of the application.
 
-## Forum Table
+This page will consist of a search header and topics grid. The topics grid will list a variety of mental health topics (ex. stress, anxiety, depression). When the user clicks on a topic, they will be directed to a Forum page for that topic.
 
-* Forum Table
-  * Forum Table Head
-  * Forum Table Body
-    * Forum Table Row 0 (key = 0)
-      * Forum Table Topic Cell (key = 0)
-      * Forum Table Last Comment Cell (key = 1)
-      * Forum Table Replies Cell (key = 2)
-      * Forum Table Views Cell (key = 3)
-    * Forum Table Row 1 (key = 1)
-      * Forum Table Topic Cell (key = 0)
-      * Forum Table Last Comment Cell (key = 1)
-      * Forum Table Replies Cell (key = 2)
-      * Forum Table Views Cell (key = 3)
-    * Forum Table Row 2 (key = 2)
-      * Forum Table Topic Cell (key = 0)
-      * Forum Table Last Comment Cell (key = 1)
-      * Forum Table Replies Cell (key = 2)
-      * Forum Table Views Cell (key = 3)
+The Topics component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
 
-## Discussion Table
+The Topics page should be reachable via direct URL or by the user clicking on the application title link in the global navigation bar.
 
-* Discussion Table
-  * Discussion Table Head
-  * Discussion Table Body
-    * Discussion Table Row 0 (key = 0)
-      * Discussion Table Author Cell (key = 0)
-      * Discussion Table Post Cell (key = 1)
-    * Discussion Table Row 1 (key = 1)
-      * Discussion Table Author Cell (key = 0)
-      * Discussion Table Post Cell (key = 1)
-    * Discussion Table Row 2 (key = 2)
-      * Discussion Table Author Cell (key = 0)
-      * Discussion Table Post Cell (key = 1)
+![Topics page](./docs/topics.png)
+
+## Forum Page
+
+The Forum page will display a table of discussions relevant to the topic of the forum. When the user clicks on a discussion, they will be directed to a Discussion page.
+
+The Forum component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
+
+The Forum page should be reachable via direct URL or by the user clicking on a Forum link within the topics table in the Topics page.
+
+![Forum page](./docs/forum.png)
+
+## Discussion Page
+
+The Discussion page will display a table of posts relevant to the discussion.
+
+The Discussion component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
+
+The Discussion page should be reachable via direct URL or by the user clicking on a Discussion link within the forum table in the Forum page.
+
+![Discussion page](./docs/discussion.png)
+
+## Signup/Login Page
+
+The Signup/Login page will display two panes: a Signup page, and a Login pane.
+
+The Signup/Login page should be reachable via direct URL or by the user clicking the Login link in the global navigation bar.
+
+![Signup/Login page](./docs/login.png)

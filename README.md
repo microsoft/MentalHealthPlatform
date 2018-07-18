@@ -1,3 +1,43 @@
+# Project Setup
+
+1. Clone the repository to your local machine:
+
+   ```
+   git clone https://github.com/MentalHealthForum/website
+   ```
+
+2. Navigate into the cloned project directory:
+
+   ```
+   cd website
+   ```
+
+3. Install all dependencies:
+
+   ```
+   npm install
+   ```
+
+4. Build the project:
+
+   ```
+   npm run build
+   ```
+
+5. Run the project:
+
+   ```
+   npm start
+   ```
+
+   The console should then print a statement with a URL in which the application is running.
+
+   For example:
+
+   > Project is running at http://localhost:8080/
+
+6. Launch the application in a web browser by navigating to the URL printed by the console
+
 # Pages
 
 ## Topics Page

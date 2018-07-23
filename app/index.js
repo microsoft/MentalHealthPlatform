@@ -7,7 +7,7 @@ import NavigationBar from './components/NavigationBar';
 import Topics from './components/Topics';
 import SignupLogin from './components/SignupLogin';
 import Forum from './components/Forum';
-import Discussion from './components/Discussion';
+import Chat from './components/Chat';
 
 const containerStyle = {
     padding: "25px"
@@ -23,7 +23,7 @@ ReactDom.render(
 				<Route exact path="/topics" component={Topics}/>
 				<Route exact path="/login" component={SignupLogin} />
 				<Route exact path={`/topics/topic:topicID`} component={Forum} />
-				<Route exact path={`/topics/topic:topicID/:discussionID`} component={Discussion} />
+				<Route exact path={`/topics/topic:topicID/:chatID`} component={Chat} />
 			</div>
 		</div>
 	</BrowserRouter>,

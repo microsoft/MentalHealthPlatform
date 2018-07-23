@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { formatDate } from '../util/Helpers';
+
 class Message extends React.Component {
 
 
@@ -26,10 +28,10 @@ class Message extends React.Component {
         var messageBodyContainerStyle = {
             display: "flex", 
             flex: 1, 
-            marginLeft: "10px", 
+            marginLeft: "10px",
             border: "1px solid #00ff00",
             paddingLeft: "10px",
-            paddingRight: "10px", 
+            paddingRight: "10px",
             backgroundColor: "#cccccc", 
             borderRadius: "10px"
         };
@@ -48,16 +50,18 @@ class Message extends React.Component {
 
             // }
         ];
-        console.log("aaaaaaaaaaaaaaa", data[0].src);
+
+        const { name, date, messageBody } = this.props;
+
         return (
             <div style={containerStyle}>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Smiley_1741_Hennet.jpg" style={profilePictureStyle}/>
                 <div style={nameDateContainerStyle}>
-                    <h3>{data[0].name}</h3>
-                    <h3>{(data[0].date).toString()}</h3>
+                    <h3>{name}</h3>
+                    <h3>{formatDate(date)}</h3>
                 </div>
                 <div style={messageBodyContainerStyle}>
-                    <h3>{data[0].messageBody}</h3>
+                    <h3>{messageBody}</h3>
                 </div>
             </div>
         );

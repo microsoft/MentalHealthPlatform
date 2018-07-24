@@ -3,6 +3,8 @@ import React from 'react';
 import { formatDate } from '../util/Helpers';
 import messageStyles  from './MessageStyles';
 
+import profilePicturePlaceholder from './../images/profile_picture_placeholder.png';
+
 class Message extends React.Component {
     constructor(props) {
         super(props);
@@ -16,18 +18,21 @@ class Message extends React.Component {
         });
 
         return (
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Smiley_1741_Hennet.jpg" style={profilePictureStyle}/>
+            <img src={profilePicturePlaceholder} style={profilePictureStyle}/>
         );
     };
 
     renderMessageBody() {
         var messageBodyContainerStyle = Object.assign({}, messageStyles.messageBodyContainerStyle, {
-            backgroundColor: this.props.isCurrentUser ? "#CCCCCC" :"#CEFFCE", 
+            backgroundColor: this.props.isCurrentUser ? "#F2F2F2" : "#E2F0D9",
+            borderColor: this.props.isCurrentUser ? "#BFBFBF" : "#92D050",
+            marginLeft: this.props.isCurrentUser ? "auto" : 20,
+            marginRight: this.props.isCurrentUser ? 20 : "auto"
         });
 
         return (
             <div style={messageBodyContainerStyle}>
-                <h3>{this.props.messageBody}</h3>
+                {this.props.messageBody}
             </div>
         );
     };
@@ -35,8 +40,12 @@ class Message extends React.Component {
     renderNameDate() {
         return (
             <div style={messageStyles.nameDateContainerStyle}>
-                <h3>{this.props.name}</h3>
-                <h3>{formatDate(this.props.date)}</h3>
+                <div style={messageStyles.nameStyle}>
+                    {this.props.name}
+                </div>
+                <div>
+                    {formatDate(this.props.date)}
+                </div>
             </div>
         );
     };
@@ -49,7 +58,7 @@ class Message extends React.Component {
                 {this.renderProfilePicture()}
                 {this.renderNameDate()}
             </div> :
-            <div>
+            <div style={messageStyles.containerStyle}>
                 {this.renderProfilePicture()}
                 {this.renderNameDate()}
                 {this.renderMessageBody()}

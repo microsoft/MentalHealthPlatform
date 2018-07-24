@@ -1,5 +1,14 @@
 export function formatDate(timestamp) {
-    const d = new Date(timestamp)
-    const time = d.toLocaleTimeString('en-US')
-    return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
+    const d = new Date(timestamp);
+
+    const month = d.getMonth();
+    const day = d.getDate() >= 10 ? d.getDate().toString() : "0" + d.getDate().toString();
+    const year = d.getFullYear().toString().substr(-2);
+
+    const hour = d.getHours() % 12;
+    const minute = d.getMinutes();
+
+    const amPm = d.getHours() >= 12 ? "pm" : "am"
+
+    return `${hour}:${minute} ${amPm} ${month}/${day}/${year}`;
 }

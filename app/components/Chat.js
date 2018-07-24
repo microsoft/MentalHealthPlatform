@@ -43,7 +43,7 @@ class Chat extends React.Component {
                                             name={message.author}
                                             date={message.timestamp}
                                             messageBody={message.message}
-                                            isCurrentUser={true} />
+                                            isCurrentUser={message.author == "sarahedo"} />
                                     </div>
                                 );
                             })}
@@ -54,6 +54,7 @@ class Chat extends React.Component {
                             style={ChatStyles.inputField}
                             type='text'
                             value={this.state.input}
+                            placeholder="Enter your messsage here"
                             onChange={(e) => this.handleInputChange(e)} />
                         <button
                             style={ChatStyles.submitButton}

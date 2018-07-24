@@ -1,25 +1,34 @@
 const messageStyles = {
     containerStyle: {
         display: "flex", 
+        flexDirection: "row",
         marginBottom: "10px"
     },
     profilePictureStyle: {
-        width: "100px", 
-        height: "100px", 
-        borderRadius: "50%"
+        width: 50, 
+        height: 50,
+        borderRadius: 25
     },
     nameDateContainerStyle: {
-        marginLeft: "10px"
+        marginLeft: "10px",
+        fontFamily: "Calibri",
+        fontSize: 16
+    },
+    nameStyle: {
+        fontWeight: "bold",
+        marginBottom: 8
     },
     messageBodyContainerStyle: {
         display: "flex", 
-        flex: 1, 
-        marginLeft: "10px",
-        border: "1px solid #006600",
-        paddingLeft: "10px",
-        paddingRight: "10px",
+        flex: "0 1 auto", 
+        borderWidth: 2,
+        borderStyle: "solid",
+        padding: 10,
         borderRadius: "10px",
-        fontFamily: "OpenSans"
+        fontFamily: "Calibri",
+        fontSize: 18,
+        marginTop: 5,
+        marginBottom: 5
     }
 };
 

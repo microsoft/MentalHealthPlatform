@@ -36,26 +36,29 @@ class CreateChat extends React.Component {
 
     renderForm() {
         return (
-        <form onSubmit={(e) => this.handleSubmit(e, this.state.inputTitle, this.state.inputDescription)} style={{}}>
-            <input
-                style={CreateChatStyles.inputTitleStyle}
-                type='text'
-                value={this.state.inputTitle}
-                placeholder="Enter chat title"
-                onChange={(e) => this.handleInputTitleChange(e)} />
-            <input
-                style={CreateChatStyles.inputDescriptionStyle}
-                type='text'
-                value={this.state.inputDescription}
-                placeholder="Enter chat description"
-                onChange={(e) => this.handleInputDescriptionChange(e)} />
-            <button
-                style={CreateChatStyles.submitButtonStyle}
-                type='submit'>
-                
-                {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}
-            </button>
-        </form>
+        <div style={CreateChatStyles.paneStyle}>
+            <form onSubmit={(e) => this.handleSubmit(e, this.state.inputTitle, this.state.inputDescription)} style={CreateChatStyles.containerStyle}>
+                <h1 style={CreateChatStyles.formTitleStyle}>Create New Chat</h1>
+                <input
+                    style={CreateChatStyles.inputTitleStyle}
+                    type='text'
+                    value={this.state.inputTitle}
+                    placeholder="Enter chat title"
+                    onChange={(e) => this.handleInputTitleChange(e)} />
+                <textarea
+                    style={CreateChatStyles.inputDescriptionStyle}
+                    type='text'
+                    value={this.state.inputDescription}
+                    placeholder="Enter chat description"
+                    onChange={(e) => this.handleInputDescriptionChange(e)}></textarea>
+                <button
+                    style={CreateChatStyles.submitButtonStyle}
+                    type='submit'>
+                    Submit
+                    {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}
+                </button>
+            </form>
+        </div>
         )
     };
 

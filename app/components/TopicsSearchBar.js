@@ -19,7 +19,11 @@ class TopicsSearchBar extends React.Component {
         return (
             <div style={TopicsSearchBarStyles.topicsSearchBarStyle}>
                 <input type="text" placeholder="Search Topics" style={TopicsSearchBarStyles.textInputStyle} />
-                <input type="image" src={searchIcon} style={TopicsSearchBarStyles.submitInputStyle} />
+                <button
+                    style={TopicsSearchBarStyles.submitInputStyle}
+                    type='submit'>
+                    <input type="image" src={searchIcon} style={TopicsSearchBarStyles.searchIconStyle} />
+                </button>
             </div>
         );
     }

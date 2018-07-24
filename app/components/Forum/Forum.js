@@ -37,9 +37,9 @@ class Forum extends React.Component {
         for (let i = 0; i < 10; i++) {
             const discussionPreview = {
                 id: i,
-                title: "Discussion " + i,
-                subtitle: "This is subtitle",
-                author: "author",
+                title: "Coping with stress at work",
+                subtitle: "My job is very stressful. I have many deadlines coming, and it is becoming overwhelming. Anyone have some suggestions on how I can reduce my deaily stress?",
+                author: "Robert S.",
                 numberOfReplies: 12,
                 numberOfViews: 123,
                 date: `${date.getMonth()}\\${date.getDate()}\\${date.getFullYear()}`,
@@ -55,16 +55,22 @@ class Forum extends React.Component {
      */
     render() {
         const forumId = this.state.forumId;
-        const forumTitle = forumId ? "Topic " + forumId : this.props.location.state.forumTitle;
+        const forumTitle = "Stress";
 
         const infoCards = this.generateData().map(discussionPreview => {
             return <InfoCard key={discussionPreview.id} data={discussionPreview} />
         });
 
+        const containerStyle = Object.assign({}, ForumStyles.containerStyle, {
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../../images/topic_image_0.jpg')})`
+        });
+
         return (
-            <div>
-                <h1 style={ForumStyles.forumTitleStyle}>{forumTitle}</h1>
-                {infoCards}
+            <div style={containerStyle}>
+                <div style={ForumStyles.bodyStyle}>
+                    <h1 style={ForumStyles.forumTitleStyle}>{forumTitle}</h1>
+                    {infoCards}
+                </div>
             </div>
         );
     }

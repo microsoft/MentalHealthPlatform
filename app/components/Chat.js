@@ -28,8 +28,13 @@ class Chat extends React.Component {
     render() {
         const { input } = this.state;
         const chat = chats['8xf0y6ziyjabvozdd253nd'];
+
+        const containerStyle = Object.assign({}, ChatStyles.containerStyle, {
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../images/topic_image_0.jpg')})`
+        });
+
         return (
-            <div style={ChatStyles.containerStyle}>
+            <div style={containerStyle}>
                 <div style={ChatStyles.chatContainerStyle}>
                     <div>
                         <div style={ChatStyles.chatHeaderStyle}>

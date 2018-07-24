@@ -1,7 +1,9 @@
 const chatStyles = {
     containerStyle: {
         padding: 25,
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat"
     },
     chatContainerStyle: {
         backgroundColor: "#FFFFFF",

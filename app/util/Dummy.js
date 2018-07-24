@@ -23,6 +23,42 @@ export const chats = {
                 message: 'Thanks!',
                 timestamp: 1467166872645
             },
+            {
+                id: '4',
+                author: 'sarahedo',
+                message: 'I have a good solution',
+                timestamp: 1467166872634
+            },
+            {
+                id: '5',
+                author: 'joebranger',
+                message: 'Good idea!',
+                timestamp: 1467166872639
+            },
+            {
+                id: '6',
+                author: 'eddylu',
+                message: 'Thanks!',
+                timestamp: 1467166872645
+            },
+            {
+                id: '7',
+                author: 'sarahedo',
+                message: 'I have a good solution',
+                timestamp: 1467166872634
+            },
+            {
+                id: '8',
+                author: 'joebranger',
+                message: 'Good idea!',
+                timestamp: 1467166872639
+            },
+            {
+                id: '9',
+                author: 'eddylu',
+                message: 'Thanks!',
+                timestamp: 1467166872645
+            }
         ]
     },
     "6ni6ok3ym7mf1p33lnez": {

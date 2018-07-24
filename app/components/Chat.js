@@ -37,7 +37,8 @@ class Chat extends React.Component {
                                 <Message
                                     name={message.author}
                                     date={message.timestamp}
-                                    messageBody={message.message} />
+                                    messageBody={message.message}
+                                    isCurrentUser={true} />
                             </div>
                         );
                     })}

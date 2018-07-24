@@ -58,7 +58,7 @@ class Forum extends React.Component {
         const forumTitle = "Stress";
 
         const infoCards = this.generateData().map(discussionPreview => {
-            return <InfoCard key={discussionPreview.id} data={discussionPreview} />
+            return <InfoCard key={discussionPreview.id} data={discussionPreview} match={this.props.match} />
         });
 
         const containerStyle = Object.assign({}, ForumStyles.containerStyle, {

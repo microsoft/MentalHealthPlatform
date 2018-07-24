@@ -1,0 +1,96 @@
+signup: {
+	type: POST,
+	input: {
+		username: string,
+		pass: string,
+		displayName: string
+	},
+	output: {
+		statusMessage: int		
+	}
+},
+login: {
+	type: GET,
+	input: {
+		username: string,
+		pass: string
+	},
+	output: {
+		statusMessage: int
+	}
+},
+getTopics: {
+	type: GET,
+	input: {
+	},
+	output: {
+		[
+			{
+				topicId: int,
+				topicTitle: string,
+				topicImageSrc: string
+			}
+		]
+	}
+},
+getChatPreviews: {
+	type: GET,
+	input: {
+		topicId: int
+	},
+	output: {
+		[
+			{
+				chatId: int,
+				chatTitle: string,
+				chatDescription: string,
+				authorName: string,
+				avatarId: int,
+				postedDate: Date,
+				numberOfReplies: int,
+				numberOfViews: int
+			}
+		]
+	}
+},
+getChat: {
+	type: GET,
+	input: {
+		chatId: integer
+	},
+	output: {
+		chatTitle: string,
+		numberOfReplies: int,
+		numberOfViews: int,
+		messages:
+		[
+			{
+				avatarId: int,
+				authorName: string,
+				date: Date,
+				messageBody: string
+			}
+		]
+	}
+},
+sendMessage: {
+	type: POST,
+	input: {
+		userId: int,
+		messageBody: string
+	},
+	output: {
+		statusMessage: int
+	}
+},
+createChat: {
+	type: POST,
+	input: {
+		chatTitle: string,
+		chatDescription: string,
+		authorId: int
+	},
+	output: {
+		statusMessage: int
+	}
+}

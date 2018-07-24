@@ -1,8 +1,7 @@
-import React from 'react';
-// import { NavLink, withRouter } from 'react-router-dom';
-import { BrowserRouter, Route, NavLink, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { InfoCard } from "./InfoCard/InfoCard";
 
-import ForumTable from './ForumTable/ForumTable';
 import ForumStyles from './ForumStyles';
 
 class Forum extends React.Component {
@@ -33,34 +32,21 @@ class Forum extends React.Component {
      */
     generateData() {
         const discussionPreviews = [];
+        const date =  new Date();
+
         for (let i = 0; i < 10; i++) {
             const discussionPreview = {
-                discussion: {
-                    discussion: "Discussion " + i,
-                    author: "author"
-                },
-                lastComment: {
-                    date: new Date(),
-                    author: "author"
-                },                
-                replies: {
-                    numberOfReplies: 12
-                },
-                views: {
-                    numberOfViews: 123,
-                }
+                id: i,
+                title: "Discussion " + i,
+                subtitle: "This is subtitle",
+                author: "author",
+                numberOfReplies: 12,
+                numberOfViews: 123,
+                date: `${date.getMonth()}\\${date.getDate()}\\${date.getFullYear()}`,
             };
             discussionPreviews.push(discussionPreview);
         };
-
-        const headers = ["Discussion", "Last Comment", "Replies", "Views"];
-
-        const data = {
-            headers: headers,
-            discussionPreviews: discussionPreviews
-        }
-
-        return data;
+        return discussionPreviews;
     }
 
     /**
@@ -71,10 +57,14 @@ class Forum extends React.Component {
         const forumId = this.state.forumId;
         const forumTitle = forumId ? "Topic " + forumId : this.props.location.state.forumTitle;
 
+        const infoCards = this.generateData().map(discussionPreview => {
+            return <InfoCard key={discussionPreview.id} data={discussionPreview} />
+        });
+
         return (
             <div>
                 <h1 style={ForumStyles.forumTitleStyle}>{forumTitle}</h1>
-                <ForumTable match={this.state.match} data={this.generateData()} />
+                {infoCards}
             </div>
         );
     }

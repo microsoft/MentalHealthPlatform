@@ -6,7 +6,7 @@ import App from './components/App';
 import NavigationBar from './components/NavigationBar';
 import Topics from './components/Topics';
 import SignupLogin from './components/SignupLogin';
-import Forum from './components/Forum';
+import Forum from './components/Forum/Forum';
 import Chat from './components/Chat';
 
 const containerStyle = {

@@ -1,7 +1,7 @@
 export const chats = {
     "8xf0y6ziyjabvozdd253nd": {
         id: '8xf0y6ziyjabvozdd253nd',
-        name: 'Help dealing with anxiety',
+        title: 'Help dealing with anxiety',
         author: 'eddylu',
         timestamp: 1467166872630,
         messages: [

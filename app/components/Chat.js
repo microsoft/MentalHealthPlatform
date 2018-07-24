@@ -19,19 +19,26 @@ class Chat extends React.Component {
         })
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        alert('Submitted!');
+    }
+
     render() {
         const { input } = this.state;
-
+        const chat = chats['8xf0y6ziyjabvozdd253nd'];
         return (
             <div style={ChatStyles.containerStyle}>
                 <div>
-                    {chats['8xf0y6ziyjabvozdd253nd'].messages.map((message) => {
+                    <h1>{chat.title}</h1>
+                    {chat.messages.map((message) => {
                         return (
                             <div key={message.id}>
                                 <Message
                                     name={message.author}
                                     date={message.timestamp}
-                                    messageBody={message.message} />
+                                    messageBody={message.message}
+                                    isCurrentUser={true} />
                             </div>
                         );
                     })}
@@ -49,7 +56,6 @@ class Chat extends React.Component {
                         Submit
                     </button>
                 </form>
-                Input: {this.state.input}
             </div>
         );
     }

@@ -14,12 +14,14 @@ class Message extends React.Component {
 
     renderMessage(){
         var containerStyle = {
-            display: "flex"
+            display: "flex", 
+            marginBottom: "10px"
         };
         var profilePictureStyle = {
             width: "100px", 
             height: "100px", 
-            borderRadius: "50%"
+            borderRadius: "50%", 
+            marginLeft: this.props.isCurrentUser ? "10px" : "0px"
 
         };
         var nameDateContainerStyle = {
@@ -29,31 +31,31 @@ class Message extends React.Component {
             display: "flex", 
             flex: 1, 
             marginLeft: "10px",
-            border: "1px solid #00ff00",
+            border: "1px solid #006600",
             paddingLeft: "10px",
             paddingRight: "10px",
-            backgroundColor: "#cccccc", 
-            borderRadius: "10px"
+            backgroundColor: this.props.isCurrentUser ? "#CCCCCC" :"#CEFFCE", 
+            borderRadius: "10px",
+            fontFamily: "OpenSans"
         };
-        var data = [
-            {
-                src: "./../images/profilePicture.jpeg",
-                name:"Maria G.",
-                date: new Date(), 
-                messageBody: "helloooooo"
-            }, 
-            // {
-            //     src: "./images/profilePicture",
-            //     name:"William G.",
-            //     date: new Date(), 
-            //     messageBody: "hi"
 
-            // }
-        ];
 
         const { name, date, messageBody } = this.props;
 
-        return (
+        return this.props.isCurrentUser ? (
+            <div style={containerStyle}>
+                <div style={messageBodyContainerStyle}>
+                    <h3>{messageBody}</h3>
+                </div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Smiley_1741_Hennet.jpg" style={profilePictureStyle}/>
+                <div style={nameDateContainerStyle}>
+                    <h3>{name}</h3>
+                    <h3>{formatDate(date)}</h3>
+                </div>
+                
+            </div>
+        ) : 
+        (
             <div style={containerStyle}>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Smiley_1741_Hennet.jpg" style={profilePictureStyle}/>
                 <div style={nameDateContainerStyle}>

@@ -7,17 +7,13 @@ import NavigationBar from './components/NavigationBar';
 import Topics from './components/Topics';
 import SignupLogin from './components/SignupLogin';
 import Forum from './components/Forum/Forum';
-import Chat from './components/Chat';
-
-const containerStyle = {
-    padding: "25px"
-};
+import Chat from './components/Chat';    
 
 ReactDom.render(
 	<BrowserRouter>
 		<div>
 			<NavigationBar />
-			<div style={containerStyle}>
+			<div>
 				<App />
 				<Route exact path="/" render={() => <Redirect to="/topics" />} />
 				<Route exact path="/topics" component={Topics}/>

@@ -10,7 +10,7 @@ class App extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     render() {
-        return <div style={AppStyles.containerStyle}></div>;
+        return <div></div>;
     }
 }
 

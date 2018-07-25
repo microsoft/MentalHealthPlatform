@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var mongoClient = require('mongodb').MongoClient;
 var mongoUrl = "mongodb://localhost:27017/";
@@ -10,6 +11,16 @@ var dbName = 'mentalhealthdb';
 var usersColl = "Users";
 var topicsColl = "Topics";
 
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -44,8 +55,8 @@ app.post('/signup', function(postReq, postRes){
 });
 
 
-app.get('/login', function(postReq, postRes) {
-    var obj = postReq.query;
+app.post('/login', function(postReq, postRes) {
+	var obj = postReq.body;
 
 	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
 		if (connerErr) throw connerErr;

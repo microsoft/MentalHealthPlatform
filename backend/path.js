@@ -227,6 +227,29 @@ app.get('/getchat', function(postReq, postRes){
 });
 
 
+app.post('/sendmessage', function(postReq, postRes){
+	var obj = postReq.query;
+
+	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
+		if (connerErr) throw connerErr;
+		var dbo = db.db(dbName);
+
+		var msgObj = {};
+		msgObj.chatID = obj.chatId;
+		msgObj.messageBody = obj.messageBody;
+		msgObj.username = obj.username;
+		msgObj.date = new Date().toString();
+
+		// Insert message into db
+		dbo.collection(msgColl).insertOne(msgObj, function(insertErr, insertRes) {
+			if (insertErr) throw insertErr;
+			db.close();
+			postRes.json({statusMessage : 1});
+		});
+	});
+});
+
+
 app.listen(app.get('port'), function(){
     console.log('Listening...');
 })

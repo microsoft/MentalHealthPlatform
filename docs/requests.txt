@@ -6,7 +6,7 @@ signup: {
 		displayName: string
 	},
 	output: {
-		statusMessage: int		
+		statusMessage: int
 	}
 },
 login: {
@@ -77,7 +77,8 @@ sendMessage: {
 	type: POST,
 	input: {
 		userId: int,
-		messageBody: string
+		messageBody: string,
+		chatId: int
 	},
 	output: {
 		statusMessage: int

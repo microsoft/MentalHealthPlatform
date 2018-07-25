@@ -11,6 +11,7 @@ var dbName = 'mentalhealthdb';
 var usersColl = "Users";
 var topicsColl = "Topics";
 var chatsColl = "Chats";
+var msgColl = "Message";
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -145,6 +146,81 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 			}
 
 			postRes.json(chatPreviewsObj);
+			db.close();
+		});
+	});
+});
+
+
+app.get('/getchat', function(postReq, postRes){
+	var obj = postReq.query;
+
+	mongoClient.connect(mongoUrl, function(err, db) {
+		if (err) throw err;
+		var dbo = db.db(dbName);
+		dbo.collection(msgColl).aggregate(
+			[
+			{ $lookup:
+				  {
+					from: 'Users',
+					localField: 'username',
+					foreignField: 'username',
+					as: 'userdetail'
+				  }
+			},
+			{ $unwind:
+				{
+					path: "$userdetail",
+					preserveNullAndEmptyArrays: false
+				}
+			},
+			{ $lookup:
+				{
+				  from: 'Chats',
+				  localField: 'chatID',
+				  foreignField: 'chatID',
+				  as: 'chatdetail'
+				}
+		  },
+		  { $unwind:
+			  {
+				  path: "$chatdetail",
+				  preserveNullAndEmptyArrays: false
+			  }
+		  },
+			{ $match:
+				{
+					chatID : obj.chatId
+				}
+			}
+			]
+		).toArray(function(chatErr, chatRes) {
+			if (chatErr) throw chatErr;
+
+			if (chatRes.length <= 0) {
+				postRes.json([]);
+				return;
+			}
+
+			var chatObj = {};
+			// Get chat data
+			chatObj.chatTitle = chatRes[0].chatdetail.chatTitle;
+			chatObj.numberOfReplies = chatRes.length;
+			chatObj.numberOfViews = chatRes[0].chatdetail.numberofviews;
+			chatObj.messages = [];
+
+			// Create messages
+			for (var i = 0; i < chatRes.length; i++) {
+				var msgObj = {};
+				msgObj.avatarId = chatRes[i].userdetail.avatarID;
+				msgObj.authorName = chatRes[i].userdetail.username;
+				msgObj.date = chatRes[i].date;
+				msgObj.messageBody = chatRes[i].messageBody;
+
+				chatObj.messages.push(msgObj);
+			}
+
+			postRes.json(chatObj);
 			db.close();
 		});
 	});

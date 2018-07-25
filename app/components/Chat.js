@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import Message from './Message';
 import sendIcon from './../images/send_icon.png';
 
@@ -13,7 +14,8 @@ class Chat extends React.Component {
         this.state = {
             title: '',
             mesages: [],
-            messageBody: ''
+            messageBody: '',
+            loading: true
         };
     }
 
@@ -23,8 +25,15 @@ class Chat extends React.Component {
         })
     }
 
-    handleSubmit(e, ctx) {
+    handleSubmit = (e) => {
+        const { messageBody, messages } = this.state;
+        const { chatID } = this.props.match.params;
+
         e.preventDefault();
+        this.setState({
+            messageBody: '',
+            loading: true
+        });
 
         fetch(`${BASE_URL}/sendmessage`, {
             method: 'POST',
@@ -33,26 +42,31 @@ class Chat extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                chatId: 0,
-                messageBody: ctx.state.messageBody,
+                chatId: chatID,
+                messageBody: messageBody,
                 username: "sarahedo"
             })
-        }).then(function(response) {
+        }).then((response) => {
             const output = response.json();
             return output;
-        }).then(function(data) {
+        }).then((data) => {
             console.log(data);
             if (data && data.statusMessage == 1) {
-                console.log("Message sent");
+                alert("Message sent");
             }
             else {
-                console.log("Message failed to send")
+                alert("Message failed to send")
             }
+
+            this.setState({
+                loading: false
+            })
+            this.forceUpdate();
         });
     }
 
     render() {
-        const { messageBody, messages, title } = this.state;
+        const { messageBody, messages, title, loading } = this.state;
 
         const containerStyle = Object.assign({}, ChatStyles.containerStyle, {
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../images/topic_image_0.jpg')})`
@@ -60,8 +74,15 @@ class Chat extends React.Component {
 
         const _this = this;
 
-        if (messages === undefined) {
-            return (<div>Loading</div>)
+        if (loading) {
+            return (
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}>
+                    <ReactLoading type="bubbles" color="#333" height={'5%'} width={'5%'} />
+                </div>
+            )
         }
 
         return (
@@ -100,28 +121,29 @@ class Chat extends React.Component {
                         </button>
                     </form>
                 </div>
-            </div>
+            </div >
         );
     }
 
     componentDidMount() {
-        const _this = this;
+        const { chatID } = this.props.match.params;
 
-        fetch(`${BASE_URL}/getChat?chatId=${1}`, {
+        fetch(`${BASE_URL}/getChat?chatId=${chatID}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             }
-        }).then(function(response) {
+        }).then((response) => {
             const output = response.json();
             return output;
-        }).then(function(data) {
-            _this.setState({
+        }).then((data) => {
+            this.setState({
                 title: data.chatTitle,
-                messages: data.messages
+                messages: data.messages,
+                loading: false
             })
-            console.log(data);
+            console.log("Data", data);
         }).catch((error) => {
             console.log(error);
         });

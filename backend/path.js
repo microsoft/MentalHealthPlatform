@@ -10,6 +10,7 @@ var dbName = 'mentalhealthdb';
 // Collections
 var usersColl = "Users";
 var topicsColl = "Topics";
+var chatsColl = "Chats";
 
 app.use(bodyParser.urlencoded({
 	extended: true

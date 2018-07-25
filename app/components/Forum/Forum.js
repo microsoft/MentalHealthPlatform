@@ -4,6 +4,8 @@ import { InfoCard } from "./InfoCard/InfoCard";
 
 import ForumStyles from './ForumStyles';
 
+import { BASE_URL } from './../../util/Helpers';
+
 class Forum extends React.Component {
     constructor(props) {
         super(props);
@@ -73,6 +75,23 @@ class Forum extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        fetch(`${BASE_URL}/getchatpreviews?topicId=${1}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(function(response) {
+            const output = response.json();
+            return output;
+        }).then(function(data) {
+            console.log(data);
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 }
 

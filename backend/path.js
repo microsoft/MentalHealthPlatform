@@ -26,7 +26,7 @@ app.set('port', process.env.PORT || 3000);
 
 
 app.post('/signup', function(postReq, postRes){
-	var obj = postReq.query;
+	var obj = postReq.body;
 	var username = obj.username;
 
 	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {

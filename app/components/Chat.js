@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { chats } from '../util/Dummy';
 import Message from './Message';
 import sendIcon from './../images/send_icon.png';
 
@@ -12,7 +11,9 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            messageBody: ""
+            title: '',
+            mesages: [],
+            messageBody: ''
         };
     }
 
@@ -51,8 +52,7 @@ class Chat extends React.Component {
     }
 
     render() {
-        const { messageBody } = this.state;
-        const chat = chats['8xf0y6ziyjabvozdd253nd'];
+        const { messageBody, messages, title } = this.state;
 
         const containerStyle = Object.assign({}, ChatStyles.containerStyle, {
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../images/topic_image_0.jpg')})`
@@ -60,21 +60,25 @@ class Chat extends React.Component {
 
         const _this = this;
 
+        if (messages === undefined) {
+            return (<div>Loading</div>)
+        }
+
         return (
             <div style={containerStyle}>
                 <div style={ChatStyles.chatContainerStyle}>
                     <div>
                         <div style={ChatStyles.chatHeaderStyle}>
-                            <h1 style={ChatStyles.title}>{chat.title}</h1>
+                            <h1 style={ChatStyles.title}>{title}</h1>
                         </div>
                         <div style={ChatStyles.chatBodyStyle}>
-                            {chat.messages.map((message) => {
+                            {messages.map((message) => {
                                 return (
                                     <div key={message.id}>
                                         <Message
-                                            name={message.author}
-                                            date={message.timestamp}
-                                            messageBody={message.message}
+                                            name={message.authorName}
+                                            date={message.date}
+                                            messageBody={message.messageBody}
                                             isCurrentUser={message.author == "sarahedo"} />
                                     </div>
                                 );
@@ -101,6 +105,8 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
+        const _this = this;
+
         fetch(`${BASE_URL}/getChat?chatId=${1}`, {
             method: 'GET',
             headers: {
@@ -111,6 +117,10 @@ class Chat extends React.Component {
             const output = response.json();
             return output;
         }).then(function(data) {
+            _this.setState({
+                title: data.chatTitle,
+                messages: data.messages
+            })
             console.log(data);
         }).catch((error) => {
             console.log(error);

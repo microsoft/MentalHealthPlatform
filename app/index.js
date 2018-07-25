@@ -20,7 +20,7 @@ ReactDom.render(
 				<Route exact path="/topics" component={Topics}/>
 				<Route exact path="/login" component={SignupLogin} />
 				<Route exact path={`/topics/topic:topicID`} component={Forum} />
-				<Route exact path={`/topics/topic:topicID/chat:chatID`} component={Chat} />
+				<Route exact path={`/topics/topic:topicID/chat/:chatID`} component={Chat} />
 				<Route exact path={`/topics/topic:topicID/createChat`} component={CreateChat} />
 			</div>
 		</div>

@@ -27,6 +27,9 @@ class CreateChat extends React.Component {
         })
     }
 
+    isSubmitButtonDisabled() {
+        return this.state.inputTitle.length > 0 && this.state.inputDescription.length > 0;
+    }
 
     handleSubmit(e, title, description) {
         e.preventDefault();
@@ -35,6 +38,10 @@ class CreateChat extends React.Component {
 
 
     renderForm() {
+        const submitButtonStyle = Object.assign({}, CreateChatStyles.submitButtonStyle, {
+            backgroundColor: this.isSubmitButtonDisabled() ? "#4CAF50" : "#CCCCCC"
+        });
+        
         return (
         <div style={CreateChatStyles.paneStyle}>
             <form onSubmit={(e) => this.handleSubmit(e, this.state.inputTitle, this.state.inputDescription)} style={CreateChatStyles.containerStyle}>
@@ -52,7 +59,8 @@ class CreateChat extends React.Component {
                     placeholder="Enter chat description"
                     onChange={(e) => this.handleInputDescriptionChange(e)}></textarea>
                 <button
-                    style={CreateChatStyles.submitButtonStyle}
+                    disabled={!this.isSubmitButtonDisabled()}
+                    style={submitButtonStyle}
                     type='submit'>
                     Submit
                     {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}

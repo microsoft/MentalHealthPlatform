@@ -38,7 +38,7 @@ const createChatStyles = {
         textAlignVertical: "top"
     }, 
     submitButtonStyle: {
-        marginLeft: "900px",
+        width: "100%",
         backgroundColor: "#4CAF50",
         border: "none",
         color: "#FFFFFF",

@@ -12,28 +12,53 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            input: ''
+            messageBody: ""
         };
     }
 
     handleInputChange(e) {
         this.setState({
-            input: e.target.value
+            messageBody: e.target.value
         })
     }
 
-    handleSubmit(e) {
+    handleSubmit(e, ctx) {
         e.preventDefault();
-        alert('Submitted!');
+
+        fetch(`${BASE_URL}/sendmessage`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chatId: 0,
+                messageBody: ctx.state.messageBody,
+                username: "sarahedo"
+            })
+        }).then(function(response) {
+            const output = response.json();
+            return output;
+        }).then(function(data) {
+            console.log(data);
+            if (data && data.statusMessage == 1) {
+                console.log("Message sent");
+            }
+            else {
+                console.log("Message failed to send")
+            }
+        });
     }
 
     render() {
-        const { input } = this.state;
+        const { messageBody } = this.state;
         const chat = chats['8xf0y6ziyjabvozdd253nd'];
 
         const containerStyle = Object.assign({}, ChatStyles.containerStyle, {
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../images/topic_image_0.jpg')})`
         });
+
+        const _this = this;
 
         return (
             <div style={containerStyle}>
@@ -56,17 +81,17 @@ class Chat extends React.Component {
                             })}
                         </div>
                     </div>
-                    <form onSubmit={this.handleSubmit} style={ChatStyles.formStyle}>
+                    <form onSubmit={(e) => this.handleSubmit(e, _this)} style={ChatStyles.formStyle}>
                         <input
                             style={ChatStyles.inputField}
                             type='text'
-                            value={this.state.input}
+                            value={this.state.messageBody}
                             placeholder="Enter your messsage here"
                             onChange={(e) => this.handleInputChange(e)} />
                         <button
                             style={ChatStyles.submitButton}
                             type='submit'
-                            disabled={input === ''}>
+                            disabled={messageBody === ''}>
                             <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} />
                         </button>
                     </form>

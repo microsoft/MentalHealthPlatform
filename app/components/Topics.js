@@ -184,9 +184,9 @@ class Topics extends React.Component {
             }
         }).then(function(response) {
             const output = response.json();
-            console.log(output);
             return output;
-        }).then(function(myJson) {
+        }).then(function(data) {
+            console.log(data);
         });
     }
 }

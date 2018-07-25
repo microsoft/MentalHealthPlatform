@@ -79,7 +79,7 @@ app.post('/login', function(postReq, postRes) {
 
 app.get('/gettopics', function(postReq, postRes) {
 	console.log("Retrieving topics");
-	var obj = postReq.query;
+	var obj = postReq.body;
 
 	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
 		if (connerErr) throw connerErr;

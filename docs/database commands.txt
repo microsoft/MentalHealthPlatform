@@ -11,9 +11,9 @@ var myDateString = Date();
 db.createCollection("Users")
 
 // Insert data to Users collection
-db.Users.insertOne({username:'Aldo',password:'Aldo',displayname:'Aldo',avatarID:'1'})
-db.Users.insertOne({username:'Eddy',password:'Eddy',displayname:'Eddy',avatarID:'2'})
-db.Users.insertOne({username:'Khush',password:'Khush',displayname:'Khush',avatarID:'3'})
+db.Users.insertOne({username:'Aldo',pass:'Aldo',displayname:'Aldo',avatarID:'1'})
+db.Users.insertOne({username:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'})
+db.Users.insertOne({username:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'})
 
 //etc...
 

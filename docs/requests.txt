@@ -89,7 +89,7 @@ createChat: {
 	input: {
 		chatTitle: string,
 		chatDescription: string,
-		authorId: int
+		username: string
 	},
 	output: {
 		statusMessage: int

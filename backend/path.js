@@ -84,7 +84,7 @@ app.get('/gettopics', function(postReq, postRes) {
 	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
-		
+
 		dbo.collection(topicsColl).find().toArray(function(findErr, findRes) {
 			if (findErr) throw findErr;
 			db.close();
@@ -93,6 +93,61 @@ app.get('/gettopics', function(postReq, postRes) {
 	});
 });
 
+
+app.get('/getchatpreviews', function(postReq, postRes) {
+	var obj = postReq.query;
+
+	mongoClient.connect(mongoUrl, function(err, db) {
+		if (err) throw err;
+		var dbo = db.db("mentalhealthdb");
+		dbo.collection(chatsColl).aggregate(
+			[
+			{ $lookup:
+				  {
+					from: 'Users',
+					localField: 'username',
+					foreignField: 'username',
+					as: 'userdetail'
+				  }
+			},
+			{ $unwind:
+				{
+					path: "$userdetail",
+					preserveNullAndEmptyArrays: false
+				}
+			},
+			{ $match:
+				{
+					TopicID : obj.topicId
+				}
+			}
+			]
+		).toArray(function(chatErr, chatRes) {
+			if (chatErr) throw chatErr;
+
+			if (chatRes.length <= 0) {
+				postRes.json([]);
+				return;
+			}
+
+			var chatPreviewsObj = [];
+			for (var i = 0; i < chatRes.length; i ++) {
+				var chatPreviewObj = {};
+				chatPreviewObj.avatarId = chatRes[i].userdetail.avatarID;
+				chatPreviewObj.chatId = chatRes[i].chatID
+				chatPreviewObj.chatTitle = chatRes[i].chatTitle
+				chatPreviewObj.chatDescription = chatRes[i].desc
+				chatPreviewObj.authorName = chatRes[i].username
+				chatPreviewObj.numberOfViews = chatRes[i].numberofviews
+				chatPreviewObj.postedDate = chatRes[i].PostedDate
+				chatPreviewsObj.push(chatPreviewObj)
+			}
+
+			postRes.json(chatPreviewsObj);
+			db.close();
+		});
+	});
+});
 
 
 app.listen(app.get('port'), function(){

@@ -1,19 +1,30 @@
- var myDateString = Date();
+// Run mongo
+mongo
 
+// Create mentalhealthdb database
+use mentalhealthdb
+
+// Create date object for populating collections
+var myDateString = Date();
+
+// Create Users collection
+db.createCollection("Users")
+
+// Insert data to Users collection
 db.Users.insertOne({username:'Aldo',password:'Aldo',displayname:'Aldo',avatarID:'1'})
 db.Users.insertOne({username:'Eddy',password:'Eddy',displayname:'Eddy',avatarID:'2'})
 db.Users.insertOne({username:'Khush',password:'Khush',displayname:'Khush',avatarID:'3'})
+
+//etc...
 
 db.Chats.insertOne({chatID:'1',chatTitle:'Techniques for reducing stress',desc:'What are your favorite techniques to reduce stress?',username:'Aldo',PostedDate:myDateString,numberofviews:'1',TopicID:'1'})
 db.Chats.insertOne{chatID:'2',chatTitle:'Coping with stress at work',desc:'My job is very stressful. I have many dealdlines coming and it is becoming overwhelming',username:'Eddy',PostedDate:myDateString,numberofviews:'1',TopicID:'1'}
 db.Chats.insertOne({chatID:'3',chatTitle:'Family Stress',desc:'My husband and I are having financial and work issues. I do noy want our childern to be worried. Does anyone...',username:'Khush',PostedDate:myDateString,numberofviews:'3',TopicID:'1'})
 
-
 db.Topics.insertOne({topicTitle:'Stress',topicID:'1',image:'1'})
 db.Topics.insertOne({topicTitle:'Anxiety',topicID:'2',image:'1'})
 db.Topics.insertOne({topicTitle:'Depression',topicID:'3',image:'1'})
 db.Topics.insertOne({topicTitle:'Loneliness',topicID:'4',image:'1'})
-
 
 db.Message.insertOne({chatID:'1',messageBody:'What are your favorite techniques to reduce stress?',username:'Aldo',date:myDateString})
 db.Message.insertOne({chatID:'1',messageBody:'Have you tried the 4 7 8 breathing technique?',username:'Eddy',date:myDateString})

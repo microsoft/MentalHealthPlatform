@@ -7,26 +7,79 @@ use mentalhealthdb
 // Create date object for populating collections
 var myDateString = Date();
 
-// Create Users collection
+// CREATE COLLECTION
 db.createCollection("Users")
+db.createCollection("Topics")
+db.createCollection("Chats")
+db.createCollection("Message")
 
-// Insert data to Users collection
-db.Users.insertOne({username:'Aldo',pass:'Aldo',displayname:'Aldo',avatarID:'1'})
-db.Users.insertOne({username:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'})
-db.Users.insertOne({username:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'})
+// CREATE USERS
+db.Users.insertOne({_id:'Aldo',pass:'Aldo',displayname:'Aldo',avatarID:'1'})
+db.Users.insertOne({_id:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'})
+db.Users.insertOne({_id:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'})
 
-//etc...
+// TOPIC
+db.Topics.insertOne({topicTitle:'Stress',image:'1'})
 
-db.Chats.insertOne({chatID:'1',chatTitle:'Techniques for reducing stress',desc:'What are your favorite techniques to reduce stress?',username:'Aldo',PostedDate:myDateString,numberofviews:'1',TopicID:'1'})
-db.Chats.insertOne{chatID:'2',chatTitle:'Coping with stress at work',desc:'My job is very stressful. I have many dealdlines coming and it is becoming overwhelming',username:'Eddy',PostedDate:myDateString,numberofviews:'1',TopicID:'1'}
-db.Chats.insertOne({chatID:'3',chatTitle:'Family Stress',desc:'My husband and I are having financial and work issues. I do noy want our childern to be worried. Does anyone...',username:'Khush',PostedDate:myDateString,numberofviews:'3',TopicID:'1'})
+a = db.Chats.insertOne({chatTitle:'Techniques for reducing stress',desc:'What are your favorite techniques to reduce stress?',user_id:'Aldo',PostedDate:myDateString,numberofviews:'1',numberofreplies:'0',topic_id:'1'})
+db.Message.insertOne({chat_id:a,messageBody:'What are your favorite techniques to reduce stress?',user_id:'Aldo',date:myDateString})
+db.Message.insertOne({chat_id:a,messageBody:'Have you tried the 4 7 8 breathing technique?',user_id:'Eddy',date:myDateString})
+db.Message.insertOne({chat_id:a,messageBody:'I agree with William. Sometime its best to stop everything that you are doing for 5 minutes and focus on breathing.',user_id:'Aldo',date:myDateString})
+db.Message.insertOne({chat_id:a,messageBody:'If you ever feel like your stress is overwhelming you should always reach out to others.',user_id:'Khush',date:myDateString})
 
-db.Topics.insertOne({topicTitle:'Stress',topicID:'1',image:'1'})
-db.Topics.insertOne({topicTitle:'Anxiety',topicID:'2',image:'1'})
-db.Topics.insertOne({topicTitle:'Depression',topicID:'3',image:'1'})
-db.Topics.insertOne({topicTitle:'Loneliness',topicID:'4',image:'1'})
+db.Chats.insertOne{chatTitle:'Coping with stress at work',desc:'My job is very stressful. I have many dealdlines coming and it is becoming overwhelming',user_id:'Eddy',PostedDate:myDateString,numberofviews:'1',numberofreplies:'0',topic_id:'1'}
 
-db.Message.insertOne({chatID:'1',messageBody:'What are your favorite techniques to reduce stress?',username:'Aldo',date:myDateString})
-db.Message.insertOne({chatID:'1',messageBody:'Have you tried the 4 7 8 breathing technique?',username:'Eddy',date:myDateString})
-db.Message.insertOne({chatID:'1',messageBody:'I agree with William. Sometime its best to stop everything that you are doing for 5 minutes and focus on breathing.',username:'Aldo',date:myDateString})
-db.Message.insertOne({chatID:'1',messageBody:'If you ever feel like your stress is overwhelming you should always reach out to others.',username:'Khush',date:myDateString})
+db.Chats.insertOne({chatTitle:'Family Stress',desc:'My husband and I are having financial and work issues. I do noy want our childern to be worried. Does anyone...',user_id:'Khush',PostedDate:myDateString,numberofviews:'3',numberofreplies:'0',topic_id:'1'})
+
+// TOPIC
+db.Topics.insertOne({topicTitle:'Anxiety',image:'1'})
+
+
+
+//TOPIC
+db.Topics.insertOne({topicTitle:'Depression',image:'1'})
+
+
+
+// TOPIC
+db.Topics.insertOne({topicTitle:'Loneliness',image:'1'})
+
+
+
+
+
+
+/***********************/
+/******* OBJECTS *******/
+/***********************/
+User object:
+{
+    _id:,
+    pass:,
+    displayname:,
+    avatarID:
+}
+
+Topic object:
+{
+    topicTitle:,
+    image:
+}
+
+Chat object:
+{
+    chatTitle:,
+    user_id:,
+    PostedDate:,
+    numberofviews:,
+    numberofreplies:,
+    topic_id:
+}
+
+Message object:
+{
+    chat_id:,
+    messageBody:,
+    user_id:,
+    date:
+}

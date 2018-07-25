@@ -4,8 +4,6 @@ import { InfoCard } from "./InfoCard/InfoCard";
 
 import ForumStyles from './ForumStyles';
 
-import addIcon from './../../images/add_icon.png';
-
 import { BASE_URL } from './../../util/Helpers';
 
 class Forum extends React.Component {

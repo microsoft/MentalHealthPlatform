@@ -45,6 +45,10 @@ class Topics extends React.Component {
      * @return  {React.Component}               All rows in topics table
      */
     createAllRows(topics) {
+        if (!topics) {
+            return null;
+        }
+
         const rows = [];
         for (let i = 0; i < topics.length; i += this.state.numberOfColumns) {
             const rowTopics = [];
@@ -86,7 +90,7 @@ class Topics extends React.Component {
      */
     createCell(cellKeyIndex, overallIndex, topic) {
         const linkProps = {
-            forumTitle: topic.title
+            forumTitle: topic.topicTitle
         };
 
         let baseUrl = this.state.match.url;
@@ -103,14 +107,14 @@ class Topics extends React.Component {
         });
 
         return (
-            <Link key={"cell-" + cellKeyIndex} to={`${baseUrl}/topic${overallIndex}`} style={TopicsStyles.topicLinkStyle}>
+            <Link key={"cell-" + cellKeyIndex} to={`${baseUrl}/topic${topic.topicID}`} style={TopicsStyles.topicLinkStyle}>
                 <td
                     onClick={() => this.cellOnClickHandler(linkProps)}
                     onMouseOver={() => this.cellOnMouseover(overallIndex)}
                     onMouseOut={() => this.cellOnMouseout()}
                     style={this.state.hoveredCellIndex == overallIndex ? forumTableCellOnMouseoverStyle : forumTableCellOnMouseoutStyle}
                 >
-                    {topic.title}
+                    {topic.topicTitle}
                 </td>
             </Link>
         );
@@ -167,7 +171,7 @@ class Topics extends React.Component {
                     <TopicsSearchBar />
                     <table style={TopicsStyles.forumTableStyle}>
                         <tbody>
-                            {this.createAllRows(this.generateData())}
+                            {this.createAllRows(this.state.topicsData)}
                         </tbody>
                     </table>
                 </div>
@@ -176,6 +180,7 @@ class Topics extends React.Component {
     }
 
     componentDidMount() {
+        const _this = this;
         fetch(`${BASE_URL}/gettopics`, {
             method: 'GET',
             headers: {
@@ -186,6 +191,9 @@ class Topics extends React.Component {
             const output = response.json();
             return output;
         }).then(function(data) {
+            _this.setState({
+                topicsData: data
+            });
             console.log(data);
         });
     }

@@ -6,6 +6,8 @@ import sendIcon from './../images/send_icon.png';
 
 import ChatStyles from './ChatStyles';
 
+import { BASE_URL } from './../util/Helpers';
+
 class Chat extends React.Component {
     constructor(props) {
         super(props);
@@ -71,6 +73,23 @@ class Chat extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        fetch(`${BASE_URL}/getChat?chatId=${1}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(function(response) {
+            const output = response.json();
+            return output;
+        }).then(function(data) {
+            console.log(data);
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 }
 

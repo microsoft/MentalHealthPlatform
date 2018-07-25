@@ -250,6 +250,40 @@ app.post('/sendmessage', function(postReq, postRes){
 });
 
 
+app.post('/createchat', function(postReq, postRes){
+	var obj = postReq.query;
+
+	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
+		if (connerErr) throw connerErr;
+		var dbo = db.db(dbName);
+
+		// Create new chat
+		var chatObj = {};
+		chatObj.chatTitle = obj.chatTitle;
+		chatObj.username = obj.username;
+		chatObj.TopicID = obj.topicId;
+
+		// Create new message
+		var msgObj = {};
+		msgObj.messageBody = obj.chatDescription;
+		msgObj.username = obj.username;
+		msgObj.date = new Date().toString();
+
+		// Insert chat to db
+		dbo.collection(chatsColl).insertOne(chatObj, function(insertChatErr, insertChatRes) {
+			if (insertChatErr) throw insertChatErr;
+			msgObj.chatID = insertChatRes.insertedId;
+
+			// Insert message to db
+			dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
+				db.close();
+				postRes.json({statusMessage : 1});
+			});
+		});
+	});
+});
+
+
 app.listen(app.get('port'), function(){
     console.log('Listening...');
 })

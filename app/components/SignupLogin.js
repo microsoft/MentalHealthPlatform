@@ -117,6 +117,8 @@ class SignupLogin extends React.Component {
     }
 
     submitLogin(ctx) {
+        const username = ctx.state.username;
+        const pass = ctx.state.pass;
         fetch(`${BASE_URL}/login`, {
             method: 'POST',
             headers: {
@@ -124,12 +126,20 @@ class SignupLogin extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: ctx.state.username,
+                username: username,
                 pass: ctx.state.password,
             })
         }).then(function(response) {
-            return response.json();
-        }).then(function(myJson) {
+            const output = response.json();
+            return output;
+        }).then(function(data) {
+            console.log(data);
+            if (data && data.statusMessage == 1) {
+                console.log("Log in success for user " + username);
+            }
+            else {
+                console.log("Log in failure")
+            }
         });
     }
 

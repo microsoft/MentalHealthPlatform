@@ -2,7 +2,7 @@ import React from 'react';
 
 import SignupLoginStyles from './SignupLoginStyles';
 
-const BASE_URL = `http://127.0.0.1:3000`
+import { BASE_URL } from './../util/Helpers';
 
 class SignupLogin extends React.Component {
 
@@ -106,9 +106,9 @@ class SignupLogin extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: ctx.state.username,
+                username: ctx.state.signUpUsername,
                 pass: ctx.state.signUpPass1,
-                displayName: ctx.state.displayName
+                displayName: ctx.state.signUpFirstName
             })
         }).then(function(response) {
             return response.json();

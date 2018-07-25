@@ -12,3 +12,5 @@ export function formatDate(timestamp) {
 
     return `${hour}:${minute} ${amPm} ${month}/${day}/${year}`;
 }
+
+export const BASE_URL = `http://127.0.0.1:3000`;

@@ -78,13 +78,13 @@ app.post('/login', function(postReq, postRes) {
 
 
 app.get('/gettopics', function(postReq, postRes) {
+	console.log("Retrieving topics");
 	var obj = postReq.query;
 
 	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
-
-		// Verify if entry exists in users collection
+		
 		dbo.collection(topicsColl).find().toArray(function(findErr, findRes) {
 			if (findErr) throw findErr;
 			db.close();

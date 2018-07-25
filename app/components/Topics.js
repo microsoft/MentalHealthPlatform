@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import TopicsSearchBar from './TopicsSearchBar';
 import TopicsStyles from './TopicsStyles';
 
+import { BASE_URL } from './../util/Helpers';
+
 class Topics extends React.Component {
     constructor(props) {
         super(props);
@@ -171,6 +173,21 @@ class Topics extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        fetch(`${BASE_URL}/gettopics`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(function(response) {
+            const output = response.json();
+            console.log(output);
+            return output;
+        }).then(function(myJson) {
+        });
     }
 }
 

@@ -7,7 +7,8 @@ import NavigationBar from './components/NavigationBar';
 import Topics from './components/Topics';
 import SignupLogin from './components/SignupLogin';
 import Forum from './components/Forum/Forum';
-import Chat from './components/Chat';    
+import Chat from './components/Chat';   
+import CreateChat from './components/CreateChat'; 
 
 ReactDom.render(
 	<BrowserRouter>
@@ -19,7 +20,8 @@ ReactDom.render(
 				<Route exact path="/topics" component={Topics}/>
 				<Route exact path="/login" component={SignupLogin} />
 				<Route exact path={`/topics/topic:topicID`} component={Forum} />
-				<Route exact path={`/topics/topic:topicID/:chatID`} component={Chat} />
+				<Route exact path={`/topics/topic:topicID/chat:chatID`} component={Chat} />
+				<Route exact path={`/topics/topic:topicID/createChat`} component={CreateChat} />
 			</div>
 		</div>
 	</BrowserRouter>,

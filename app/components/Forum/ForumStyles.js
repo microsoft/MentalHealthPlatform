@@ -16,6 +16,24 @@ const ForumStyles = {
         textAlign: "center",
         color: "#FFFFFF"
     },  
+    createChatButtonStyle: {
+        padding: 10,
+        fontSize: 20,
+        fontFamily: "Calibri",
+        backgroundColor: "#FFFFFF",
+        border: "0px",
+        borderRadius: 20,
+        boxShadow: '1px 1px 3px #333333',
+        border: '1px solid #CCCCCC',
+        justifyContent: 'center',
+        alignItems: 'center',
+        verticalAlign: "middle",
+        cursor: "pointer"
+    },
+    addIconStyle: {
+        width: 30,
+        height: 30
+    }
 };
 
 export default ForumStyles;

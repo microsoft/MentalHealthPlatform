@@ -1,8 +1,10 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from 'react-router-dom';
 import { InfoCard } from "./InfoCard/InfoCard";
 
 import ForumStyles from './ForumStyles';
+
+import addIcon from './../../images/add_icon.png';
 
 import { BASE_URL } from './../../util/Helpers';
 
@@ -67,10 +69,24 @@ class Forum extends React.Component {
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../../images/topic_image_0.jpg')})`
         });
 
+        let baseUrl = this.props.match.url;
+        if (baseUrl.charAt(baseUrl.length - 1) == '/') {
+            baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+        }
+
         return (
             <div style={containerStyle}>
                 <div style={ForumStyles.bodyStyle}>
                     <h1 style={ForumStyles.forumTitleStyle}>{forumTitle}</h1>
+                    <div style={{justifyContent: "flex-end", display: "flex"}}>
+                        <Link to={`${baseUrl}/createChat`} style={ForumStyles.createChatStyle}>
+                            <button
+                                style={ForumStyles.createChatButtonStyle}>
+                                <span style={{fontWeight: "bold"}}>+</span>
+                                <span style={{}}> Create new discussion</span>
+                            </button>
+                        </Link>
+                    </div>
                     {infoCards}
                 </div>
             </div>

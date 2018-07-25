@@ -76,7 +76,7 @@ getChat: {
 sendMessage: {
 	type: POST,
 	input: {
-		userId: int,
+		username: string,
 		messageBody: string,
 		chatId: int
 	},

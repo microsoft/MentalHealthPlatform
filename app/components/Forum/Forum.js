@@ -31,37 +31,17 @@ class Forum extends React.Component {
     }
 
     /**
-     * Temporary function that generates stub forum data
-     * @return  {any}   Stub forum data
-     */
-    generateData() {
-        const discussionPreviews = [];
-        const date =  new Date();
-
-        for (let i = 0; i < 10; i++) {
-            const discussionPreview = {
-                id: i,
-                title: "Coping with stress at work",
-                subtitle: "My job is very stressful. I have many deadlines coming, and it is becoming overwhelming. Anyone have some suggestions on how I can reduce my deaily stress?",
-                author: "Robert S.",
-                numberOfReplies: 12,
-                numberOfViews: 123,
-                date: `${date.getMonth()}\\${date.getDate()}\\${date.getFullYear()}`,
-            };
-            discussionPreviews.push(discussionPreview);
-        };
-        return discussionPreviews;
-    }
-
-    /**
      * Renders forum component
      * @return  {React.Component}   Rendered component
      */
     render() {
-        const forumId = this.state.forumId;
-        const forumTitle = "Stress";
-
-        const infoCards = this.generateData().map(discussionPreview => {
+        const forumData = this.state.forumData;
+        console.log(forumData);
+        if (!forumData) {
+            return null;
+        }
+        
+        const infoCards = forumData.map(discussionPreview => {
             return <InfoCard key={discussionPreview.id} data={discussionPreview} match={this.props.match} />
         });
 
@@ -77,7 +57,7 @@ class Forum extends React.Component {
         return (
             <div style={containerStyle}>
                 <div style={ForumStyles.bodyStyle}>
-                    <h1 style={ForumStyles.forumTitleStyle}>{forumTitle}</h1>
+                    <h1 style={ForumStyles.forumTitleStyle}>{"Topic " + this.state.forumId}</h1>
                     <div style={{justifyContent: "flex-end", display: "flex"}}>
                         <Link to={`${baseUrl}/createChat`} style={ForumStyles.createChatStyle}>
                             <button
@@ -94,7 +74,8 @@ class Forum extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${BASE_URL}/getchatpreviews?topicId=${1}`, {
+        const _this = this;
+        fetch(`${BASE_URL}/getchatpreviews?topicId=${_this.state.forumId | 1}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -104,6 +85,9 @@ class Forum extends React.Component {
             const output = response.json();
             return output;
         }).then(function(data) {
+            _this.setState({
+                forumData: data
+            });
             console.log(data);
         }).catch((error) => {
             console.log(error);

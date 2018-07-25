@@ -11,6 +11,10 @@ class TopicsSearchBar extends React.Component {
         };
     }
 
+    searchStringChangedHandler = (event) => {
+        this.props.inputChanged(event.target.value);
+    }
+
     /**
      * Renders topics search bar component
      * @return  {React.Component}   Rendered component
@@ -18,7 +22,11 @@ class TopicsSearchBar extends React.Component {
     render() {
         return (
             <div style={TopicsSearchBarStyles.topicsSearchBarStyle}>
-                <input type="text" placeholder="Search Topics" style={TopicsSearchBarStyles.textInputStyle} />
+                <input 
+                    type="text"
+                    placeholder="Search Topics" 
+                    style={TopicsSearchBarStyles.textInputStyle}
+                    onChange={this.searchStringChangedHandler} />
                 <button
                     style={TopicsSearchBarStyles.submitInputStyle}
                     type='submit'>

@@ -12,7 +12,8 @@ class Topics extends React.Component {
         this.state = {
             match: this.props.match,
             numberOfColumns: 4,
-            hoveredCellIndex: -1
+            hoveredCellIndex: -1,
+            searchString: undefined,
         };
     }
     
@@ -155,6 +156,9 @@ class Topics extends React.Component {
         });
     }
 
+    updateSearchString = (searchString) => {
+        this.setState({searchString});
+    }
     /**
      * Renders topics component including search bar and topics table
      * @return  {React.Component}   Rendered component
@@ -163,15 +167,20 @@ class Topics extends React.Component {
         const backgroundStyle = Object.assign({}, TopicsStyles.backgroundStyle, {
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('./../images/background_cropped.jpg')})`
         });
-
+        let topicsData = this.state.topicsData;
+        if(topicsData !== undefined && this.state.searchString !== undefined){
+            topicsData = topicsData.filter((data) => {
+                return data.topicTitle.toLowerCase().indexOf(this.state.searchString.toLowerCase()) !== -1;
+            });
+        }
         return (
             <div>
                 <div style={backgroundStyle}></div>
                 <div style={TopicsStyles. containerStyle}>
-                    <TopicsSearchBar />
+                    <TopicsSearchBar inputChanged={this.updateSearchString}/>
                     <table style={TopicsStyles.forumTableStyle}>
                         <tbody>
-                            {this.createAllRows(this.state.topicsData)}
+                            {this.createAllRows(topicsData)}
                         </tbody>
                     </table>
                 </div>
@@ -194,6 +203,7 @@ class Topics extends React.Component {
             _this.setState({
                 topicsData: data
             });
+            console.log("Got topics data***********");
             console.log(data);
         });
     }

@@ -201,6 +201,14 @@ app.get('/getchat', function(postReq, postRes){
 				postRes.json([]);
 				return;
 			}
+			else {
+				dbo.collection(chatsColl).update(
+				{"chatID" : obj.chatId },
+				{ $inc: 
+				  { numberofviews : 1 
+				  } 
+				  }, true)
+			}
 
 			var chatObj = {};
 			// Get chat data

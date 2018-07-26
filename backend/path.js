@@ -293,7 +293,10 @@ app.post('/createchat', function(postReq, postRes){
 				// Insert message to db
 				dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
 					db.close();
-					postRes.json({statusMessage : 1});
+					postRes.json({
+						statusMessage : 1,
+						chatId: count
+					});
 				});
 			});
 		});

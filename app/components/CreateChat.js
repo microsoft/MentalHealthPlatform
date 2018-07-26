@@ -33,7 +33,7 @@ class CreateChat extends React.Component {
         return this.state.inputTitle.length > 0 && this.state.inputDescription.length > 0;
     }
 
-    handleSubmit(e, title, description) {
+    handleSubmit(e, title, description, ctx) {
         e.preventDefault();
         fetch(`${BASE_URL}/createchat`, {
             method: 'POST',
@@ -49,7 +49,11 @@ class CreateChat extends React.Component {
             })
         }).then(function(response) {
             return response.json();
-        }).then(function(myJson) {
+        }).then(function(data) {
+            if (data && data.chatId) {
+                const path = `${ctx.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
+                ctx.props.history.push(path);
+            }
         });
     }
 
@@ -69,7 +73,7 @@ class CreateChat extends React.Component {
             <div style={backgroundStyle}>
                 <div style={CreateChatStyles.formContainerStyle}>
                     <div style={CreateChatStyles.paneStyle}>
-                        <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription)} style={CreateChatStyles.containerStyle}>
+                        <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription, _this)} style={CreateChatStyles.containerStyle}>
                             <h1 style={CreateChatStyles.formTitleStyle}>Create New Chat</h1>
                             <input
                                 style={CreateChatStyles.inputTitleStyle}

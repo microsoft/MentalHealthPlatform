@@ -18,22 +18,10 @@ export const InfoCardStyles = {
         fontWeight: "bold",
         marginBottom: 8
     },
-    numberOfRepliesStyle: {
-        fontWeight: "bold",
-        marginLeft: 8
-    },
-    numberOfViewsStyle: {
-        fontWeight: "bold",
-        marginLeft: 8
-    },
     profilePictureStyle: {
         width: 50, 
         height: 50,
         borderRadius: 25
-    },
-    iconStyle: {
-        width: 25,
-        height: 25
     },
     iconDetailsContainer: {
         display: "flex",

@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Link, IndexRoute, hashHistory, browserHistory, withRouter } from 'react-router-dom';
 import { InfoCardStyles } from "./InfoCardStyles";
+import Icon from '../../Icon';
 
 import profilePicturePlaceholder from './../../../images/profile_picture_placeholder.png';
-import messageIcon from './../../../images/message_icon.png';
-import viewIcon from './../../../images/view_icon.png';
 
 export class InfoCard extends React.Component {
     render() {
@@ -29,14 +28,8 @@ export class InfoCard extends React.Component {
                         </div>
                     </div>
                     <div style={{marginLeft: 32}}>
-                        <div style={InfoCardStyles.iconDetailsContainer}>
-                            <img src={messageIcon} style={InfoCardStyles.iconStyle}/>
-                            <div style={{marginBottom: 8}}><span style={InfoCardStyles.numberOfRepliesStyle}>{data.numberOfReplies}</span> replies</div>
-                        </div>
-                        <div style={InfoCardStyles.iconDetailsContainer}>
-                            <img src={viewIcon} style={InfoCardStyles.iconStyle}/>
-                            <div><span style={InfoCardStyles.numberOfViewsStyle}>{data.numberOfViews}</span> views</div>
-                        </div>
+                        <Icon type='replies' number={data.numberOfReplies || '0'} text='replies' />
+                        <Icon type='views' number={data.numberOfViews || '0'} text='views' />
                     </div>
                 </div>
             </Link>

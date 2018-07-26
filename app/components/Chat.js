@@ -7,6 +7,7 @@ import sendIcon from './../images/send_icon.png';
 import ChatStyles from './ChatStyles';
 
 import { BASE_URL } from './../util/Helpers';
+import Icon from './Icon';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -15,6 +16,8 @@ class Chat extends React.Component {
             title: '',
             mesages: [],
             messageBody: '',
+            views: 0,
+            replies: 0,
             loading: true
         };
     }
@@ -44,7 +47,7 @@ class Chat extends React.Component {
             body: JSON.stringify({
                 chatId: chatID,
                 messageBody: messageBody,
-                username: "sarahedo"
+                username: "Aldo"
             })
         }).then((response) => {
             const output = response.json();
@@ -90,7 +93,12 @@ class Chat extends React.Component {
                 <div style={ChatStyles.chatContainerStyle}>
                     <div>
                         <div style={ChatStyles.chatHeaderStyle}>
+                            <div style={ChatStyles.sideColumn}></div>
                             <h1 style={ChatStyles.title}>{title}</h1>
+                            <div style={ChatStyles.sideColumn}>
+                                <Icon type='replies' number={this.state.replies || '0'} text='replies' />
+                                <Icon type='views' number={this.state.views || '0'} text='views' />
+                            </div>
                         </div>
                         <div style={ChatStyles.chatBodyStyle}>
                             {messages.map((message) => {
@@ -141,7 +149,9 @@ class Chat extends React.Component {
             this.setState({
                 title: data.chatTitle,
                 messages: data.messages,
-                loading: false
+                loading: false,
+                replies: data.numberOfReplies,
+                views: data.numberOfViews
             })
             console.log("Data", data);
         }).catch((error) => {

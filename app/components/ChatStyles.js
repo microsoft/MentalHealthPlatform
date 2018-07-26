@@ -12,6 +12,7 @@ const chatStyles = {
         border: "1px solid #CCCCCC"
     },
     chatHeaderStyle: {
+        display: "flex",
         textAlign: "center",
         boxShadow: "0px 3px 1px #CCCCCC",
         padding: "10px 20px 10px 20px"
@@ -20,7 +21,11 @@ const chatStyles = {
         margin: 20
     },
     title: {
+        flex: 1,
         fontFamily: "Calibri"
+    },
+    sideColumn: {
+        width: 80
     },
     messageBubble: {
         padding: 10,

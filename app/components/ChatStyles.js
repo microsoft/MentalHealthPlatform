@@ -25,7 +25,11 @@ const chatStyles = {
         fontFamily: "Calibri"
     },
     sideColumn: {
-        width: 80
+        width: 150,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        fontFamily: "Calibri"
     },
     messageBubble: {
         padding: 10,

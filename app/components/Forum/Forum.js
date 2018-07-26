@@ -10,11 +10,23 @@ class Forum extends React.Component {
     constructor(props) {
         super(props);
         const forumId = this.obtainForumId(this.props.match.url);
+        console.log(this.getTopicId());
         this.state = {
             match: this.props.match,
             forumId: forumId
         };
     }
+
+    getTopicId() {
+        let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");        
+        
+        let list = subUrl.split("/");
+        list = list.filter((item) => item != "");
+
+        const topicId = list[list.length - 1].replace("topic", "");
+        
+        return topicId;
+    };
 
     obtainForumId(url) {
         var regex = /^\/topics\/topic[\d]+[\/]?$/;
@@ -73,7 +85,7 @@ class Forum extends React.Component {
 
     componentDidMount() {
         const _this = this;
-        fetch(`${BASE_URL}/getchatpreviews?topicId=${_this.state.forumId | 1}`, {
+        fetch(`${BASE_URL}/getchatpreviews?topicId=${this.getTopicId()}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

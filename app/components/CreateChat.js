@@ -17,6 +17,17 @@ class CreateChat extends React.Component {
         };
     }
 
+    getTopicId() {
+        let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");        
+        
+        let list = subUrl.split("/");
+        list = list.filter((item) => item != "");
+
+        const topicId = list[list.length - 1].replace("topic", "");
+        
+        return topicId;
+    }
+
     handleInputTitleChange(e) {
         this.setState({
             inputTitle: e.target.value
@@ -34,6 +45,7 @@ class CreateChat extends React.Component {
     }
 
     handleSubmit(e, title, description, ctx) {
+        console.log(this.getTopicId());
         e.preventDefault();
         fetch(`${BASE_URL}/createchat`, {
             method: 'POST',
@@ -44,7 +56,7 @@ class CreateChat extends React.Component {
             body: JSON.stringify({
                 chatTitle: title,
                 chatDescription: description,
-                topicId: 1,
+                topicId: this.getTopicId(),
                 username: "Aldo"
             })
         }).then(function(response) {

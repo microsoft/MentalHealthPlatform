@@ -71,7 +71,7 @@ class SignupLogin extends React.Component {
      * Renders login panel in overall sign-up/login form
      * @return  {React.Component}   Rendered component
      */
-    createLoginPane() {
+    createLoginPane(userData) {
         const loginPaneStyle = Object.assign({}, SignupLoginStyles.paneStyle, {
             borderLeft: "1px solid #CCCCCC"
         });
@@ -88,7 +88,7 @@ class SignupLogin extends React.Component {
                     <div>
                         <input type="text" value={this.state.username} placeholder="Username" name="username" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({username: e.target.value})} />
                         <input type="password" value={this.state.password} placeholder="Password" name="password" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({password: e.target.value})} />
-                        <button onClick={(e) => this.submitLogin(_this)} disabled={!this.isLoginButtonEnabled} type="submit" style={loginButtonStyle}>Login</button>
+                        <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" style={loginButtonStyle}>Login</button>
                     </div>
                     <div style={SignupLoginStyles.forgotPasswordContainerStyle}>
                         <span style={SignupLoginStyles.signupLoginFormTextStyle}><a href="#" style={SignupLoginStyles.formLinkStyle}>Forgot your password?</a></span>
@@ -116,7 +116,7 @@ class SignupLogin extends React.Component {
         });
     }
 
-    submitLogin(ctx) {
+    submitLogin(ctx, userData) {        
         const username = ctx.state.username;
         const pass = ctx.state.pass;
         fetch(`${BASE_URL}/login`, {
@@ -133,9 +133,12 @@ class SignupLogin extends React.Component {
             const output = response.json();
             return output;
         }).then(function(data) {
-            console.log(data);
             if (data && data.statusMessage == 1) {
                 console.log("Log in success for user " + username);
+                userData.updateUser({
+                    userId: 0,
+                    username: username
+                });
             }
             else {
                 console.log("Log in failure")
@@ -156,7 +159,10 @@ class SignupLogin extends React.Component {
             <div style={backgroundStyle}>
                 <div style={SignupLoginStyles.signupLoginFormStyle}>
                     {this.createSignupPane()}
-                    {this.createLoginPane()}
+                    <this.props.UserContext.Consumer>
+                        {(userData) => {return this.createLoginPane(userData)}}
+                    </this.props.UserContext.Consumer>
+                    
                 </div>
             </div>
         );

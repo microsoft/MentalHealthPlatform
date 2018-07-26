@@ -11,28 +11,73 @@ import CreateChat from './CreateChat';
 
 import AppStyles from "./AppStyles";
 
-class App extends React.Component {
+const UserContext = React.createContext({
+    user: {},
+    updateUser: () => {}
+});
+
+class UserProvider extends React.Component {
+    constructor(props) {
+        super(props);
+        this.updateUser = (userData) => {
+            console.log("updating user");
+            this.setState(state => ({
+                user: {
+                    userId: userData.userId,
+                    username: userData.username
+                }
+            }));
+        };
+        this.state = {
+            user: {
+                userId: -1,
+                username: ""
+            },
+            updateUser: this.updateUser
+        };
+    }
+
+    render() {
+        return (
+            <UserContext.Provider value={this.state}>
+                <BrowserRouter>
+                    <div>
+                        <NavigationBar UserContext={UserContext} />
+                        <div>
+                            <Route exact path="/" render={() => <Redirect to="/topics" />} />
+                            <Route exact path="/topics" component={() => <Topics UserContext={UserContext} />} />
+                            <Route exact path="/login" component={() => <SignupLogin UserContext={UserContext} />} />
+                            <Route exact path={`/topics/topic:topicID`} component={() => <Forum UserContext={UserContext} />} />
+                            <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={() => <Chat UserContext={UserContext} />} />
+                            <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserContext} />} />
+                        </div>
+                    </div>
+                </BrowserRouter>
+            </UserContext.Provider>
+        );
+    }
+}
+
+class App extends React.Component {    
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+    
     /**
      * Renders overall application component
      * @return  {React.Component}   Rendered component
      */
     render() {
         return (
-            <BrowserRouter>
-                <div>
-                    <NavigationBar />
-                    <div>
-                        <Route exact path="/" render={() => <Redirect to="/topics" />} />
-                        <Route exact path="/topics" component={Topics}/>
-                        <Route exact path="/login" component={SignupLogin} />
-                        <Route exact path={`/topics/topic:topicID`} component={Forum} />
-                        <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={Chat} />
-                        <Route exact path={`/topics/topic:topicID/createChat`} component={CreateChat} />
-                    </div>
-                </div>
-            </BrowserRouter>
+            <UserProvider>
+                <UserContext.Consumer>
+                    {(context) => context.user}
+                </UserContext.Consumer>
+            </UserProvider>
         );
     }
 }
 
-module.exports = App;
+module.exports = UserProvider;

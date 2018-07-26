@@ -148,10 +148,16 @@ class SignupLogin extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     createSignupLoginForm() {
+        const backgroundStyle = Object.assign({}, SignupLoginStyles.backgroundStyle, {
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('./../images/background_cropped.jpg')})`
+        });
+
         return (
-            <div style={SignupLoginStyles.signupLoginFormStyle}>
-                {this.createSignupPane()}
-                {this.createLoginPane()}
+            <div style={backgroundStyle}>
+                <div style={SignupLoginStyles.signupLoginFormStyle}>
+                    {this.createSignupPane()}
+                    {this.createLoginPane()}
+                </div>
             </div>
         );
     }

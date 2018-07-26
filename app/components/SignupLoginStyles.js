@@ -1,4 +1,15 @@
 const SignupLoginStyles = {
+    backgroundStyle: {
+        justifyContent: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+        padding: 25,
+        boxSizing: "border-box"
+    },
     signupLoginFormStyle: {
         display: "flex",
         flexDirection: "row",
@@ -6,7 +17,9 @@ const SignupLoginStyles = {
         border: "1px solid #CCCCCC",
         padding: "20px",
         marginLeft: "auto",
-        marginRight: "auto"
+        marginRight: "auto",
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #CCCCCC"
     },
     formTitleStyle: {
         fontFamily: "Calibri",

@@ -45,7 +45,6 @@ class CreateChat extends React.Component {
     }
 
     handleSubmit(e, title, description, ctx) {
-        console.log(this.getTopicId());
         e.preventDefault();
         fetch(`${BASE_URL}/createchat`, {
             method: 'POST',

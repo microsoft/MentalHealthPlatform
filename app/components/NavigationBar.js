@@ -9,9 +9,26 @@ class NavigationBar extends React.Component {
         this.state = {
         };
     }
-    
-    renderUser(user) {
-        return user.username && user.username != "" ? "Welcome " + user.username : "Login";
+
+    renderNameField(userData) {
+        if (userData.user.username && userData.user.username != "") {
+            return (
+                <div style={{display: "flex", flexDirection: "row"}}>
+                    {`Welcome ${userData.user.username}!`}
+                    <div style={{marginLeft: 22, cursor: "pointer"}} onClick={() => {
+                        userData.updateUser({
+                            userId: -1,
+                            username: ""
+                        });
+                    }}>Logout</div>
+                </div>
+            );
+        }
+        return (
+            <NavLink exact to="/login" style={NavigationBarStyles.navigationBarLoginLink}>
+                Login
+            </NavLink>
+        );
     }
 
     /**
@@ -25,11 +42,9 @@ class NavigationBar extends React.Component {
                     <NavLink exact to="/" style={NavigationBarStyles.navigationBarTitleLink}>Mental Health Forum</NavLink>
                 </div>
                 <div style={NavigationBarStyles.navigationBarRightStyle}>
-                    <NavLink exact to="/login" style={NavigationBarStyles.navigationBarLoginLink}>
-                        <this.props.UserContext.Consumer>
-                            {(userData) => {return this.renderUser(userData.user)}}
-                        </this.props.UserContext.Consumer>
-                    </NavLink>
+                    <this.props.UserContext.Consumer>
+                        {(userData) => {return this.renderNameField(userData)}}
+                    </this.props.UserContext.Consumer>
                 </div>
             </div>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import SignupLoginStyles from './SignupLoginStyles';
 
@@ -139,6 +140,7 @@ class SignupLogin extends React.Component {
                     userId: 0,
                     username: username
                 });
+                ctx.props.history.push("/");
             }
             else {
                 console.log("Log in failure")
@@ -179,4 +181,4 @@ class SignupLogin extends React.Component {
     }
 }
 
-module.exports = SignupLogin;
+export default withRouter(SignupLogin);

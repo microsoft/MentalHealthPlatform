@@ -10,7 +10,6 @@ class Forum extends React.Component {
     constructor(props) {
         super(props);
         const forumId = this.obtainForumId(this.props.match.url);
-        console.log(this.getTopicId());
         this.state = {
             match: this.props.match,
             forumId: forumId
@@ -46,7 +45,6 @@ class Forum extends React.Component {
      */
     render() {
         const forumData = this.state.forumData;
-        console.log(forumData);
         if (!forumData) {
             return null;
         }
@@ -98,7 +96,6 @@ class Forum extends React.Component {
             _this.setState({
                 forumData: data
             });
-            console.log(data);
         }).catch((error) => {
             console.log(error);
         });

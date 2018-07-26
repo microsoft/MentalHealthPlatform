@@ -175,6 +175,9 @@ class Topics extends React.Component {
         }
         return (
             <div>
+                <this.props.UserContext.Consumer>
+                    {(context) => context.number}
+                </this.props.UserContext.Consumer>
                 <div style={backgroundStyle}></div>
                 <div style={TopicsStyles. containerStyle}>
                     <TopicsSearchBar inputChanged={this.updateSearchString}/>
@@ -203,8 +206,6 @@ class Topics extends React.Component {
             _this.setState({
                 topicsData: data
             });
-            console.log("Got topics data***********");
-            console.log(data);
         });
     }
 }

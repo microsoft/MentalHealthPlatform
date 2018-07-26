@@ -53,7 +53,6 @@ class Chat extends React.Component {
             const output = response.json();
             return output;
         }).then((data) => {
-            console.log(data);
             if (data && data.statusMessage == 1) {
                 console.log("Message sent");
             }

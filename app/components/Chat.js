@@ -78,7 +78,14 @@ class Chat extends React.Component {
             return (
                 <div style={{
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: "center",
+                    alignItems: "center",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    position: "absolute",
+                    margin: "auto"
                 }}>
                     <ReactLoading type="bubbles" color="#333" height={'5%'} width={'5%'} />
                 </div>

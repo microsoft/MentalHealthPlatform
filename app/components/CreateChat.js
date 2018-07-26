@@ -45,7 +45,7 @@ class CreateChat extends React.Component {
                 chatTitle: title,
                 chatDescription: description,
                 topicId: 1,
-                username: "Eddy"
+                username: "Aldo"
             })
         }).then(function(response) {
             return response.json();

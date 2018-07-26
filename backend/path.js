@@ -270,23 +270,31 @@ app.post('/createchat', function(postReq, postRes){
 		var chatObj = {};
 		chatObj.chatTitle = obj.chatTitle;
 		chatObj.username = obj.username;
-		chatObj.TopicID = obj.topicId;
+		chatObj.TopicID = obj.topicId.toString();
+		chatObj.PostedDate = new Date().toString();
+		chatObj.numberofviews = "0";
+		chatObj.desc = obj.chatDescription;
 
 		// Create new message
 		var msgObj = {};
 		msgObj.messageBody = obj.chatDescription;
 		msgObj.username = obj.username;
 		msgObj.date = new Date().toString();
+		
+		dbo.collection(chatsColl).count().then((count) => {
 
-		// Insert chat to db
-		dbo.collection(chatsColl).insertOne(chatObj, function(insertChatErr, insertChatRes) {
-			if (insertChatErr) throw insertChatErr;
-			msgObj.chatID = insertChatRes.insertedId;
+			chatObj.chatID = count.toString();
 
-			// Insert message to db
-			dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
-				db.close();
-				postRes.json({statusMessage : 1});
+			// Insert chat to db
+			dbo.collection(chatsColl).insertOne(chatObj, function(insertChatErr, insertChatRes) {
+				if (insertChatErr) throw insertChatErr;
+				msgObj.chatID = count.toString();
+
+				// Insert message to db
+				dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
+					db.close();
+					postRes.json({statusMessage : 1});
+				});
 			});
 		});
 	});

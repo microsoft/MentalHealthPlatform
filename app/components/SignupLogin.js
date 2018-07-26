@@ -47,10 +47,10 @@ class SignupLogin extends React.Component {
                         <input type="password" value={this.state.signUpPass2} placeholder="Confirm Password" name="confirm-password" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({signUpPass2: e.target.value})} />
                         <button type="submit" onClick={(e) => this.submitSignup(_this)} style={signUpButtonStyle} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
                     </div>
-                    <div style={SignupLoginStyles.agreementContainerStyle}>
+                    {/* <div style={SignupLoginStyles.agreementContainerStyle}>
                         <input type="checkbox" name="agree" style={SignupLoginStyles.agreementCheckboxStyle} />
                         <span style={agreementTextStyle}>By creating an account you agree to our <a href="#" style={SignupLoginStyles.formLinkStyle}>Terms & Privacy</a>.</span>
-                    </div>                
+                    </div>                 */}
                 {/* </form> */}
             </div>
         )
@@ -91,9 +91,9 @@ class SignupLogin extends React.Component {
                         <input type="password" value={this.state.password} placeholder="Password" name="password" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({password: e.target.value})} />
                         <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" style={loginButtonStyle}>Login</button>
                     </div>
-                    <div style={SignupLoginStyles.forgotPasswordContainerStyle}>
+                    {/* <div style={SignupLoginStyles.forgotPasswordContainerStyle}>
                         <span style={SignupLoginStyles.signupLoginFormTextStyle}><a href="#" style={SignupLoginStyles.formLinkStyle}>Forgot your password?</a></span>
-                    </div>                
+                    </div>                 */}
                 {/* </form> */}
             </div>
         )

@@ -55,16 +55,13 @@ class Chat extends React.Component {
         }).then((data) => {
             console.log(data);
             if (data && data.statusMessage == 1) {
-                alert("Message sent");
+                console.log("Message sent");
             }
             else {
                 alert("Message failed to send")
             }
 
-            this.setState({
-                loading: false
-            })
-            this.forceUpdate();
+            this.retrieveChatData();
         });
     }
 
@@ -114,7 +111,7 @@ class Chat extends React.Component {
                             })}
                         </div>
                     </div>
-                    <form onSubmit={(e) => this.handleSubmit(e, _this)} style={ChatStyles.formStyle}>
+                    <form style={ChatStyles.formStyle}>
                         <input
                             style={ChatStyles.inputField}
                             type='text'
@@ -122,6 +119,7 @@ class Chat extends React.Component {
                             placeholder="Enter your messsage here"
                             onChange={(e) => this.handleInputChange(e)} />
                         <button
+                            onClick={(e) => this.handleSubmit(e, _this)}
                             style={ChatStyles.submitButton}
                             type='submit'
                             disabled={messageBody === ''}>
@@ -133,7 +131,7 @@ class Chat extends React.Component {
         );
     }
 
-    componentDidMount() {
+    retrieveChatData() {
         const { chatID } = this.props.match.params;
 
         fetch(`${BASE_URL}/getChat?chatId=${chatID}`, {
@@ -151,12 +149,17 @@ class Chat extends React.Component {
                 messages: data.messages,
                 loading: false,
                 replies: data.numberOfReplies,
-                views: data.numberOfViews
+                views: data.numberOfViews,
+                loading: false
             })
             console.log("Data", data);
         }).catch((error) => {
             console.log(error);
         });
+    }
+
+    componentDidMount() {
+        this.retrieveChatData();
     }
 }
 

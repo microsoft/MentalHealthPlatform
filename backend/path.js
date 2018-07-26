@@ -259,7 +259,8 @@ app.post('/sendmessage', function(postReq, postRes){
 
 
 app.post('/createchat', function(postReq, postRes){
-	var obj = postReq.query;
+	var obj = postReq.body;
+	console.log("Creating chat");
 
 	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
 		if (connerErr) throw connerErr;

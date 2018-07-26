@@ -4,6 +4,8 @@ import { chats } from '../util/Dummy';
 import Message from './Message';
 import sendIcon from './../images/send_icon.png';
 
+import { BASE_URL } from './../util/Helpers';
+
 import CreateChatStyles from './CreateChatStyles';
 
 class CreateChat extends React.Component {
@@ -33,7 +35,22 @@ class CreateChat extends React.Component {
 
     handleSubmit(e, title, description) {
         e.preventDefault();
-        alert("submitting with title: " + title +  " and description: " + description);
+        fetch(`${BASE_URL}/createchat`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chatTitle: title,
+                chatDescription: description,
+                topicId: 1,
+                username: "Eddy"
+            })
+        }).then(function(response) {
+            return response.json();
+        }).then(function(myJson) {
+        });
     }
 
 
@@ -41,10 +58,12 @@ class CreateChat extends React.Component {
         const submitButtonStyle = Object.assign({}, CreateChatStyles.submitButtonStyle, {
             backgroundColor: this.isSubmitButtonDisabled() ? "#4CAF50" : "#CCCCCC"
         });
+
+        const _this = this;
         
         return (
         <div style={CreateChatStyles.paneStyle}>
-            <form onSubmit={(e) => this.handleSubmit(e, this.state.inputTitle, this.state.inputDescription)} style={CreateChatStyles.containerStyle}>
+            <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription)} style={CreateChatStyles.containerStyle}>
                 <h1 style={CreateChatStyles.formTitleStyle}>Create New Chat</h1>
                 <input
                     style={CreateChatStyles.inputTitleStyle}

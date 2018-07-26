@@ -1,8 +1,29 @@
 const createChatStyles = {
+    backgroundStyle: {
+        justifyContent: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+        padding: 25,
+        boxSizing: "border-box"
+    },
+    formContainerStyle: {
+        display: "flex",
+        flexDirection: "row",
+        width: "80%",
+        border: "1px solid #CCCCCC",
+        padding: "20px",
+        marginLeft: "auto",
+        marginRight: "auto",
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #CCCCCC"
+    },
     paneStyle: {
-        paddingLeft: "200px",
-        paddingRight: "200px",
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#FFFFFF",
+        width: "100%"
     }, 
     containerStyle:{
         display: "flex", 

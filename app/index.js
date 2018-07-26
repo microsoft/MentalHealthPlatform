@@ -1,29 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import App from './components/App';
-import NavigationBar from './components/NavigationBar';
-import Topics from './components/Topics';
-import SignupLogin from './components/SignupLogin';
-import Forum from './components/Forum/Forum';
-import Chat from './components/Chat';   
-import CreateChat from './components/CreateChat'; 
 
 ReactDom.render(
-	<BrowserRouter>
-		<div>
-			<NavigationBar />
-			<div>
-				<App />
-				<Route exact path="/" render={() => <Redirect to="/topics" />} />
-				<Route exact path="/topics" component={Topics}/>
-				<Route exact path="/login" component={SignupLogin} />
-				<Route exact path={`/topics/topic:topicID`} component={Forum} />
-				<Route exact path={`/topics/topic:topicID/chat/:chatID`} component={Chat} />
-				<Route exact path={`/topics/topic:topicID/createChat`} component={CreateChat} />
-			</div>
-		</div>
-	</BrowserRouter>,
+	<App />,
 	document.getElementById('app')
 );

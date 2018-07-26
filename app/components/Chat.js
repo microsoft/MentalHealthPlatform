@@ -150,9 +150,10 @@ class Chat extends React.Component {
             const output = response.json();
             return output;
         }).then((data) => {
+            const messages = data.messages !== undefined ? data.messages : [];
             this.setState({
                 title: data.chatTitle,
-                messages: data.messages,
+                messages,
                 loading: false,
                 replies: data.numberOfReplies,
                 views: data.numberOfViews,

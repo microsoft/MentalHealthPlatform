@@ -1,0 +1,33 @@
+.InfoCardContainer {
+    display: 'flex';
+    align-items: 'center';
+    margin: '20px 5px';
+    border: '1px solid #CCCCCC';
+    padding: 20;
+    box-shadow: '1px 1px 3px #333333';
+    font-family: "Calibri";
+    background-color: "#FFFFFF";
+}
+
+.Title {
+    font-weight: "bold";
+    font-size: 22;
+    margin-bottom: 8
+}
+
+.Name {
+    font-weight: "bold";
+    margin-bottom: 8
+}
+
+.ProfilePicture {
+    width: 50; 
+    height: 50;
+    border-radius: 25
+}
+
+.IconDetailsContainer {
+    display: "flex";
+    flex-direction: "row";
+    align-items: "center"   
+}

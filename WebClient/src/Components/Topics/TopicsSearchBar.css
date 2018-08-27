@@ -1,0 +1,30 @@
+.TopicsSearchBar {
+    display: flex;
+    flex-direction: row;
+    width: 940px;
+    margin: 32px auto 22px auto;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px #333333;
+}
+
+.TextInput {
+    flex: 1 1 auto;
+    line-height: 30px;
+    font-size: large;
+    padding: 0px 10px;
+    border: 0px
+}
+
+.SubmitInput {   
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    border: 0px;
+}
+
+.SearchIcon {
+    height: 36px;
+    width: 36px;
+}

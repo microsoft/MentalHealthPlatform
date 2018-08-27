@@ -1,22 +1,35 @@
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-	template: __dirname + '/app/index.html',
+	template: __dirname + '/src/index.html',
 	filename: 'index.html',
 	inject: 'body'
 });
 
 module.exports = {
-	entry: __dirname + '/app/index.js',
+	entry: __dirname + '/src/index.js',
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader'
+				use: 'babel-loader'
 			},
 			{
 				test: /\.(png|jpg|gif)$/,
-				loader: 'file-loader'
+				use: 'file-loader'
+			},
+			{	
+				test: /\.css$/,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[name]__[local]___[hash:base64:5]'
+						}
+					}
+				]
 			}
 		]
 	},

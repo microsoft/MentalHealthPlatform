@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import TopicsSearchBar from './TopicsSearchBar';
-import TopicsStyles from './TopicsStyles';
-
-import { BASE_URL } from './../util/Helpers';
+import classes from "./Topics.css";
+import TopicsStyles from "./TopicsStyles";
+import { BASE_URL } from '../../util/Helpers';
 
 class Topics extends React.Component {
     constructor(props) {
@@ -68,13 +68,14 @@ class Topics extends React.Component {
      * @return  {React.Component}               Single row in topics table
      */
     createRow(rowIndex, rowTopics) {
+        console.log("rowTopics:", rowTopics);
         const row = [];
         var path = "";
         for (let i = 0; i < this.state.numberOfColumns; i++) {
             if (!rowTopics[i]) {
                 break;
             }
-
+            console.log("i", i, " rT:", rowTopics[i]);
             row.push(this.createCell(i, rowIndex * this.state.numberOfColumns + i, rowTopics[i]));
         }
         return (
@@ -90,8 +91,9 @@ class Topics extends React.Component {
      * @return  {React.Component}                   Single cell in topics table
      */
     createCell(cellKeyIndex, overallIndex, topic) {
+        console.log(topic.title);
         const linkProps = {
-            forumTitle: topic.topicTitle
+            forumTitle: topic.title
         };
 
         let baseUrl = this.state.match.url;
@@ -99,23 +101,23 @@ class Topics extends React.Component {
             baseUrl = baseUrl.substring(0, baseUrl.length - 1);
         }
 
-        const forumTableCellOnMouseoutStyle = Object.assign({}, TopicsStyles.forumTableCellStyle, {
-            backgroundImage: this.getBackgroundImageMouseout(require(`./../images/topic_image_${overallIndex}.jpg`))
+        const forumTableCellOnMouseoutStyle = Object.assign({},  TopicsStyles.forumTableCellStyle, {
+            backgroundImage: this.getBackgroundImageMouseout(require(`../../images/topic_image_${overallIndex}.jpg`))
         });
 
-        const forumTableCellOnMouseoverStyle = Object.assign({}, TopicsStyles.forumTableCellStyle, {
-            backgroundImage: this.getBackgroundImageMouseover(require(`./../images/topic_image_${overallIndex}.jpg`))
+        const forumTableCellOnMouseoverStyle = Object.assign({},  TopicsStyles.forumTableCellStyle, {
+            backgroundImage: this.getBackgroundImageMouseover(require(`../../images/topic_image_${overallIndex}.jpg`))
         });
 
         return (
-            <Link key={"cell-" + cellKeyIndex} to={`${baseUrl}/topic${topic.topicID}`} style={TopicsStyles.topicLinkStyle}>
+            <Link key={"cell-" + cellKeyIndex} to={`${baseUrl}/topic${topic.topicID}`} className={classes.TopicLink}>
                 <td
                     onClick={() => this.cellOnClickHandler(linkProps)}
                     onMouseOver={() => this.cellOnMouseover(overallIndex)}
                     onMouseOut={() => this.cellOnMouseout()}
                     style={this.state.hoveredCellIndex == overallIndex ? forumTableCellOnMouseoverStyle : forumTableCellOnMouseoutStyle}
                 >
-                    {topic.topicTitle}
+                    {topic.title}
                 </td>
             </Link>
         );
@@ -126,6 +128,7 @@ class Topics extends React.Component {
      * @param   {any}   linkProps    Properties associated with cell
      */
     cellOnClickHandler(linkProps) { 
+        console.log(linkProps);
         this.props.history.push({
             pathname: linkProps.pathname,
             state: {
@@ -164,10 +167,10 @@ class Topics extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     render() {
-        const backgroundStyle = Object.assign({}, TopicsStyles.backgroundStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('./../images/background_cropped.jpg')})`
-        });
-        let topicsData = this.state.topicsData;
+        // const backgroundStyle = Object.assign({},  classes.backgroundStyle, {
+        //     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('../../images/background_cropped.jpg')})`
+        // });
+        let topicsData = this.generateData();//this.state.topicsData;
         if(topicsData !== undefined && this.state.searchString !== undefined){
             topicsData = topicsData.filter((data) => {
                 return data.topicTitle.toLowerCase().indexOf(this.state.searchString.toLowerCase()) !== -1;
@@ -178,10 +181,10 @@ class Topics extends React.Component {
                 <this.props.UserContext.Consumer>
                     {(context) => context.number}
                 </this.props.UserContext.Consumer>
-                <div style={backgroundStyle}></div>
-                <div style={TopicsStyles. containerStyle}>
+                <div className={classes.Background}></div>
+                <div className={classes.Container}>
                     <TopicsSearchBar inputChanged={this.updateSearchString}/>
-                    <table style={TopicsStyles.forumTableStyle}>
+                    <table className={ classes.ForumTable}>
                         <tbody>
                             {this.createAllRows(topicsData)}
                         </tbody>

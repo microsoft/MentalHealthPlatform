@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { formatDate } from '../util/Helpers';
+import { formatDate } from '../../util/Helpers';
 import messageStyles  from './MessageStyles';
 
-import profilePicturePlaceholder from './../images/profile_picture_placeholder.png';
+import profilePicturePlaceholder from '../../images/profile_picture_placeholder.png';
 
 class Message extends React.Component {
     constructor(props) {

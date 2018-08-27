@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import SignupLoginStyles from './SignupLoginStyles';
 
-import { BASE_URL } from './../util/Helpers';
+import { BASE_URL } from '../../util/Helpers';
 
 class SignupLogin extends React.Component {
 
@@ -154,7 +154,7 @@ class SignupLogin extends React.Component {
      */
     createSignupLoginForm() {
         const backgroundStyle = Object.assign({}, SignupLoginStyles.backgroundStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('./../images/background_cropped.jpg')})`
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('../../images/background_cropped.jpg')})`
         });
 
         return (

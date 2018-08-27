@@ -1,13 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactLoading from 'react-loading';
-import Message from './Message';
-import sendIcon from './../images/send_icon.png';
+import Message from '../Messages/Message';
+import sendIcon from '../../images/send_icon.png';
 
 import ChatStyles from './ChatStyles';
 
-import { BASE_URL } from './../util/Helpers';
-import Icon from './Icon';
+import { BASE_URL } from '../../util/Helpers';
+import Icon from '../Icon/Icon';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -68,7 +68,7 @@ class Chat extends React.Component {
         const { messageBody, messages, title, loading } = this.state;
 
         const containerStyle = Object.assign({}, ChatStyles.containerStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../images/topic_image_0.jpg')})`
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('../../images/topic_image_0.jpg')})`
         });
 
         const _this = this;

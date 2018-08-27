@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { chats } from '../util/Dummy';
-import Message from './Message';
-import sendIcon from './../images/send_icon.png';
+// import { chats } from '../util/Dummy';
+// import Message from './Message';
+// import sendIcon from './../images/send_icon.png';
 
-import { BASE_URL } from './../util/Helpers';
+import { BASE_URL } from '../../util/Helpers';
 
 import CreateChatStyles from './CreateChatStyles';
 
@@ -71,7 +71,7 @@ class CreateChat extends React.Component {
 
     renderForm() {
         const backgroundStyle = Object.assign({}, CreateChatStyles.backgroundStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../images/topic_image_0.jpg')})`
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('../../images/topic_image_0.jpg')})`
         });
         
         const submitButtonStyle = Object.assign({}, CreateChatStyles.submitButtonStyle, {

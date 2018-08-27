@@ -1,7 +1,7 @@
 import React from 'react';
 
-import searchIcon from './../images/search_icon.png';
-import TopicsSearchBarStyles from './TopicsSearchBarStyles';
+import searchIcon from '../../images/search_icon.png';
+import classes from "./TopicsSearchBar.css";
 
 class TopicsSearchBar extends React.Component {
     
@@ -21,16 +21,16 @@ class TopicsSearchBar extends React.Component {
      */
     render() {
         return (
-            <div style={TopicsSearchBarStyles.topicsSearchBarStyle}>
+            <div className={classes.TopicsSearchBar}>
                 <input 
                     type="text"
                     placeholder="Search Topics" 
-                    style={TopicsSearchBarStyles.textInputStyle}
+                    className={classes.TextInput}
                     onChange={this.searchStringChangedHandler} />
                 <button
-                    style={TopicsSearchBarStyles.submitInputStyle}
+                    className={classes.SubmitInput}
                     type='submit'>
-                    <input type="image" src={searchIcon} style={TopicsSearchBarStyles.searchIconStyle} />
+                    <input type="image" src={searchIcon} className={classes.SearchIcon} />
                 </button>
             </div>
         );

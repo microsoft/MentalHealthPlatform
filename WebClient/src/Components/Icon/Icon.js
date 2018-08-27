@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { IconStyles } from './IconStyles';
-import messageIcon from '../images/message_icon.png'
-import viewIcon from '../images/view_icon.png';
+import messageIcon from '../../images/message_icon.png'
+import viewIcon from '../../images/view_icon.png';
 
 class Icon extends React.Component {
     renderIcon = (type) => {

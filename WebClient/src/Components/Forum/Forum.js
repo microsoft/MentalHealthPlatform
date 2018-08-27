@@ -23,7 +23,7 @@ class Forum extends React.Component {
         list = list.filter((item) => item != "");
 
         const topicId = list[list.length - 1].replace("topic", "");
-        
+        console.log(topicId);
         return topicId;
     };
 

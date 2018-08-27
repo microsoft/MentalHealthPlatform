@@ -2,12 +2,12 @@ import React from 'react';
 // import { NavLink, withRouter } from 'react-router-dom';
 import { BrowserRouter, Route, NavLink, IndexRoute, hashHistory, browserHistory, withRouter, Redirect } from 'react-router-dom';
 
-import NavigationBar from './NavigationBar';
-import Topics from './Topics';
-import SignupLogin from './SignupLogin';
+import NavigationBar from './Navigation/NavigationBar';
+import Topics from './Topics/Topics';
+import SignupLogin from './SignupLogin/SignupLogin';
 import Forum from './Forum/Forum';
-import Chat from './Chat';   
-import CreateChat from './CreateChat'; 
+import Chat from './Chat/Chat';   
+import CreateChat from './Chat/CreateChat'; 
 
 import AppStyles from "./AppStyles";
 

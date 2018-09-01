@@ -39,18 +39,32 @@ class Forum extends React.Component {
         return null;
     }
 
+    generateForumData = () => {
+        return [...Array(8)].map((_, index) => (
+            {
+                chatId: index,
+                chatTitle: `Chat${index}`,
+                chatDescription: `Description: ${index}`,
+                authorName: "Amardeep",
+                date: "08/31/2018",
+                numberOfReplies: 30,
+                numberOfViews: 20
+            }
+        ));
+    }
+
     /**
      * Renders forum component
      * @return  {React.Component}   Rendered component
      */
     render() {
-        const forumData = this.state.forumData;
+        const forumData = this.generateForumData();//this.state.forumData;
         if (!forumData) {
             return null;
         }
         
         const infoCards = forumData.map(discussionPreview => {
-            return <InfoCard key={discussionPreview.id} data={discussionPreview} match={this.props.match} />
+            return <InfoCard key={discussionPreview.chatId} data={discussionPreview} match={this.props.match} />
         });
 
         const containerStyle = Object.assign({}, ForumStyles.containerStyle, {

@@ -11,8 +11,6 @@ import topic_image_1 from "../../images/topic_image_1.jpg";
 import topic_image_2 from "../../images/topic_image_2.jpg";
 import topic_image_3 from "../../images/topic_image_3.jpg";
 
-// import Topic from "./Topic/Topic";
-
 class Topics extends React.Component {
     constructor(props) {
         super(props);

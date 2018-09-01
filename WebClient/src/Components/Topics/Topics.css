@@ -35,3 +35,8 @@
 .TopicLink {
     text-decoration: none
 }
+
+.TileContainer {
+    width: 70%;
+    margin: 0 auto;
+}

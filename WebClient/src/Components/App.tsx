@@ -1,31 +1,33 @@
-import React from 'react';
-// import { NavLink, withRouter } from 'react-router-dom';
-import { BrowserRouter, Route, NavLink, IndexRoute, hashHistory, browserHistory, withRouter, Redirect } from 'react-router-dom';
+import * as React from 'react';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
-import NavigationBar from './Navigation/NavigationBar';
-import Topics from './Topics/Topics';
-import SignupLogin from './SignupLogin/SignupLogin';
-import Forum from './Forum/Forum';
-import Chat from './Chat/Chat';   
-import CreateChat from './Chat/CreateChat'; 
+import { NavigationBar } from './Navigation/NavigationBar';
+import {Topics} from './Topics/Topics';
+import {SignupLogin} from './SignupLogin/SignupLogin';
+import { Forum } from './Forum/Forum';
+import { Chat } from './Chat/Chat';   
+import { CreateChat } from './Chat/CreateChat'; 
 
 const UserContext = React.createContext({
     user: {},
     updateUser: () => {}
 });
 
-class UserProvider extends React.Component {
+export class UserProvider extends React.Component<{}, {user: any, updateUser: any}> {
+
+    private updateUser = (userData) => {
+        console.log("updating user");
+        this.setState(() => ({
+            user: {
+                userId: userData.userId,
+                username: userData.username
+            }
+        }));
+    };
+
     constructor(props) {
         super(props);
-        this.updateUser = (userData) => {
-            console.log("updating user");
-            this.setState(state => ({
-                user: {
-                    userId: userData.userId,
-                    username: userData.username
-                }
-            }));
-        };
+        
         this.state = {
             user: {
                 userId: -1,
@@ -77,5 +79,3 @@ class App extends React.Component {
         );
     }
 }
-
-module.exports = UserProvider;

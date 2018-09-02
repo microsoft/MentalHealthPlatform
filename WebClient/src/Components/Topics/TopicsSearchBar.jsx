@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 
 import searchIcon from '../../images/search_icon.png';
 import classes from "./TopicsSearchBar.css";
 
-class TopicsSearchBar extends React.Component {
+export class TopicsSearchBar extends React.Component {
     
     constructor(props) {
         super(props);
@@ -36,5 +36,3 @@ class TopicsSearchBar extends React.Component {
         );
     }
 }
-
-module.exports = TopicsSearchBar;

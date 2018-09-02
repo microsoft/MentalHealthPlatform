@@ -6,15 +6,27 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 });
 
 module.exports = {
-	entry: __dirname + '/src/index.js',
-	resolve: { extensions: [".webpack.js", ".web.js",".js", ".jsx"] },
+	entry: './src/index.jsx',
+	resolve: {
+        // Add '.ts' and '.tsx' as resolvable extensions.
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+	},
+	mode: "development",
+	// Enable sourcemaps for debugging webpack's output.
+    devtool: "source-map",
+	output: {
+        filename: "bundle.js",
+		path: __dirname + "/dist",
+		publicPath: "/"
+    },
 	module: {
 		rules: [
-			{
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				use: 'babel-loader'
-			},
+			// All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+            { test: /\.(tsx?|jsx?)$/, loader: "awesome-typescript-loader" },
+
+            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+			{ enforce: "pre", test: /\.jsx?$/, loader: "source-map-loader" },
+			
 			{
 				test: /\.(png|jpg|gif)$/,
 				use: 'file-loader'
@@ -34,20 +46,29 @@ module.exports = {
 			}
 		]
 	},
-	output: {
-		filename: 'transformed.js',
-		path: __dirname + '/build/',
-		publicPath: '/'
-	},
 	devServer: {
-		historyApiFallback: true
+		historyApiFallback: true,
+		publicPath: "/"
 	},
 	plugins: [HTMLWebpackPluginConfig],
-	node: {
-		console: 'empty',
-		fs: 'empty',
-		net: 'empty',
-		tls: 'empty',
-		console: true
-	}
+	// node: {
+	// 	console: 'empty',
+	// 	fs: 'empty',
+	// 	net: 'empty',
+	// 	tls: 'empty',
+	// 	console: true
+	// }
 };
+
+// module.exports = {
+
+//     module: {
+//         rules: [
+//             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+//             { test: /\.(tsx?|jsx?)$/, loader: "awesome-typescript-loader" },
+
+//             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+//             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+//         ]
+//     }
+// };

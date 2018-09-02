@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Message } from '../Messages/Message';
@@ -7,7 +7,7 @@ import sendIcon from '../../images/send_icon.png';
 import classes from "./Chat.css";
 
 import { BASE_URL } from '../../util/Helpers';
-import Icon from '../Icon/Icon';
+import {Icon} from '../Icon/Icon';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -155,4 +155,4 @@ class Chat extends React.Component {
     }
 }
 
-export default withRouter(Chat);
+export const Chat = withRouter(Chat);

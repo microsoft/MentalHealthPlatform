@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import classes from "./NavigationBar.css";
 
-class NavigationBar extends React.Component {
+export class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,5 +58,3 @@ class NavigationBar extends React.Component {
         return this.createNavigationBar();
     }
 }
-
-module.exports = NavigationBar;

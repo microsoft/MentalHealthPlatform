@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 
 import classes from "./Icon.css";
 import messageIcon from '../../images/message_icon.png'
 import viewIcon from '../../images/view_icon.png';
 
-class Icon extends React.Component {
+export class Icon extends React.Component {
     renderIcon = (type) => {
         let icon;
 
@@ -35,5 +35,3 @@ class Icon extends React.Component {
         );
     }
 }
-
-export default Icon;

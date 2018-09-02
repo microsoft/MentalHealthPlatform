@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import TopicsSearchBar from './TopicsSearchBar';
+import {TopicsSearchBar} from './TopicsSearchBar';
 import classes from "./Topics.css";
 import { BASE_URL } from '../../util/Helpers';
 import {Topic} from "./Topic/Topic";
@@ -102,4 +102,4 @@ class Topics extends React.Component {
     }
 }
 
-module.exports = withRouter(Topics);
+export const Topics = withRouter(Topics);

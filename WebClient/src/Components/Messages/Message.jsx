@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { formatDate } from '../../util/Helpers';
 import classes from "./Message.css";

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import classes from "./SignupLogin.css";
@@ -171,4 +171,4 @@ class SignupLogin extends React.Component {
     }
 }
 
-export default withRouter(SignupLogin);
+export const SignupLogin =  withRouter(SignupLogin);

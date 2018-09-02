@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 // import { chats } from '../util/Dummy';
 // import Message from './Message';
@@ -105,12 +105,11 @@ class CreateChat extends React.Component {
             </div>
         )
     };
-
-
+    
     render() {
         
         return this.renderForm();
     }
 }
 
-export default withRouter(CreateChat);
+export const CreateChat = withRouter(CreateChat);

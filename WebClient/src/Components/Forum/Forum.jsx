@@ -1,12 +1,14 @@
-import React from "react";
+import * as React from "react";
 import { withRouter, Link } from 'react-router-dom';
 import { InfoCard } from "./InfoCard/InfoCard";
 
 import classes from "./Forum.css";
 
-import { BASE_URL } from './../../util/Helpers';
+import { BASE_URL } from '../../util/Helpers';
 
 class Forum extends React.Component {
+    isUnmounted = false;
+
     constructor(props) {
         super(props);
         const forumId = this.obtainForumId(this.props.match.url);
@@ -40,7 +42,7 @@ class Forum extends React.Component {
     }
 
     generateForumData = () => {
-        return [...Array(8)].map((_, index) => (
+        return new Array(8).fill(undefined).map((_, index) => (
             {
                 chatId: index,
                 chatTitle: `Chat${index}`,
@@ -103,13 +105,19 @@ class Forum extends React.Component {
             const output = response.json();
             return output;
         }).then(function(data) {
-            _this.setState({
-                forumData: data
-            });
+            if(!_this.isUnmounted){
+                _this.setState({
+                    forumData: data
+                });
+            }
         }).catch((error) => {
             console.log(error);
         });
     }
+
+    componentWillMount() {
+        this.isUnmounted = true;
+    }
 }
 
-module.exports = withRouter(Forum);
+export const Forum = withRouter(Forum);

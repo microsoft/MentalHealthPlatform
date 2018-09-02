@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import { Link } from 'react-router-dom';
-import Icon from '../../Icon/Icon';
+import {Icon} from '../../Icon/Icon';
 import classes from "./InfoCard.css";
 
 import profilePicturePlaceholder from './../../../images/profile_picture_placeholder.png';

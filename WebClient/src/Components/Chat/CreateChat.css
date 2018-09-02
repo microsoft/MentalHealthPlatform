@@ -1,0 +1,87 @@
+.Background {
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    padding: 25px;
+    box-sizing: border-box;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url("../../images/topic_image_0.jpg");
+}
+
+.FormContainer {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    border: 1px solid #CCCCCC;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC
+}
+
+.Pane {
+    background-color: #FFFFFF;
+    width: 100%
+} 
+
+.Container {
+    display: flex; 
+    flex-direction: column;
+}
+
+.FormTitle {
+    font-family: Calibri;
+    text-align: center;
+    color: #181818
+}
+
+.InputTitle {
+    width: 100%;
+    line-height: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: x-large;
+    font-family: Calibri;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC
+}
+
+.InputDescription {
+    width: 100%;
+    line-height: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: x-large;
+    font-family: Calibri;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC; 
+    height: 200px;
+    vertical-align: top;
+} 
+
+.SubmitButton {
+    width: 100%;
+    border: none;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: x-large;
+    line-height: 30px;
+    border-radius: 5px; 
+}
+
+.Green {
+    background-color: #4CAF50;
+}
+
+.Gray {
+    background-color: #CCCCCC;
+}

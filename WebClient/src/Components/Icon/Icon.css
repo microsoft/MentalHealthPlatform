@@ -1,0 +1,14 @@
+.Container {
+    display: flex;
+    align-items: center;
+}
+
+.Icon {
+    width: 25px;
+    height: 25px;
+}
+
+.Text {
+    font-weight: "bold";
+    margin-left: 8px;
+}

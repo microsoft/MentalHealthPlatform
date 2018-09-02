@@ -197,7 +197,7 @@ app.get('/getchat', function(postReq, postRes){
 		]
 		).toArray(function(chatErr, chatRes) {
 			if (chatErr) throw chatErr;
-
+			console.log("chat res length:", chatRes.length);
 			if (chatRes.length <= 0) {
 				postRes.json([]);
 				return;

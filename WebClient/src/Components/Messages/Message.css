@@ -1,0 +1,35 @@
+.Container {
+    display: flex; 
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.ProfilePicture {
+    width: 50px; 
+    height: 50px;
+    border-radius: 25px;
+}
+
+.NameDateContainer {
+    margin-left: 10px;
+    font-family: Calibri;
+    font-size: 16px;
+}
+
+.Name {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.MessageBodyContainer {
+    display: flex; 
+    flex: 0 1 auto; 
+    border-width: 2px;
+    border: solid;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: Calibri;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

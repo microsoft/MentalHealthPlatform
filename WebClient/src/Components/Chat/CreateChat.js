@@ -5,8 +5,7 @@ import { withRouter } from 'react-router-dom';
 // import sendIcon from './../images/send_icon.png';
 
 import { BASE_URL } from '../../util/Helpers';
-
-import CreateChatStyles from './CreateChatStyles';
+import classes from "./CreateChat.css";
 
 class CreateChat extends React.Component {
     constructor(props) {
@@ -70,37 +69,32 @@ class CreateChat extends React.Component {
 
 
     renderForm() {
-        const backgroundStyle = Object.assign({}, CreateChatStyles.backgroundStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('../../images/topic_image_0.jpg')})`
-        });
-        
-        const submitButtonStyle = Object.assign({}, CreateChatStyles.submitButtonStyle, {
-            backgroundColor: this.isSubmitButtonDisabled() ? "#4CAF50" : "#CCCCCC"
-        });
+        let submitButtonClass = classes.SubmitButton + " ";
+        submitButtonClass += this.isSubmitButtonDisabled() ? classes.Green : classes.Gray;
 
         const _this = this;
         
         return (
-            <div style={backgroundStyle}>
-                <div style={CreateChatStyles.formContainerStyle}>
-                    <div style={CreateChatStyles.paneStyle}>
-                        <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription, _this)} style={CreateChatStyles.containerStyle}>
-                            <h1 style={CreateChatStyles.formTitleStyle}>Create New Chat</h1>
+            <div className={classes.Background}>
+                <div className={classes.FormContainer}>
+                    <div className={classes.Pane}>
+                        <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription, _this)} className={classes.Container}>
+                            <h1 className={classes.FormTitle}>Create New Chat</h1>
                             <input
-                                style={CreateChatStyles.inputTitleStyle}
+                                className={classes.InputTitle}
                                 type='text'
                                 value={this.state.inputTitle}
                                 placeholder="Enter chat title"
                                 onChange={(e) => this.handleInputTitleChange(e)} />
                             <textarea
-                                style={CreateChatStyles.inputDescriptionStyle}
+                                className={classes.InputDescription}
                                 type='text'
                                 value={this.state.inputDescription}
                                 placeholder="Enter chat description"
                                 onChange={(e) => this.handleInputDescriptionChange(e)}></textarea>
                             <button
                                 disabled={!this.isSubmitButtonDisabled()}
-                                style={submitButtonStyle}
+                                className={submitButtonClass}
                                 type='submit'>
                                 Submit
                                 {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}

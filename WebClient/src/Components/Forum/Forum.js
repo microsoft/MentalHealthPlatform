@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter, Link } from 'react-router-dom';
 import { InfoCard } from "./InfoCard/InfoCard";
 
-import ForumStyles from './ForumStyles';
+import classes from "./Forum.css";
 
 import { BASE_URL } from './../../util/Helpers';
 
@@ -67,23 +67,19 @@ class Forum extends React.Component {
             return <InfoCard key={discussionPreview.chatId} data={discussionPreview} match={this.props.match} />
         });
 
-        const containerStyle = Object.assign({}, ForumStyles.containerStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('./../../images/topic_image_0.jpg')})`
-        });
-
         let baseUrl = this.props.match.url;
         if (baseUrl.charAt(baseUrl.length - 1) == '/') {
             baseUrl = baseUrl.substring(0, baseUrl.length - 1);
         }
 
         return (
-            <div style={containerStyle}>
-                <div style={ForumStyles.bodyStyle}>
-                    <h1 style={ForumStyles.forumTitleStyle}>{"Topic " + this.state.forumId}</h1>
+            <div className={classes.Container}>
+                <div className={classes.BodyStyle}>
+                    <h1 className={classes.ForumTitle}>{"Topic " + this.state.forumId}</h1>
                     <div style={{justifyContent: "flex-end", display: "flex"}}>
-                        <Link to={`${baseUrl}/createChat`} style={ForumStyles.createChatStyle}>
+                        <Link to={`${baseUrl}/createChat`}>
                             <button
-                                style={ForumStyles.createChatButtonStyle}>
+                                className={classes.CreateChatButton}>
                                 <span style={{fontWeight: "bold"}}>+</span>
                                 <span style={{}}> Create new discussion</span>
                             </button>

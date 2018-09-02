@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import SignupLoginStyles from './SignupLoginStyles';
+import classes from "./SignupLogin.css";
 
 import { BASE_URL } from '../../util/Helpers';
 
@@ -25,27 +25,25 @@ class SignupLogin extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     createSignupPane() {
-        const agreementTextStyle = Object.assign({}, SignupLoginStyles.signupLoginFormTextStyle, {
-            float: "left",
-            marginLeft: "3px"
-        });
+        // const agreementTextStyle = Object.assign({}, SignupLoginStyles.signupLoginFormTextStyle, {
+        //     float: "left",
+        //     marginLeft: "3px"
+        // });
 
-        const signUpButtonStyle = Object.assign({}, SignupLoginStyles.formButtonStyle, {
-            backgroundColor: this.isSignUpButtonEnabled() ? "#4CAF50" : "#CCCCCC"
-        });
-
+        let signupButtonClasses = classes.FormButton + " ";
+        signupButtonClasses += this.isSignUpButtonEnabled() ? classes.Green : classes.Gray;
         const _this = this;
 
         return (
-            <div style={SignupLoginStyles.paneStyle}>
+            <div className={classes.Pane}>
                 {/* <form> */}
-                    <h1 style={SignupLoginStyles.formTitleStyle}>Sign Up</h1>
+                    <h1 className={classes.FormTitle}>Sign Up</h1>
                     <div>
-                        <input type="text" value={this.state.signUpFirstName} placeholder="First Name" name="name" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({signUpFirstName: e.target.value})} />
-                        <input type="text" value={this.state.signUpUserName} placeholder="Username" name="username" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({signUpUserName: e.target.value})} />
-                        <input type="password" value={this.state.signUpPass1} placeholder="Password" name="password" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({signUpPass1: e.target.value})} />
-                        <input type="password" value={this.state.signUpPass2} placeholder="Confirm Password" name="confirm-password" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({signUpPass2: e.target.value})} />
-                        <button type="submit" onClick={(e) => this.submitSignup(_this)} style={signUpButtonStyle} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
+                        <input type="text" value={this.state.signUpFirstName} placeholder="First Name" name="name" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpFirstName: e.target.value})} />
+                        <input type="text" value={this.state.signUpUserName} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpUserName: e.target.value})} />
+                        <input type="password" value={this.state.signUpPass1} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass1: e.target.value})} />
+                        <input type="password" value={this.state.signUpPass2} placeholder="Confirm Password" name="confirm-password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass2: e.target.value})} />
+                        <button type="submit" onClick={(e) => this.submitSignup(_this)} className={signupButtonClasses} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
                     </div>
                     {/* <div style={SignupLoginStyles.agreementContainerStyle}>
                         <input type="checkbox" name="agree" style={SignupLoginStyles.agreementCheckboxStyle} />
@@ -73,23 +71,18 @@ class SignupLogin extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     createLoginPane(userData) {
-        const loginPaneStyle = Object.assign({}, SignupLoginStyles.paneStyle, {
-            borderLeft: "1px solid #CCCCCC"
-        });
-
-        const loginButtonStyle = Object.assign({}, SignupLoginStyles.formButtonStyle, {
-            backgroundColor: this.isLoginButtonEnabled() ? "#4CAF50" : "#CCCCCC"
-        });
-
+        let loginButtonClasses = classes.FormButton + " ";
+        loginButtonClasses += this.isLoginButtonEnabled() ? classes.Green : classes.Gray;
         const _this = this;
+
         return (
-            <div style={loginPaneStyle}>
+            <div className={classes.Pane} style={{borderLeft: "1px solid #CCCCCC"}}>
                 {/* <form> */}
-                    <h1 style={SignupLoginStyles.formTitleStyle}>Log In</h1>
+                    <h1 className={classes.FormTitle}>Log In</h1>
                     <div>
-                        <input type="text" value={this.state.username} placeholder="Username" name="username" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({username: e.target.value})} />
-                        <input type="password" value={this.state.password} placeholder="Password" name="password" required style={SignupLoginStyles.formTextInputStyle} onChange={(e) => this.setState({password: e.target.value})} />
-                        <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" style={loginButtonStyle}>Login</button>
+                        <input type="text" value={this.state.username} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({username: e.target.value})} />
+                        <input type="password" value={this.state.password} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({password: e.target.value})} />
+                        <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" className={loginButtonClasses}>Login</button>
                     </div>
                     {/* <div style={SignupLoginStyles.forgotPasswordContainerStyle}>
                         <span style={SignupLoginStyles.signupLoginFormTextStyle}><a href="#" style={SignupLoginStyles.formLinkStyle}>Forgot your password?</a></span>
@@ -153,13 +146,10 @@ class SignupLogin extends React.Component {
      * @return  {React.Component}   Rendered component
      */
     createSignupLoginForm() {
-        const backgroundStyle = Object.assign({}, SignupLoginStyles.backgroundStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0), rgba(255, 255, 255, 1)), url(${require('../../images/background_cropped.jpg')})`
-        });
 
         return (
-            <div style={backgroundStyle}>
-                <div style={SignupLoginStyles.signupLoginFormStyle}>
+            <div className={classes.Background}>
+                <div className={classes.SignupLoginForm}>
                     {this.createSignupPane()}
                     <this.props.UserContext.Consumer>
                         {(userData) => {return this.createLoginPane(userData)}}

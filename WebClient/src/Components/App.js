@@ -9,8 +9,6 @@ import Forum from './Forum/Forum';
 import Chat from './Chat/Chat';   
 import CreateChat from './Chat/CreateChat'; 
 
-import AppStyles from "./AppStyles";
-
 const UserContext = React.createContext({
     user: {},
     updateUser: () => {}

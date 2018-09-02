@@ -1,37 +1,32 @@
 import React from 'react';
 
 import { formatDate } from '../../util/Helpers';
-import messageStyles  from './MessageStyles';
+import classes from "./Message.css";
 
 import profilePicturePlaceholder from '../../images/profile_picture_placeholder.png';
 
-class Message extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
+export class Message extends React.Component {
+    
     renderProfilePicture() {
-        var profilePictureStyle = Object.assign({}, messageStyles.profilePictureStyle, {
+        var profilePictureStyle = {
             marginLeft: this.props.isCurrentUser ? "10px" : "0px"
-        });
+        };
 
         return (
-            <img src={profilePicturePlaceholder} style={profilePictureStyle}/>
+            <img src={profilePicturePlaceholder} className={classes.ProfilePicture} style={profilePictureStyle}/>
         );
     };
 
     renderMessageBody() {
-        var messageBodyContainerStyle = Object.assign({}, messageStyles.messageBodyContainerStyle, {
+        var messageBodyContainerStyle = {
             backgroundColor: this.props.isCurrentUser ? "#F2F2F2" : "#E2F0D9",
             borderColor: this.props.isCurrentUser ? "#BFBFBF" : "#92D050",
             marginLeft: this.props.isCurrentUser ? "auto" : 20,
             marginRight: this.props.isCurrentUser ? 20 : "auto"
-        });
+        };
 
         return (
-            <div style={messageBodyContainerStyle}>
+            <div className={classes.MessageBodyContainer} style={messageBodyContainerStyle}>
                 {this.props.messageBody}
             </div>
         );
@@ -39,8 +34,8 @@ class Message extends React.Component {
 
     renderNameDate() {
         return (
-            <div style={messageStyles.nameDateContainerStyle}>
-                <div style={messageStyles.nameStyle}>
+            <div className={classes.NameDateContainer}>
+                <div className={classes.Name}>
                     {this.props.name}
                 </div>
                 <div>
@@ -52,13 +47,13 @@ class Message extends React.Component {
 
     renderMessage(){
         return this.props.isCurrentUser ?
-            <div style={messageStyles.containerStyle}>
+            <div className={classes.Container}>
                 {this.props.isCurrentUser}
                 {this.renderMessageBody()}
                 {this.renderProfilePicture()}
                 {this.renderNameDate()}
             </div> :
-            <div style={messageStyles.containerStyle}>
+            <div className={classes.Container}>
                 {this.renderProfilePicture()}
                 {this.renderNameDate()}
                 {this.renderMessageBody()}
@@ -69,5 +64,3 @@ class Message extends React.Component {
         return this.renderMessage();
     }
 }
-
-module.exports = Message;

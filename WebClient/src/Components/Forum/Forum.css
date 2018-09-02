@@ -1,0 +1,35 @@
+.Container {
+        padding: 25px;
+        justify-content: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url("../../images/topic_image_0.jpg");
+};
+
+.BodyStyle {
+    background-color: transparent;
+    width: 90%;
+    margin: 0 auto;
+    border: 0px;
+}
+
+.ForumTitle {
+    font-family: Calibri;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.CreateChatButton {
+    padding: 10px;
+    font-size: 20px;
+    font-family: Calibri;
+    background-color: #FFFFFF;
+    border: 0px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px #333333;
+    border: 1px solid #CCCCCC;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    cursor: pointer;
+}

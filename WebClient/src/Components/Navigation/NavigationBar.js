@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import NavigationBarStyles from './NavigationBarStyles';
+import classes from "./NavigationBar.css";
 
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class NavigationBar extends React.Component {
             );
         }
         return (
-            <NavLink exact to="/login" style={NavigationBarStyles.navigationBarLoginLink}>
+            <NavLink exact to="/login" className={classes.NavigationBarLoginLink}>
                 Login
             </NavLink>
         );
@@ -37,11 +37,11 @@ class NavigationBar extends React.Component {
      */
     createNavigationBar() {
         return (
-            <div style={NavigationBarStyles.navigationBarStyle}>
-                <div style={NavigationBarStyles.navigationBarLeftStyle}>                
-                    <NavLink exact to="/" style={NavigationBarStyles.navigationBarTitleLink}>Mental Health Forum</NavLink>
+            <div className={classes.NavigationBar}>
+                <div className={classes.NavigationBarLeft}>                
+                    <NavLink exact to="/" className={classes.NavigationBarTitleLink}>Mental Health Forum</NavLink>
                 </div>
-                <div style={NavigationBarStyles.navigationBarRightStyle}>
+                <div className={classes.NavigationBarRight}>
                     <this.props.UserContext.Consumer>
                         {(userData) => {return this.renderNameField(userData)}}
                     </this.props.UserContext.Consumer>

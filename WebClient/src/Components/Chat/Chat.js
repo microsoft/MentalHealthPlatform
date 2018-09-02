@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactLoading from 'react-loading';
-import Message from '../Messages/Message';
+import { Message } from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
 
-import ChatStyles from './ChatStyles';
+import classes from "./Chat.css";
 
 import { BASE_URL } from '../../util/Helpers';
 import Icon from '../Icon/Icon';
@@ -66,44 +66,29 @@ class Chat extends React.Component {
 
     render() {
         const { messageBody, messages, title, loading } = this.state;
-
-        const containerStyle = Object.assign({}, ChatStyles.containerStyle, {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url(${require('../../images/topic_image_0.jpg')})`
-        });
-
         const _this = this;
 
         if (loading) {
             return (
-                <div style={{
-                    display: 'flex',
-                    justifyContent: "center",
-                    alignItems: "center",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    position: "absolute",
-                    margin: "auto"
-                }}>
+                <div className={classes.Loading}>
                     <ReactLoading type="bubbles" color="#333" height={'5%'} width={'5%'} />
                 </div>
             )
         }
 
         return (
-            <div style={containerStyle}>
-                <div style={ChatStyles.chatContainerStyle}>
+            <div className={classes.Container}>
+                <div className={classes.ChatContainer}>
                     <div>
-                        <div style={ChatStyles.chatHeaderStyle}>
-                            <div style={ChatStyles.sideColumn}></div>
-                            <h1 style={ChatStyles.title}>{title}</h1>
-                            <div style={ChatStyles.sideColumn}>
+                        <div className={classes.ChatHeader}>
+                            <div className={classes.SideColumn}></div>
+                            <h1 className={classes.Title}>{title}</h1>
+                            <div className={classes.SideColumn}>
                                 <Icon type='replies' number={this.state.replies || '0'} text='replies' />
                                 <Icon type='views' number={this.state.views || '0'} text='views' />
                             </div>
                         </div>
-                        <div style={ChatStyles.chatBodyStyle}>
+                        <div className={classes.ChatBody}>
                             {messages.map((message) => {
                                 return (
                                     <div key={message.id}>
@@ -117,19 +102,19 @@ class Chat extends React.Component {
                             })}
                         </div>
                     </div>
-                    <form style={ChatStyles.formStyle}>
+                    <form className={classes.Form}>
                         <input
-                            style={ChatStyles.inputField}
+                            className={classes.InputField}
                             type='text'
                             value={this.state.messageBody}
                             placeholder="Enter your messsage here"
                             onChange={(e) => this.handleInputChange(e)} />
                         <button
                             onClick={(e) => this.handleSubmit(e, _this)}
-                            style={ChatStyles.submitButton}
+                            className={classes.SubmitButton}
                             type='submit'
                             disabled={messageBody === ''}>
-                            <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} />
+                            <input type="image" src={sendIcon} className={classes.SendIcon} />
                         </button>
                     </form>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconStyles } from './IconStyles';
+import classes from "./Icon.css";
 import messageIcon from '../../images/message_icon.png'
 import viewIcon from '../../images/view_icon.png';
 
@@ -20,16 +20,16 @@ class Icon extends React.Component {
                 break;
         }
 
-        return <img style={IconStyles.iconStyle} src={icon} />
+        return <img className={classes.Icon} src={icon} />
     }
 
     render() {
         const { type, number, text } = this.props;
 
         return (
-            <span style={IconStyles.containerStyle}>
+            <span  className={classes.Container}>
                 {this.renderIcon(type)}
-                {number && <span style={IconStyles.textStyle}>{number}</span>}
+                {number && <span className={classes.Text}>{number}</span>}
                 {text && <span>{'\u00A0'}{text}</span>}
             </span>
         );

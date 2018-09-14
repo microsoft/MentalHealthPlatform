@@ -1,11 +1,25 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import classes from "./SignupLogin.css";
+import * as classes from "./SignupLogin.css";
 
 import { BASE_URL } from '../../util/Helpers';
+import { IUserContext } from '../App';
 
-class SignupLogin extends React.Component {
+export interface ISignupLoginState {
+    username: string;
+    password: string;
+    signUpFirstName: string;
+    signUpUserName: string;
+    signUpPass1: string;
+    signUpPass2: string;
+}
+
+export interface ISignupLoginProps {
+    UserContext: React.Context<IUserContext>;
+}
+
+class SignupLoginClass extends React.Component<ISignupLoginProps, ISignupLoginState> {
 
     constructor(props) {
         super(props);
@@ -171,4 +185,4 @@ class SignupLogin extends React.Component {
     }
 }
 
-export const SignupLogin =  withRouter(SignupLogin);
+export const SignupLogin =  withRouter(SignupLoginClass);

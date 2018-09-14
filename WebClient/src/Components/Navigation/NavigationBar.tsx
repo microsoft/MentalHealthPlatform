@@ -1,22 +1,27 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import classes from "./NavigationBar.css";
+import * as classes from "./NavigationBar.css";
+import { IUserContext } from '../App';
 
-export class NavigationBar extends React.Component {
+export interface INavigationBarProps {
+    UserContext: React.Context<any>
+}
+
+export class NavigationBar extends React.Component<INavigationBarProps, {}> {
     constructor(props) {
         super(props);
         this.state = {
         };
     }
 
-    renderNameField(userData) {
-        if (userData.user.username && userData.user.username != "") {
+    renderNameField(userContext: IUserContext) {
+        if (userContext.user && userContext.user.username != "") {
             return (
                 <div style={{display: "flex", flexDirection: "row"}}>
-                    {`Welcome ${userData.user.username}!`}
+                    {`Welcome ${userContext.user.username}!`}
                     <div style={{marginLeft: 22, cursor: "pointer"}} onClick={() => {
-                        userData.updateUser({
+                        userContext.updateUser({
                             userId: -1,
                             username: ""
                         });

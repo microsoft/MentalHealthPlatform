@@ -1,20 +1,36 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Message } from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
 
-import classes from "./Chat.css";
+import * as classes from "./Chat.css";
 
 import { BASE_URL } from '../../util/Helpers';
 import {Icon} from '../Icon/Icon';
 
-class Chat extends React.Component {
+export type MessageType = {
+    id: string;
+    authorName: string;
+    date: string;
+    messageBody: string;
+}
+
+export interface IChatState {
+    title: string;
+    messages: MessageType[];
+    messageBody: string;
+    views: number;
+    replies: number;
+    loading: boolean;
+}
+
+class ChatClass extends React.Component<RouteComponentProps<{chatID: string}>, IChatState> {
     constructor(props) {
         super(props);
         this.state = {
             title: '',
-            mesages: [],
+            messages: [],
             messageBody: '',
             views: 0,
             replies: 0,
@@ -29,7 +45,7 @@ class Chat extends React.Component {
     }
 
     handleSubmit = (e) => {
-        const { messageBody, messages } = this.state;
+        const { messageBody } = this.state;
         const { chatID } = this.props.match.params;
 
         e.preventDefault();
@@ -84,8 +100,8 @@ class Chat extends React.Component {
                             <div className={classes.SideColumn}></div>
                             <h1 className={classes.Title}>{title}</h1>
                             <div className={classes.SideColumn}>
-                                <Icon type='replies' number={this.state.replies || '0'} text='replies' />
-                                <Icon type='views' number={this.state.views || '0'} text='views' />
+                                <Icon type='replies' count={this.state.replies || 0} text='replies' />
+                                <Icon type='views' count={this.state.views || 0} text='views' />
                             </div>
                         </div>
                         <div className={classes.ChatBody}>
@@ -96,7 +112,7 @@ class Chat extends React.Component {
                                             name={message.authorName}
                                             date={message.date}
                                             messageBody={message.messageBody}
-                                            isCurrentUser={message.author == "sarahedo"} />
+                                            isCurrentUser={message.authorName == "sarahedo"} />
                                     </div>
                                 );
                             })}
@@ -110,7 +126,7 @@ class Chat extends React.Component {
                             placeholder="Enter your messsage here"
                             onChange={(e) => this.handleInputChange(e)} />
                         <button
-                            onClick={(e) => this.handleSubmit(e, _this)}
+                            onClick={(e) => this.handleSubmit(e)}
                             className={classes.SubmitButton}
                             type='submit'
                             disabled={messageBody === ''}>
@@ -141,8 +157,7 @@ class Chat extends React.Component {
                 messages,
                 loading: false,
                 replies: data.numberOfReplies,
-                views: data.numberOfViews,
-                loading: false
+                views: data.numberOfViews
             })
             console.log("Data", data);
         }).catch((error) => {
@@ -155,4 +170,4 @@ class Chat extends React.Component {
     }
 }
 
-export const Chat = withRouter(Chat);
+export const Chat = withRouter(ChatClass);

@@ -1,7 +1,13 @@
 import * as React from "react";
-import classes from "./Topic.css";
+import * as classes from "./Topic.css";
 
-export const Topic = (props) => {
+export interface ITopicProps {
+    name: string;
+    image: string;
+    title: string;
+}
+
+export const Topic: React.SFC<ITopicProps> = (props): JSX.Element => {
 
     return (
         <div className={classes.TopicTile}>

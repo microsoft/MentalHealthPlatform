@@ -1,9 +1,13 @@
 import * as React from 'react';
 
 import searchIcon from '../../images/search_icon.png';
-import classes from "./TopicsSearchBar.css";
+import * as classes from "./TopicsSearchBar.css";
 
-export class TopicsSearchBar extends React.Component {
+export interface ITopicsSearchBarProps {
+    inputChanged: (searchString: string) => void;
+}
+
+export class TopicsSearchBar extends React.Component<ITopicsSearchBarProps, {}> {
     
     constructor(props) {
         super(props);

@@ -1,20 +1,20 @@
 import * as React from "react";
-import { withRouter, Link } from 'react-router-dom';
-import { InfoCard } from "./InfoCard/InfoCard";
+import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
+import { InfoCard, InfoCardDataType } from "./InfoCard/InfoCard";
 
-import classes from "./Forum.css";
+import * as classes from "./Forum.css";
 
 import { BASE_URL } from '../../util/Helpers';
 
-class Forum extends React.Component {
+class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: number, forumData: any}> {
     isUnmounted = false;
 
     constructor(props) {
         super(props);
         const forumId = this.obtainForumId(this.props.match.url);
         this.state = {
-            match: this.props.match,
-            forumId: forumId
+            forumId: forumId,
+            forumData: undefined
         };
     }
 
@@ -42,7 +42,7 @@ class Forum extends React.Component {
     }
 
     generateForumData = () => {
-        return new Array(8).fill(undefined).map((_, index) => (
+        return Array.apply(null, Array(8)).map((_, index) => (
             {
                 chatId: index,
                 chatTitle: `Chat${index}`,
@@ -111,7 +111,7 @@ class Forum extends React.Component {
                 });
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
     }
 
@@ -120,4 +120,4 @@ class Forum extends React.Component {
     }
 }
 
-export const Forum = withRouter(Forum);
+export const Forum = withRouter(ForumClass);

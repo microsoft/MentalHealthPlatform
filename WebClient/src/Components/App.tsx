@@ -8,14 +8,24 @@ import { Forum } from './Forum/Forum';
 import { Chat } from './Chat/Chat';   
 import { CreateChat } from './Chat/CreateChat'; 
 
-const UserContext = React.createContext({
-    user: {},
-    updateUser: () => {}
+export type UserDataType = {
+    userId: number;
+    username: string;
+};
+
+export interface IUserContext {
+    user: UserDataType | undefined,
+    updateUser: (data: UserDataType) => void;
+}
+
+const UserContext = React.createContext<IUserContext>({
+    user: undefined,
+    updateUser: (data: UserDataType) => {}
 });
 
 export class UserProvider extends React.Component<{}, {user: any, updateUser: any}> {
 
-    private updateUser = (userData) => {
+    private updateUser = (userData: UserDataType) => {
         console.log("updating user");
         this.setState(() => ({
             user: {
@@ -54,28 +64,6 @@ export class UserProvider extends React.Component<{}, {user: any, updateUser: an
                     </div>
                 </BrowserRouter>
             </UserContext.Provider>
-        );
-    }
-}
-
-class App extends React.Component {    
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-    
-    /**
-     * Renders overall application component
-     * @return  {React.Component}   Rendered component
-     */
-    render() {
-        return (
-            <UserProvider>
-                <UserContext.Consumer>
-                    {(context) => context.user}
-                </UserContext.Consumer>
-            </UserProvider>
         );
     }
 }

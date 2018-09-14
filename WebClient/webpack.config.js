@@ -6,7 +6,7 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 });
 
 module.exports = {
-	entry: './src/index.jsx',
+	entry: './src/index.tsx',
 	resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]

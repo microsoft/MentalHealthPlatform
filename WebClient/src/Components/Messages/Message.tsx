@@ -1,11 +1,18 @@
 import * as React from 'react';
 
 import { formatDate } from '../../util/Helpers';
-import classes from "./Message.css";
+import * as classes from "./Message.css";
 
 import profilePicturePlaceholder from '../../images/profile_picture_placeholder.png';
 
-export class Message extends React.Component {
+export interface IMessageProps {
+    isCurrentUser: boolean;
+    messageBody: string;
+    name: string;
+    date: string;
+}
+
+export class Message extends React.Component<IMessageProps, {}> {
     
     renderProfilePicture() {
         var profilePictureStyle = {

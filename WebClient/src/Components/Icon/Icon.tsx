@@ -1,10 +1,16 @@
 import * as React from 'react';
 
-import classes from "./Icon.css";
+import * as classes from "./Icon.css";
 import messageIcon from '../../images/message_icon.png'
 import viewIcon from '../../images/view_icon.png';
 
-export class Icon extends React.Component {
+export interface IIconProps {
+    type: string;
+    count: number;
+    text: string;
+}
+
+export class Icon extends React.Component<IIconProps, {}> {
     renderIcon = (type) => {
         let icon;
 
@@ -24,12 +30,12 @@ export class Icon extends React.Component {
     }
 
     render() {
-        const { type, number, text } = this.props;
+        const { type, count, text } = this.props;
 
         return (
             <span  className={classes.Container}>
                 {this.renderIcon(type)}
-                {number && <span className={classes.Text}>{number}</span>}
+                {count && <span className={classes.Text}>{count}</span>}
                 {text && <span>{'\u00A0'}{text}</span>}
             </span>
         );

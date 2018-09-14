@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 // import { chats } from '../util/Dummy';
 // import Message from './Message';
 // import sendIcon from './../images/send_icon.png';
 
 import { BASE_URL } from '../../util/Helpers';
-import classes from "./CreateChat.css";
+import * as classes from "./CreateChat.css";
 
-class CreateChat extends React.Component {
+export interface ICreateChatState {
+    inputTitle: string;
+    inputDescription: string;
+}
+
+class CreateChatClass extends React.Component<RouteComponentProps<{chatID: string}>, ICreateChatState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -88,7 +93,6 @@ class CreateChat extends React.Component {
                                 onChange={(e) => this.handleInputTitleChange(e)} />
                             <textarea
                                 className={classes.InputDescription}
-                                type='text'
                                 value={this.state.inputDescription}
                                 placeholder="Enter chat description"
                                 onChange={(e) => this.handleInputDescriptionChange(e)}></textarea>
@@ -112,4 +116,4 @@ class CreateChat extends React.Component {
     }
 }
 
-export const CreateChat = withRouter(CreateChat);
+export const CreateChat = withRouter(CreateChatClass);

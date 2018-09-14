@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps, match } from 'react-router-dom';
 
 import {TopicsSearchBar} from './TopicsSearchBar';
-import classes from "./Topics.css";
+import * as classes from "./Topics.css";
 import { BASE_URL } from '../../util/Helpers';
 import {Topic} from "./Topic/Topic";
 
@@ -11,14 +11,23 @@ import topic_image_1 from "../../images/topic_image_1.jpg";
 import topic_image_2 from "../../images/topic_image_2.jpg";
 import topic_image_3 from "../../images/topic_image_3.jpg";
 
-class Topics extends React.Component {
+export interface ITopicsProps extends RouteComponentProps<{}> {
+    UserContext: React.Context<any>
+}
+
+export interface ITopicsState {
+    match: match<{}>;
+    searchString: string;
+    topicsData: any;
+}
+
+class TopicsClass extends React.Component<ITopicsProps, ITopicsState> {
     constructor(props) {
         super(props);
         this.state = {
             match: this.props.match,
-            numberOfColumns: 4,
-            hoveredCellIndex: -1,
             searchString: undefined,
+            topicsData: undefined
         };
     }
 
@@ -64,7 +73,7 @@ class Topics extends React.Component {
         const tiles = topicsData.map((topic, index) => {
             return (
                 <Link key={index} to={`${baseUrl}/topic${index}`}>
-                    <Topic title={topic.title} image={images[index%images.length]} />
+                    <Topic name={"jksbvjv"} title={topic.title} image={images[index%images.length]} />
                 </Link>
             );
         });
@@ -102,4 +111,4 @@ class Topics extends React.Component {
     }
 }
 
-export const Topics = withRouter(Topics);
+export const Topics = withRouter(TopicsClass);

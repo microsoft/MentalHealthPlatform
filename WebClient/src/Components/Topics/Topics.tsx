@@ -10,7 +10,6 @@ import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";
 import topic_image_2 from "../../images/topic_image_2.jpg";
 import topic_image_3 from "../../images/topic_image_3.jpg";
-import { IUserContext } from '../App';
 
 export interface ITopicsState {
     match: match<{}>;

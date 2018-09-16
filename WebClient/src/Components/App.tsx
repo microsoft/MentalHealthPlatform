@@ -52,12 +52,12 @@ export class UserProvider extends React.Component<{}, {user: any, updateUser: an
             <UserDataContext.Provider value={this.state}>
                 <BrowserRouter>
                     <div>
-                        <NavigationBar UserContext={UserDataContext} />
+                        <NavigationBar />
                         <div>
                             <Route exact path="/" render={() => <Redirect to="/topics" />} />
-                            <Route exact path="/topics" component={() => <Topics UserContext={UserDataContext} />} />
-                            <Route exact path="/login" component={() => <SignupLogin UserContext={UserDataContext} />} />
-                            <Route exact path={`/topics/topic:topicID`} component={() => <Forum UserContext={UserDataContext} />} />
+                            <Route exact path="/topics" component={() => <Topics />} />
+                            <Route exact path="/login" component={() => <SignupLogin />} />
+                            <Route exact path={`/topics/topic:topicID`} component={() => <Forum />} />
                             <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={() => <Chat UserContext={UserDataContext} />} />
                             <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserDataContext} />} />
                         </div>

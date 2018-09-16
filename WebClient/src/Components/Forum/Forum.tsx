@@ -41,7 +41,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         return null;
     }
 
-    generateForumData = () => {
+    generateForumData = (): InfoCardDataType[] => {
         return Array.apply(null, Array(8)).map((_, index) => (
             {
                 chatId: index,
@@ -60,7 +60,8 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
      * @return  {React.Component}   Rendered component
      */
     render() {
-        const forumData = this.generateForumData();//this.state.forumData;
+        const forumData = this.state.forumData; //this.generateForumData();//
+        console.log("***$$$", this.state.forumData);
         if (!forumData) {
             return null;
         }
@@ -115,7 +116,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         });
     }
 
-    componentWillMount() {
+    componentWillUnmount() {
         this.isUnmounted = true;
     }
 }

@@ -10,10 +10,7 @@ import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";
 import topic_image_2 from "../../images/topic_image_2.jpg";
 import topic_image_3 from "../../images/topic_image_3.jpg";
-
-export interface ITopicsProps extends RouteComponentProps<{}> {
-    UserContext: React.Context<any>
-}
+import { IUserContext } from '../App';
 
 export interface ITopicsState {
     match: match<{}>;
@@ -21,7 +18,7 @@ export interface ITopicsState {
     topicsData: any;
 }
 
-class TopicsClass extends React.Component<ITopicsProps, ITopicsState> {
+class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -63,26 +60,26 @@ class TopicsClass extends React.Component<ITopicsProps, ITopicsState> {
         //     forumTitle: topic.title
         // };
 
-        let topicsData = this.generateData();//this.state.topicsData;
+        let topicsData = this.state.topicsData; //this.generateData();
         if(topicsData !== undefined && this.state.searchString !== undefined){
             topicsData = topicsData.filter((data) => {
                 return data.title.toLowerCase().indexOf(this.state.searchString.toLowerCase()) !== -1;
             });
         }
         const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3];
-        const tiles = topicsData.map((topic, index) => {
-            return (
-                <Link key={index} to={`${baseUrl}/topic${index}`}>
-                    <Topic name={"jksbvjv"} title={topic.title} image={images[index%images.length]} />
-                </Link>
-            );
-        });
+        let tiles;
+        if(topicsData != undefined){
+            tiles = topicsData.map((topic, index) => {
+                return (
+                    <Link key={index} to={`${baseUrl}/topic${index}`}>
+                        <Topic name={"jksbvjv"} title={topic.title} image={images[index%images.length]} />
+                    </Link>
+                );
+            });
+        }
 
         return (
             <div>
-                <this.props.UserContext.Consumer>
-                    {(context) => context.number}
-                </this.props.UserContext.Consumer>
                 <div className={classes.Background}></div>
                 <div className={classes.Container}>
                     <TopicsSearchBar inputChanged={this.updateSearchString}/>

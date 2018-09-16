@@ -6,6 +6,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { BASE_URL } from '../../util/Helpers';
 import * as classes from "./CreateChat.css";
+import { IUserContext, UserDataContext } from '../App';
 
 export interface ICreateChatState {
     inputTitle: string;
@@ -65,7 +66,8 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         }).then(function(response) {
             return response.json();
         }).then(function(data) {
-            if (data && data.chatId) {
+            console.log("chat created", data);
+            if (data && data.chatId !== undefined) {
                 const path = `${ctx.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
                 ctx.props.history.push(path);
             }
@@ -83,27 +85,31 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
             <div className={classes.Background}>
                 <div className={classes.FormContainer}>
                     <div className={classes.Pane}>
-                        <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription, _this)} className={classes.Container}>
-                            <h1 className={classes.FormTitle}>Create New Chat</h1>
-                            <input
-                                className={classes.InputTitle}
-                                type='text'
-                                value={this.state.inputTitle}
-                                placeholder="Enter chat title"
-                                onChange={(e) => this.handleInputTitleChange(e)} />
-                            <textarea
-                                className={classes.InputDescription}
-                                value={this.state.inputDescription}
-                                placeholder="Enter chat description"
-                                onChange={(e) => this.handleInputDescriptionChange(e)}></textarea>
-                            <button
-                                disabled={!this.isSubmitButtonDisabled()}
-                                className={submitButtonClass}
-                                type='submit'>
-                                Submit
-                                {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}
-                            </button>
-                        </form>
+                        <UserDataContext.Consumer>
+                            {(userData) => (
+                                <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription, _this)} className={classes.Container}>
+                                    <h1 className={classes.FormTitle}>Create New Chat</h1>
+                                    <input
+                                        className={classes.InputTitle}
+                                        type='text'
+                                        value={this.state.inputTitle}
+                                        placeholder="Enter chat title"
+                                        onChange={(e) => this.handleInputTitleChange(e)} />
+                                    <textarea
+                                        className={classes.InputDescription}
+                                        value={this.state.inputDescription}
+                                        placeholder="Enter chat description"
+                                        onChange={(e) => this.handleInputDescriptionChange(e)}></textarea>
+                                    <button
+                                        disabled={!this.isSubmitButtonDisabled()}
+                                        className={submitButtonClass}
+                                        type='submit'>
+                                        Submit
+                                        {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}
+                                    </button>
+                                </form>
+                            )}
+                        </UserDataContext.Consumer>
                     </div>
                 </div>
             </div>

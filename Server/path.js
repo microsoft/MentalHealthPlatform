@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mongoClient = require('mongodb').MongoClient;
 var mongoUrl = "mongodb://localhost:27017/";
 var dbName = 'mentalhealthdb';
+let date = require('date-and-time');
 
 
 // Collections
@@ -31,7 +32,7 @@ app.post('/signup', function(postReq, postRes){
 	var obj = postReq.body;
 	var username = obj.username;
 
-	mongoClient.connect(mongoUrl, { ...obj,  useNewUrlParser: true }, function(connerErr, db) {
+	mongoClient.connect(mongoUrl, { ...obj, useNewUrlParser: true }, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
 
@@ -60,7 +61,7 @@ app.post('/signup', function(postReq, postRes){
 app.post('/login', function(postReq, postRes) {
 	var obj = postReq.body;
 	console.log(obj);
-	mongoClient.connect(mongoUrl, function(connerErr, db) {
+	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
 
@@ -84,7 +85,7 @@ app.get('/gettopics', function(postReq, postRes) {
 	console.log("Retrieving topics");
 	var obj = postReq.body;
 
-	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
+	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
 
@@ -145,7 +146,7 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 				chatPreviewObj.postedDate = chatRes[i].PostedDate
 				chatPreviewsObj.push(chatPreviewObj)
 			}
-
+			// console.log(chatPreviewsObj);
 			postRes.json(chatPreviewsObj);
 			db.close();
 		});
@@ -156,7 +157,7 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 app.get('/getchat', function(postReq, postRes){
 	var obj = postReq.query;
 
-	mongoClient.connect(mongoUrl, function(err, db) {
+	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(err, db) {
 		if (err) throw err;
 		var dbo = db.db(dbName);
 		dbo.collection(msgColl).aggregate(
@@ -203,7 +204,7 @@ app.get('/getchat', function(postReq, postRes){
 				return;
 			}
 			else {
-				dbo.collection(chatsColl).update(
+				dbo.collection(chatsColl).updateOne(
 				{"chatID" : obj.chatId },
 				{ $inc: 
 				  { numberofviews : 1 
@@ -239,7 +240,7 @@ app.get('/getchat', function(postReq, postRes){
 app.post('/sendmessage', function(postReq, postRes){
 	var obj = postReq.body;
 
-	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
+	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
 
@@ -247,7 +248,7 @@ app.post('/sendmessage', function(postReq, postRes){
 		msgObj.chatID = obj.chatId;
 		msgObj.messageBody = obj.messageBody;
 		msgObj.username = obj.username;
-		msgObj.date = new Date().toString();
+		msgObj.date = date.format(new Date(), "MM/DD/YYYY");
 
 		// Insert message into db
 		dbo.collection(msgColl).insertOne(msgObj, function(insertErr, insertRes) {
@@ -263,7 +264,7 @@ app.post('/createchat', function(postReq, postRes){
 	var obj = postReq.body;
 	console.log("Creating chat");
 
-	mongoClient.connect(mongoUrl, obj, function(connerErr, db) {
+	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
 
@@ -272,17 +273,17 @@ app.post('/createchat', function(postReq, postRes){
 		chatObj.chatTitle = obj.chatTitle;
 		chatObj.username = obj.username;
 		chatObj.TopicID = obj.topicId.toString();
-		chatObj.PostedDate = new Date().toString();
-		chatObj.numberofviews = "0";
+		chatObj.PostedDate = date.format(new Date(), "MM/DD/YYYY");
+		chatObj.numberofviews = 0;
 		chatObj.desc = obj.chatDescription;
 
 		// Create new message
 		var msgObj = {};
 		msgObj.messageBody = obj.chatDescription;
 		msgObj.username = obj.username;
-		msgObj.date = new Date().toString();
-		
-		dbo.collection(chatsColl).count().then((count) => {
+		msgObj.date = date.format(new Date(), "MM/DD/YYYY");
+
+		dbo.collection(chatsColl).countDocuments().then((count) => {
 
 			chatObj.chatID = count.toString();
 
@@ -290,7 +291,7 @@ app.post('/createchat', function(postReq, postRes){
 			dbo.collection(chatsColl).insertOne(chatObj, function(insertChatErr, insertChatRes) {
 				if (insertChatErr) throw insertChatErr;
 				msgObj.chatID = count.toString();
-
+				console.log("Chat inserted");
 				// Insert message to db
 				dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
 					db.close();
@@ -298,6 +299,7 @@ app.post('/createchat', function(postReq, postRes){
 						statusMessage : 1,
 						chatId: count
 					});
+					console.log("chat responding with messages");
 				});
 			});
 		});

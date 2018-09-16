@@ -10,8 +10,9 @@ export type InfoCardDataType = {
     chatTitle: string;
     chatDescription: string;
     authorName: string;
-    date: string;
-    numberOfReplies: number;
+    // date: string;
+    postedDate: string;
+    // numberOfReplies: number;
     numberOfViews: number;
 };
 
@@ -39,11 +40,11 @@ export const InfoCard: React.SFC<IInfocardProps> = (props: IInfocardProps): JSX.
                     <img src={profilePicturePlaceholder} className={classes.ProfilePicture}/>
                     <div style={{display: "flex", flexDirection: "column", marginLeft: 8}}>
                         <div className={classes.Name}>{data.authorName}</div>
-                        <div>{data.date}</div>
+                        <div>{data.postedDate}</div>
                     </div>
                 </div>
                 <div style={{marginLeft: 32}}>
-                    <Icon type='replies' count={data.numberOfReplies || 0} text='replies' />
+                    {/* <Icon type='replies' count={data.numberOfReplies || 0} text='replies' /> */}
                     <Icon type='views' count={data.numberOfViews || 0} text='views' />
                 </div>
             </div>

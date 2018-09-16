@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import * as classes from "./SignupLogin.css";
 
 import { BASE_URL } from '../../util/Helpers';
-import { IUserContext } from '../App';
+import { IUserContext, UserDataContext } from '../App';
 
 export interface ISignupLoginState {
     username: string;
@@ -165,9 +165,9 @@ class SignupLoginClass extends React.Component<ISignupLoginProps, ISignupLoginSt
             <div className={classes.Background}>
                 <div className={classes.SignupLoginForm}>
                     {this.createSignupPane()}
-                    <this.props.UserContext.Consumer>
+                    <UserDataContext.Consumer>
                         {(userData) => {return this.createLoginPane(userData)}}
-                    </this.props.UserContext.Consumer>
+                    </UserDataContext.Consumer>
                     
                 </div>
             </div>

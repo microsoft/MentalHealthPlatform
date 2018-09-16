@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, match } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Message } from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
@@ -8,6 +8,7 @@ import * as classes from "./Chat.css";
 
 import { BASE_URL } from '../../util/Helpers';
 import {Icon} from '../Icon/Icon';
+import { IUserContext, UserDataContext } from '../App';
 
 export type MessageType = {
     id: string;
@@ -25,7 +26,11 @@ export interface IChatState {
     loading: boolean;
 }
 
-class ChatClass extends React.Component<RouteComponentProps<{chatID: string}>, IChatState> {
+export interface IChatProps {
+    match: match<{chatID: string}>;
+}
+
+class ChatClass extends React.Component<IChatProps, IChatState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +49,7 @@ class ChatClass extends React.Component<RouteComponentProps<{chatID: string}>, I
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (e, userData: IUserContext) => {
         const { messageBody } = this.state;
         const { chatID } = this.props.match.params;
 
@@ -53,7 +58,7 @@ class ChatClass extends React.Component<RouteComponentProps<{chatID: string}>, I
             messageBody: '',
             loading: true
         });
-
+        console.log("*********",userData);
         fetch(`${BASE_URL}/sendmessage`, {
             method: 'POST',
             headers: {
@@ -63,7 +68,7 @@ class ChatClass extends React.Component<RouteComponentProps<{chatID: string}>, I
             body: JSON.stringify({
                 chatId: chatID,
                 messageBody: messageBody,
-                username: "Aldo"
+                username: userData.user.userId !== -1 ? userData.user.username : "Anonymous"
             })
         }).then((response) => {
             const output = response.json();
@@ -125,13 +130,18 @@ class ChatClass extends React.Component<RouteComponentProps<{chatID: string}>, I
                             value={this.state.messageBody}
                             placeholder="Enter your messsage here"
                             onChange={(e) => this.handleInputChange(e)} />
-                        <button
-                            onClick={(e) => this.handleSubmit(e)}
-                            className={classes.SubmitButton}
-                            type='submit'
-                            disabled={messageBody === ''}>
-                            <input type="image" src={sendIcon} className={classes.SendIcon} />
-                        </button>
+                            <UserDataContext.Consumer>
+                                {
+                                    (userData) => (<button
+                                        onClick={(e) => this.handleSubmit(e, userData)}
+                                        className={classes.SubmitButton}
+                                        type='submit'
+                                        disabled={messageBody === ''}>
+                                        <input type="image" src={sendIcon} className={classes.SendIcon} />
+                                    </button>)
+                                }
+                            </UserDataContext.Consumer>
+                        
                     </form>
                 </div>
             </div >

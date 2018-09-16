@@ -2,13 +2,9 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import * as classes from "./NavigationBar.css";
-import { IUserContext } from '../App';
+import { IUserContext, UserDataContext } from '../App';
 
-export interface INavigationBarProps {
-    UserContext: React.Context<any>
-}
-
-export class NavigationBar extends React.Component<INavigationBarProps, {}> {
+export class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,9 +43,9 @@ export class NavigationBar extends React.Component<INavigationBarProps, {}> {
                     <NavLink exact to="/" className={classes.NavigationBarTitleLink}>Mental Health Forum</NavLink>
                 </div>
                 <div className={classes.NavigationBarRight}>
-                    <this.props.UserContext.Consumer>
+                    <UserDataContext.Consumer>
                         {(userData) => {return this.renderNameField(userData)}}
-                    </this.props.UserContext.Consumer>
+                    </UserDataContext.Consumer>
                 </div>
             </div>
         );

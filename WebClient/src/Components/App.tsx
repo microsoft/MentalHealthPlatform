@@ -18,7 +18,7 @@ export interface IUserContext {
     updateUser: (data: UserDataType) => void;
 }
 
-const UserContext = React.createContext<IUserContext>({
+export const UserDataContext = React.createContext<IUserContext>({
     user: undefined,
     updateUser: (data: UserDataType) => {}
 });
@@ -49,21 +49,21 @@ export class UserProvider extends React.Component<{}, {user: any, updateUser: an
 
     render() {
         return (
-            <UserContext.Provider value={this.state}>
+            <UserDataContext.Provider value={this.state}>
                 <BrowserRouter>
                     <div>
-                        <NavigationBar UserContext={UserContext} />
+                        <NavigationBar UserContext={UserDataContext} />
                         <div>
                             <Route exact path="/" render={() => <Redirect to="/topics" />} />
-                            <Route exact path="/topics" component={() => <Topics UserContext={UserContext} />} />
-                            <Route exact path="/login" component={() => <SignupLogin UserContext={UserContext} />} />
-                            <Route exact path={`/topics/topic:topicID`} component={() => <Forum UserContext={UserContext} />} />
-                            <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={() => <Chat UserContext={UserContext} />} />
-                            <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserContext} />} />
+                            <Route exact path="/topics" component={() => <Topics UserContext={UserDataContext} />} />
+                            <Route exact path="/login" component={() => <SignupLogin UserContext={UserDataContext} />} />
+                            <Route exact path={`/topics/topic:topicID`} component={() => <Forum UserContext={UserDataContext} />} />
+                            <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={() => <Chat UserContext={UserDataContext} />} />
+                            <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserDataContext} />} />
                         </div>
                     </div>
                 </BrowserRouter>
-            </UserContext.Provider>
+            </UserDataContext.Provider>
         );
     }
 }

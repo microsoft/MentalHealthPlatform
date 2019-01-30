@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license.
+
 import React from "react";
 import { withRouter, Link } from 'react-router-dom';
 import { InfoCard } from "./InfoCard/InfoCard";

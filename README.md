@@ -5,7 +5,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 1. Clone the repository to your local machine:
 
    ```
-   git clone https://github.com/MentalHealthForum/website
+   git clone https://github.com/Microsoft/MentalHealthPlatform.git
    ```
 
 2. Navigate into the cloned project directory:
@@ -20,13 +20,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
    npm install
    ```
 
-4. Build the project:
-
-   ```
-   npm run build
-   ```
-
-5. Run the project:
+4. Run the project:
 
    ```
    npm start
@@ -38,7 +32,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
    > Project is running at http://localhost:8080/
 
-6. Launch the application in a web browser by navigating to the URL printed by the console
+5. Launch the application in a web browser by navigating to the URL printed by the console
 
 # Pages
 
@@ -56,7 +50,7 @@ The Topics page should be reachable via direct URL or by the user clicking on th
 
 ## Forum Page
 
-The Forum page will display a table of discussions relevant to the topic of the forum. When the user clicks on a discussion, they will be directed to a Discussion page.
+The Forum page will display a table of chats relevant to the topic of the forum. When the user clicks on a chat, they will be directed to a Chat page.
 
 The Forum component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
 
@@ -64,15 +58,15 @@ The Forum page should be reachable via direct URL or by the user clicking on a F
 
 ![Forum page](./docs/forum.png)
 
-## Discussion Page
+## Chat Page
 
-The Discussion page will display a table of posts relevant to the discussion.
+The Chat page will display a table of posts relevant to the chat.
 
-The Discussion component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
+The Chat component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
 
-The Discussion page should be reachable via direct URL or by the user clicking on a Discussion link within the forum table in the Forum page.
+The Chat page should be reachable via direct URL or by the user clicking on a Chat link within the forum table in the Forum page.
 
-![Discussion page](./docs/discussion.png)
+![Chat page](./docs/chat.png)
 
 ## Signup/Login Page
 

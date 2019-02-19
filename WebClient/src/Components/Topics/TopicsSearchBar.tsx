@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-
 import searchIcon from '../../images/search_icon.png';
 import * as classes from "./TopicsSearchBar.css";
 

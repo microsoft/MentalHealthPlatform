@@ -1,0 +1,93 @@
+.Container {
+    padding: 25px;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url("../../images/topic_image_0.jpg")
+}
+
+.ChatContainer {
+    background-color: #FFFFFF;
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #CCCCCC
+}
+
+.ChatHeader {
+    display: flex;
+    text-align: center;
+    box-shadow: 0px 3px 1px #CCCCCC;
+    padding: 10px 20px 10px 20px
+}
+
+.ChatBody {
+    margin: 20px;
+}
+
+.Title {
+    flex: 1;
+    font-family: Calibri;
+}
+
+.SideColumn {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Calibri;
+}
+
+.MessageBubble {
+    padding: 10;
+    margin-bottom: 5px;
+    background-color: #DDD
+}
+
+.InputField {
+    background-color: #EEE;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px;
+    font-size: 22px;
+    background-color: transparent
+}
+
+.SubmitButton {
+    background-color: #339933;
+    border-width: 0px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.SendIcon {
+    width: 30px;
+    height: 30px;
+}
+
+.Form {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 3px 3px 1px #CCCCCC;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+    margin: auto;
+}

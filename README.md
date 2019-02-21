@@ -42,21 +42,21 @@ The Topics page will act as the home page of the application.
 
 This page will consist of a search header and topics grid. The topics grid will list a variety of mental health topics (ex. stress, anxiety, depression). When the user clicks on a topic, they will be directed to a Forum page for that topic.
 
-The Topics component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
+The Topics component hierarchy can be found in [Component Hierarchies](./WebClient/docs/COMPONENT_HIERARCHIES.md).
 
 The Topics page should be reachable via direct URL or by the user clicking on the application title link in the global navigation bar.
 
-![Topics page](./docs/topics.png)
+![Topics page](./WebClient/docs/topics.png)
 
 ## Forum Page
 
 The Forum page will display a table of chats relevant to the topic of the forum. When the user clicks on a chat, they will be directed to a Chat page.
 
-The Forum component hierarchy can be found in [Component Hierarchies](./docs/COMPONENT_HIERARCHIES.md).
+The Forum component hierarchy can be found in [Component Hierarchies](./WebClient/docs/COMPONENT_HIERARCHIES.md).
 
 The Forum page should be reachable via direct URL or by the user clicking on a Forum link within the topics table in the Topics page.
 
-![Forum page](./docs/forum.png)
+![Forum page](./WebClient/docs/forum.png)
 
 ## Chat Page
 
@@ -74,4 +74,4 @@ The Signup/Login page will display two panes: a Signup page, and a Login pane.
 
 The Signup/Login page should be reachable via direct URL or by the user clicking the Login link in the global navigation bar.
 
-![Signup/Login page](./docs/login.png)
+![Signup/Login page](./WebClient/docs/login.png)

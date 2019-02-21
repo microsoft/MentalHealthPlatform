@@ -1,0 +1,49 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "prestart": "tcm -p src/**/*.css",
+    "start": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MentalHealthCommunity/website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MentalHealthCommunity/website/issues"
+  },
+  "homepage": "https://github.com/MentalHealthCommunity/website#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.1.1",
+    "mysql": "^2.15.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-loading": "^2.0.3",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.13",
+    "@types/react-dom": "^16.0.7",
+    "@types/react-router-dom": "^4.3.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.22.1",
+    "typed-css-modules": "^0.3.7",
+    "typescript": "^3.0.3",
+    "url-loader": "^0.6.2",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-middleware": "^3.2.0",
+    "webpack-dev-server": "^3.1.14"
+  }
+}

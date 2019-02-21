@@ -1,0 +1,19 @@
+{
+  "name": "mh_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "date-and-time": "^0.6.2",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "mongodb": "^3.1.4"
+  }
+}

@@ -66,7 +66,7 @@ The Chat component hierarchy can be found in [Component Hierarchies](./docs/COMP
 
 The Chat page should be reachable via direct URL or by the user clicking on a Chat link within the forum table in the Forum page.
 
-![Chat page](./docs/chat.png)
+![Chat page](./WebClient/docs/chat.png)
 
 ## Signup/Login Page
 

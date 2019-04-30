@@ -65,7 +65,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
         let topicsData = this.state.topicsData; //this.generateData();
         if(topicsData !== undefined && this.state.searchString !== undefined){
             topicsData = topicsData.filter((data) => {
-                return data.title.toLowerCase().indexOf(this.state.searchString.toLowerCase()) !== -1;
+                return data.topicTitle && data.topicTitle.toLowerCase().indexOf(this.state.searchString.toLowerCase()) !== -1;
             });
         }
         const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3];

@@ -38,7 +38,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
         const topics = [];
         for (let i = 0; i < 8; i++) {
             const topic = {
-                title: "Topic " + i                
+                titleTitle: "Topic " + i                
             };
             topics.push(topic);
         };
@@ -58,10 +58,6 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
             baseUrl = baseUrl.substring(0, baseUrl.length - 1);
         }
 
-        // const linkProps = {
-        //     forumTitle: topic.title
-        // };
-
         let topicsData = this.state.topicsData; //this.generateData();
         if(topicsData !== undefined && this.state.searchString !== undefined){
             topicsData = topicsData.filter((data) => {
@@ -74,7 +70,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
             tiles = topicsData.map((topic, index) => {
                 return (
                     <Link key={index} to={`${baseUrl}/topic${index}`}>
-                        <Topic name={"jksbvjv"} title={topic.title} image={images[index%images.length]} />
+                        <Topic name={"jksbvjv"} title={topic.topicTitle} image={images[index%images.length]} />
                     </Link>
                 );
             });

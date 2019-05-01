@@ -11,7 +11,6 @@ export interface ITopicProps {
 }
 
 export const Topic: React.SFC<ITopicProps> = (props): JSX.Element => {
-
     return (
         <div className={classes.TopicTile}>
             <p 

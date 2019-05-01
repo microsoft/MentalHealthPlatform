@@ -3,13 +3,10 @@
 
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-// import { chats } from '../util/Dummy';
-// import Message from './Message';
-// import sendIcon from './../images/send_icon.png';
 
 import { BASE_URL } from '../../util/Helpers';
 import * as classes from "./CreateChat.css";
-import { IUserContext, UserDataContext } from '../App';
+import { UserDataContext } from '../App';
 
 export interface ICreateChatState {
     inputTitle: string;
@@ -25,7 +22,7 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         };
     }
 
-    getTopicId() {
+    getTopicId = () => {
         let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");        
         
         let list = subUrl.split("/");
@@ -36,23 +33,23 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         return topicId;
     }
 
-    handleInputTitleChange(e) {
+    handleInputTitleChange = (e) => {
         this.setState({
             inputTitle: e.target.value
         })
     }
 
-    handleInputDescriptionChange(e) {
+    handleInputDescriptionChange = (e) => {
         this.setState({
             inputDescription: e.target.value
         })
     }
 
-    isSubmitButtonDisabled() {
+    isSubmitButtonDisabled = () => {
         return this.state.inputTitle.length > 0 && this.state.inputDescription.length > 0;
     }
 
-    handleSubmit(e, title, description, ctx) {
+    handleSubmit = (e, title, description, ctx) => {
         e.preventDefault();
         fetch(`${BASE_URL}/createchat`, {
             method: 'POST',
@@ -77,8 +74,7 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         });
     }
 
-
-    renderForm() {
+    renderForm = () => {
         let submitButtonClass = classes.SubmitButton + " ";
         submitButtonClass += this.isSubmitButtonDisabled() ? classes.Green : classes.Gray;
 
@@ -108,7 +104,6 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
                                         className={submitButtonClass}
                                         type='submit'>
                                         Submit
-                                        {/* <input type="image" src={sendIcon} style={ChatStyles.sendIconStyle} /> */}
                                     </button>
                                 </form>
                             )}
@@ -119,8 +114,7 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         )
     };
     
-    render() {
-        
+    render = () => {
         return this.renderForm();
     }
 }

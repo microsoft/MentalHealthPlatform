@@ -34,7 +34,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
      * Temporary function that generates stub topics data
      * @return  {any}   Stub topics data
      */
-    generateData() {
+    generateData = () => {
         const topics = [];
         for (let i = 0; i < 8; i++) {
             const topic = {
@@ -52,7 +52,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
      * Renders topics component including search bar and topics table
      * @return  {React.Component}   Rendered component
      */
-    render() {
+    render = () => {
         let baseUrl = this.state.match.url;
         if (baseUrl.charAt(baseUrl.length - 1) == '/') {
             baseUrl = baseUrl.substring(0, baseUrl.length - 1);
@@ -87,7 +87,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
         );
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         const _this = this;
         fetch(`${BASE_URL}/gettopics`, {
             method: 'GET',

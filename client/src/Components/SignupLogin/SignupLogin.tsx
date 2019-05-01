@@ -22,7 +22,6 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
 
     constructor(props) {
         super(props);
-        const _this = this;
         this.state = {
             username: "",
             password: "",
@@ -37,44 +36,33 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
      * Renders sign up panel in overall sign-up/login form
      * @return  {React.Component}   Rendered component
      */
-    createSignupPane() {
-        // const agreementTextStyle = Object.assign({}, SignupLoginStyles.signupLoginFormTextStyle, {
-        //     float: "left",
-        //     marginLeft: "3px"
-        // });
-
+    createSignupPane = () => {
         let signupButtonClasses = classes.FormButton + " ";
         signupButtonClasses += this.isSignUpButtonEnabled() ? classes.Green : classes.Gray;
         const _this = this;
 
         return (
             <div className={classes.Pane}>
-                {/* <form> */}
-                    <h1 className={classes.FormTitle}>Sign Up</h1>
-                    <div>
-                        <input type="text" value={this.state.signUpFirstName} placeholder="First Name" name="name" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpFirstName: e.target.value})} />
-                        <input type="text" value={this.state.signUpUserName} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpUserName: e.target.value})} />
-                        <input type="password" value={this.state.signUpPass1} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass1: e.target.value})} />
-                        <input type="password" value={this.state.signUpPass2} placeholder="Confirm Password" name="confirm-password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass2: e.target.value})} />
-                        <button type="submit" onClick={(e) => this.submitSignup(_this)} className={signupButtonClasses} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
-                    </div>
-                    {/* <div style={SignupLoginStyles.agreementContainerStyle}>
-                        <input type="checkbox" name="agree" style={SignupLoginStyles.agreementCheckboxStyle} />
-                        <span style={agreementTextStyle}>By creating an account you agree to our <a href="#" style={SignupLoginStyles.formLinkStyle}>Terms & Privacy</a>.</span>
-                    </div>                 */}
-                {/* </form> */}
+                <h1 className={classes.FormTitle}>Sign Up</h1>
+                <div>
+                    <input type="text" value={this.state.signUpFirstName} placeholder="First Name" name="name" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpFirstName: e.target.value})} />
+                    <input type="text" value={this.state.signUpUserName} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpUserName: e.target.value})} />
+                    <input type="password" value={this.state.signUpPass1} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass1: e.target.value})} />
+                    <input type="password" value={this.state.signUpPass2} placeholder="Confirm Password" name="confirm-password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass2: e.target.value})} />
+                    <button type="submit" onClick={(e) => this.submitSignup(_this)} className={signupButtonClasses} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
+                </div>
             </div>
         )
     }
 
-    isSignUpButtonEnabled() {
+    isSignUpButtonEnabled = () => {
         return this.state.signUpFirstName.length > 0
         && this.state.signUpUserName.length > 0
         && this.state.signUpPass1.length > 0
         && this.state.signUpPass1 == this.state.signUpPass2;
     }
 
-    isLoginButtonEnabled() {
+    isLoginButtonEnabled = () => {
         return this.state.username.length > 0
         && this.state.password.length > 0;
     }
@@ -83,29 +71,24 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
      * Renders login panel in overall sign-up/login form
      * @return  {React.Component}   Rendered component
      */
-    createLoginPane(userData) {
+    createLoginPane = (userData) => {
         let loginButtonClasses = classes.FormButton + " ";
         loginButtonClasses += this.isLoginButtonEnabled() ? classes.Green : classes.Gray;
         const _this = this;
 
         return (
             <div className={classes.Pane} style={{borderLeft: "1px solid #CCCCCC"}}>
-                {/* <form> */}
-                    <h1 className={classes.FormTitle}>Log In</h1>
-                    <div>
-                        <input type="text" value={this.state.username} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({username: e.target.value})} />
-                        <input type="password" value={this.state.password} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({password: e.target.value})} />
-                        <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" className={loginButtonClasses}>Login</button>
-                    </div>
-                    {/* <div style={SignupLoginStyles.forgotPasswordContainerStyle}>
-                        <span style={SignupLoginStyles.signupLoginFormTextStyle}><a href="#" style={SignupLoginStyles.formLinkStyle}>Forgot your password?</a></span>
-                    </div>                 */}
-                {/* </form> */}
+                <h1 className={classes.FormTitle}>Log In</h1>
+                <div>
+                    <input type="text" value={this.state.username} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({username: e.target.value})} />
+                    <input type="password" value={this.state.password} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({password: e.target.value})} />
+                    <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" className={loginButtonClasses}>Login</button>
+                </div>
             </div>
         )
     }
 
-    submitSignup(ctx) {
+    submitSignup = (ctx) => {
         fetch(`${BASE_URL}/signup`, {
             method: 'POST',
             headers: {
@@ -123,9 +106,9 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
         });
     }
 
-    submitLogin(ctx, userData) {        
+    submitLogin = (ctx, userData) => {        
         const username = ctx.state.username;
-        const pass = ctx.state.pass;
+        const pass = ctx.state.password;
         fetch(`${BASE_URL}/login`, {
             method: 'POST',
             headers: {
@@ -134,7 +117,7 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
             },
             body: JSON.stringify({
                 username: username,
-                pass: ctx.state.password,
+                pass: pass,
             })
         }).then(function(response) {
             const output = response.json();
@@ -158,8 +141,7 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
      * Renders form that includes sign up and login panels
      * @return  {React.Component}   Rendered component
      */
-    createSignupLoginForm() {
-
+    createSignupLoginForm = () => {
         return (
             <div className={classes.Background}>
                 <div className={classes.SignupLoginForm}>
@@ -177,7 +159,7 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
      * Renders sign-up/login form component
      * @return  {React.Component}   Rendered component
      */
-    render() {
+    render = () => {
         return (
             this.createSignupLoginForm()
         );

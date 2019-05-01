@@ -46,7 +46,7 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
         };
     }
 
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         this.setState({
             messageBody: e.target.value
         })
@@ -61,7 +61,7 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
             messageBody: '',
             loading: true
         });
-        console.log("*********",userData);
+
         fetch(`${BASE_URL}/sendmessage`, {
             method: 'POST',
             headers: {
@@ -88,9 +88,8 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
         });
     }
 
-    render() {
+    render = () => {
         const { messageBody, messages, title, loading } = this.state;
-        const _this = this;
 
         if (loading) {
             return (
@@ -151,7 +150,7 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
         );
     }
 
-    retrieveChatData() {
+    retrieveChatData = () => {
         const { chatID } = this.props.match.params;
 
         fetch(`${BASE_URL}/getChat?chatId=${chatID}`, {
@@ -178,7 +177,7 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
         });
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.retrieveChatData();
     }
 }

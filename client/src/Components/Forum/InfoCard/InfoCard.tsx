@@ -13,9 +13,7 @@ export type InfoCardDataType = {
     chatTitle: string;
     chatDescription: string;
     authorName: string;
-    // date: string;
     postedDate: string;
-    // numberOfReplies: number;
     numberOfViews: number;
 };
 

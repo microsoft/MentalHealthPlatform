@@ -25,7 +25,7 @@ export class TopicsSearchBar extends React.Component<ITopicsSearchBarProps, {}> 
      * Renders topics search bar component
      * @return  {React.Component}   Rendered component
      */
-    render() {
+    render = () => {
         return (
             <div className={classes.TopicsSearchBar}>
                 <input 

@@ -32,7 +32,7 @@ export class Icon extends React.Component<IIconProps, {}> {
         return <img className={classes.Icon} src={icon} />
     }
 
-    render() {
+    render = () => {
         const { type, count, text } = this.props;
 
         return (

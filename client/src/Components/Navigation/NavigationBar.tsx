@@ -14,7 +14,7 @@ export class NavigationBar extends React.Component {
         };
     }
 
-    renderNameField(userContext: IUserContext) {
+    renderNameField = (userContext: IUserContext) => {
         if (userContext.user && userContext.user.username != "") {
             return (
                 <div style={{display: "flex", flexDirection: "row"}}>
@@ -39,7 +39,7 @@ export class NavigationBar extends React.Component {
      * Renders navigation bar
      * @return  {React.Component}   Rendered component
      */
-    createNavigationBar() {
+    createNavigationBar = () => {
         return (
             <div className={classes.NavigationBar}>
                 <div className={classes.NavigationBarLeft}>                
@@ -58,7 +58,7 @@ export class NavigationBar extends React.Component {
      * Renders navigation bar component
      * @return  {React.Component}   Rendered component
      */
-    render() {
+    render = () => {
         return this.createNavigationBar();
     }
 }

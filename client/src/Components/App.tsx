@@ -27,7 +27,6 @@ export const UserDataContext = React.createContext<IUserContext>({
 });
 
 export class UserProvider extends React.Component<{}, {user: any, updateUser: any}> {
-
     private updateUser = (userData: UserDataType) => {
         console.log("updating user");
         this.setState(() => ({
@@ -40,7 +39,6 @@ export class UserProvider extends React.Component<{}, {user: any, updateUser: an
 
     constructor(props) {
         super(props);
-        
         this.state = {
             user: {
                 userId: -1,
@@ -50,7 +48,7 @@ export class UserProvider extends React.Component<{}, {user: any, updateUser: an
         };
     }
 
-    render() {
+    render = () => {
         return (
             <UserDataContext.Provider value={this.state}>
                 <BrowserRouter>

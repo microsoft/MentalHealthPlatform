@@ -16,17 +16,17 @@ export interface IMessageProps {
 
 export class Message extends React.Component<IMessageProps, {}> {
     
-    renderProfilePicture() {
+    renderProfilePicture = () => {
         var profilePictureStyle = {
             marginLeft: this.props.isCurrentUser ? "10px" : "0px"
         };
 
         return (
-            <img src={profilePicturePlaceholder} className={classes.ProfilePicture} style={profilePictureStyle}/>
+            <img src={profilePicturePlaceholder} className={classes.ProfilePicture} style={profilePictureStyle} />
         );
     };
 
-    renderMessageBody() {
+    renderMessageBody = () => {
         var messageBodyContainerStyle = {
             backgroundColor: this.props.isCurrentUser ? "#F2F2F2" : "#E2F0D9",
             borderColor: this.props.isCurrentUser ? "#BFBFBF" : "#92D050",
@@ -41,7 +41,7 @@ export class Message extends React.Component<IMessageProps, {}> {
         );
     };
 
-    renderNameDate() {
+    renderNameDate = () => {
         return (
             <div className={classes.NameDateContainer}>
                 <div className={classes.Name}>
@@ -54,7 +54,7 @@ export class Message extends React.Component<IMessageProps, {}> {
         );
     };
 
-    renderMessage(){
+    renderMessage = () => {
         return this.props.isCurrentUser ?
             <div className={classes.Container}>
                 {this.props.isCurrentUser}
@@ -69,7 +69,7 @@ export class Message extends React.Component<IMessageProps, {}> {
             </div>;
     }
 
-    render() {
+    render = () => {
         return this.renderMessage();
     }
 }

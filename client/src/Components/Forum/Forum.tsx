@@ -21,7 +21,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         };
     }
 
-    getTopicId() {
+    getTopicId = () => {
         let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");        
         
         let list = subUrl.split("/");
@@ -32,7 +32,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         return topicId;
     };
 
-    obtainForumId(url) {
+    obtainForumId = (url) => {
         var regex = /^\/topics\/topic[\d]+[\/]?$/;
         var anythingButNumRegex = /[\/a-zA-Z]+/g;
 
@@ -62,7 +62,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
      * Renders forum component
      * @return  {React.Component}   Rendered component
      */
-    render() {
+    render = () => {
         const forumData = this.state.forumData; //this.generateForumData();//
         console.log("***$$$", this.state.forumData);
         if (!forumData) {
@@ -97,7 +97,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         );
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         const _this = this;
         fetch(`${BASE_URL}/getchatpreviews?topicId=${this.getTopicId()}`, {
             method: 'GET',
@@ -119,7 +119,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount = () => {
         this.isUnmounted = true;
     }
 }

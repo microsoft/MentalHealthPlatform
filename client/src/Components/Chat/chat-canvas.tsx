@@ -91,6 +91,6 @@ const ChatCanvas = (props: IChatCanvasProps) => {
             </div>
         </div >
     );
-}
+};
 
 export default ChatCanvas;

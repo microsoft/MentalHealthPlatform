@@ -16,7 +16,7 @@ export type MessageType = {
     messageBody: string;
 }
 
-export interface IChatProviderState {
+interface IChatProviderState {
     title: string;
     messages: MessageType[];
     messageBody: string;
@@ -25,7 +25,7 @@ export interface IChatProviderState {
     loading: boolean;
 }
 
-export interface IChatProviderProps {
+interface IChatProviderProps {
     UserContext: React.Context<IUserContext>;
     match: match<{chatID: string}>;
     chatID?: string;

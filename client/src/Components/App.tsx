@@ -9,7 +9,7 @@ import { Topics } from './Topics/Topics';
 import { SignupLogin } from './SignupLogin/SignupLogin';
 import { Forum } from './Forum/Forum';
 import { Chat } from './Chat/chat-provider';   
-import { CreateChat } from './Chat/CreateChat'; 
+import { CreateChat } from './Chat/create-chat-provider';
 
 export type UserDataType = {
     userId: number;

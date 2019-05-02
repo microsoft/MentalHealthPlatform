@@ -6,15 +6,20 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { BASE_URL } from '../../util/Helpers';
 import * as classes from "./CreateChat.css";
-import { UserDataContext } from '../App';
+import { IUserContext, UserDataContext } from '../App';
+
+interface ICreateChatProps {
+    UserContext: React.Context<IUserContext>;
+    chatID?: string;
+}
 
 export interface ICreateChatState {
     inputTitle: string;
     inputDescription: string;
 }
 
-class CreateChatClass extends React.Component<RouteComponentProps<{chatID: string}>, ICreateChatState> {
-    constructor(props) {
+class CreateChatClass extends React.Component<RouteComponentProps<{}> & ICreateChatProps, ICreateChatState> {
+    constructor(props: RouteComponentProps<{}> & ICreateChatProps) {
         super(props);
         this.state = {
             inputTitle: "",
@@ -33,13 +38,13 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         return topicId;
     }
 
-    handleInputTitleChange = (e) => {
+    handleInputTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             inputTitle: e.target.value
         })
     }
 
-    handleInputDescriptionChange = (e) => {
+    handleInputDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({
             inputDescription: e.target.value
         })
@@ -49,7 +54,7 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         return this.state.inputTitle.length > 0 && this.state.inputDescription.length > 0;
     }
 
-    handleSubmit = (e, title, description, ctx) => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>, title: string, description: string) => {
         e.preventDefault();
         fetch(`${BASE_URL}/createchat`, {
             method: 'POST',
@@ -68,8 +73,8 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
         }).then(function(data) {
             console.log("chat created", data);
             if (data && data.chatId !== undefined) {
-                const path = `${ctx.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
-                ctx.props.history.push(path);
+                const path = `${this.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
+                this.props.history.push(path);
             }
         });
     }
@@ -86,7 +91,7 @@ class CreateChatClass extends React.Component<RouteComponentProps<{chatID: strin
                     <div className={classes.Pane}>
                         <UserDataContext.Consumer>
                             {(userData) => (
-                                <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription, _this)} className={classes.Container}>
+                                <form onSubmit={(e) => this.handleSubmit(e, _this.state.inputTitle, _this.state.inputDescription)} className={classes.Container}>
                                     <h1 className={classes.FormTitle}>Create New Chat</h1>
                                     <input
                                         className={classes.InputTitle}

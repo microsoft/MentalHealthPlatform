@@ -2,31 +2,30 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import * as classes from "./SignupLogin.css";
 
 import { BASE_URL } from '../../util/Helpers';
-import { UserDataContext } from '../App';
+import { IUserContext, UserDataContext } from '../App';
 
 export interface ISignupLoginState {
     username: string;
     password: string;
     signUpFirstName: string;
-    signUpUserName: string;
+    signUpUsername: string;
     signUpPass1: string;
     signUpPass2: string;
 }
 
-class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
-
-    constructor(props) {
+class SignupLoginClass extends React.Component<RouteComponentProps<{}>, ISignupLoginState> {
+    constructor(props: RouteComponentProps<{}>) {
         super(props);
         this.state = {
             username: "",
             password: "",
             signUpFirstName: "",
-            signUpUserName: "",
+            signUpUsername: "",
             signUpPass1: "",
             signUpPass2: ""
         };
@@ -46,10 +45,10 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
                 <h1 className={classes.FormTitle}>Sign Up</h1>
                 <div>
                     <input type="text" value={this.state.signUpFirstName} placeholder="First Name" name="name" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpFirstName: e.target.value})} />
-                    <input type="text" value={this.state.signUpUserName} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpUserName: e.target.value})} />
+                    <input type="text" value={this.state.signUpUsername} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpUsername: e.target.value})} />
                     <input type="password" value={this.state.signUpPass1} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass1: e.target.value})} />
                     <input type="password" value={this.state.signUpPass2} placeholder="Confirm Password" name="confirm-password" required className={classes.FormTextInput} onChange={(e) => this.setState({signUpPass2: e.target.value})} />
-                    <button type="submit" onClick={(e) => this.submitSignup(_this)} className={signupButtonClasses} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
+                    <button type="submit" onClick={(e) => this.submitSignup()} className={signupButtonClasses} disabled={!this.isSignUpButtonEnabled()}>Sign Up</button>
                 </div>
             </div>
         )
@@ -57,7 +56,7 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
 
     isSignUpButtonEnabled = () => {
         return this.state.signUpFirstName.length > 0
-        && this.state.signUpUserName.length > 0
+        && this.state.signUpUsername.length > 0
         && this.state.signUpPass1.length > 0
         && this.state.signUpPass1 == this.state.signUpPass2;
     }
@@ -71,10 +70,9 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
      * Renders login panel in overall sign-up/login form
      * @return  {React.Component}   Rendered component
      */
-    createLoginPane = (userData) => {
+    createLoginPane = (userData: IUserContext) => {
         let loginButtonClasses = classes.FormButton + " ";
         loginButtonClasses += this.isLoginButtonEnabled() ? classes.Green : classes.Gray;
-        const _this = this;
 
         return (
             <div className={classes.Pane} style={{borderLeft: "1px solid #CCCCCC"}}>
@@ -82,13 +80,13 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
                 <div>
                     <input type="text" value={this.state.username} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => this.setState({username: e.target.value})} />
                     <input type="password" value={this.state.password} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => this.setState({password: e.target.value})} />
-                    <button onClick={(e) => this.submitLogin(_this, userData)} disabled={!this.isLoginButtonEnabled} type="submit" className={loginButtonClasses}>Login</button>
+                    <button onClick={(e) => this.submitLogin(userData)} disabled={!this.isLoginButtonEnabled} type="submit" className={loginButtonClasses}>Login</button>
                 </div>
             </div>
         )
     }
 
-    submitSignup = (ctx) => {
+    submitSignup = () => {
         fetch(`${BASE_URL}/signup`, {
             method: 'POST',
             headers: {
@@ -96,9 +94,9 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: ctx.state.signUpUsername,
-                pass: ctx.state.signUpPass1,
-                displayName: ctx.state.signUpFirstName
+                username: this.state.signUpUsername,
+                pass: this.state.signUpPass1,
+                displayName: this.state.signUpFirstName
             })
         }).then(function(response) {
             return response.json();
@@ -106,9 +104,9 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
         });
     }
 
-    submitLogin = (ctx, userData) => {        
-        const username = ctx.state.username;
-        const pass = ctx.state.password;
+    submitLogin = (userData: IUserContext) => {        
+        const username = this.state.username;
+        const pass = this.state.password;
         fetch(`${BASE_URL}/login`, {
             method: 'POST',
             headers: {
@@ -129,7 +127,7 @@ class SignupLoginClass extends React.Component<{}, ISignupLoginState> {
                     userId: 0,
                     username: username
                 });
-                ctx.props.history.push("/");
+                this.props.history.push("/");
             }
             else {
                 console.log("Log in failure")

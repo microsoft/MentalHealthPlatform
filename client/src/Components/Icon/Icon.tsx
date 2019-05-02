@@ -14,7 +14,7 @@ export interface IIconProps {
 }
 
 export class Icon extends React.Component<IIconProps, {}> {
-    renderIcon = (type) => {
+    renderIcon = (type: string) => {
         let icon;
 
         switch (type) {

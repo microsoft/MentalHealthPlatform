@@ -9,10 +9,25 @@ import * as classes from "./Forum.css";
 
 import { BASE_URL } from '../../util/Helpers';
 
-class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: number, forumData: any}> {
+interface IDiscussionPreviewData {
+    chatId: number;
+    chatTitle: string;
+    chatDescription: string;
+    authorName: string;
+    date: string;
+    numberOfReplies: number;
+    numberOfViews: number;
+}
+
+interface IForumState {
+    forumId: string;
+    forumData: IDiscussionPreviewData[];
+}
+
+class ForumClass extends React.Component<RouteComponentProps<{}>, IForumState> {
     isUnmounted = false;
 
-    constructor(props) {
+    constructor(props: RouteComponentProps<{}>) {
         super(props);
         const forumId = this.obtainForumId(this.props.match.url);
         this.state = {
@@ -32,7 +47,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
         return topicId;
     };
 
-    obtainForumId = (url) => {
+    obtainForumId = (url: string) => {
         var regex = /^\/topics\/topic[\d]+[\/]?$/;
         var anythingButNumRegex = /[\/a-zA-Z]+/g;
 
@@ -45,7 +60,7 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
     }
 
     generateForumData = (): InfoCardDataType[] => {
-        return Array.apply(null, Array(8)).map((_, index) => (
+        return Array.apply(null, Array(8)).map((_: undefined, index: number) => (
             {
                 chatId: index,
                 chatTitle: `Chat${index}`,
@@ -63,14 +78,13 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, {forumId: numb
      * @return  {React.Component}   Rendered component
      */
     render = () => {
-        const forumData = this.state.forumData; //this.generateForumData();//
-        console.log("***$$$", this.state.forumData);
+        const forumData = this.state.forumData;
         if (!forumData) {
             return null;
         }
         
         const infoCards = forumData.map(discussionPreview => {
-            return <InfoCard key={discussionPreview.chatId} data={discussionPreview} match={this.props.match} />
+            return <InfoCard key={discussionPreview.chatId.toString()} data={discussionPreview} match={this.props.match} />
         });
 
         let baseUrl = this.props.match.url;

@@ -11,13 +11,11 @@ export interface ITopicsSearchBarProps {
 
 export class TopicsSearchBar extends React.Component<ITopicsSearchBarProps, {}> {
     
-    constructor(props) {
+    constructor(props: ITopicsSearchBarProps) {
         super(props);
-        this.state = {
-        };
     }
 
-    searchStringChangedHandler = (event) => {
+    searchStringChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.props.inputChanged(event.target.value);
     }
 

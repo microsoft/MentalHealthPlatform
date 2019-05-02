@@ -8,12 +8,6 @@ import * as classes from "./NavigationBar.css";
 import { IUserContext, UserDataContext } from '../App';
 
 export class NavigationBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
     renderNameField = (userContext: IUserContext) => {
         if (userContext.user && userContext.user.username != "") {
             return (

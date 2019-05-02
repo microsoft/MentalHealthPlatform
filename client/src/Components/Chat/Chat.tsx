@@ -30,11 +30,13 @@ export interface IChatState {
 }
 
 export interface IChatProps {
+    UserContext: React.Context<IUserContext>;
     match: match<{chatID: string}>;
+    chatID?: string;
 }
 
-class ChatClass extends React.Component<IChatProps, IChatState> {
-    constructor(props) {
+class ChatClass extends React.Component<RouteComponentProps<{}> & IChatProps, IChatState> {
+    constructor(props: RouteComponentProps<{}> & IChatProps) {
         super(props);
         this.state = {
             title: '',
@@ -46,13 +48,13 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
         };
     }
 
-    handleInputChange = (e) => {
+    handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             messageBody: e.target.value
         })
     }
 
-    handleSubmit = (e, userData: IUserContext) => {
+    handleSubmit = (e: React.MouseEvent<HTMLButtonElement>, userData: IUserContext) => {
         const { messageBody } = this.state;
         const { chatID } = this.props.match.params;
 
@@ -143,7 +145,6 @@ class ChatClass extends React.Component<IChatProps, IChatState> {
                                     </button>)
                                 }
                             </UserDataContext.Consumer>
-                        
                     </form>
                 </div>
             </div >

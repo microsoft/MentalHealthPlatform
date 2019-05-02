@@ -9,18 +9,18 @@ import * as classes from "./InfoCard.css";
 import profilePicturePlaceholder from './../../../images/profile_picture_placeholder.png';
 
 export type InfoCardDataType = {
-    chatId: string;
+    chatId: number;
     chatTitle: string;
     chatDescription: string;
     authorName: string;
-    postedDate: string;
     numberOfViews: number;
+    postedDate?: string;
 };
 
 export interface IInfocardProps {
     key: string;
-    data: InfoCardDataType;
-    match: match<{}>
+    match: match<{}>;
+    data?: InfoCardDataType;
 }
 
 export const InfoCard: React.SFC<IInfocardProps> = (props: IInfocardProps): JSX.Element => {

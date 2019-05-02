@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-export function formatDate(timestamp) {
+export function formatDate(timestamp: string) {
     const d = new Date(timestamp);
 
     const month = d.getMonth();

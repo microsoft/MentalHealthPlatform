@@ -14,17 +14,25 @@ import topic_image_1 from "../../images/topic_image_1.jpg";
 import topic_image_2 from "../../images/topic_image_2.jpg";
 import topic_image_3 from "../../images/topic_image_3.jpg";
 
+interface ITopicData {
+    topicTitle: string;
+}
+
+export interface ITopicsProps {
+    match: match<{}>;
+}
+
 export interface ITopicsState {
     match: match<{}>;
     searchString: string;
-    topicsData: any;
+    topicsData: ITopicData[];
 }
 
-class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState> {
-    constructor(props) {
+class TopicsClass extends React.Component<RouteComponentProps<ITopicsProps>, ITopicsState> {
+    constructor(props: RouteComponentProps<ITopicsProps>) {
         super(props);
         this.state = {
-            match: this.props.match,
+            match: props.match,
             searchString: undefined,
             topicsData: undefined
         };
@@ -45,7 +53,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
         return topics;
     }
 
-    updateSearchString = (searchString) => {
+    updateSearchString = (searchString: string) => {
         this.setState({searchString});
     }
     /**
@@ -58,7 +66,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
             baseUrl = baseUrl.substring(0, baseUrl.length - 1);
         }
 
-        let topicsData = this.state.topicsData; //this.generateData();
+        let topicsData = this.state.topicsData;
         if(topicsData !== undefined && this.state.searchString !== undefined){
             topicsData = topicsData.filter((data) => {
                 return data.topicTitle && data.topicTitle.toLowerCase().indexOf(this.state.searchString.toLowerCase()) !== -1;
@@ -67,7 +75,7 @@ class TopicsClass extends React.Component<RouteComponentProps<{}>, ITopicsState>
         const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3];
         let tiles;
         if(topicsData != undefined){
-            tiles = topicsData.map((topic, index) => {
+            tiles = topicsData.map((topic, index: number) => {
                 return (
                     <Link key={index} to={`${baseUrl}/topic${index}`}>
                         <Topic name={"jksbvjv"} title={topic.topicTitle} image={images[index%images.length]} />

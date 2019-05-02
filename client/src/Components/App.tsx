@@ -5,8 +5,8 @@ import * as React from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import { NavigationBar } from './Navigation/NavigationBar';
-import {Topics} from './Topics/Topics';
-import {SignupLogin} from './SignupLogin/SignupLogin';
+import { Topics } from './Topics/Topics';
+import { SignupLogin } from './SignupLogin/SignupLogin';
 import { Forum } from './Forum/Forum';
 import { Chat } from './Chat/Chat';   
 import { CreateChat } from './Chat/CreateChat'; 
@@ -23,12 +23,11 @@ export interface IUserContext {
 
 export const UserDataContext = React.createContext<IUserContext>({
     user: undefined,
-    updateUser: (data: UserDataType) => {}
+    updateUser: undefined
 });
 
-export class UserProvider extends React.Component<{}, {user: any, updateUser: any}> {
+export class UserProvider extends React.Component<{}, IUserContext> {
     private updateUser = (userData: UserDataType) => {
-        console.log("updating user");
         this.setState(() => ({
             user: {
                 userId: userData.userId,
@@ -37,7 +36,7 @@ export class UserProvider extends React.Component<{}, {user: any, updateUser: an
         }));
     };
 
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             user: {

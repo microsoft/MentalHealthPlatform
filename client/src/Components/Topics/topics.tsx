@@ -4,10 +4,10 @@
 import * as React from 'react';
 import { Link, withRouter, RouteComponentProps, match } from 'react-router-dom';
 
-import {TopicsSearchBar} from './TopicsSearchBar';
+import TopicsSearchBar from '../TopicsSearchBar/topics-search-bar';
 import * as classes from "./Topics.css";
 import { BASE_URL } from '../../util/Helpers';
-import {Topic} from "./Topic/Topic";
+import Topic from "../Topic/topic";
 
 import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";

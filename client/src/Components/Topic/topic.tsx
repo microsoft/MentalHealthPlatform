@@ -2,7 +2,8 @@
 // Licensed under the MIT license.
 
 import * as React from "react";
-import * as classes from "./Topic.css";
+
+import * as classes from "./topic.css";
 
 export interface ITopicProps {
     name: string;
@@ -10,7 +11,7 @@ export interface ITopicProps {
     title: string;
 }
 
-export const Topic: React.SFC<ITopicProps> = (props): JSX.Element => {
+const Topic = (props: ITopicProps): JSX.Element => {
     return (
         <div className={classes.TopicTile}>
             <p 
@@ -22,3 +23,5 @@ export const Topic: React.SFC<ITopicProps> = (props): JSX.Element => {
         </div>
     )
 };
+
+export default Topic;

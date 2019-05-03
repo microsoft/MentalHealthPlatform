@@ -5,7 +5,7 @@ import * as React from "react";
 import { Link, match } from 'react-router-dom';
 
 import * as classes from "./forum.css";
-import { InfoCard } from "./InfoCard/InfoCard";
+import InfoCard from "../InfoCard/info-card";
 
 interface IDiscussionPreviewData {
     chatId: number;

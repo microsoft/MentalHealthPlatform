@@ -3,12 +3,12 @@
 
 import * as React from "react";
 import { Link, match } from 'react-router-dom';
-import {Icon} from '../../Icon/Icon';
-import * as classes from "./InfoCard.css";
+import Icon from '../Icon/Icon';
+import * as classes from "./info-card.css";
 
-import profilePicturePlaceholder from './../../../images/profile_picture_placeholder.png';
+import profilePicturePlaceholder from './../../images/profile_picture_placeholder.png';
 
-export type InfoCardDataType = {
+type InfoCardDataType = {
     chatId: number;
     chatTitle: string;
     chatDescription: string;
@@ -17,13 +17,13 @@ export type InfoCardDataType = {
     postedDate?: string;
 };
 
-export interface IInfocardProps {
+interface IInfocardProps {
     key: string;
     match: match<{}>;
     data?: InfoCardDataType;
 }
 
-export const InfoCard: React.SFC<IInfocardProps> = (props: IInfocardProps): JSX.Element => {
+const InfoCard = (props: IInfocardProps): JSX.Element => {
     const { data, match } = props;
     let baseUrl = match.url;
     if (baseUrl.charAt(baseUrl.length - 1) == '/') {
@@ -52,3 +52,5 @@ export const InfoCard: React.SFC<IInfocardProps> = (props: IInfocardProps): JSX.
         </Link>
     )
 }
+
+export default InfoCard;

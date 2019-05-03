@@ -8,9 +8,9 @@ import * as classes from "./chat.css";
 import { MessageType } from "./chat-provider";
 
 import { IUserContext, UserDataContext } from '../App';
-import { Message } from '../Messages/Message';
+import Message from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
-import { Icon } from '../Icon/Icon';
+import Icon from '../Icon/Icon';
 
 interface IChatCanvasProps {
     title: string;

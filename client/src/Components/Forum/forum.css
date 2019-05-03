@@ -1,9 +1,9 @@
 .Container {
-        padding: 25px;
-        justify-content: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url("../../images/topic_image_0.jpg");
+    padding: 25px;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1)), url("../../images/topic_image_0.jpg");
 };
 
 .BodyStyle {

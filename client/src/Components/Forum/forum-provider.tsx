@@ -2,10 +2,9 @@
 // Licensed under the MIT license.
 
 import * as React from "react";
-import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
-import { InfoCard, InfoCardDataType } from "./InfoCard/InfoCard";
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import * as classes from "./Forum.css";
+import ForumCanvas from "./forum-canvas";
 
 import { BASE_URL } from '../../util/Helpers';
 
@@ -19,12 +18,12 @@ interface IDiscussionPreviewData {
     numberOfViews: number;
 }
 
-interface IForumState {
+interface IForumProviderState {
     forumId: string;
     forumData: IDiscussionPreviewData[];
 }
 
-class ForumClass extends React.Component<RouteComponentProps<{}>, IForumState> {
+class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForumProviderState> {
     isUnmounted = false;
 
     constructor(props: RouteComponentProps<{}>) {
@@ -59,55 +58,17 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, IForumState> {
         return null;
     }
 
-    generateForumData = (): InfoCardDataType[] => {
-        return Array.apply(null, Array(8)).map((_: undefined, index: number) => (
-            {
-                chatId: index,
-                chatTitle: `Chat${index}`,
-                chatDescription: `Description: ${index}`,
-                authorName: "Amardeep",
-                date: "08/31/2018",
-                numberOfReplies: 30,
-                numberOfViews: 20
-            }
-        ));
-    }
-
     /**
      * Renders forum component
      * @return  {React.Component}   Rendered component
      */
     render = () => {
-        const forumData = this.state.forumData;
-        if (!forumData) {
-            return null;
-        }
-        
-        const infoCards = forumData.map(discussionPreview => {
-            return <InfoCard key={discussionPreview.chatId.toString()} data={discussionPreview} match={this.props.match} />
-        });
-
-        let baseUrl = this.props.match.url;
-        if (baseUrl.charAt(baseUrl.length - 1) == '/') {
-            baseUrl = baseUrl.substring(0, baseUrl.length - 1);
-        }
-
         return (
-            <div className={classes.Container}>
-                <div className={classes.BodyStyle}>
-                    <h1 className={classes.ForumTitle}>{"Topic " + this.state.forumId}</h1>
-                    <div style={{justifyContent: "flex-end", display: "flex"}}>
-                        <Link to={`${baseUrl}/createChat`}>
-                            <button
-                                className={classes.CreateChatButton}>
-                                <span style={{fontWeight: "bold"}}>+</span>
-                                <span style={{}}> Create new discussion</span>
-                            </button>
-                        </Link>
-                    </div>
-                    {infoCards}
-                </div>
-            </div>
+            <ForumCanvas
+                forumId={this.state.forumId}
+                forumData={this.state.forumData}
+                match={this.props.match}
+            />
         );
     }
 
@@ -138,4 +99,4 @@ class ForumClass extends React.Component<RouteComponentProps<{}>, IForumState> {
     }
 }
 
-export const Forum = withRouter(ForumClass);
+export const Forum = withRouter(ForumProviderClass);

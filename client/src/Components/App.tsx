@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import NavigationBar from './Navigation/navigation-bar';
 import { Topics } from './Topics/Topics';
-import { SignupLogin } from './SignupLogin/signup-login';
+import { SignupLogin } from './SignupLogin/signup-login-provider';
 import { Forum } from './Forum/forum-provider';
 import { Chat } from './Chat/chat-provider';   
 import { CreateChat } from './CreateChat/create-chat-provider';

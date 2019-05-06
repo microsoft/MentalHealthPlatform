@@ -5,8 +5,7 @@ import * as React from "react";
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import ForumCanvas from "./forum-canvas";
-
-import { BASE_URL } from '../../util/Helpers';
+import { baseGetRequest } from "./../../util/base-requests";
 
 interface IDiscussionPreviewData {
     chatId: number;
@@ -73,25 +72,26 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
     }
 
     componentDidMount = () => {
-        const _this = this;
-        fetch(`${BASE_URL}/getchatpreviews?topicId=${this.getTopicId()}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then(function(response) {
-            const output = response.json();
-            return output;
-        }).then(function(data) {
-            if(!_this.isUnmounted){
-                _this.setState({
-                    forumData: data
-                });
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
+        this.retrieveChatPreviews();
+    }
+
+    retrieveChatPreviewsResponseHandler = (data: any) => {
+        if (!this.isUnmounted) {
+            this.setState({
+                forumData: data
+            });
+        }
+    }
+
+    retrieveChatPreviewsErrorHandler = (error: any) => {
+        console.error(error);
+    }
+
+    retrieveChatPreviews = () => {
+        const params = [
+            {["topicId"]: this.getTopicId()}
+        ];
+        baseGetRequest("getchatpreviews", params, this.retrieveChatPreviewsResponseHandler, this.retrieveChatPreviewsErrorHandler);
     }
 
     componentWillUnmount = () => {

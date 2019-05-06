@@ -5,8 +5,9 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import SignUpLoginCanvas from "./signup-login-canvas";
-import { BASE_URL } from '../../util/Helpers';
 import { IUserContext } from '../App';
+import { BASE_URL } from "./../../util/Helpers";
+import { basePostRequest } from "./../../util/base-requests";
 
 export interface ISignupLoginProviderState {
     username: string;
@@ -42,24 +43,24 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
         && this.state.password.length > 0;
     }
 
-    submitSignup = () => {
-        fetch(`${BASE_URL}/signup`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: this.state.signUpUsername,
-                pass: this.state.signUpPass1,
-                displayName: this.state.signUpFirstName
-            })
-        }).then(function(response) {
-            return response.json();
-        }).then(function(myJson) {
-        });
+    submitSignupResponseHandler = (data: any) => {
+        console.log(data);
     }
 
+    submitSignupErrorHandler = (error: any) => {
+        console.log(error);
+    }
+
+    submitSignup = () => {
+        const postRequestData = {
+            username: this.state.signUpUsername,
+            pass: this.state.signUpPass1,
+            displayName: this.state.signUpFirstName
+        };
+        basePostRequest("signup", postRequestData, this.submitSignupResponseHandler, this.submitSignupErrorHandler);
+    }
+
+    // TODO: Refactor submit login request
     submitLogin = (userData: IUserContext) => {        
         const username = this.state.username;
         const pass = this.state.password;

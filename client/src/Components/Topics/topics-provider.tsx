@@ -5,7 +5,7 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps, match } from 'react-router-dom';
 
 import TopicsCanvas from "./topics-canvas";
-import { BASE_URL } from '../../util/Helpers';
+import { baseGetRequest } from "./../../util/base-requests";
 
 export interface ITopicData {
     topicTitle: string;
@@ -50,21 +50,21 @@ class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsPro
     }
 
     componentDidMount = () => {
-        const _this = this;
-        fetch(`${BASE_URL}/gettopics`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then(function(response) {
-            const output = response.json();
-            return output;
-        }).then(function(data) {
-            _this.setState({
-                topicsData: data
-            });
+        this.retrieveTopics();
+    }
+
+    retrieveTopicsResponseHandler = (data: any) => {
+        this.setState({
+            topicsData: data
         });
+    }
+
+    retrieveTopicsErrorHandler = (error: any) => {
+        console.log(error);
+    }
+
+    retrieveTopics = () => {
+        baseGetRequest("gettopics", [], this.retrieveTopicsResponseHandler, this.retrieveTopicsErrorHandler);
     }
 }
 

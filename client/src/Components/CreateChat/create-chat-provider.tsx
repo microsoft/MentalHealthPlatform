@@ -7,7 +7,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import CreateChatCanvas from "./create-chat-canvas";
 
 import { IUserContext } from '../App';
-import { BASE_URL } from '../../util/Helpers';
+import { baseGetRequest, basePostRequest } from "./../../util/base-requests";
 
 interface ICreateChatProviderProps {
     UserContext: React.Context<IUserContext>;
@@ -55,31 +55,6 @@ class CreateChatProviderClass extends React.Component<RouteComponentProps<{}> & 
         return this.state.inputTitle.length > 0 && this.state.inputDescription.length > 0;
     }
 
-    handleSubmit = (e: React.FormEvent<HTMLFormElement>, title: string, description: string) => {
-        e.preventDefault();
-        fetch(`${BASE_URL}/createchat`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chatTitle: title,
-                chatDescription: description,
-                topicId: this.getTopicId(),
-                username: "Aldo"
-            })
-        }).then(function(response) {
-            return response.json();
-        }).then(function(data) {
-            console.log("chat created", data);
-            if (data && data.chatId !== undefined) {
-                const path = `${this.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
-                this.props.history.push(path);
-            }
-        });
-    }
-
     render = () => {
         return (
             <CreateChatCanvas
@@ -91,6 +66,30 @@ class CreateChatProviderClass extends React.Component<RouteComponentProps<{}> & 
                 handleInputDescriptionChange={this.handleInputDescriptionChange}
             />
         );
+    }
+    
+    handleSubmitResponseHandler = (data: any) => {
+        console.log("chat created", data);
+        if (data && data.chatId !== undefined) {
+            const path = `${this.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
+            this.props.history.push(path);
+        }
+    }
+
+    handleSubmitErrorHandler = (error: any) => {
+        console.log(error);
+    }
+
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>, title: string, description: string) => {
+        e.preventDefault();
+
+        const postRequestData = {
+            chatTitle: title,
+            chatDescription: description,
+            topicId: this.getTopicId(),
+            username: "Aldo"
+        };
+        basePostRequest("createchat", postRequestData, this.handleSubmitResponseHandler, this.handleSubmitErrorHandler);
     }
 }
 

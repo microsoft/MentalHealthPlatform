@@ -6,8 +6,8 @@ import { withRouter, RouteComponentProps, match } from 'react-router-dom';
 
 import ChatCanvas from "./chat-canvas"
 
-import { BASE_URL } from '../../util/Helpers';
 import { IUserContext } from '../App';
+import { baseGetRequest, basePostRequest } from "./../../util/base-requests";
 
 export type MessageType = {
     id: string;
@@ -50,42 +50,6 @@ class ChatProviderClass extends React.Component<RouteComponentProps<{}> & IChatP
         })
     }
 
-    handleSubmit = (e: React.MouseEvent<HTMLButtonElement>, userData: IUserContext) => {
-        const { messageBody } = this.state;
-        const { chatID } = this.props.match.params;
-
-        e.preventDefault();
-        this.setState({
-            messageBody: '',
-            loading: true
-        });
-
-        fetch(`${BASE_URL}/sendmessage`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chatId: chatID,
-                messageBody: messageBody,
-                username: userData.user.userId !== -1 ? userData.user.username : "Anonymous"
-            })
-        }).then((response) => {
-            const output = response.json();
-            return output;
-        }).then((data) => {
-            if (data && data.statusMessage == 1) {
-                console.log("Message sent");
-            }
-            else {
-                alert("Message failed to send")
-            }
-
-            this.retrieveChatData();
-        });
-    }
-
     render = () => {
         return (
             <ChatCanvas
@@ -101,31 +65,63 @@ class ChatProviderClass extends React.Component<RouteComponentProps<{}> & IChatP
         );
     }
 
-    retrieveChatData = () => {
+    handleSubmitResponseHandler = (data: any) => {
+        if (data && data.statusMessage == 1) {
+            console.log("Message sent");
+        }
+        else {
+            alert("Message failed to send")
+        }
+
+        this.retrieveChatData();
+    }
+
+    handleSubmitErrorHandler = (error: any) => {
+        console.log(error);
+    }
+
+    handleSubmit = (e: React.MouseEvent<HTMLButtonElement>, userData: IUserContext) => {
+        const { messageBody } = this.state;
         const { chatID } = this.props.match.params;
 
-        fetch(`${BASE_URL}/getChat?chatId=${chatID}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((response) => {
-            const output = response.json();
-            return output;
-        }).then((data) => {
-            const messages = data.messages !== undefined ? data.messages : [];
-            this.setState({
-                title: data.chatTitle,
-                messages,
-                loading: false,
-                replies: data.numberOfReplies,
-                views: data.numberOfViews
-            })
-            console.log("Data", data);
-        }).catch((error) => {
-            console.log(error);
+        e.preventDefault();
+        this.setState({
+            messageBody: '',
+            loading: true
         });
+
+        const postRequestData = {
+            chatId: chatID,
+            messageBody: messageBody,
+            username: userData.user.userId !== -1 ? userData.user.username : "Anonymous"
+        };
+
+        basePostRequest("sendmessage", postRequestData, this.handleSubmitResponseHandler, this.handleSubmitErrorHandler);
+    }
+
+    retrieveChatDataResponseHandler = (data: any) => {
+        const messages = data.messages !== undefined ? data.messages : [];
+        this.setState({
+            title: data.chatTitle,
+            messages,
+            loading: false,
+            replies: data.numberOfReplies,
+            views: data.numberOfViews
+        })
+        console.log("Data", data);
+    }
+
+    retrieveChatDataErrorHandler = (error: any) => {
+        console.log(error);
+    }
+
+    retrieveChatData = () => {
+        const { chatID } = this.props.match.params;
+        const params = [
+            { ["chatId"]: chatID}
+        ];
+        
+        baseGetRequest("getChat", params, this.retrieveChatDataResponseHandler, this.retrieveChatDataErrorHandler);
     }
 
     componentDidMount = () => {

@@ -32,10 +32,46 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
         <div className={classes.Pane}>
             <h1 className={classes.FormTitle}>Sign Up</h1>
             <div>
-                <input type="text" value={signUpFirstName} placeholder="First Name" name="name" required className={classes.FormTextInput} onChange={(e) => updateInputValues("signUpFirstName", e.target.value)} />
-                <input type="text" value={signUpUsername} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => updateInputValues("signUpUsername", e.target.value)} />
-                <input type="password" value={signUpPass1} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => updateInputValues("signUpPass1", e.target.value)} />
-                <input type="password" value={signUpPass2} placeholder="Confirm Password" name="confirm-password" required className={classes.FormTextInput} onChange={(e) => updateInputValues("signUpPass2", e.target.value)} />
+                <input
+                    type="text"
+                    value={signUpFirstName}
+                    placeholder="First Name"
+                    name="name"
+                    required
+                    className={classes.FormTextInput}
+                    onChange={(e) => updateInputValues("signUpFirstName", e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                />
+                <input
+                    type="text"
+                    value={signUpUsername}
+                    placeholder="Username"
+                    name="username"
+                    required
+                    className={classes.FormTextInput}
+                    onChange={(e) => updateInputValues("signUpUsername", e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                />
+                <input
+                    type="password"
+                    value={signUpPass1}
+                    placeholder="Password"
+                    name="password"
+                    required
+                    className={classes.FormTextInput}
+                    onChange={(e) => updateInputValues("signUpPass1", e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                />
+                <input
+                    type="password" 
+                    value={signUpPass2}
+                    placeholder="Confirm Password"
+                    name="confirm-password"
+                    required
+                    className={classes.FormTextInput}
+                    onChange={(e) => updateInputValues("signUpPass2", e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                />
                 <button type="submit" onClick={(e) => submitSignup()} className={signupButtonClasses} disabled={!isSignUpButtonEnabled()}>Sign Up</button>
             </div>
         </div>
@@ -54,8 +90,26 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
         <div className={classes.Pane} style={{borderLeft: "1px solid #CCCCCC"}}>
             <h1 className={classes.FormTitle}>Log In</h1>
             <div>
-                <input type="text" value={username} placeholder="Username" name="username" required className={classes.FormTextInput} onChange={(e) => updateInputValues("username", e.target.value)} />
-                <input type="password" value={password} placeholder="Password" name="password" required className={classes.FormTextInput} onChange={(e) => updateInputValues("password", e.target.value)} />
+                <input
+                    type="text"
+                    value={username}
+                    placeholder="Username"
+                    name="username"
+                    required
+                    className={classes.FormTextInput}
+                    onChange={(e) => updateInputValues("username", e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitLogin(userData) }}
+                />
+                <input
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    name="password"
+                    required
+                    className={classes.FormTextInput}
+                    onChange={(e) => updateInputValues("password", e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitLogin(userData) }}
+                />
                 <button onClick={(e) => submitLogin(userData)} disabled={!isLoginButtonEnabled()} type="submit" className={loginButtonClasses}>Login</button>
             </div>
         </div>

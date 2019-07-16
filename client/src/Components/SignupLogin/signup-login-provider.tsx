@@ -16,6 +16,8 @@ export interface ISignupLoginProviderState {
     signUpUsername: string;
     signUpPass1: string;
     signUpPass2: string;
+    signupErrorMessage: string;
+    loginErrorMessage: string;
 }
 
 class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, ISignupLoginProviderState> {
@@ -27,7 +29,9 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
             signUpFirstName: "",
             signUpUsername: "",
             signUpPass1: "",
-            signUpPass2: ""
+            signUpPass2: "",
+            signupErrorMessage: "",
+            loginErrorMessage: ""
         };
     }
 
@@ -44,10 +48,12 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
     }
 
     submitSignupResponseHandler = (data: any) => {
+        this.setState({ loginErrorMessage: "" });
         console.log(data);
     }
 
     submitSignupErrorHandler = (error: any) => {
+        this.setState({ loginErrorMessage: "Sign up failure" });
         console.log(error);
     }
 
@@ -64,6 +70,7 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
     submitLogin = (userData: IUserContext) => {        
         const username = this.state.username;
         const pass = this.state.password;
+        const _this = this;
         fetch(`${BASE_URL}/login`, {
             method: 'POST',
             headers: {
@@ -84,9 +91,11 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
                     userId: 0,
                     username: username
                 });
-                this.props.history.push("/");
+                _this.props.history.push("/");
+                _this.setState({ loginErrorMessage: "" });
             }
             else {
+                _this.setState({ loginErrorMessage: "Log in failure" });
                 console.log("Log in failure")
             }
         });
@@ -135,6 +144,8 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
                 submitSignup={this.submitSignup}
                 submitLogin={this.submitLogin}
                 updateInputValues={this.updateInputValues}
+                signupErrorMessage={this.state.signupErrorMessage}
+                loginErrorMessage={this.state.loginErrorMessage}
             />
         );
     }

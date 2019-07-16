@@ -11,3 +11,4 @@ export const AgreementCheckbox: string;
 export const ForgotPasswordContainer: string;
 export const Green: string;
 export const Gray: string;
+export const InvalidMessage: string;

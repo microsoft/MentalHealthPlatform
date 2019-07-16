@@ -90,3 +90,9 @@
 .Gray {
     background-color: #CCCCCC;
 }
+
+.InvalidMessage {
+    color: #FF0000;
+    font-family: Calibri;
+    min-height: 30px;
+}

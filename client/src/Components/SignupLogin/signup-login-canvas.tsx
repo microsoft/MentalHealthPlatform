@@ -18,13 +18,15 @@ export interface ISignupLoginCanvasProps {
     submitSignup: () => void;
     submitLogin: (userData: IUserContext) => void;
     updateInputValues: (inputType: string, value: string) => void;
+    signupErrorMessage: string;
+    loginErrorMessage: string;
 }
 
 /**
  * Renders sign up panel in overall sign-up/login form
  * @return  {React.Component}   Rendered component
  */
-const createSignupPane = (signUpFirstName: string, signUpUsername: string, signUpPass1: string, signUpPass2: string, isSignUpButtonEnabled: () => boolean, submitSignup: () => void, updateInputValues: (inputType: string, value: string) => void) => {
+const createSignupPane = (signUpFirstName: string, signUpUsername: string, signUpPass1: string, signUpPass2: string, isSignUpButtonEnabled: () => boolean, submitSignup: () => void, updateInputValues: (inputType: string, value: string) => void, signupErrorMessage: string) => {
     let signupButtonClasses = classes.FormButton + " ";
     signupButtonClasses += isSignUpButtonEnabled() ? classes.Green : classes.Gray;
 
@@ -40,7 +42,7 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
                     required
                     className={classes.FormTextInput}
                     onChange={(e) => updateInputValues("signUpFirstName", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
                 />
                 <input
                     type="text"
@@ -50,7 +52,7 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
                     required
                     className={classes.FormTextInput}
                     onChange={(e) => updateInputValues("signUpUsername", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
                 />
                 <input
                     type="password"
@@ -60,7 +62,7 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
                     required
                     className={classes.FormTextInput}
                     onChange={(e) => updateInputValues("signUpPass1", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
                 />
                 <input
                     type="password" 
@@ -70,8 +72,9 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
                     required
                     className={classes.FormTextInput}
                     onChange={(e) => updateInputValues("signUpPass2", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitSignup() }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
                 />
+                <div className={classes.InvalidMessage}>{signupErrorMessage}</div>
                 <button type="submit" onClick={(e) => submitSignup()} className={signupButtonClasses} disabled={!isSignUpButtonEnabled()}>Sign Up</button>
             </div>
         </div>
@@ -82,7 +85,7 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
  * Renders login panel in overall sign-up/login form
  * @return  {React.Component}   Rendered component
  */
-const createLoginPane = (userData: IUserContext, username: string, password: string, isLoginButtonEnabled: () => boolean, submitLogin: (userData: IUserContext) => void, updateInputValues: (inputType: string, value: string) => void) => {
+const createLoginPane = (userData: IUserContext, username: string, password: string, isLoginButtonEnabled: () => boolean, submitLogin: (userData: IUserContext) => void, updateInputValues: (inputType: string, value: string) => void, loginErrorMessage: string) => {
     let loginButtonClasses = classes.FormButton + " ";
     loginButtonClasses += isLoginButtonEnabled() ? classes.Green : classes.Gray;
 
@@ -98,7 +101,7 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
                     required
                     className={classes.FormTextInput}
                     onChange={(e) => updateInputValues("username", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitLogin(userData) }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && isLoginButtonEnabled()) submitLogin(userData) }}
                 />
                 <input
                     type="password"
@@ -108,8 +111,9 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
                     required
                     className={classes.FormTextInput}
                     onChange={(e) => updateInputValues("password", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitLogin(userData) }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && isLoginButtonEnabled()) submitLogin(userData) }}
                 />
+                <div className={classes.InvalidMessage}>{loginErrorMessage}</div>
                 <button onClick={(e) => submitLogin(userData)} disabled={!isLoginButtonEnabled()} type="submit" className={loginButtonClasses}>Login</button>
             </div>
         </div>
@@ -132,15 +136,17 @@ const SignUpLoginCanvas = (props: ISignupLoginCanvasProps) => {
         isLoginButtonEnabled,
         submitSignup,
         submitLogin,
-        updateInputValues
+        updateInputValues,
+        signupErrorMessage,
+        loginErrorMessage
     } = props;
     
     return (
         <div className={classes.Background}>
             <div className={classes.SignupLoginForm}>
-                {createSignupPane(signUpFirstName, signUpUsername, signUpPass1, signUpPass2, isSignUpButtonEnabled, submitSignup, updateInputValues)}
+                {createSignupPane(signUpFirstName, signUpUsername, signUpPass1, signUpPass2, isSignUpButtonEnabled, submitSignup, updateInputValues, signupErrorMessage)}
                 <UserDataContext.Consumer>
-                    {(userData) => {return createLoginPane(userData, username, password, isLoginButtonEnabled, submitLogin, updateInputValues)}}
+                    {(userData) => {return createLoginPane(userData, username, password, isLoginButtonEnabled, submitLogin, updateInputValues, loginErrorMessage)}}
                 </UserDataContext.Consumer>
             </div>
         </div>

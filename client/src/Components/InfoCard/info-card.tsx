@@ -9,11 +9,12 @@ import * as classes from "./info-card.css";
 import profilePicturePlaceholder from './../../images/profile_picture_placeholder.png';
 
 type InfoCardDataType = {
-    chatId: number;
+    _id: string;
     chatTitle: string;
     chatDescription: string;
     authorName: string;
     numberOfViews: number;
+    numberOfReplies: number;
     postedDate?: string;
 };
 
@@ -31,7 +32,7 @@ const InfoCard = (props: IInfocardProps): JSX.Element => {
     }
 
     return (
-        <Link to={`${baseUrl}/chat/${data.chatId}`} style={{textDecoration: "none", color: "#333333"}}>
+        <Link to={`${baseUrl}/chat/${data._id}`} style={{textDecoration: "none", color: "#333333"}}>
             <div className={classes.InfoCardContainer}>
                 <div style={{flex: 1}}>
                     <div className={classes.Title}>{data.chatTitle}</div>
@@ -45,7 +46,7 @@ const InfoCard = (props: IInfocardProps): JSX.Element => {
                     </div>
                 </div>
                 <div style={{marginLeft: 32}}>
-                    {/* <Icon type='replies' count={data.numberOfReplies || 0} text='replies' /> */}
+                    <Icon type='replies' count={data.numberOfReplies || 0} text='replies' />
                     <Icon type='views' count={data.numberOfViews || 0} text='views' />
                 </div>
             </div>

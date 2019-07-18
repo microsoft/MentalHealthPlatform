@@ -8,7 +8,7 @@ import * as classes from "./forum.css";
 import InfoCard from "../InfoCard/info-card";
 
 interface IDiscussionPreviewData {
-    chatId: number;
+    _id: string;
     chatTitle: string;
     chatDescription: string;
     authorName: string;
@@ -31,7 +31,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
     }
     
     const infoCards = forumData.map(discussionPreview => {
-        return <InfoCard key={discussionPreview.chatId.toString()} data={discussionPreview} match={match} />
+        return <InfoCard key={discussionPreview._id} data={discussionPreview} match={match} />
     });
 
     let baseUrl = match.url;
@@ -58,4 +58,6 @@ const ForumCanvas = (props: IForumCanvasProps) => {
     );
 }
 
-export default ForumCanvas;
+export {
+    IDiscussionPreviewData, ForumCanvas
+};

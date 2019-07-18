@@ -112,8 +112,8 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 			{ $lookup:
 				  {
 					from: 'Users',
-					localField: 'username',
-					foreignField: 'username',
+					localField: 'user_id',
+					foreignField: '_id',
 					as: 'userdetail'
 				  }
 			},
@@ -125,31 +125,34 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 			},
 			{ $match:
 				{
-					TopicID : obj.topicId
+					topic_id : obj.topicId
 				}
 			}
 			]
 		).toArray(function(chatErr, chatRes) {
 			if (chatErr) throw chatErr;
-
-			if (chatRes.length <= 0) {
+			console.log(chatRes);
+			if (chatRes.length === 0) {
 				postRes.json([]);
 				return;
 			}
 
 			var chatPreviewsObj = [];
-			for (var i = 0; i < chatRes.length; i ++) {
+			for (var i = 0; i < chatRes.length; i++) {
 				var chatPreviewObj = {};
+				console.log(chatRes[i]);
 				chatPreviewObj.avatarId = chatRes[i].userdetail.avatarID;
-				chatPreviewObj.chatId = chatRes[i].chatID
+				chatPreviewObj.chatId = chatRes[i].topic_id
 				chatPreviewObj.chatTitle = chatRes[i].chatTitle
 				chatPreviewObj.chatDescription = chatRes[i].desc
-				chatPreviewObj.authorName = chatRes[i].username
+				chatPreviewObj.authorName = chatRes[i].userdetail.displayname
 				chatPreviewObj.numberOfViews = chatRes[i].numberofviews
+				chatPreviewObj.numberOfReplies = chatRes[i].numberofreplies
 				chatPreviewObj.postedDate = chatRes[i].PostedDate
+				chatPreviewObj._id = chatRes[i]._id;
 				chatPreviewsObj.push(chatPreviewObj)
+				console.log(chatPreviewObj);
 			}
-			// console.log(chatPreviewsObj);
 			postRes.json(chatPreviewsObj);
 			db.close();
 		});
@@ -168,8 +171,8 @@ app.get('/getchat', function(postReq, postRes){
 			{ $lookup:
 				  {
 					from: 'Users',
-					localField: 'username',
-					foreignField: 'username',
+					localField: 'user_id',
+					foreignField: '_id',
 					as: 'userdetail'
 				  }
 			},
@@ -179,27 +182,28 @@ app.get('/getchat', function(postReq, postRes){
 					preserveNullAndEmptyArrays: false
 				}
 			},
-			{ $lookup:
-				{
-				  from: 'Chats',
-				  localField: 'chatID',
-				  foreignField: 'chatID',
-				  as: 'chatdetail'
-				}
-			},
-			{ $unwind:
-				{
-					path: "$chatdetail",
-					preserveNullAndEmptyArrays: false
-				}
-			},
+			// { $lookup:
+			// 	{
+			// 	  from: 'Chats',
+			// 	  localField: 'chat_id',
+			// 	  foreignField: '_id',
+			// 	  as: 'chatdetail'
+			// 	}
+			// },
+			// { $unwind:
+			// 	{
+			// 		path: "$chatdetail",
+			// 		preserveNullAndEmptyArrays: false
+			// 	}
+			// },
 			{ $match:
 				{
-					chatID : obj.chatId
+					chat_id : obj.chatId
 				}
 			}
 		]
 		).toArray(function(chatErr, chatRes) {
+			console.log(chatRes);
 			if (chatErr) throw chatErr;
 			console.log("chat res length:", chatRes.length);
 			if (chatRes.length <= 0) {
@@ -217,16 +221,16 @@ app.get('/getchat', function(postReq, postRes){
 
 			var chatObj = {};
 			// Get chat data
-			chatObj.chatTitle = chatRes[0].chatdetail.chatTitle;
+			// chatObj.chatTitle = chatRes[0].chatdetail.chatTitle;
 			chatObj.numberOfReplies = chatRes.length;
-			chatObj.numberOfViews = chatRes[0].chatdetail.numberofviews;
+			// chatObj.numberOfViews = chatRes[0].chatdetail.numberofviews;
 			chatObj.messages = [];
 
 			// Create messages
 			for (var i = 0; i < chatRes.length; i++) {
 				var msgObj = {};
 				msgObj.avatarId = chatRes[i].userdetail.avatarID;
-				msgObj.authorName = chatRes[i].userdetail.username;
+				msgObj.authorName = chatRes[i].userdetail.displayname;
 				msgObj.date = chatRes[i].date;
 				msgObj.messageBody = chatRes[i].messageBody;
 
@@ -248,13 +252,15 @@ app.post('/sendmessage', function(postReq, postRes){
 		var dbo = db.db(dbName);
 
 		var msgObj = {};
-		msgObj.chatID = obj.chatId;
+		msgObj.chat_id = obj.chatId;
 		msgObj.messageBody = obj.messageBody;
-		msgObj.username = obj.username;
+		msgObj.user_id = obj.username;
 		msgObj.date = date.format(new Date(), "MM/DD/YYYY");
-
+		msgObj.userdetail = {};
+		console.log(msgObj);
 		// Insert message into db
 		dbo.collection(msgColl).insertOne(msgObj, function(insertErr, insertRes) {
+			console.log(insertErr);
 			if (insertErr) throw insertErr;
 			db.close();
 			postRes.json({statusMessage : 1});
@@ -271,13 +277,16 @@ app.post('/createchat', function(postReq, postRes){
 		if (connerErr) throw connerErr;
 		var dbo = db.db(dbName);
 
+		console.log(obj);
+
 		// Create new chat
 		var chatObj = {};
 		chatObj.chatTitle = obj.chatTitle;
-		chatObj.username = obj.username;
-		chatObj.TopicID = obj.topicId.toString();
-		chatObj.PostedDate = date.format(new Date(), "MM/DD/YYYY");
+		chatObj.user_id = obj.username;
+		chatObj.topic_id = obj.topicId.toString();
+		chatObj.PostedDate = (new Date()).toString();
 		chatObj.numberofviews = 0;
+		chatObj.numberofreplies = 0;
 		chatObj.desc = obj.chatDescription;
 
 		// Create new message
@@ -287,22 +296,19 @@ app.post('/createchat', function(postReq, postRes){
 		msgObj.date = date.format(new Date(), "MM/DD/YYYY");
 
 		dbo.collection(chatsColl).countDocuments().then((count) => {
-
-			chatObj.chatID = count.toString();
-
+			
 			// Insert chat to db
 			dbo.collection(chatsColl).insertOne(chatObj, function(insertChatErr, insertChatRes) {
 				if (insertChatErr) throw insertChatErr;
-				msgObj.chatID = count.toString();
-				console.log("Chat inserted");
+				// console.log("Chat inserted");
 				// Insert message to db
 				dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
 					db.close();
 					postRes.json({
 						statusMessage : 1,
-						chatId: count
+						chatId: insertChatRes.ops[0]._id
 					});
-					console.log("chat responding with messages");
+					// console.log("chat responding with messages");
 				});
 			});
 		});

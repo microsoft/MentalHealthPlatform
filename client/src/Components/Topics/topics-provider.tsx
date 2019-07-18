@@ -9,6 +9,8 @@ import { baseGetRequest } from "./../../util/base-requests";
 
 export interface ITopicData {
     topicTitle: string;
+    image: string;
+    _id: string;
 }
 
 interface ITopicsProviderProps {

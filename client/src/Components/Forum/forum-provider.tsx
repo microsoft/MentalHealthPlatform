@@ -4,18 +4,8 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import ForumCanvas from "./forum-canvas";
+import { ForumCanvas, IDiscussionPreviewData } from "./forum-canvas";
 import { baseGetRequest } from "./../../util/base-requests";
-
-interface IDiscussionPreviewData {
-    chatId: number;
-    chatTitle: string;
-    chatDescription: string;
-    authorName: string;
-    date: string;
-    numberOfReplies: number;
-    numberOfViews: number;
-}
 
 interface IForumProviderState {
     forumId: string;
@@ -23,8 +13,6 @@ interface IForumProviderState {
 }
 
 class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForumProviderState> {
-    isUnmounted = false;
-
     constructor(props: RouteComponentProps<{}>) {
         super(props);
         const forumId = this.obtainForumId(this.props.match.url);
@@ -76,11 +64,9 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
     }
 
     retrieveChatPreviewsResponseHandler = (data: any) => {
-        if (!this.isUnmounted) {
-            this.setState({
-                forumData: data
-            });
-        }
+        this.setState({
+            forumData: data
+        });
     }
 
     retrieveChatPreviewsErrorHandler = (error: any) => {
@@ -92,10 +78,6 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
             {["topicId"]: this.getTopicId()}
         ];
         baseGetRequest("getchatpreviews", params, this.retrieveChatPreviewsResponseHandler, this.retrieveChatPreviewsErrorHandler);
-    }
-
-    componentWillUnmount = () => {
-        this.isUnmounted = true;
     }
 }
 

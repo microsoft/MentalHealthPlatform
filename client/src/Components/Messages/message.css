@@ -1,7 +1,15 @@
-.Container {
+.MessageContainerCurrentUser {
     display: flex; 
     flex-direction: row;
     margin-bottom: 20px;
+    justify-content: flex-start;
+}
+
+.MessageContainerOtherUser {
+    display: flex; 
+    flex-direction: row;
+    margin-bottom: 20px;
+    justify-content: flex-end;
 }
 
 .ProfilePicture {

@@ -1,4 +1,5 @@
-export const Container: string;
+export const MessageContainerCurrentUser: string;
+export const MessageContainerOtherUser: string
 export const ProfilePictureNameContainer: string;
 export const ProfilePicture: string;
 export const Name: string;

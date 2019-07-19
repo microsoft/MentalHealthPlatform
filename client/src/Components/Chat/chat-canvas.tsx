@@ -51,11 +51,17 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         {messages.map((message) => {
                             return (
                                 <div key={message.id}>
-                                    <Message
-                                        name={message.authorName}
-                                        date={message.date}
-                                        messageBody={message.messageBody}
-                                        isCurrentUser={message.authorName == "sarahedo"} />
+                                    <UserDataContext.Consumer>
+                                    {
+                                        (userData) => (
+                                        <Message
+                                            name={message.authorName}
+                                            date={message.date}
+                                            messageBody={message.messageBody}
+                                            isCurrentUser={message.authorName === userData.user.username} />
+                                        )
+                                    }
+                                    </UserDataContext.Consumer>
                                 </div>
                             );
                         })}

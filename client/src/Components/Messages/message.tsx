@@ -56,7 +56,7 @@ const Message = (props: IMessageProps) => {
     const { isCurrentUser, messageBody, name, date } = props;
 
     return isCurrentUser ?
-        <div className={classes.Container}>
+        <div className={classes.MessageContainerOtherUser}>
             {isCurrentUser}
             <div className={classes.MessageDateContainerCurrentUser}>
                 {renderMessageBody(isCurrentUser, messageBody)}
@@ -67,7 +67,7 @@ const Message = (props: IMessageProps) => {
                 {renderName(name)}
             </div>
         </div> :
-        <div className={classes.Container}>
+        <div className={classes.MessageContainerCurrentUser}>
             <div className={classes.ProfilePictureNameContainer}>
                 {renderProfilePicture(isCurrentUser)}
                 {renderName(name)}

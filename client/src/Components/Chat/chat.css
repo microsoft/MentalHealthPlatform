@@ -10,7 +10,8 @@
     background-color: #FFFFFF;
     width: 90%;
     margin: 0 auto;
-    border: 1px solid #CCCCCC
+    border: 1px solid #CCCCCC;
+    max-width: 1200px;
 }
 
 .ChatHeader {

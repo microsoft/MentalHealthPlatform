@@ -35,14 +35,6 @@ const ChatCanvas = (props: IChatCanvasProps) => {
         handleSubmit
     } = props;
 
-    if (loading) {
-        return (
-            <div className={classes.Loading}>
-                <ReactLoading type="bubbles" color="#333" height={'5%'} width={'5%'} />
-            </div>
-        )
-    }
-
     return (
         <div className={classes.Container}>
             <div className={classes.ChatContainer}>
@@ -67,6 +59,11 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                                 </div>
                             );
                         })}
+                        {loading ? (
+                            <div className={classes.Loading}>
+                                <ReactLoading type="bubbles" color="#333" height={'5%'} width={'5%'} />
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <form className={classes.Form}>

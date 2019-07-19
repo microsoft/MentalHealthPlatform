@@ -8,8 +8,11 @@ export function formatDate(timestamp: string) {
     const day = d.getDate() >= 10 ? d.getDate().toString() : "0" + d.getDate().toString();
     const year = d.getFullYear().toString().substr(-2);
 
-    const hour = d.getHours() % 12;
-    const minute = d.getMinutes();
+    const hour = (d.getHours() === 0 ? 12 : d.getHours() % 12).toString();
+    let minute = (d.getMinutes()).toString();
+    if (minute === "0") {
+        minute = "00";
+    }
 
     const amPm = d.getHours() >= 12 ? "pm" : "am"
 

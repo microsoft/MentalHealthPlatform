@@ -1,6 +1,7 @@
 .Container {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .Icon {
@@ -11,4 +12,12 @@
 .Text {
     font-weight: "bold";
     margin-left: 8px;
+}
+
+.IconInfo {
+    width: 65px;
+    min-width: 65px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }

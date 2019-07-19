@@ -26,10 +26,7 @@ const renderProfilePicture = (isCurrentUser: boolean) => {
 
 const renderMessageBody = (isCurrentUser: boolean, messageBody: string) => {
     var messageBodyContainerStyle = {
-        backgroundColor: isCurrentUser ? "#F2F2F2" : "#E2F0D9",
-        borderColor: isCurrentUser ? "#BFBFBF" : "#92D050",
-        marginLeft: isCurrentUser ? "auto" : 20,
-        marginRight: isCurrentUser ? 20 : "auto"
+        backgroundColor: isCurrentUser ? "#F2F2F2" : "#E2F0D9"
     };
 
     return (
@@ -39,15 +36,18 @@ const renderMessageBody = (isCurrentUser: boolean, messageBody: string) => {
     );
 };
 
-const renderNameDate = (name: string, date: string) => {
+const renderName = (name: string) => {
     return (
-        <div className={classes.NameDateContainer}>
-            <div className={classes.Name}>
-                {name}
-            </div>
-            <div>
-                {formatDate(date)}
-            </div>
+        <div className={classes.Name}>
+            {name}
+        </div>
+    );
+};
+
+const renderDate = (date: string) => {
+    return (
+        <div className={classes.MessageDate}>
+            {formatDate(date)}
         </div>
     );
 };
@@ -58,14 +58,24 @@ const Message = (props: IMessageProps) => {
     return isCurrentUser ?
         <div className={classes.Container}>
             {isCurrentUser}
-            {renderMessageBody(isCurrentUser, messageBody)}
-            {renderProfilePicture(isCurrentUser)}
-            {renderNameDate(name, date)}
+            <div className={classes.MessageDateContainerCurrentUser}>
+                {renderMessageBody(isCurrentUser, messageBody)}
+                {renderDate(date)}
+            </div>
+            <div className={classes.ProfilePictureNameContainer}>
+                {renderProfilePicture(isCurrentUser)}
+                {renderName(name)}
+            </div>
         </div> :
         <div className={classes.Container}>
-            {renderProfilePicture(isCurrentUser)}
-            {renderNameDate(name, date)}
-            {renderMessageBody(isCurrentUser, messageBody)}
+            <div className={classes.ProfilePictureNameContainer}>
+                {renderProfilePicture(isCurrentUser)}
+                {renderName(name)}
+            </div>
+            <div className={classes.MessageDateContainerOtherUser}>
+                {renderMessageBody(isCurrentUser, messageBody)}
+                {renderDate(date)}
+            </div>
         </div>;
 }
 

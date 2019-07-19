@@ -35,8 +35,10 @@ const Icon = (props: IIconProps) => {
     return (
         <span className={classes.Container}>
             {renderIcon(type)}
-            {count && <span className={classes.Text}>{count}</span>}
-            {text && <span>{'\u00A0'}{text}</span>}
+            <div className={classes.IconInfo}>
+                {count != undefined && <span className={classes.Text}>{count}</span>}
+                {text && <span>{'\u00A0'}{text}</span>}
+            </div>
         </span>
     );
 }

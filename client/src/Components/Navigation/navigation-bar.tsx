@@ -32,7 +32,7 @@ const NavigationBar = () => {
     return (
         <div className={classes.NavigationBar}>
             <div className={classes.NavigationBarLeft}>                
-                <NavLink exact to="/" className={classes.NavigationBarTitleLink}>Mental Health Forum</NavLink>
+                <NavLink exact to="/" className={classes.NavigationBarTitleLink}>Mental Health Platform</NavLink>
             </div>
             <div className={classes.NavigationBarRight}>
                 <UserDataContext.Consumer>

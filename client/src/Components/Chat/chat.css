@@ -16,7 +16,7 @@
 .ChatHeader {
     display: flex;
     text-align: center;
-    box-shadow: 0px 3px 1px #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
     padding: 10px 20px 10px 20px
 }
 
@@ -46,10 +46,9 @@
 .InputField {
     background-color: #EEE;
     width: 100%;
-    border-radius: 5px;
     border: 1px;
-    padding: 10px;
-    font-size: 22px;
+    padding: 8px;
+    font-size: 18px;
     background-color: transparent
 }
 
@@ -58,6 +57,8 @@
     border-width: 0px;
     width: 50px;
     height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     border-radius: 25px;
     align-items: center;
     justify-content: center;
@@ -74,9 +75,8 @@
     flex-direction: row;
     background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
-    box-shadow: 3px 3px 1px #CCCCCC;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 30px;
+    padding: 8px;
     margin: 20px;
 }
 

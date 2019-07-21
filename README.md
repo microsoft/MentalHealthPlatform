@@ -47,7 +47,7 @@ To set up and run the application, please follow the procedures outlined in the 
 3.  Run the server:
 
     ```
-    node path.js
+    node server.js
     ```
     
     The console should then print a statement about the server running on a certain port:

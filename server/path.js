@@ -140,7 +140,6 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 			var chatPreviewsObj = [];
 			for (var i = 0; i < chatRes.length; i++) {
 				var chatPreviewObj = {};
-				console.log(chatRes[i]);
 				chatPreviewObj.avatarId = chatRes[i].userdetail.avatarID;
 				chatPreviewObj.chatId = chatRes[i].topic_id
 				chatPreviewObj.chatTitle = chatRes[i].chatTitle
@@ -151,7 +150,6 @@ app.get('/getchatpreviews', function(postReq, postRes) {
 				chatPreviewObj.postedDate = chatRes[i].PostedDate
 				chatPreviewObj._id = chatRes[i]._id;
 				chatPreviewsObj.push(chatPreviewObj)
-				console.log(chatPreviewObj);
 			}
 			postRes.json(chatPreviewsObj);
 			db.close();

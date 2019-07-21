@@ -48,7 +48,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
                         <button
                             className={classes.CreateChatButton}>
                             <span style={{fontWeight: "bold"}}>+</span>
-                            <span style={{}}> Create new discussion</span>
+                            <span style={{fontFamily: "Calibri"}}> Create new discussion</span>
                         </button>
                     </Link>
                 </div>

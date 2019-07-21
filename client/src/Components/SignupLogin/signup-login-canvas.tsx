@@ -90,7 +90,7 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
     loginButtonClasses += isLoginButtonEnabled() ? classes.Green : classes.Gray;
 
     return (
-        <div className={classes.Pane} style={{borderLeft: "1px solid #CCCCCC"}}>
+        <div className={classes.Pane} style={{ borderLeft: "1px solid #CCCCCC" }}>
             <h1 className={classes.FormTitle}>Log In</h1>
             <div>
                 <input

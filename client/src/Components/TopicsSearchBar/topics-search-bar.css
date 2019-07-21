@@ -1,10 +1,11 @@
 .TopicsSearchBar {
+    position: relative;
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 940px;
     margin: 32px auto 22px auto;
     background-color: #FFFFFF;
-    padding: 10px;
     border-radius: 8px;
     box-shadow: 3px 3px 3px #CCCCCC;
 }
@@ -14,11 +15,16 @@
     line-height: 30px;
     font-size: large;
     padding: 0px 10px;
-    border: 0px
+    border: 0px;
+    padding: 15px 55px 10px 10px;
+    border-radius: 8px;
 }
 
 .SubmitInput {   
-    background-color: #FFFFFF;
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    background-color: transparent;
     align-items: center;
     justify-content: center;
     border: 0px;

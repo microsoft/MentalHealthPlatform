@@ -18,7 +18,7 @@ const TopicsSearchBar = (props: ITopicsSearchBarProps) => {
         <div className={classes.TopicsSearchBar}>
             <input 
                 type="text"
-                placeholder="Search Topics" 
+                placeholder="Search for topics"
                 className={classes.TextInput}
                 onChange={(e) => searchStringChangedHandler(e, props.inputChanged)} />
             <button

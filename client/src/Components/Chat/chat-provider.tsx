@@ -80,7 +80,7 @@ class ChatProviderClass extends React.Component<RouteComponentProps<{}> & IChatP
         console.log(error);
     }
 
-    handleSubmit = (e: React.MouseEvent<HTMLButtonElement>, userData: IUserContext) => {
+    handleSubmit = (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>, userData: IUserContext) => {
         const { messageBody } = this.state;
         const { chatID } = this.props.match.params;
 

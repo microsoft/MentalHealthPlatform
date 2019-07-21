@@ -8,7 +8,7 @@ import * as classes from "./navigation-bar.css";
 import { IUserContext, UserDataContext } from '../App';
 
 const renderNameField = (userContext: IUserContext) => {
-    if (userContext.user && userContext.user.username != "") {
+    if (userContext.user && userContext.user.username && userContext.user.username.length > 0) {
         return (
             <div style={{display: "flex", flexDirection: "row"}}>
                 {`Welcome ${userContext.user.username}!`}

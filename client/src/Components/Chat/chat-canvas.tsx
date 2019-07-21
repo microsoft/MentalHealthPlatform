@@ -20,7 +20,7 @@ interface IChatCanvasProps {
     replies: number;
     loading: boolean;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleSubmit: (e: React.MouseEvent<HTMLButtonElement>, userData: IUserContext) => void;
+    handleSubmit: (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>, userData: IUserContext) => void;
 }
 
 const ChatCanvas = (props: IChatCanvasProps) => {
@@ -71,25 +71,32 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                             </div>
                         ) : null}
                     </div>
-                    <form className={classes.Form}>
-                        <input
-                            className={classes.InputField}
-                            type='text'
-                            value={messageBody}
-                            placeholder="Enter your messsage here"
-                            onChange={(e) => handleInputChange(e)} />
-                            <UserDataContext.Consumer>
-                                {
-                                    (userData) => (<button
-                                        onClick={(e) => handleSubmit(e, userData)}
+                    <div className={classes.Form}>
+                        <UserDataContext.Consumer>
+                        {
+                            (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ? (
+                                <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
+                                    <input
+                                        className={classes.InputField}
+                                        type='text'
+                                        value={messageBody}
+                                        placeholder="Enter your messsage here"
+                                        onKeyDown={(e) => { if (e.key === "Enter" && messageBody && messageBody.length > 0) handleSubmit(e, userData) }}
+                                        onChange={(e) => handleInputChange(e)} />
+                                    <button
+                                        onClick={(e) => messageBody && messageBody.length > 0 ? handleSubmit(e, userData) : null}
                                         className={classes.SubmitButton}
                                         type='submit'
-                                        disabled={messageBody === ''}>
+                                        disabled={!(messageBody && messageBody.length > 0)}>
                                         <input type="image" src={sendIcon} className={classes.SendIcon} />
-                                    </button>)
-                                }
-                            </UserDataContext.Consumer>
-                    </form>
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1 }}>Please log in to send messages in this chat</div>
+                            )
+                        }
+                        </UserDataContext.Consumer>
+                    </div>
                 </div>
             </div>
         </div >

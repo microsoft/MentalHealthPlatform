@@ -59,16 +59,17 @@
     border: 1px;
     padding: 8px;
     font-size: 18px;
-    background-color: transparent
+    background-color: transparent;
+    font-family: Calibri;
 }
 
 .SubmitButton {
     background-color: #339933;
     border-width: 0px;
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    min-height: 50px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
     border-radius: 25px;
     align-items: center;
     justify-content: center;
@@ -76,8 +77,8 @@
 }
 
 .SendIcon {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 
 .Form {
@@ -92,6 +93,6 @@
 
 .Loading {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 }

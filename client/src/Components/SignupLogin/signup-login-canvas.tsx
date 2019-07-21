@@ -6,6 +6,12 @@ import * as React from 'react';
 import * as classes from "./signup-login.css";
 import { IUserContext, UserDataContext } from '../App';
 
+interface IHandlers {
+    isEnabled: () => boolean,
+    submit: (userData?: IUserContext) => void;
+    updateInput: (inputType: string, value: string) => void;
+}
+
 export interface ISignupLoginCanvasProps {
     username: string;
     password: string;
@@ -22,6 +28,24 @@ export interface ISignupLoginCanvasProps {
     loginErrorMessage: string;
 }
 
+const renderInput = (type: string, value: string, placeholder: string, name: string, inputValueParam: string, handlers: IHandlers, userData?: IUserContext) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => handlers.updateInput(inputValueParam, e.target.value);
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => { if (e.key === "Enter" && handlers.isEnabled()) handlers.submit(userData) };
+    
+    return (
+        <input
+            type={type}
+            value={value}
+            placeholder={placeholder}
+            name={name}
+            required
+            className={classes.FormTextInput}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+        />
+    );
+};
+
 /**
  * Renders sign up panel in overall sign-up/login form
  * @return  {React.Component}   Rendered component
@@ -30,50 +54,20 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
     let signupButtonClasses = classes.FormButton + " ";
     signupButtonClasses += isSignUpButtonEnabled() ? classes.Green : classes.Gray;
 
+    const handlers = {
+        isEnabled: isSignUpButtonEnabled,
+        submit: submitSignup,
+        updateInput: updateInputValues
+    };
+
     return (
         <div className={classes.Pane}>
             <h1 className={classes.FormTitle}>Sign Up</h1>
             <div>
-                <input
-                    type="text"
-                    value={signUpFirstName}
-                    placeholder="First Name"
-                    name="name"
-                    required
-                    className={classes.FormTextInput}
-                    onChange={(e) => updateInputValues("signUpFirstName", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
-                />
-                <input
-                    type="text"
-                    value={signUpUsername}
-                    placeholder="Username"
-                    name="username"
-                    required
-                    className={classes.FormTextInput}
-                    onChange={(e) => updateInputValues("signUpUsername", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
-                />
-                <input
-                    type="password"
-                    value={signUpPass1}
-                    placeholder="Password"
-                    name="password"
-                    required
-                    className={classes.FormTextInput}
-                    onChange={(e) => updateInputValues("signUpPass1", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
-                />
-                <input
-                    type="password" 
-                    value={signUpPass2}
-                    placeholder="Confirm Password"
-                    name="confirm-password"
-                    required
-                    className={classes.FormTextInput}
-                    onChange={(e) => updateInputValues("signUpPass2", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter" && isSignUpButtonEnabled()) submitSignup() }}
-                />
+                {renderInput("text", signUpFirstName, "First Name", "name", "signUpFirstName", handlers)}
+                {renderInput("text", signUpUsername, "Username", "username", "signUpUsername", handlers)}
+                {renderInput("password", signUpPass1, "Password", "password", "signUpPass1", handlers)}
+                {renderInput("password", signUpPass2, "Confirm Password", "confirm-password", "signUpPass2", handlers)}
                 <div className={classes.InvalidMessage}>{signupErrorMessage}</div>
                 <button type="submit" onClick={(e) => submitSignup()} className={signupButtonClasses} disabled={!isSignUpButtonEnabled()}>Sign Up</button>
             </div>
@@ -89,30 +83,18 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
     let loginButtonClasses = classes.FormButton + " ";
     loginButtonClasses += isLoginButtonEnabled() ? classes.Green : classes.Gray;
 
+    const handlers = {
+        isEnabled: isLoginButtonEnabled,
+        submit: submitLogin,
+        updateInput: updateInputValues
+    };
+
     return (
         <div className={classes.Pane} style={{ borderLeft: "1px solid #CCCCCC" }}>
             <h1 className={classes.FormTitle}>Log In</h1>
             <div>
-                <input
-                    type="text"
-                    value={username}
-                    placeholder="Username"
-                    name="username"
-                    required
-                    className={classes.FormTextInput}
-                    onChange={(e) => updateInputValues("username", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter" && isLoginButtonEnabled()) submitLogin(userData) }}
-                />
-                <input
-                    type="password"
-                    value={password}
-                    placeholder="Password"
-                    name="password"
-                    required
-                    className={classes.FormTextInput}
-                    onChange={(e) => updateInputValues("password", e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter" && isLoginButtonEnabled()) submitLogin(userData) }}
-                />
+                {renderInput("text", username, "Username", "username", "username", handlers, userData)}
+                {renderInput("password", password, "Password", "password", "password", handlers, userData)}
                 <div className={classes.InvalidMessage}>{loginErrorMessage}</div>
                 <button onClick={(e) => submitLogin(userData)} disabled={!isLoginButtonEnabled()} type="submit" className={loginButtonClasses}>Login</button>
             </div>

@@ -1,3 +1,5 @@
+const ObjectId = require('mongodb').ObjectID;
+
 const {
 	TOPICS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE
 } = require('../constants.js');
@@ -120,12 +122,12 @@ const getChat = (mongoClient, postReq, postRes) => {
 				true
 			);
 
-			const messages = chatRes.map(chat => {
+			const messages = chatRes.map(message => {
 				return {
-					avatarId: chat.userdetail.avatarID,
-					authorName: chat.userdetail.displayname,
-					date: chat.date,
-					messageBody: chat.messageBody
+					avatarId: message.userdetail.avatarID,
+					authorName: message.userdetail.displayname,
+					date: message.date,
+					messageBody: message.messageBody
 				};
 			});
 
@@ -134,7 +136,21 @@ const getChat = (mongoClient, postReq, postRes) => {
 				messages: messages
 			};
 
-			postRes.json(chatObj);
+			dbo.collection(CHATS_COLLECTION).find({ _id: ObjectId(obj.chatId) }).toArray((chatErr, chatRes) => {
+				if (chatErr) throw chatErr;
+	
+				const title = chatRes && chatRes[0] && chatRes[0].chatTitle;
+				
+				if (title === undefined) {
+					console.log("Chat title cannot be found");
+				}
+				else {
+					chatObj.chatTitle = title;
+				}
+
+				postRes.json(chatObj);
+			});
+
 			db.close();
 		});
 	});

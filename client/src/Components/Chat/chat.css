@@ -36,6 +36,7 @@
 .Title {
     flex: 1;
     font-family: Calibri;
+    color: #333333;
 }
 
 .SideColumn {

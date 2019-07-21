@@ -92,7 +92,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                                     </button>
                                 </div>
                             ) : (
-                                <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1 }}>Please log in to send messages in this chat</div>
+                                <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>Please log in to send messages in this chat</div>
                             )
                         }
                         </UserDataContext.Consumer>

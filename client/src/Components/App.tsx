@@ -51,9 +51,9 @@ export class UserProvider extends React.Component<{}, IUserContext> {
         return (
             <UserDataContext.Provider value={this.state}>
                 <BrowserRouter>
-                    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+                    <div style={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#E8E8E8" }}>
                         <NavigationBar />
-                        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+                        <div style={{ display: "flex", flexDirection: "column", flex: 1, overflowY: "auto" }}>
                             <Route exact path="/" render={() => <Redirect to="/topics" />} />
                             <Route exact path="/topics" component={() => <Topics />} />
                             <Route exact path="/login" component={() => <SignupLogin />} />

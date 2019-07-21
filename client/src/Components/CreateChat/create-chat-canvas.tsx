@@ -29,12 +29,12 @@ const CreateChatCanvas = (props: ICreateChatCanvasProps) => {
     submitButtonClass += isSubmitButtonDisabled() ? classes.Green : classes.Gray;
     
     return (
-        <div className={classes.Background}>
+        <div className={classes.Container}>
             <div className={classes.FormContainer}>
                 <div className={classes.Pane}>
                     <UserDataContext.Consumer>
                         {(userData) => (
-                            <form onSubmit={(e) => handleSubmit(e, inputTitle, inputDescription)} className={classes.Container}>
+                            <form onSubmit={(e) => handleSubmit(e, inputTitle, inputDescription)} className={classes.FormWrapper}>
                                 <h1 className={classes.FormTitle}>Create New Chat</h1>
                                 <input
                                     className={classes.InputTitle}

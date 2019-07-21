@@ -142,7 +142,7 @@ const SignUpLoginCanvas = (props: ISignupLoginCanvasProps) => {
     } = props;
     
     return (
-        <div className={classes.Background}>
+        <div className={classes.Container}>
             <div className={classes.SignupLoginForm}>
                 {createSignupPane(signUpFirstName, signUpUsername, signUpPass1, signUpPass2, isSignUpButtonEnabled, submitSignup, updateInputValues, signupErrorMessage)}
                 <UserDataContext.Consumer>

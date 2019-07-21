@@ -1,5 +1,4 @@
 export const Container: string;
-export const Background: string;
 export const ForumTable: string;
 export const ForumTableCell: string;
 export const TopicLink: string;

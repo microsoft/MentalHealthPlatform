@@ -4,7 +4,8 @@
     height: 140px;
     float: left;
     margin: 2.5%;
-    border-radius: 10px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px #CCCCCC;
 }
 
 .Title {
@@ -25,7 +26,7 @@
     margin: 0;
     padding: 0;
     display: block;
-    border-radius: 10px;
+    border-radius: 8px;
     text-align: center;
     line-height: 140px;
     color: white;

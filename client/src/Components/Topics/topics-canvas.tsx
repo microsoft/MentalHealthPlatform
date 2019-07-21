@@ -56,7 +56,6 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-            <div className={classes.Background}></div>
             <div className={classes.Container}>
                 <TopicsSearchBar inputChanged={updateSearchString}/>
                 <div className={classes.TileContainer}>{tiles}</div>

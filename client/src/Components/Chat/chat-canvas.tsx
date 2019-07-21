@@ -38,7 +38,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
     return (
         <div className={classes.Container}>
             <div className={classes.ChatContainer}>
-                <div>
+                <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
                     <div className={classes.ChatHeader}>
                         <div className={classes.SideColumn}></div>
                         <h1 className={classes.Title}>{title}</h1>
@@ -71,26 +71,26 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                             </div>
                         ) : null}
                     </div>
+                    <form className={classes.Form}>
+                        <input
+                            className={classes.InputField}
+                            type='text'
+                            value={messageBody}
+                            placeholder="Enter your messsage here"
+                            onChange={(e) => handleInputChange(e)} />
+                            <UserDataContext.Consumer>
+                                {
+                                    (userData) => (<button
+                                        onClick={(e) => handleSubmit(e, userData)}
+                                        className={classes.SubmitButton}
+                                        type='submit'
+                                        disabled={messageBody === ''}>
+                                        <input type="image" src={sendIcon} className={classes.SendIcon} />
+                                    </button>)
+                                }
+                            </UserDataContext.Consumer>
+                    </form>
                 </div>
-                <form className={classes.Form}>
-                    <input
-                        className={classes.InputField}
-                        type='text'
-                        value={messageBody}
-                        placeholder="Enter your messsage here"
-                        onChange={(e) => handleInputChange(e)} />
-                        <UserDataContext.Consumer>
-                            {
-                                (userData) => (<button
-                                    onClick={(e) => handleSubmit(e, userData)}
-                                    className={classes.SubmitButton}
-                                    type='submit'
-                                    disabled={messageBody === ''}>
-                                    <input type="image" src={sendIcon} className={classes.SendIcon} />
-                                </button>)
-                            }
-                        </UserDataContext.Consumer>
-                </form>
             </div>
         </div >
     );

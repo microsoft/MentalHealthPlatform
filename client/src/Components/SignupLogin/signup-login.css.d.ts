@@ -1,4 +1,4 @@
-export const Background: string;
+export const Container: string;
 export const SignupLoginForm: string;
 export const FormTitle: string;
 export const SignupLoginFormText: string;

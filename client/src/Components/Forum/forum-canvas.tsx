@@ -41,8 +41,8 @@ const ForumCanvas = (props: IForumCanvasProps) => {
 
     return (
         <div className={classes.Container}>
-            <div className={classes.BodyStyle}>
-                <h1 className={classes.ForumTitle}>{"Topic " + forumId}</h1>
+            <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
+                <h1 className={classes.ForumTitle} style={{ textAlign: "center" }}>{"Topic " + forumId}</h1>
                 <div style={{justifyContent: "flex-end", display: "flex"}}>
                     <Link to={`${baseUrl}/createChat`}>
                         <button

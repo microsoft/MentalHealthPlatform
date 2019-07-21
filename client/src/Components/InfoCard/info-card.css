@@ -1,13 +1,12 @@
 .InfoCardContainer {
     display: flex;
     align-items: center;
-    margin: 20px 5px;
-    border: 1px solid #CCCCCC;
+    margin-top: 20px;
     padding: 20px;
-    box-shadow: 1px 1px 3px #333333;
+    box-shadow: 3px 3px 3px #CCCCCC;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .Title {

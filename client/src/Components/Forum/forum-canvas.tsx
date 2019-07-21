@@ -3,6 +3,7 @@
 
 import * as React from "react";
 import { Link, match } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 import * as classes from "./forum.css";
 import InfoCard from "../InfoCard/info-card";
@@ -23,10 +24,11 @@ interface IForumCanvasProps {
         chatPreviews: IDiscussionPreviewData[]
     };
     match: match<{}>;
+    loading: boolean;
 }
 
 const ForumCanvas = (props: IForumCanvasProps) => {
-    const { forumData, match } = props;
+    const { forumData, match, loading } = props;
 
     if (!(forumData && forumData.chatPreviews)) {
         return null;
@@ -43,19 +45,25 @@ const ForumCanvas = (props: IForumCanvasProps) => {
 
     return (
         <div className={classes.Container}>
-            <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
-                <h1 className={classes.ForumTitle} style={{ textAlign: "center" }}>{forumData.chatTitle}</h1>
-                <div style={{justifyContent: "flex-end", display: "flex"}}>
-                    <Link to={`${baseUrl}/createChat`}>
-                        <button
-                            className={classes.CreateChatButton}>
-                            <span style={{fontWeight: "bold"}}>+</span>
-                            <span style={{fontFamily: "Calibri"}}> Create new discussion</span>
-                        </button>
-                    </Link>
+            {loading ? (
+                <div className={classes.Loading}>
+                    <ReactLoading type="bubbles" color="#333333" height={'5%'} width={'5%'} />
                 </div>
-                {infoCards}
-            </div>
+            ) : (
+                <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
+                    <h1 className={classes.ForumTitle} style={{ textAlign: "center" }}>{forumData.chatTitle}</h1>
+                    <div style={{justifyContent: "flex-end", display: "flex"}}>
+                        <Link to={`${baseUrl}/createChat`}>
+                            <button
+                                className={classes.CreateChatButton}>
+                                <span style={{fontWeight: "bold"}}>+</span>
+                                <span style={{fontFamily: "Calibri"}}> Create new discussion</span>
+                            </button>
+                        </Link>
+                    </div>
+                    {infoCards}
+                </div>
+            )}
         </div>
     );
 }

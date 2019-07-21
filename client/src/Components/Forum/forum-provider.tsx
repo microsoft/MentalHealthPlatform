@@ -11,14 +11,16 @@ interface IForumProviderState {
     forumData: {
         chatTitle: string,
         chatPreviews: IDiscussionPreviewData[]
-    };
+    },
+    loading: boolean;
 }
 
 class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForumProviderState> {
     constructor(props: RouteComponentProps<{}>) {
         super(props);
         this.state = {
-            forumData: undefined
+            forumData: undefined,
+            loading: true
         };
     }
 
@@ -29,7 +31,6 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
         list = list.filter((item) => item != "");
 
         const topicId = list[list.length - 1].replace("topic", "");
-        console.log(topicId);
         return topicId;
     };
 
@@ -42,6 +43,7 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
             <ForumCanvas
                 forumData={this.state.forumData}
                 match={this.props.match}
+                loading={this.state.loading}
             />
         );
     }
@@ -52,7 +54,8 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
 
     retrieveChatPreviewsResponseHandler = (data: any) => {
         this.setState({
-            forumData: data
+            forumData: data,
+            loading: false
         });
     }
 

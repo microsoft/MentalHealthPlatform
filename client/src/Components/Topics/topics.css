@@ -30,3 +30,9 @@
     width: 70%;
     margin: 0 auto;
 }
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

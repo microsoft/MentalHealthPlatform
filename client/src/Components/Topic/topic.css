@@ -34,7 +34,7 @@
     font-size: 20px;
 }
 
-.TopicTile:hover .Image {
+.TopicTile:hover {
     opacity: 0.7;
 }
 

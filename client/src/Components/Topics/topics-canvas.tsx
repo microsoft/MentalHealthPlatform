@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import { Link, match } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 import { ITopicData } from "./topics-provider";
 import TopicsSearchBar from '../TopicsSearchBar/topics-search-bar';
@@ -18,6 +19,7 @@ interface ITopicsCanvasProps {
     match: match<{}>;
     searchString: string;
     topicsData: ITopicData[];
+    loading: boolean;
     updateSearchString: (searchString: string) => void;
 }
 
@@ -26,7 +28,8 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         match,
         searchString,
         topicsData,
-        updateSearchString
+        updateSearchString,
+        loading
     } = props;
 
     // TODO: Migrate images from client to server
@@ -59,7 +62,13 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div className={classes.Container}>
                 <TopicsSearchBar inputChanged={updateSearchString}/>
-                <div className={classes.TileContainer}>{tiles}</div>
+                {loading ? (
+                    <div className={classes.Loading}>
+                        <ReactLoading type="bubbles" color="#333333" height={'5%'} width={'5%'} />
+                    </div>
+                ) : (
+                    <div className={classes.TileContainer}>{tiles}</div>
+                )}
             </div>
         </div>
     );

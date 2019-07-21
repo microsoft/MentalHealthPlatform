@@ -21,6 +21,7 @@ interface ITopicsProviderState {
     match: match<{}>;
     searchString: string;
     topicsData: ITopicData[];
+    loading: boolean;
 }
 
 class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsProviderProps>, ITopicsProviderState> {
@@ -29,7 +30,8 @@ class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsPro
         this.state = {
             match: props.match,
             searchString: undefined,
-            topicsData: undefined
+            topicsData: undefined,
+            loading: true
         };
     }
 
@@ -47,6 +49,7 @@ class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsPro
                 searchString={this.state.searchString}
                 topicsData={this.state.topicsData}
                 updateSearchString={this.updateSearchString}
+                loading={this.state.loading}
             />
         );
     }
@@ -57,7 +60,8 @@ class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsPro
 
     retrieveTopicsResponseHandler = (data: any) => {
         this.setState({
-            topicsData: data
+            topicsData: data,
+            loading: false
         });
     }
 

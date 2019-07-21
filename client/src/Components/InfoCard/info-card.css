@@ -1,12 +1,22 @@
+.InfoCardLinkContainer {
+    text-decoration: none;
+    color: #333333;
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px #CCCCCC;
+}
+
+.InfoCardLinkContainer :hover {
+    opacity: 0.7;
+}
+
 .InfoCardContainer {
     display: flex;
     align-items: center;
-    margin-top: 20px;
     padding: 20px;
-    box-shadow: 3px 3px 3px #CCCCCC;
-    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    background-color: white;
-    border-radius: 8px;
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;    
+    background-color: transparent;
 }
 
 .Title {

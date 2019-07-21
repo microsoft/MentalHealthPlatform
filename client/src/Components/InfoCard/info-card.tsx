@@ -33,7 +33,7 @@ const InfoCard = (props: IInfocardProps): JSX.Element => {
     }
 
     return (
-        <Link to={`${baseUrl}/chat/${data._id}`} style={{textDecoration: "none", color: "#333333"}}>
+        <Link className={classes.InfoCardLinkContainer} to={`${baseUrl}/chat/${data._id}`}>
             <div className={classes.InfoCardContainer}>
                 <div style={{flex: 1}}>
                     <div className={classes.Title}>{data.chatTitle}</div>

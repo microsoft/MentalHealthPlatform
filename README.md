@@ -50,9 +50,9 @@ To set up and run the application, please follow the procedures outlined in the 
     node path.js
     ```
     
-    The console should then print the following statement:
+    The console should then print a statement about the server running on a certain port:
 
-    > Listening...
+    > Server is running on Port 3000...
 
 ## Setting up the client
 

@@ -1,239 +1,233 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+// Imports for Express
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-var mongoClient = require('mongodb').MongoClient;
-var mongoUrl = "mongodb://localhost:27017/";
-var dbName = 'mentalhealthdb';
-let date = require('date-and-time');
+// Imports for MongoDB
+const mongoClient = require('mongodb').MongoClient;
+const MONGO_URL = "mongodb://localhost:27017/";
+const DATABASE_NAME = 'mentalhealthdb';
 
+// Database collections
+const USERS_COLLECTION = "Users";
+const TOPICS_COLLECTION = "Topics";
+const CHATS_COLLECTION = "Chats";
+const MESSAGE_COLLECTION = "Message";
 
-// Collections
-var usersColl = "Users";
-var topicsColl = "Topics";
-var chatsColl = "Chats";
-var msgColl = "Message";
+// TODO: Migrate logic for date string localization from server to client
+const date = require('date-and-time');
+
+const SUCCESS_STATUS_MESSAGE = 1;
+const FAILED_STATUS_MESSAGE = -1;
 
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
 app.use(bodyParser.json());
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
 
-app.set('port', process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
+app.set('port', port);
 
+app.post('/signup', (postReq, postRes) => {
+	console.log("Signing up...");
 
-app.post('/signup', function(postReq, postRes){
-	var obj = postReq.body;
-	var username = obj.username;
+	const obj = postReq.body;
+	const username = obj.username;
 
-	mongoClient.connect(mongoUrl, { ...obj, useNewUrlParser: true }, function(connerErr, db) {
+	mongoClient.connect(MONGO_URL, { ...obj, useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
-		var dbo = db.db(dbName);
 
 		// Verify if user already exists
-		dbo.collection(usersColl).find({username : username}).toArray(function(findErr, findRes) {
+		const dbo = db.db(DATABASE_NAME);		
+		dbo.collection(USERS_COLLECTION).find({ username }).toArray((findErr, findRes) => {
 			if (findErr) throw findErr;
+
 			if (findRes.length != 0) {
-				console.log("username already exists: ", username)
+				console.log("Username already exists: " + username);
 				db.close();
-				postRes.json({statusMessage : -1});
+				postRes.json({ statusMessage: FAILED_STATUS_MESSAGE });
 				return;
 			}
 
-			// Insert user into db
-			dbo.collection(usersColl).insertOne(obj, function(insertErr, insertRes) {
+			// Insert user into database
+			dbo.collection(USERS_COLLECTION).insertOne(obj, (insertErr, insertRes) => {
 				if (insertErr) throw insertErr;
-				console.log("user created: ", username);
+
+				console.log("User created: ", username);
 				db.close();
-				postRes.json({statusMessage : 1});
+				postRes.json({ statusMessage: SUCCESS_STATUS_MESSAGE });
 			});
 		});
 	});
 });
 
+app.post('/login', (postReq, postRes) => {
+	console.log("Logging in...");
 
-app.post('/login', function(postReq, postRes) {
-	var obj = postReq.body;
-	console.log(obj);
-	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
+	const obj = postReq.body;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
-		var dbo = db.db(dbName);
 
 		// Verify if entry exists in users collection
-		dbo.collection(usersColl).find({"pass": obj["pass"]}).toArray(function(findErr, findRes) {
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(USERS_COLLECTION).find({"pass": obj["pass"]}).toArray((findErr, findRes) => {
 			if (findErr) throw findErr;
+
 			if (findRes.length != 0) {
-				console.log("success");
+				console.log("Login successful");
 				db.close();
-				postRes.json({statusMessage : 1});
+				postRes.json({ statusMessage: SUCCESS_STATUS_MESSAGE });
 				return;
 			}
-			console.log("failure");
-			postRes.json({statusMessage : -1});
+
+			console.log("Login failed");
+			postRes.json({ statusMessage: FAILED_STATUS_MESSAGE });
 		});
 	});
 });
 
+app.get('/gettopics', (postReq, postRes) => {
+	console.log("Retrieving topics...");
 
-app.get('/gettopics', function(postReq, postRes) {
-	console.log("Retrieving topics");
-	var obj = postReq.body;
-
-	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
-		var dbo = db.db(dbName);
 
-		dbo.collection(topicsColl).find().toArray(function(findErr, findRes) {
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(TOPICS_COLLECTION).find().toArray((findErr, findRes) => {
 			if (findErr) throw findErr;
+
 			db.close();
 			postRes.json(findRes);
 		});
 	});
 });
 
+app.get('/getchatpreviews', (postReq, postRes) => {
+	console.log("Getting chat previews");
 
-app.get('/getchatpreviews', function(postReq, postRes) {
-	var obj = postReq.query;
-
-	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(err, db) {
+	const obj = postReq.query;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
-		var dbo = db.db("mentalhealthdb");
-		dbo.collection(chatsColl).aggregate(
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(CHATS_COLLECTION).aggregate(
 			[
-			{ $lookup:
-				  {
-					from: 'Users',
-					localField: 'user_id',
-					foreignField: '_id',
-					as: 'userdetail'
-				  }
-			},
-			{ $unwind:
 				{
-					path: "$userdetail",
-					preserveNullAndEmptyArrays: false
-				}
-			},
-			{ $match:
+					$lookup: {
+						from: 'Users',
+						localField: 'user_id',
+						foreignField: '_id',
+						as: 'userdetail'
+					}
+				},
 				{
-					topic_id : obj.topicId
+					$unwind: {
+						path: "$userdetail",
+						preserveNullAndEmptyArrays: false
+					}
+				},
+				{
+					$match: {
+						topic_id: obj.topicId
+					}
 				}
-			}
 			]
-		).toArray(function(chatErr, chatRes) {
+		).toArray((chatErr, chatRes) => {
 			if (chatErr) throw chatErr;
-			console.log(chatRes);
+
 			if (chatRes.length === 0) {
 				postRes.json([]);
 				return;
 			}
 
-			var chatPreviewsObj = [];
-			for (var i = 0; i < chatRes.length; i++) {
-				var chatPreviewObj = {};
-				chatPreviewObj.avatarId = chatRes[i].userdetail.avatarID;
-				chatPreviewObj.chatId = chatRes[i].topic_id
-				chatPreviewObj.chatTitle = chatRes[i].chatTitle
-				chatPreviewObj.chatDescription = chatRes[i].desc
-				chatPreviewObj.authorName = chatRes[i].userdetail.displayname
-				chatPreviewObj.numberOfViews = chatRes[i].numberofviews
-				chatPreviewObj.numberOfReplies = chatRes[i].numberofreplies
-				chatPreviewObj.postedDate = chatRes[i].PostedDate
-				chatPreviewObj._id = chatRes[i]._id;
-				chatPreviewsObj.push(chatPreviewObj)
-			}
+			const chatPreviewsObj = chatRes.map(chat => {
+				return {
+					_id: chat._id,
+					avatarId: chat.userdetail.avatarID,
+					chatId: chat.topic_id,
+					chatTitle: chat.chatTitle,
+					chatDescription: chat.desc,
+					authorName: chat.userdetail.displayname,
+					numberOfViews: chat.numberofviews,
+					numberOfReplies: chat.numberofreplies,
+					postedDate: chat.PostedDate
+				};
+			});
+
 			postRes.json(chatPreviewsObj);
 			db.close();
 		});
 	});
 });
 
+app.get('/getchat', (postReq, postRes) => {
+	console.log("Getting chat...");
 
-app.get('/getchat', function(postReq, postRes){
-	var obj = postReq.query;
-
-	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(err, db) {
+	const obj = postReq.query;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
-		var dbo = db.db(dbName);
-		dbo.collection(msgColl).aggregate(
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(MESSAGE_COLLECTION).aggregate(
 			[
-			{ $lookup:
-				  {
-					from: 'Users',
-					localField: 'user_id',
-					foreignField: '_id',
-					as: 'userdetail'
-				  }
-			},
-			{ $unwind:
 				{
-					path: "$userdetail",
-					preserveNullAndEmptyArrays: false
-				}
-			},
-			// { $lookup:
-			// 	{
-			// 	  from: 'Chats',
-			// 	  localField: 'chat_id',
-			// 	  foreignField: '_id',
-			// 	  as: 'chatdetail'
-			// 	}
-			// },
-			// { $unwind:
-			// 	{
-			// 		path: "$chatdetail",
-			// 		preserveNullAndEmptyArrays: false
-			// 	}
-			// },
-			{ $match:
+					$lookup: {
+						from: 'Users',
+						localField: 'user_id',
+						foreignField: '_id',
+						as: 'userdetail'
+					}
+				},
 				{
-					chat_id : obj.chatId
+					$unwind: {
+						path: "$userdetail",
+						preserveNullAndEmptyArrays: false
+					}
+				},
+				{
+					$match: {
+						chat_id: obj.chatId
+					}
 				}
-			}
-		]
-		).toArray(function(chatErr, chatRes) {
-			console.log(chatRes);
+			]
+		).toArray((chatErr, chatRes) => {
 			if (chatErr) throw chatErr;
-			console.log("chat res length:", chatRes.length);
+			
 			if (chatRes.length <= 0) {
 				postRes.json([]);
 				return;
 			}
-			else {
-				dbo.collection(chatsColl).updateOne(
-				{"chatID" : obj.chatId },
-				{ $inc: 
-				  { numberofviews : 1 
-				  } 
-				  }, true)
-			}
 
-			var chatObj = {};
-			// Get chat data
-			// chatObj.chatTitle = chatRes[0].chatdetail.chatTitle;
-			chatObj.numberOfReplies = chatRes.length;
-			// chatObj.numberOfViews = chatRes[0].chatdetail.numberofviews;
-			chatObj.messages = [];
+			
+			dbo.collection(CHATS_COLLECTION).updateOne(
+				{ "chatID": obj.chatId },
+				{ $inc: { numberofviews: SUCCESS_STATUS_MESSAGE } },
+				true
+			);
 
-			// Create messages
-			for (var i = 0; i < chatRes.length; i++) {
-				var msgObj = {};
-				msgObj.avatarId = chatRes[i].userdetail.avatarID;
-				msgObj.authorName = chatRes[i].userdetail.displayname;
-				msgObj.date = chatRes[i].date;
-				msgObj.messageBody = chatRes[i].messageBody;
+			const messages = chatRes.map(chat => {
+				return {
+					avatarId: chat.userdetail.avatarID,
+					authorName: chat.userdetail.displayname,
+					date: chat.date,
+					messageBody: chat.messageBody
+				};
+			});
 
-				chatObj.messages.push(msgObj);
-			}
+			const chatObj = {
+				numberOfReplies: chatRes.length,
+				messages: messages
+			};
 
 			postRes.json(chatObj);
 			db.close();
@@ -241,79 +235,74 @@ app.get('/getchat', function(postReq, postRes){
 	});
 });
 
+app.post('/sendmessage', (postReq, postRes) => {
+	console.log("Sending message...");
 
-app.post('/sendmessage', function(postReq, postRes){
-	var obj = postReq.body;
+	const obj = postReq.body;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+		if (connerErr) throw connerErr;		
 
-	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
-		if (connerErr) throw connerErr;
-		var dbo = db.db(dbName);
+		const msgObj = {
+			chat_id: obj.chatId,
+			messageBody: obj.messageBody,
+			user_id: obj.username,
+			date: date.format(new Date(), "MM/DD/YYYY"),
+			userdetail: {}
+		};
 
-		var msgObj = {};
-		msgObj.chat_id = obj.chatId;
-		msgObj.messageBody = obj.messageBody;
-		msgObj.user_id = obj.username;
-		msgObj.date = date.format(new Date(), "MM/DD/YYYY");
-		msgObj.userdetail = {};
-		console.log(msgObj);
-		// Insert message into db
-		dbo.collection(msgColl).insertOne(msgObj, function(insertErr, insertRes) {
-			console.log(insertErr);
+		// Insert message into database
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(MESSAGE_COLLECTION).insertOne(msgObj, (insertErr, insertRes) => {			
 			if (insertErr) throw insertErr;
+			
 			db.close();
-			postRes.json({statusMessage : 1});
+			postRes.json({ statusMessage: SUCCESS_STATUS_MESSAGE });
 		});
 	});
 });
 
+app.post('/createchat', (postReq, postRes) => {
+	console.log("Creating chat...");
 
-app.post('/createchat', function(postReq, postRes){
-	var obj = postReq.body;
-	console.log("Creating chat");
-
-	mongoClient.connect(mongoUrl, { useNewUrlParser: true }, function(connerErr, db) {
+	const obj = postReq.body;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
-		var dbo = db.db(dbName);
 
-		console.log(obj);
+		// Create new chat object
+		const chatObj = {
+			chatTitle: obj.chatTitle,
+			user_id: obj.username,
+			topic_id: obj.topicId.toString(),
+			PostedDate: (new Date()).toString(),
+			numberofviews: 0,
+			numberofreplies: 0,
+			desc: obj.chatDescription
+		};
 
-		// Create new chat
-		var chatObj = {};
-		chatObj.chatTitle = obj.chatTitle;
-		chatObj.user_id = obj.username;
-		chatObj.topic_id = obj.topicId.toString();
-		chatObj.PostedDate = (new Date()).toString();
-		chatObj.numberofviews = 0;
-		chatObj.numberofreplies = 0;
-		chatObj.desc = obj.chatDescription;
+		// Create new message object
+		const msgObj = {
+			messageBody: obj.chatDescription,
+			username: obj.username,
+			date: date.format(new Date(), "MM/DD/YYYY")
+		};		
 
-		// Create new message
-		var msgObj = {};
-		msgObj.messageBody = obj.chatDescription;
-		msgObj.username = obj.username;
-		msgObj.date = date.format(new Date(), "MM/DD/YYYY");
-
-		dbo.collection(chatsColl).countDocuments().then((count) => {
+		// Insert newly created chat into database
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(CHATS_COLLECTION).insertOne(chatObj, (insertChatErr, insertChatRes) => {
+			if (insertChatErr) throw insertChatErr;
 			
-			// Insert chat to db
-			dbo.collection(chatsColl).insertOne(chatObj, function(insertChatErr, insertChatRes) {
-				if (insertChatErr) throw insertChatErr;
-				// console.log("Chat inserted");
-				// Insert message to db
-				dbo.collection(msgColl).insertOne(msgObj, function(insertMsgErr, insertMsgRes) {
-					db.close();
-					postRes.json({
-						statusMessage : 1,
-						chatId: insertChatRes.ops[0]._id
-					});
-					// console.log("chat responding with messages");
+			// Insert message into database
+			dbo.collection(MESSAGE_COLLECTION).insertOne(msgObj, (insertMsgErr, insertMsgRes) => {
+				db.close();
+				postRes.json({
+					statusMessage: SUCCESS_STATUS_MESSAGE,
+					chatId: insertChatRes.ops[0]._id
 				});
 			});
 		});
 	});
 });
 
-
-app.listen(app.get('port'), function(){
-    console.log('Listening...');
-})
+app.listen(app.get('port'), () => {
+    console.log(`Server is running on Port ${port}...`);
+});

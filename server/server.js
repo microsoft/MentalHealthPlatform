@@ -10,8 +10,8 @@ const bodyParser = require('body-parser');
 const mongoClient = require('mongodb').MongoClient;
 
 // Import requests
-const { getTopics, getChatPreviews, getChat } = require('./requests/getRequests.js');
-const { signUp, login, sendMessage, createChat } = require('./requests/postRequests');
+const { getTopics, getChatPreviews, getChat } = require('./requests/get-requests.js');
+const { signUp, login, sendMessage, createChat } = require('./requests/post-requests');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

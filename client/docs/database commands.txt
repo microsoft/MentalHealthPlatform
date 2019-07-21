@@ -4,8 +4,6 @@ mongo
 // Create mentalhealthdb database
 use mentalhealthdb
 
-
-
 // CREATE COLLECTION
 db.createCollection("Users");
 db.createCollection("Topics");
@@ -21,92 +19,47 @@ db.Users.insertOne({_id:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'});
 db.Users.insertOne({_id:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'});
 db.Users.insertOne({_id:'Aileen',pass:'Aileen',displayname:'Aileen',avatarID:'4'});
 
-
 // TOPIC
 stressId = db.Topics.insertOne({topicTitle:'Stress',image:'1'}).insertedId.str;
 
-stressChatId1 = db.Chats.insertOne({chatTitle:'Techniques for reducing stress',user_id:'Aldo',PostedDate:myDateString,numberofviews:100,numberofreplies:3,topic_id:stressId}).insertedId.str;
+stressChatId1 = db.Chats.insertOne({chatTitle:'Techniques for reducing stress',user_id:'Aldo',PostedDate:myDateString,numberofviews:100,numberofreplies:3,topic_id:stressId,desc:'Things have been heated lately'}).insertedId.str;
 db.Message.insertOne({chat_id:stressChatId1,messageBody:"What are your favorite techniques to reduce stress?",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:stressChatId1,messageBody:"Have you tried the 4 7 8 breathing technique?",user_id:'Eddy',date:myDateString});
 db.Message.insertOne({chat_id:stressChatId1,messageBody:"I agree with William. Sometime its best to stop everything that you are doing for 5 minutes and focus on breathing.",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:stressChatId1,messageBody:"If you ever feel like your stress is overwhelming you should always reach out to others.",user_id:'Khush',date:myDateString});
 
-stressChatId2 = db.Chats.insertOne({chatTitle:'Coping with stress in lab',user_id:'Eddy',PostedDate:myDateString,numberofviews:50,numberofreplies:1,topic_id:stressId}).insertedId.str;
+stressChatId2 = db.Chats.insertOne({chatTitle:'Coping with stress in lab',user_id:'Eddy',PostedDate:myDateString,numberofviews:50,numberofreplies:1,topic_id:stressId,desc:'I feel like I will screw something up'}).insertedId.str;
 db.Message.insertOne({chat_id:stressChatId2,messageBody:"I recently joined a new research lab and my PI has really high expectations for me. Everyone in the lab is a lot more experienced than me, and since I am only in my first year of graduate school, I feel a lot of pressure to perform at a high standard and I do not want to let my mentor down. I have a lot of deadlines piling up, and I don't even know if I'll finish my experients in time for my presentation at the end of the month. I don't know what to do.",user_id:'Eddy',date:myDateString});
 db.Message.insertOne({chat_id:stressChatId2,messageBody:"How are you getting along with the rest of your lab? I know that joining a lab where you are the youngest may be really intimidating, but generally other people in your lab will probably be more than willing to help you out! And don't worry, I experienced the same thing during my first year working in my neurobiology lab :).",user_id:'Eddy',date:myDateString});
 
-
-stressChatId3 = db.Chats.insertOne({chatTitle:'Friend stress',user_id:'Khush',PostedDate:myDateString,numberofviews:76,numberofreplies:2,topic_id:stressId}).insertedId.str;
+stressChatId3 = db.Chats.insertOne({chatTitle:'Friend stress',user_id:'Khush',PostedDate:myDateString,numberofviews:76,numberofreplies:2,topic_id:stressId,desc:'Not sure how to deal with my friend...'}).insertedId.str;
 db.Message.insertOne({chat_id:stressChatId3,messageBody:"So I'm living with two of my closest friends for the summer, but I didn't realize how stressful it would be. We have pretty incompatible schedules, they never clean the house, and we all share a cramped one bedroom apartment. I haven't been getting enough sleep for the past two weeks because I always wake up to my roommates' alarms, and it's starting to affect my performance at school. It's too late to find a new place, and living with them is starting to affect my relationships with them. What do I do?",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:stressChatId3,messageBody:"Hm.... have you talked to them about this? Maybe they don't know what is bothering you. It's best to be open with them, especially if you are stuck with them for the whole summer.",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:stressChatId3,messageBody:"Ahhh I'm facing a similar situation as well, not as bad as yours though. I would suggest sitting down with them and establishing rules for the apartment, so it's clear what the expectations are for everyone. Even though it might be tough to bring it up, confrontation is sometimes necessary to fix the situation.",user_id:'Aldo',date:myDateString});
 
-
 // TOPIC
 anxietyId = db.Topics.insertOne({topicTitle:'Anxiety',image:'2'}).insertedId.str;
 
-anxietyChatId1 = db.Chats.insertOne({chatTitle:'Exam Anxiety',user_id:'Aldo',PostedDate:myDateString,numberofviews:187,numberofreplies:3,topic_id:anxietyId}).insertedId.str;
+anxietyChatId1 = db.Chats.insertOne({chatTitle:'Exam Anxiety',user_id:'Aldo',PostedDate:myDateString,numberofviews:187,numberofreplies:3,topic_id:anxietyId,desc:'I have multiple exams coming up'}).insertedId.str;
 db.Message.insertOne({chat_id:anxietyChatId1,messageBody:"Ever since I transferred to a more competitive school, I've been facing crippling exam anxiety. I freeze up when I take take tests, and it's gotten so bad that I sometimes have to leave the classroom because I can't read the words on the paper. I feel really frustrated because my anxiety has never been this bad until this year. Any advice would be amazing and well appreciated :).",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:anxietyChatId1,messageBody:"I'm sorry to hear that you're struggling with this. My sister has been dealing with exam anxiety for the past few years so I understand what you're going through.",user_id:'Eddy',date:myDateString});
 db.Message.insertOne({chat_id:anxietyChatId1,messageBody:"I've been facing the same issues. What was helpful for me was reflecting on the times where I faced extreme academic anxiety. I realized the reason I get very anxious isn't so much as a fear of failure, but a feeling of inferiority compared to my classmates. Even though I still struggle with exam anxiety, I try my best to not compare myself to others, and remind myself that I'm here learn for myself.",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:anxietyChatId1,messageBody:"I would recommend asking to take your tests privately. Students with disabilities are granted this, and anxiety shouldn't be any different. In my personal experience, it's really helpful to take exams in an isolated envirnoment without any distraction so you can really focus and do your best.",user_id:'Khush',date:myDateString});
 
-anxietyChatId2 = db.Chats.insertOne({chatTitle:'Having panic attacks',user_id:'Aldo',PostedDate:myDateString,numberofviews:1,numberofreplies:2,topic_id:anxietyId}).insertedId.str;
+anxietyChatId2 = db.Chats.insertOne({chatTitle:'Having panic attacks',user_id:'Aldo',PostedDate:myDateString,numberofviews:1,numberofreplies:2,topic_id:anxietyId,desc:'Sometimes I lose control'}).insertedId.str;
 db.Message.insertOne({chat_id:anxietyChatId2,messageBody:"I broke up with my boyfriend about a year ago, and he was really manipulative and abusive. After struggling for a long time, I completely cut him out of my life. He recently started messaging me again, asking if I want to hang out. Him reaching out has triggered a lot of bad memories from the past, and a few times at work I've had to step out of my office because I would suddenly have panic attacks. I've always struggled with anxiety, but it has never been this bad before. I don't know who to talk to because even thinking about him brings back painful memories.",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:anxietyChatId2,messageBody:"I know how you are feeling. I suffer with PTSD, panic attacks and anxiety. Believe it or not, the more you think about them, the worse they are. I've recently been seeing a psychiatrist, and she has been able to give me really helpful advice. ",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:anxietyChatId2,messageBody:"I've had panic attacks before right after my divorce. I could tell you what helped me overcome them, but every situation is different. When you feel that a panic attack is coming, just focus on your breathing. Take deep breaths, and find an object in the room to focus on. Most importantely, don't try to stop the attack; try to confront your fear, because f you don't run away from it, you're giving yourself a chance to discover that nothing's going to happen.",user_id:'Aldo',date:myDateString});
 
-
-//TOPIC
+// TOPIC
 depressionId = db.Topics.insertOne({topicTitle:'Depression',image:'3'}).insertedId.str;
-depressionChatId1 = db.Chats.insertOne({chatTitle:'Depression or Sadness?',user_id:'Aldo',PostedDate:myDateString,numberofviews:375,numberofreplies:1,topic_id:depressionId}).insertedId.str;
+depressionChatId1 = db.Chats.insertOne({chatTitle:'Depression or Sadness?',user_id:'Aldo',PostedDate:myDateString,numberofviews:375,numberofreplies:1,topic_id:depressionId,desc:'What is the difference?'}).insertedId.str;
 db.Message.insertOne({chat_id:depressionChatId1,messageBody:"I've been feeling really down lately. A lot of things haven't been going my way : I recently moved to a new city for my job, and I miss my friends from back home, I am having a tough time at my new job, I recently broke up with my girlfriend right before I moved, and I've just been stuck in an unmotivated rut. Sometimes, I tear up thinking about how shitty life is while taking public transit back home. I don't really have anybody to talk to here, and I dont know if I'm actually depressed or just going through a difficult patch. ",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:depressionChatId1,messageBody:"Stay strong man. Remember that even though you're going through a hard time now, it's not permanent. Keep yourself motivated by doing things you enjoy, try to keep your mind off of things, and remember there are people who care for you. Even though it may not feel like it now, the feeling will pass. ",user_id:'Aldo',date:myDateString});
 
-
-
 // TOPIC
 lonelinessId = db.Topics.insertOne({topicTitle:'Loneliness',image:'4'}).insertedId.str;
-lonelinessChatId1 = db.Chats.insertOne({chatTitle:'Feeling isolated while studying abroad',user_id:'Aileen',PostedDate:myDateString,numberofviews:28,numberofreplies:2,topic_id:lonelinessId}).insertedId.str;
+lonelinessChatId1 = db.Chats.insertOne({chatTitle:'Feeling isolated while studying abroad',user_id:'Aileen',PostedDate:myDateString,numberofviews:28,numberofreplies:2,topic_id:lonelinessId,desc:'I want to go back home...'}).insertedId.str;
 db.Message.insertOne({chat_id:lonelinessChatId1,messageBody:"I've been feeling really lonely while studying abroad here in Paris. I went into Paris not knowing anybody, and I had expected to immediately find people who I vibed with. It's been three weeks so far, and I don't really get along with my school cohort here; there are little opportunities for me to interact with French people, and its hard to keep in touch with friends at home because of the time difference. My feelings of loneliness spiral a lot, and often grow into desperation. I don't know how to deal with this.",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:lonelinessChatId1,messageBody:"I've experienced the same thing while I was studying abroad in Beijing. Even thoughs studying abroad can be a fun experience, people don't really tell you the negatives of their experiences abroad. For me, I joined a local soccer team, and even though I didn't speak a lot of Chinese, I found a community that I felt a part of and could have fun with. ",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:lonelinessChatId1,messageBody:"Try to make the best of your situation! Talk to locals, go on spontaneous adventures with new people, and  out to your host family.  Most importantly, remember you're not alone in this, and don't doubt yourself. Best of luck to the rest of your time abroad!",user_id:'Aldo',date:myDateString});
-
-
-
-
-
-/***********************/
-/******* OBJECTS *******/
-/***********************/
-User object:
-{
-    _id:,
-    pass:,
-    displayname:,
-    avatarID:
-}
-
-Topic object:
-{
-    topicTitle:,
-    image:
-}
-
-Chat object:
-{
-    chatTitle:,
-    user_id:,
-    PostedDate:,
-    numberofviews:,
-    numberofreplies:,
-    topic_id:
-}
-
-Message object:
-{
-    chat_id:,
-    messageBody:,
-    user_id:,
-    date:
-}

@@ -29,22 +29,23 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         updateSearchString
     } = props;
 
+    // TODO: Migrate images from client to server
     const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3];
     
     let baseUrl = match.url;
-    if (baseUrl.charAt(baseUrl.length - 1) == '/') {
+    if (baseUrl.charAt(baseUrl.length - 1) === '/') {
         baseUrl = baseUrl.substring(0, baseUrl.length - 1);
     }
 
     let newTopicsData = topicsData;
-    if(newTopicsData !== undefined && searchString !== undefined){
+    if (newTopicsData !== undefined && searchString !== undefined){
         newTopicsData = newTopicsData.filter((data) => {
             return data.topicTitle && data.topicTitle.toLowerCase().indexOf(searchString.toLowerCase()) !== -1;
         });
     }
     
     let tiles;
-    if (newTopicsData != undefined){
+    if (newTopicsData !== undefined){
         tiles = newTopicsData.map((topic, index: number) => {
             return (
                 <Link key={index} to={`${baseUrl}/topic${topic._id}`}>

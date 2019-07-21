@@ -18,19 +18,21 @@ interface IDiscussionPreviewData {
 }
 
 interface IForumCanvasProps {
-    forumId: string;
-    forumData: IDiscussionPreviewData[];
+    forumData: {
+        chatTitle: string,
+        chatPreviews: IDiscussionPreviewData[]
+    };
     match: match<{}>;
 }
 
 const ForumCanvas = (props: IForumCanvasProps) => {
-    const { forumId, forumData, match } = props;
+    const { forumData, match } = props;
 
-    if (!forumData) {
+    if (!(forumData && forumData.chatPreviews)) {
         return null;
     }
     
-    const infoCards = forumData.map(discussionPreview => {
+    const infoCards = forumData.chatPreviews.map(discussionPreview => {
         return <InfoCard key={discussionPreview._id} data={discussionPreview} match={match} />
     });
 
@@ -42,7 +44,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
     return (
         <div className={classes.Container}>
             <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
-                <h1 className={classes.ForumTitle} style={{ textAlign: "center" }}>{"Topic " + forumId}</h1>
+                <h1 className={classes.ForumTitle} style={{ textAlign: "center" }}>{forumData.chatTitle}</h1>
                 <div style={{justifyContent: "flex-end", display: "flex"}}>
                     <Link to={`${baseUrl}/createChat`}>
                         <button

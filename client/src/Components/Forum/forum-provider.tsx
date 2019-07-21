@@ -8,16 +8,16 @@ import { ForumCanvas, IDiscussionPreviewData } from "./forum-canvas";
 import { baseGetRequest } from "./../../util/base-requests";
 
 interface IForumProviderState {
-    forumId: string;
-    forumData: IDiscussionPreviewData[];
+    forumData: {
+        chatTitle: string,
+        chatPreviews: IDiscussionPreviewData[]
+    };
 }
 
 class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForumProviderState> {
     constructor(props: RouteComponentProps<{}>) {
         super(props);
-        const forumId = this.obtainForumId(this.props.match.url);
         this.state = {
-            forumId: forumId,
             forumData: undefined
         };
     }
@@ -33,18 +33,6 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
         return topicId;
     };
 
-    obtainForumId = (url: string) => {
-        var regex = /^\/topics\/topic[\d]+[\/]?$/;
-        var anythingButNumRegex = /[\/a-zA-Z]+/g;
-
-        if (regex.test(url)) {
-            // Checking /topic{num}/ or /topic{num} and nothing after
-            return url.replace(anythingButNumRegex, "");
-        }
-
-        return null;
-    }
-
     /**
      * Renders forum component
      * @return  {React.Component}   Rendered component
@@ -52,7 +40,6 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
     render = () => {
         return (
             <ForumCanvas
-                forumId={this.state.forumId}
                 forumData={this.state.forumData}
                 match={this.props.match}
             />

@@ -57,7 +57,9 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 				return;
 			}
 
-			const chatPreviewsObj = chatRes.map(chat => {
+			const chatPreviewsObj = {};
+
+			chatPreviewsObj.chatPreviews = chatRes.map(chat => {
 				return {
 					_id: chat._id,
 					avatarId: chat.userdetail.avatarID,
@@ -71,7 +73,21 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 				};
 			});
 
-			postRes.json(chatPreviewsObj);
+			dbo.collection(TOPICS_COLLECTION).find({ _id: ObjectId(obj.topicId) }).toArray((topicErr, topicRes) => {
+				if (topicErr) throw topicErr;
+	
+				const title = topicRes && topicRes[0] && topicRes[0].topicTitle;
+				
+				if (title === undefined) {
+					console.log("Topic title cannot be found");
+				}
+				else {
+					chatPreviewsObj.chatTitle = title;
+				}
+
+				postRes.json(chatPreviewsObj);
+			});
+
 			db.close();
 		});
 	});

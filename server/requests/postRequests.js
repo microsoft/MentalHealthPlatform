@@ -2,9 +2,6 @@ const {
 	USERS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE, FAILED_STATUS_MESSAGE
 } = require('../constants.js');
 
-// TODO: Migrate logic for date string localization from server to client
-const date = require('date-and-time');
-
 const signUp = (mongoClient, postReq, postRes) => {
 	console.log("Signing up...");
 
@@ -74,7 +71,7 @@ const sendMessage = (mongoClient, postReq, postRes) => {
 			chat_id: obj.chatId,
 			messageBody: obj.messageBody,
 			user_id: obj.username,
-			date: date.format(new Date(), "MM/DD/YYYY"),
+			date: new Date(),
 			userdetail: {}
 		};
 
@@ -111,7 +108,7 @@ const createChat = (mongoClient, postReq, postRes) => {
 		const msgObj = {
 			messageBody: obj.chatDescription,
 			username: obj.username,
-			date: date.format(new Date(), "MM/DD/YYYY")
+			date: new Date()
 		};		
 
 		// Insert newly created chat into database

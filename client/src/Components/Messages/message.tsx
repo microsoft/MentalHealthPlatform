@@ -4,7 +4,7 @@
 import * as React from 'react';
 
 import * as classes from "./Message.css";
-import { formatDate } from '../../util/Helpers';
+import { getShortenedTimeAndDate } from '../../util/Helpers';
 import profilePicturePlaceholder from '../../images/profile_picture_placeholder.png';
 
 interface IMessageProps {
@@ -47,7 +47,7 @@ const renderName = (name: string) => {
 const renderDate = (date: string) => {
     return (
         <div className={classes.MessageDate}>
-            {formatDate(date)}
+            {getShortenedTimeAndDate(new Date(date))}
         </div>
     );
 };

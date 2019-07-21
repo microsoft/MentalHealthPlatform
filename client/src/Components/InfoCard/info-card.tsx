@@ -7,6 +7,7 @@ import Icon from '../Icon/Icon';
 import * as classes from "./info-card.css";
 
 import profilePicturePlaceholder from './../../images/profile_picture_placeholder.png';
+import { getShortenedTimeAndDate } from '../../util/Helpers';
 
 type InfoCardDataType = {
     _id: string;
@@ -42,7 +43,7 @@ const InfoCard = (props: IInfocardProps): JSX.Element => {
                     <img src={profilePicturePlaceholder} className={classes.ProfilePicture}/>
                     <div style={{display: "flex", flexDirection: "column", marginLeft: 8}}>
                         <div className={classes.Name}>{data.authorName}</div>
-                        <div>{data.postedDate}</div>
+                        <div>{getShortenedTimeAndDate(new Date(data.postedDate))}</div>
                     </div>
                 </div>
                 <div style={{marginLeft: 32}}>

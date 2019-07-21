@@ -48,7 +48,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         tiles = newTopicsData.map((topic, index: number) => {
             return (
                 <Link key={index} to={`${baseUrl}/topic${topic._id}`}>
-                    <Topic name={"jksbvjv"} title={topic.topicTitle} image={images[index%images.length]} />
+                    <Topic name={"jksbvjv"} title={topic.topicTitle} image={images[parseInt(topic.image) - 1]} />
                 </Link>
             );
         });

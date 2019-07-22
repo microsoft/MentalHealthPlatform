@@ -96,7 +96,7 @@ The Topics component hierarchy can be found in [Component Hierarchies](./docs/CO
 
 The Topics page should be reachable via direct URL or by the user clicking on the application title link in the global navigation bar.
 
-![Topics page](./client/docs/topics.png)
+![Topics page](./docs/topics.png)
 
 ## Forum Page
 
@@ -106,7 +106,7 @@ The Forum component hierarchy can be found in [Component Hierarchies](./docs/COM
 
 The Forum page should be reachable via direct URL or by the user clicking on a Forum link within the topics table in the Topics page.
 
-![Forum page](./client/docs/forum.png)
+![Forum page](./docs/forum.png)
 
 ## Chat Page
 
@@ -116,7 +116,7 @@ The Chat component hierarchy can be found in [Component Hierarchies](./docs/COMP
 
 The Chat page should be reachable via direct URL or by the user clicking on a Chat link within the forum table in the Forum page.
 
-![Chat page](./client/docs/chat.png)
+![Chat page](./docs/chat.png)
 
 ## Signup/Login Page
 
@@ -124,4 +124,4 @@ The Signup/Login page will display two panes: a Signup page, and a Login pane.
 
 The Signup/Login page should be reachable via direct URL or by the user clicking the Login link in the global navigation bar.
 
-![Signup/Login page](./client/docs/login.png)
+![Signup/Login page](./docs/login.png)

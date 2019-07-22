@@ -10,6 +10,7 @@ import { SignupLogin } from './SignupLogin/signup-login-provider';
 import { Forum } from './Forum/forum-provider';
 import { Chat } from './Chat/chat-provider';   
 import { CreateChat } from './CreateChat/create-chat-provider';
+import ResourcesPreview from './ResourcesPreview/resources-preview';
 
 export type UserDataType = {
     userId: number;
@@ -57,6 +58,7 @@ export class UserProvider extends React.Component<{}, IUserContext> {
                             <Route exact path="/" render={() => <Redirect to="/topics" />} />
                             <Route exact path="/topics" component={() => <Topics />} />
                             <Route exact path="/login" component={() => <SignupLogin />} />
+                            <Route exact path="/resourcespreview" component={() => <ResourcesPreview />} />
                             <Route exact path={`/topics/topic:topicID`} component={() => <Forum />} />
                             <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={() => <Chat UserContext={UserDataContext} />} />
                             <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserDataContext} />} />

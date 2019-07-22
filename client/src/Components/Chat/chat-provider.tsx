@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, match } from 'react-router-dom';
 
-import ChatCanvas from "./chat-canvas"
+import ChatCanvas from "./chat-canvas";
 
 import { IUserContext } from '../App';
 import { baseGetRequest, basePostRequest } from "./../../util/base-requests";

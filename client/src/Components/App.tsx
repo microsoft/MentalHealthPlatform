@@ -41,10 +41,12 @@ export class UserProvider extends React.Component<{}, IUserContext> {
 
     constructor(props: {}) {
         super(props);
+        const userId = localStorage.getItem('userId');
+        const username = localStorage.getItem('username');
         this.state = {
             user: {
-                userId: -1,
-                username: ""
+                userId: parseInt(userId),
+                username: username
             },
             updateUser: this.updateUser
         };

@@ -87,10 +87,14 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
         }).then(function(data) {
             if (data && data.statusMessage == 1) {
                 console.log("Log in success for user " + username);
-                userData.updateUser({
+                const userInfo = {
                     userId: 0,
                     username: username
-                });
+                };
+                userData.updateUser(userInfo);
+                localStorage.setItem('userId', userInfo.userId.toString());
+                localStorage.setItem('username', userInfo.username.toString());
+                
                 _this.props.history.push("/");
                 _this.setState({ loginErrorMessage: "" });
             }

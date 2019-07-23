@@ -13,10 +13,13 @@ const renderNameField = (userContext: IUserContext) => {
             <div style={{display: "flex", flexDirection: "row"}}>
                 {`Welcome ${userContext.user.username}!`}
                 <div style={{marginLeft: 22, cursor: "pointer"}} onClick={() => {
-                    userContext.updateUser({
+                    const userInfo = {
                         userId: -1,
                         username: ""
-                    });
+                    };
+                    userContext.updateUser(userInfo);
+                    localStorage.setItem('userId', userInfo.userId.toString());
+                    localStorage.setItem('username', userInfo.username.toString());
                 }}>Logout</div>
             </div>
         );

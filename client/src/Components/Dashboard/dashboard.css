@@ -1,0 +1,53 @@
+.DashboardContainer {    
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+}
+
+.RowA {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    height: 33%;
+}
+
+.RowB {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+    height: 67%;
+}
+
+.ColA {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    width: 37.5%;
+}
+
+.ColB {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    width: 37.5%;
+}
+
+.ColC {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    width: 25%;
+}
+
+.Tile {
+    margin: 20px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 3px 3px 3px #CCCCCC;
+    padding: 20px;
+}

@@ -10,7 +10,7 @@ import { SignupLogin } from './SignupLogin/signup-login-provider';
 import { Forum } from './Forum/forum-provider';
 import { Chat } from './Chat/chat-provider';   
 import { CreateChat } from './CreateChat/create-chat-provider';
-import ResourcesPreview from './ResourcesPreview/resources-preview';
+import Dashboard from './Dashboard/dashboard';
 
 export type UserDataType = {
     userId: number;
@@ -55,10 +55,10 @@ export class UserProvider extends React.Component<{}, IUserContext> {
                     <div style={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#E8E8E8" }}>
                         <NavigationBar />
                         <div style={{ display: "flex", flexDirection: "column", flex: 1, overflowY: "auto" }}>
-                            <Route exact path="/" render={() => <Redirect to="/topics" />} />
+                            <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+                            <Route exact path="/dashboard" component={() => <Dashboard />} />
                             <Route exact path="/topics" component={() => <Topics />} />
                             <Route exact path="/login" component={() => <SignupLogin />} />
-                            <Route exact path="/resourcespreview" component={() => <ResourcesPreview />} />
                             <Route exact path={`/topics/topic:topicID`} component={() => <Forum />} />
                             <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={() => <Chat UserContext={UserDataContext} />} />
                             <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserDataContext} />} />

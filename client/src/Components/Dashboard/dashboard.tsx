@@ -6,6 +6,12 @@ import * as React from 'react';
 import * as classes from './dashboard.css';
 import ResourcesPreview from './../ResourcesPreview/resources-preview';
 import NewsPreview from './../NewsPreview/news-preview';
+import CrisisPreview from './../CrisisPreview/crisis-preview';
+import StatisticsPreview from './../StatisticsPreview/statistics-preview';
+import TherapistsPreview from './../TherapistsPreview/therapists-preview';
+import TrendingPostsPreview from './../TrendingPostsPreview/trending-posts-preview';
+import TrendingKeywordsPreview from './../TrendingKeywordsPreview/trending-keywords-preview';
+import UpcomingEventsPreview from './../UpcomingEventsPreview/upcoming-events-preview';
 
 interface IDashboardProps {
 }
@@ -29,10 +35,10 @@ const Dashboard = (props: IDashboardProps) => {
                     <Tile><ResourcesPreview /></Tile>
                 </div>
                 <div className={classes.ColB}>
-                    <Tile>Crisis</Tile>
+                    <Tile><CrisisPreview /></Tile>
                 </div>
                 <div className={classes.ColC}>
-                    <Tile>Statistics</Tile>
+                    <Tile><StatisticsPreview /></Tile>
                 </div>
             </div>
             <div className={classes.RowB}>
@@ -41,20 +47,20 @@ const Dashboard = (props: IDashboardProps) => {
                         <Tile><NewsPreview /></Tile>
                     </div>
                     <div className={classes.RowA}>
-                        <Tile>Therapist</Tile>
+                        <Tile><TherapistsPreview /></Tile>
                     </div>
                 </div>
                 <div className={classes.ColB}>
                     <div className={classes.RowA}>
-                        <Tile>Trending posts</Tile>
+                        <Tile><TrendingPostsPreview /></Tile>
                     </div>
                 </div>
                 <div className={classes.ColC}>
                     <div className={classes.RowA}>
-                        <Tile>Trending keywords</Tile>
+                        <Tile><TrendingKeywordsPreview /></Tile>
                     </div>
                     <div className={classes.RowA}>
-                        <Tile>Upcoming events</Tile>
+                        <Tile><UpcomingEventsPreview /></Tile>
                     </div>
                 </div>
             </div>

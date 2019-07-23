@@ -11,6 +11,7 @@ import { Forum } from './Forum/forum-provider';
 import { Chat } from './Chat/chat-provider';   
 import { CreateChat } from './CreateChat/create-chat-provider';
 import Dashboard from './Dashboard/dashboard';
+import Therapists from './Therapists/therapists';
 
 export type UserDataType = {
     userId: number;
@@ -57,6 +58,7 @@ export class UserProvider extends React.Component<{}, IUserContext> {
                         <div style={{ display: "flex", flexDirection: "column", flex: 1, overflowY: "auto" }}>
                             <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
                             <Route exact path="/dashboard" component={() => <Dashboard />} />
+                            <Route exact path="/therapists" component={() => <Therapists />} />
                             <Route exact path="/topics" component={() => <Topics />} />
                             <Route exact path="/login" component={() => <SignupLogin />} />
                             <Route exact path={`/topics/topic:topicID`} component={() => <Forum />} />

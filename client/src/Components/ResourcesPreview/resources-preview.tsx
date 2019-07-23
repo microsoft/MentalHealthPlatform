@@ -79,12 +79,6 @@ const ResourcesPreview = (props: IResourcesPreviewProps) => {
         match
     } = props;
 
-
-    // // let baseUrl = match.url;
-    // if (baseUrl.charAt(baseUrl.length - 1) == '/') {
-    //     baseUrl = baseUrl.substring(0, baseUrl.length - 1); 
-    // }
-
     const previews = [];
     for (let i = 0; i < resourcesData.length; i++)
     {
@@ -92,7 +86,7 @@ const ResourcesPreview = (props: IResourcesPreviewProps) => {
     }
     return (
         <div className={classes.ResourcesBox}>
-            <h2>Resources</h2>
+            <h3>Resources</h3>
             
             <div className={classes.ResourcePreviews}>
                 {previews}

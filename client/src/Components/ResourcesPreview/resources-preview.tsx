@@ -2,19 +2,103 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-// import * as classes from "./resources-preview";
+// import { hydrate } from 'react-dom';
+import { withRouter, Link, match } from 'react-router-dom';
+import image0 from './../../images/topic_image_0.jpg';
+import image1 from './../../images/topic_image_1.jpg';
+import image2 from './../../images/topic_image_2.jpg';
+import image3 from './../../images/topic_image_3.jpg';
+import * as classes from "./resources-preview.css";
+
 
 interface IResourcesPreviewProps {
-    
+    match: match<{}>;
 }
+
+interface IResourcesData {
+    label: string;
+    src: any;
+    pageName?: string;
+}
+
+
+
+const resourcesData = [
+    {
+        label: "Forums",
+        src: image0,
+        pageName: "topics"
+    },
+    {
+        label: "Contacts",
+        src: image1
+    },
+    {
+        label: "Guides",
+        src: image2
+    },
+    {
+        label: "Mediation",
+        src: image3
+    }
+
+];
+
+const renderPreview = (data: IResourcesData) => {
+    
+
+    if (data.pageName)
+    {
+        return (
+            <Link to={`/${data.pageName}`}>
+                <div className={classes.ResourcePreviewContainer}>
+                    <img src={data.src} className={classes.ResourcePreviewImage} />
+                    <label >{data.label}</label>
+                </div>
+            </Link>
+        );
+    } 
+    else {
+        return (
+            <div className={classes.ResourcePreviewContainer}>
+                <img src={data.src} className={classes.ResourcePreviewImage} />
+                <label >{data.label}</label>
+            </div>
+            
+        );
+    }  
+};
+
+
+
+
+
 
 const ResourcesPreview = (props: IResourcesPreviewProps) => {
     const {
+        match
     } = props;
 
+
+    // // let baseUrl = match.url;
+    // if (baseUrl.charAt(baseUrl.length - 1) == '/') {
+    //     baseUrl = baseUrl.substring(0, baseUrl.length - 1); 
+    // }
+
+    const previews = [];
+    for (let i = 0; i < resourcesData.length; i++)
+    {
+        previews.push(renderPreview(resourcesData[i]));
+    }
     return (
-        <div>Hello World!</div>
+        <div className={classes.ResourcesBox}>
+            <h2>Resources</h2>
+            
+            <div className={classes.ResourcePreviews}>
+                {previews}
+            </div>
+        </div>
     );
 };
 
-export default ResourcesPreview;
+export default withRouter(ResourcesPreview);

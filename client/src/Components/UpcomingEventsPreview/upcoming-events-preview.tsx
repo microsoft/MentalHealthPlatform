@@ -14,7 +14,7 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
 
     return (
         <div>
-            Upcoming events
+            <h3>Upcoming Events</h3>
         </div>
     );
 };

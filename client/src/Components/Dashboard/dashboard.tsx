@@ -5,6 +5,7 @@ import * as React from 'react';
 
 import * as classes from './dashboard.css';
 import ResourcesPreview from './../ResourcesPreview/resources-preview';
+import NewsPreview from './../NewsPreview/news-preview';
 
 interface IDashboardProps {
 }
@@ -37,7 +38,7 @@ const Dashboard = (props: IDashboardProps) => {
             <div className={classes.RowB}>
                 <div className={classes.ColA}>
                     <div className={classes.RowA}>
-                        <Tile>Latest news</Tile>
+                        <Tile><NewsPreview /></Tile>
                     </div>
                     <div className={classes.RowA}>
                         <Tile>Therapist</Tile>

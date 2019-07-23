@@ -2,17 +2,14 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-// import { hydrate } from 'react-dom';
-import { withRouter, Link, match } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import image0 from './../../images/topic_image_0.jpg';
 import image1 from './../../images/topic_image_1.jpg';
 import image2 from './../../images/topic_image_2.jpg';
 import image3 from './../../images/topic_image_3.jpg';
 import * as classes from "./resources-preview.css";
 
-
 interface IResourcesPreviewProps {
-    match: match<{}>;
 }
 
 interface IResourcesData {
@@ -20,8 +17,6 @@ interface IResourcesData {
     src: any;
     pageName?: string;
 }
-
-
 
 const resourcesData = [
     {
@@ -45,8 +40,6 @@ const resourcesData = [
 ];
 
 const renderPreview = (data: IResourcesData) => {
-    
-
     if (data.pageName)
     {
         return (
@@ -58,25 +51,17 @@ const renderPreview = (data: IResourcesData) => {
             </Link>
         );
     } 
-    else {
-        return (
-            <div className={classes.ResourcePreviewContainer}>
-                <img src={data.src} className={classes.ResourcePreviewImage} />
-                <label >{data.label}</label>
-            </div>
-            
-        );
-    }  
+    return (
+        <div className={classes.ResourcePreviewContainer}>
+            <img src={data.src} className={classes.ResourcePreviewImage} />
+            <label >{data.label}</label>
+        </div>
+        
+    );
 };
-
-
-
-
-
 
 const ResourcesPreview = (props: IResourcesPreviewProps) => {
     const {
-        match
     } = props;
 
     const previews = [];
@@ -95,4 +80,4 @@ const ResourcesPreview = (props: IResourcesPreviewProps) => {
     );
 };
 
-export default withRouter(ResourcesPreview);
+export default ResourcesPreview;

@@ -1,0 +1,27 @@
+.NewsDataImage {
+    width: 150px;
+    /* height: 100px; */
+}
+
+.NewsDataTextContainer {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.NewsDataContainer {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+}
+
+.NewsDataTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.NewsDataDate {
+    font-size: 17px;
+    margin-bottom: 5px;
+}

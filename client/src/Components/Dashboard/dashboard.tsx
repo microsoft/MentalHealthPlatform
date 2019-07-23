@@ -9,7 +9,7 @@ import NewsPreview from './../NewsPreview/news-preview';
 import CrisisPreview from './../CrisisPreview/crisis-preview';
 import StatisticsPreview from './../StatisticsPreview/statistics-preview';
 import TherapistsPreview from './../TherapistsPreview/therapists-preview';
-import TrendingPostsPreview from './../TrendingPostsPreview/trending-posts-preview';
+import { TrendingPostsProvider } from '../TrendingPostsPreview/trending-posts-preview-provider';
 import TrendingKeywordsPreview from './../TrendingKeywordsPreview/trending-keywords-preview';
 import UpcomingEventsPreview from './../UpcomingEventsPreview/upcoming-events-preview';
 
@@ -52,7 +52,7 @@ const Dashboard = (props: IDashboardProps) => {
                 </div>
                 <div className={classes.ColB}>
                     <div className={classes.RowA}>
-                        <Tile><TrendingPostsPreview /></Tile>
+                        <Tile><TrendingPostsProvider /></Tile>
                     </div>
                 </div>
                 <div className={classes.ColC}>

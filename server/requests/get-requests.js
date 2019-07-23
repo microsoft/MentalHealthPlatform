@@ -93,6 +93,40 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 	});
 };
 
+const getTrendingPosts = (mongoClient, postReq, postRes) => {
+	console.log("Getting trending posts...");
+
+	const obj = postReq.query;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+		if (err) throw err;
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(3)
+		.toArray((chatErr, chatRes) => {
+			if (chatErr) throw chatErr;
+
+			if (chatRes.length === 0) {
+				postRes.json([]);
+				return;
+			}
+
+			const chatPreviewsObj = {};
+
+			chatPreviewsObj.chatPreviews = chatRes.map(chat => {
+				return {
+					title: chat.chatTitle,
+					description: chat.desc,
+					_id: chat._id
+				};
+			});
+
+			postRes.json(chatPreviewsObj);
+
+			db.close();
+		});
+	});
+};
+
 const getChat = (mongoClient, postReq, postRes) => {
 	console.log("Getting chat...");
 
@@ -173,5 +207,5 @@ const getChat = (mongoClient, postReq, postRes) => {
 };
 
 module.exports = {
-    getTopics, getChatPreviews, getChat
+    getTopics, getChatPreviews, getTrendingPosts, getChat
 };

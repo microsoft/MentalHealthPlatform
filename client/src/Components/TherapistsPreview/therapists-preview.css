@@ -1,0 +1,23 @@
+.TherapistsPreviewButton {
+    height: 25px;
+    width: 100px;
+    border: none;
+    background-color: blue;
+    color: white;
+}
+
+.TherapistsPreviewButton:hover {
+    background-color: gray;
+}
+
+.TherapistsPreviewContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.TherapistsPreviewButtonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

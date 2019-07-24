@@ -27,7 +27,8 @@ const resourcesData = [
     },
     {
         label: "Contacts",
-        src: image1
+        src: image1,
+        pageName: "contacts"
     },
     {
         label: "Guides",

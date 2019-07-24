@@ -11,6 +11,7 @@ db.createCollection("Chats");
 db.createCollection("Message");
 db.createCollection("Therapists");
 db.createCollection("Events");
+db.createCollection("Contacts");
 
 // Create date object for populating collections
 var myDateString = Date();
@@ -20,6 +21,10 @@ db.Users.insertOne({_id:'Aldo',pass:'Aldo',displayname:'Aldo',avatarID:'1'});
 db.Users.insertOne({_id:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'});
 db.Users.insertOne({_id:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'});
 db.Users.insertOne({_id:'Aileen',pass:'Aileen',displayname:'Aileen',avatarID:'4'});
+
+// CREATE CONTACTS
+db.Contacts.insertOne({title:'National Suicide Prevention Lifeline, 1-800-273-TALK (8255) or Live Online Chat',desc:'If you or someone you know is suicidal or in emotional distress, contact the National Suicide Prevention Lifeline.',link:'http://www.suicidepreventionlifeline.org/GetHelp/LifelineChat.aspx'});
+db.Contacts.insertOne({title:'SAMHSA\'s National Helpline – 1-800-662-HELP (4357)',desc:'SAMHSA\`s National Helpline is a free, confidential, 24/7, 365-day-a-year treatment referral and information service (in English and Spanish) for individuals and families facing mental and/or substance use disorders.',link:'https://www.samhsa.gov/find-help/national-helpline'});
 
 // CREATE THERAPISTS
 db.Therapists.insertOne({title:'Michael Johnson',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Seattle, WA'});

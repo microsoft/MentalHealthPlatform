@@ -6,6 +6,7 @@ import calendar_icon from './../../images/calendar_icon.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
 import { IUpcomingEventData } from './upcoming-events-preview-provider';
+import { getShortenedTimeAndDate } from './../../util/Helpers';
 
 const NUMBER_OF_EVENTS = 1;
 
@@ -25,7 +26,7 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
                 <img src={calendar_icon} className={classes.UpcomingEventsPreviewImage} />
                 <div className={classes.UpcomingEventsPreviewDataText}>
                     <label style={{ fontWeight: "bold", fontSize: "18px", marginBottom: "5px" }}>{eventsData[0].title}</label>
-                    <label style={{ fontSize: "16px", marginBottom: "5px" }}>{eventsData[0].date}</label>
+                    <label style={{ fontSize: "16px", marginBottom: "5px" }}>{getShortenedTimeAndDate(new Date(eventsData[0].date))}</label>
                     <label>{eventsData[0].desc}</label>
                 </div>
             </div>

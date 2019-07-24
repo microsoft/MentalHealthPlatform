@@ -3,12 +3,14 @@
     height: 80px;
     border-radius: 50%;
     margin: 5px;
+    border: 3px solid rgb(13, 103, 151);
 }
 
 .ResourcePreviewContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 10px;
 }
 
 .ResourcePreviews {
@@ -18,4 +20,8 @@
 
 .ResourcesBox {
     background-color: white;
+}
+
+.ResourcesPreviewLabel, .ResourcesPreviewLabel:link, .ResourcesPreviewLabel:visited, .ResourcesPreviewLabel:hover, .ResourcesPreviewLabel:focus, .ResourcesPreviewLabel:active {
+    color: rgb(13, 103, 151);
 }

@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-
+import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./trending-keywords-preview.css";
 
 interface ITrendingKeywordsPreviewProps {
@@ -31,23 +31,25 @@ const trendingKeywords = [
         count: 5
     },
     {
-        word: "Depressed",
-        count: 15
+        word: "anxious",
+        count: 12
     },
     {
-        word: "tired",
-        count: 5
+        word: "sleepy",
+        count: 25
+    },
+    {
+        word: "triggered",
+        count: 30
     }
 ];
 
-const getFontSizeIncrement = (i: number) => {
-    const incrementBase = (50 - 10) / trendingKeywords.length;
-    let increment = (incrementBase) * (i + 1);
-    if (increment < 10)
-    {
-        increment = 10;
-    }
-    return increment;
+const getFontSizeIncrement = (count: number, maxCount: number, minCount: number) => {
+    const MAX_SIZE = 30;
+    const MIN_SIZE = 5;
+    const percentage = count / (maxCount - minCount);
+    const size = (percentage * (MAX_SIZE - MIN_SIZE)) + MIN_SIZE;
+    return size + "px";
 };
 
 
@@ -56,11 +58,23 @@ const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
     } = props;
 
     const keywords = [];
+
+    let maxCount = Number.MIN_VALUE;
+    let minCount = Number.MAX_VALUE;
     for (let i = 0; i < trendingKeywords.length; i++)
     {
-        const fontSize = getFontSizeIncrement(i);
+        maxCount = Math.max(maxCount, trendingKeywords[i].count);
+        minCount = Math.min(minCount, trendingKeywords[i].count);
+    }
+
+
+    for (let i = 0; i < trendingKeywords.length; i++)
+    {
+        const opacity = (Math.random() * 0.5) + 0.5;
+        const degrees = (Math.random() * 20) - 10;
+        const fontSize = getFontSizeIncrement(trendingKeywords[i].count, maxCount, minCount);
         keywords.push(
-            <label style={{fontSize:fontSize}} className={classes.TrendingKeywordsPreviewWords}>
+            <label style={{fontSize:fontSize, transform:`rotate(${degrees}deg)`, opacity:opacity}} className={classes.TrendingKeywordsPreviewWords} key={i}>
                 {trendingKeywords[i].word}
             </label>
         );
@@ -68,8 +82,8 @@ const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
 
     return (
         <div>
-            <h3>Trending Keywords</h3>
-            <div >
+            <div className={Header}>Trending Keywords</div>
+            <div className={classes.TrendingKeywordsWords}>
                 {keywords}
             </div>
         </div>

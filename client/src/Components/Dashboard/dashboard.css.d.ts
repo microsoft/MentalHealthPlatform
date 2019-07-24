@@ -5,3 +5,6 @@ export const ColA: string;
 export const ColB: string;
 export const ColC: string;
 export const Tile: string;
+export const Header: string;
+export const BlueBackground: string;
+export const WhiteBackground: string;

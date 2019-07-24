@@ -4,7 +4,7 @@
 import * as React from 'react';
 import phone from './../../images/phone.jpg';
 import online_support from './../../images/online_support.jpg';
-
+import { Link } from 'react-router-dom';
 import * as classes from "./crisis-preview.css";
 
 interface ICrisisPreviewProps {
@@ -25,17 +25,19 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
                 <div className={classes.CrisisPreviewsSupportContainer}>
                     <div className={classes.CrisisPreviewSupportContainer}>
                         <img src={phone} className={classes.CrisisPreviewImage}/>
-                        <label>Phone</label>
+                        <label className={classes.CrisisPreviewSupportText}>Phone</label>
                     </div>
                     <div className={classes.CrisisPreviewSupportContainer}>
                         <img src={online_support} className={classes.CrisisPreviewImage}/>
-                        <label>Online</label>
+                        <label className={classes.CrisisPreviewSupportText}>Online</label>
                     </div>  
                 </div>
-                
-                <div className={classes.CrisisPreviewsButtonContainer}>
-                    <button className={classes.CrisisPreviewsButton}>Get help now</button>
-                </div>
+                <Link to={`/crisis`} style={{textDecoration:"none"}}>
+                    <div className={classes.CrisisPreviewsButtonContainer}>
+                        <button className={classes.CrisisPreviewsButton}>Get help now</button>
+                    </div>
+                </Link>
+               
             </div>
             
         </div>

@@ -50,4 +50,20 @@
     overflow: hidden;
     box-shadow: 3px 3px 3px #CCCCCC;
     padding: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.BlueBackground { 
+    background-color: rgb(13, 103, 151);
+}
+
+.WhiteBackground { 
+    background-color: #FFFFFF;
+}
+
+.Header {
+    color: rgb(13, 103, 151);
+    margin-top: 0%;
+    font-size: 20px;
+    margin: 0 0 20px 0;
 }

@@ -16,9 +16,25 @@ import UpcomingEventsPreview from './../UpcomingEventsPreview/upcoming-events-pr
 interface IDashboardProps {
 }
 
-const Tile = (props: any) => {
+interface ITileProps {
+    children: any;
+    isBlue?: boolean;
+}
+
+const Tile = (props: ITileProps) => {
+
+    let className = classes.Tile + " ";
+    if (props.isBlue)
+    {
+        className += classes.BlueBackground;
+    }
+    else
+    {
+        className += classes.WhiteBackground;
+    }
+
     return (
-        <div className={classes.Tile}>
+        <div className={className}>
             {props.children}
         </div>
     );
@@ -35,7 +51,7 @@ const Dashboard = (props: IDashboardProps) => {
                     <Tile><ResourcesPreview /></Tile>
                 </div>
                 <div className={classes.ColB}>
-                    <Tile><CrisisPreview /></Tile>
+                    <Tile isBlue={true}><CrisisPreview /></Tile>
                 </div>
                 <div className={classes.ColC}>
                     <Tile><StatisticsPreview /></Tile>

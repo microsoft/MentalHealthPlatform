@@ -5,6 +5,7 @@ import * as React from 'react';
 import message_icon from './../../images/message_icon.png';
 import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
+import { Header } from './../Dashboard/dashboard.css';
 
 interface ITrendingPostsPreviewProps {
     postsData: IPostPreviewData[]
@@ -34,7 +35,7 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
 
     return (
         <div>
-            <h3>Trending posts in your network</h3>
+            <div className={Header}>Trending posts in your network</div>
             <label>Posts based on your preferences</label>
             {posts}
         </div>  

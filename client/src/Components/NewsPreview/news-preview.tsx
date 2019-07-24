@@ -4,7 +4,7 @@
 import * as React from 'react';
 import satya_nadella from './../../images/satya_nadella.jpg';
 import headspace from './../../images/headspace.png';
-
+import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./news-preview.css";
 
 interface INewsPreviewProps {
@@ -38,7 +38,7 @@ const NewsPreview = (props: INewsPreviewProps) => {
 
     return (
         <div>
-            <h3>Latest News</h3>
+            <div className={Header}>Latest News</div>
             <div className={classes.NewsDataContainer}>
                 <img src={newsData[0].picture} className={classes.NewsDataImage}/>
                 <div className={classes.NewsDataTextContainer}>

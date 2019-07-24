@@ -8,6 +8,7 @@ import image1 from './../../images/topic_image_1.jpg';
 import image2 from './../../images/topic_image_2.jpg';
 import image3 from './../../images/topic_image_3.jpg';
 import * as classes from "./resources-preview.css";
+import { Header } from './../Dashboard/dashboard.css';
 
 interface IResourcesPreviewProps {
 }
@@ -43,7 +44,7 @@ const renderPreview = (data: IResourcesData) => {
     if (data.pageName)
     {
         return (
-            <Link to={`/${data.pageName}`}>
+            <Link to={`/${data.pageName}`} style={{textDecoration:"none"}}>
                 <div className={classes.ResourcePreviewContainer}>
                     <img src={data.src} className={classes.ResourcePreviewImage} />
                     <label >{data.label}</label>
@@ -54,7 +55,7 @@ const renderPreview = (data: IResourcesData) => {
     return (
         <div className={classes.ResourcePreviewContainer}>
             <img src={data.src} className={classes.ResourcePreviewImage} />
-            <label >{data.label}</label>
+            <label className={classes.ResourcesPreviewLabel}>{data.label}</label>
         </div>
         
     );
@@ -71,7 +72,7 @@ const ResourcesPreview = (props: IResourcesPreviewProps) => {
     }
     return (
         <div className={classes.ResourcesBox}>
-            <h3>Resources</h3>
+            <div className={Header}>Resources</div>
             
             <div className={classes.ResourcePreviews}>
                 {previews}

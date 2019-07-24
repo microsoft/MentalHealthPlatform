@@ -6,6 +6,8 @@ import facebook_icon from './../../images/facebook_icon.png';
 import outlook_icon from './../../images/outlook_icon.png';
 import twitter_icon from './../../images/twitter_icon.png';
 import * as classes from './statistics-preview.css'
+import { Header } from './../Dashboard/dashboard.css';
+
 interface IStatisticsPreviewProps {
 }
 
@@ -15,7 +17,7 @@ const StatisticsPreview = (props: IStatisticsPreviewProps) => {
 
     return (
         <div>
-            <h3>Your statistics this week</h3>
+            <div className={Header}>Your statistics this week</div>
             <div className={classes.StatisticsPreviewApp}>
                 <img src={outlook_icon} className={classes.StatisticsPreviewImage} />
                 <label className={classes.StatisticsPreviewLabels}>Outlook</label>

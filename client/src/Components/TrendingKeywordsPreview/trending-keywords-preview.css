@@ -1,4 +1,11 @@
 .TrendingKeywordsPreviewWords {
     margin-right: 5px;
     display: inline-block;
+    color: rgb(13, 103, 151);
+    font-weight: bold;
+    
+}
+
+.TrendingKeywordsWords {
+    text-align: center;
 }

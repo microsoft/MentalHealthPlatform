@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import calendar_icon from './../../images/calendar_icon.png';
-
+import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
 
 interface IUpcomingEventsPreviewProps {
@@ -31,7 +31,7 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
 
     return (
         <div>
-            <h3>Upcoming Events</h3>
+            <div className={Header}>Upcoming Events</div>
             <div className={classes.UpcomingEventsPreviewDataContainer}>
                 <img src={upcomingEventsData[0].calendarIcon} className={classes.UpcomingEventsPreviewImage} />
                 <div className={classes.UpcomingEventsPreviewDataText}>

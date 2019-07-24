@@ -45,16 +45,16 @@ const renderPreview = (data: IResourcesData, key: number) => {
     if (data.pageName)
     {
         return (
-            <Link key={key} to={`/${data.pageName}`} style={{textDecoration:"none"}}>
+            <Link key={key} to={`/${data.pageName}`} style={{ textDecoration:"none", marginLeft: 10 }}>
                 <div className={classes.ResourcePreviewContainer}>
                     <img src={data.src} className={classes.ResourcePreviewImage} />
-                    <label >{data.label}</label>
+                    <label>{data.label}</label>
                 </div>
             </Link>
         );
     } 
     return (
-        <div key={key} className={classes.ResourcePreviewContainer}>
+        <div key={key} className={classes.ResourcePreviewContainer} style={{ marginLeft: 10 }}>
             <img src={data.src} className={classes.ResourcePreviewImage} />
             <label className={classes.ResourcesPreviewLabel}>{data.label}</label>
         </div>

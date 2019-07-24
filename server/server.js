@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const mongoClient = require('mongodb').MongoClient;
 
 // Import requests
-const { getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents, getContacts } = require('./requests/get-requests.js');
+const { getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents, getContacts, getNews } = require('./requests/get-requests.js');
 const { signUp, login, sendMessage, createChat } = require('./requests/post-requests');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +33,7 @@ app.get('/gettrendingkeywords', (postReq, postRes) => getTrendingKeywords(mongoC
 app.get('/gettherapists', (postReq, postRes) => getTherapists(mongoClient, postReq, postRes));
 app.get('/getevents', (postReq, postRes) => getEvents(mongoClient, postReq, postRes));
 app.get('/getcontacts', (postReq, postRes) => getContacts(mongoClient, postReq, postRes));
+app.get('/getnews', (postReq, postRes) => getNews(mongoClient, postReq, postRes));
 
 // POST requests
 app.post('/signup', (postReq, postRes) => signUp(mongoClient, postReq, postRes));

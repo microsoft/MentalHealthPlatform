@@ -4,13 +4,17 @@
     border-radius: 50%;
     margin: 5px;
     border: 3px solid rgb(13, 103, 151);
+    cursor: pointer;
 }
 
 .ResourcePreviewContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 10px;
+}
+
+.ResourcePreviewContainer :hover {
+    opacity: 0.7;
 }
 
 .ResourcePreviews {
@@ -24,4 +28,5 @@
 
 .ResourcesPreviewLabel, .ResourcesPreviewLabel:link, .ResourcesPreviewLabel:visited, .ResourcesPreviewLabel:hover, .ResourcesPreviewLabel:focus, .ResourcesPreviewLabel:active {
     color: rgb(13, 103, 151);
+    cursor: pointer;
 }

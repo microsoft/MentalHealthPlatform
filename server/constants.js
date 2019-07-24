@@ -6,6 +6,7 @@ const MESSAGE_COLLECTION = "Message";
 const THERAPISTS_COLLECTION = "Therapists";
 const EVENTS_COLLECTION = "Events";
 const CONTACTS_COLLECTION = "Contacts";
+const NEWS_COLLECTION = "News";
 
 // Status messages
 const SUCCESS_STATUS_MESSAGE = 1;
@@ -23,6 +24,7 @@ module.exports = {
     THERAPISTS_COLLECTION,
     EVENTS_COLLECTION,
     CONTACTS_COLLECTION,
+    NEWS_COLLECTION,
     MONGO_URL,
     DATABASE_NAME,
     SUCCESS_STATUS_MESSAGE,

@@ -1,7 +1,7 @@
 const ObjectId = require('mongodb').ObjectID;
 
 const {
-	TOPICS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, THERAPISTS_COLLECTION, EVENTS_COLLECTION, CONTACTS_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE
+	TOPICS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, THERAPISTS_COLLECTION, EVENTS_COLLECTION, CONTACTS_COLLECTION, NEWS_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE
 } = require('../constants.js');
 
 const getTopics = (mongoClient, postReq, postRes) => {
@@ -349,6 +349,32 @@ const getContacts = (mongoClient, postReq, postRes) => {
 	});
 };
 
+const getNews = (mongoClient, postReq, postRes) => {
+	console.log("Getting news...");
+	
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+		if (err) throw err;
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(NEWS_COLLECTION).find()
+		.toArray((newsErr, newsRes) => {
+			if (newsErr) throw newsErr;
+			
+			if (newsRes.length <= 0) {
+				postRes.json([]);
+				return;
+			}
+
+			const newsObj = {
+				news: newsRes
+			};
+			postRes.json(newsObj);
+
+			db.close();
+		});
+	});
+};
+
 module.exports = {
-    getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents, getContacts
+    getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents, getContacts, getNews
 };

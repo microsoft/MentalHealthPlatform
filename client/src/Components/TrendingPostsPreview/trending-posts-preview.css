@@ -10,6 +10,10 @@
     display: flex;
 }
 
+.TrendingPostsPreviewMessageLink :hover {
+    background-color: #E8E8E8;
+}
+
 .TrendingPostsPreviewMessage {
     display: flex;
     flex-direction: row;

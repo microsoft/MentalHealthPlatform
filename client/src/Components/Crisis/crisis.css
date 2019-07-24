@@ -1,21 +1,40 @@
 .CrisisContainer {
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
 }
 
 .CrisisWrapper {
-    height: 80%;
-    width: 80%;
+    height: 360px;
+    width: 1000px;
     display: flex;
     flex-direction: row;
     box-shadow: 3px 3px 3px #CCCCCC;
 }
 
+.Warning {
+    font-size: 22px;
+    color: rgb(13, 103, 151);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
 .LeftPane {
+    color: rgb(13, 103, 151);
+    padding: 30px;
+    width: 50%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-image: url('./../../images/online_therapist.png');
+    background-size: 100% 100%;
+}
+
+.RightPane {
     background-color: rgb(13, 103, 151);
     color: #FFFFFF;
     padding: 30px;
@@ -26,49 +45,56 @@
     align-items: flex-end;
 }
 
-.RightPane {
-    background-color: #FFFFFF;
-    color: rgb(13, 103, 151);
-    padding: 30px;
-    width: 50%;
-    text-align: start;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 .Label1 {
     font-size: 26px;
     display: flex;
     flex-direction: row;
-    height: 40%;
-    max-height: 40%;
+    height: 120px;
+    max-height: 120px;
+    min-height: 120px;
     max-width: 80%;
-    align-items: center;
 }
 
 .Label2 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     display: flex;
     flex-direction: row;
-    height: 40%;
-    max-height: 40%;
     max-width: 80%;
-    align-items: center;
 }
 
 .Label3 {
-    font-size: 28px;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 80%;
+    justify-content: flex-end;
+    font-size: 42px;
+}
+
+.TalkButtonContainer {
     display: flex;
     flex-direction: row;
-    height: 20%;
-    max-height: 20%;
-    max-width: 80%;
-    align-items: center;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .TalkButton {
-    background-color: rgb(13, 103, 151);
-    color: #FFFFFF;
+    height: 50px;
+    width: 200px;
+    border: none;
+    font-size: 20px;
+    background-color:#FFFFFF;
+    color: rgb(13, 103, 151);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.TalkButton :hover {
+    background-color: #CCCCCC;
 }

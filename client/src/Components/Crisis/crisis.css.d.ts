@@ -6,3 +6,5 @@ export const Label1: string;
 export const Label2: string;
 export const Label3: string;
 export const TalkButton: string;
+export const TalkButtonContainer: string;
+export const Warning: string;

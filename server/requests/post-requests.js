@@ -8,7 +8,7 @@ const signUp = (mongoClient, postReq, postRes) => {
 	const obj = postReq.body;
 	const username = obj.username;
 
-	mongoClient.connect(MONGO_URL, { ...obj, useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
 
 		// Verify if user already exists

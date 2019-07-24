@@ -44,8 +44,10 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         <h1 className={classes.Title}>{title}</h1>
                         <div className={classes.SideColumn}>
                             <table>
-                                <Icon type='replies' count={replies || 0} text='replies' />
-                                <Icon type='views' count={views || 0} text='views' />
+                                <tbody>
+                                    <Icon type='replies' count={replies || 0} text='replies' />
+                                    <Icon type='views' count={views || 0} text='views' />
+                                </tbody>
                             </table>
                         </div>
                     </div>

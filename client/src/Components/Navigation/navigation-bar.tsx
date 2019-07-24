@@ -17,7 +17,7 @@ const renderNameField = (userContext: IUserContext) => {
                     <img src={profilePicturePlaceholder} style={{ height: 30, width: 30, borderRadius: "50%", marginRight: 10 }} />
                     {userContext.user.username}
                 </div>
-                <div style={{ marginLeft: 30, cursor: "pointer" }} onClick={() => {
+                <div style={{ marginLeft: 30, cursor: "pointer", fontWeight: "lighter" }} onClick={() => {
                     const userInfo = {
                         userId: -1,
                         username: ""

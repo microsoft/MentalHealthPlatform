@@ -11,29 +11,58 @@ import { Header } from './../Dashboard/dashboard.css';
 interface IStatisticsPreviewProps {
 }
 
+interface IStatisticData {
+    src: string;
+    label: string;
+    hours: number;
+}
+
+const statisticsData = [
+    {
+        src: outlook_icon,
+        label: "Outlook",
+        hours: 10.2
+    },
+    {
+        src: facebook_icon,
+        label: "Facebook",
+        hours: 5.0
+    },
+    {
+        src: twitter_icon,
+        label: "Twitter",
+        hours: 2.1
+    }
+];
+
+const renderStatistic = (statisticData: IStatisticData, key: number) => {
+    const hours = statisticData.hours;
+    return (
+        <tr key={key}>
+            <td className={classes.TableCell}><img src={statisticData.src} className={classes.StatisticsPreviewImage} /></td>
+            <td className={classes.TableCell} style={{ fontWeight: "bold" }}>{statisticData.label}</td>
+            <td className={classes.TableCell}>{`${hours} ${hours === 1 ? "hour" : "hours"}`}</td>
+        </tr>
+    );
+}
+
 const StatisticsPreview = (props: IStatisticsPreviewProps) => {
     const {
     } = props;
 
+    const statistics = [];
+    for (let i = 0; i < statisticsData.length; i++) {
+        statistics.push(renderStatistic(statisticsData[i], i));
+    }
+
     return (
         <div>
             <div className={Header}>Your statistics this week</div>
-            <div className={classes.StatisticsPreviewApp}>
-                <img src={outlook_icon} className={classes.StatisticsPreviewImage} />
-                <label className={classes.StatisticsPreviewLabels}>Outlook</label>
-                <label className={classes.StatisticsPreviewLabels}>10.2 hours</label>
-            </div>
-            <div className={classes.StatisticsPreviewApp}>
-                <img src={facebook_icon} className={classes.StatisticsPreviewImage} />
-                <label className={classes.StatisticsPreviewLabels}>Facebook</label>
-                <label className={classes.StatisticsPreviewLabels}>5.0 hours</label>
-            </div>
-            <div className={classes.StatisticsPreviewApp}>
-                <img src={twitter_icon} className={classes.StatisticsPreviewImage} />
-                <label className={classes.StatisticsPreviewLabels}>Twitter</label>
-                <label className={classes.StatisticsPreviewLabels}>2.1 hours</label>
-            </div>
-            
+            <table>
+                <tbody>
+                    {statistics}
+                </tbody>
+            </table>
         </div>
     );
 };

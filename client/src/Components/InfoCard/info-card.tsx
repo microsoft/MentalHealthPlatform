@@ -47,8 +47,12 @@ const InfoCard = (props: IInfocardProps): JSX.Element => {
                     </div>
                 </div>
                 <div style={{marginLeft: 32}}>
-                    <Icon type='replies' count={data.numberOfReplies || 0} text='replies' />
-                    <Icon type='views' count={data.numberOfViews || 0} text='views' />
+                    <table>
+                        <tbody>
+                            <Icon type='replies' count={data.numberOfReplies || 0} text='replies' />
+                            <Icon type='views' count={data.numberOfViews || 0} text='views' />
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </Link>

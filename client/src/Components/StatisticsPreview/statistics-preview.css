@@ -2,14 +2,7 @@
     max-width: 25px;
 }
 
-.StatisticsPreviewApp {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.StatisticsPreviewLabels {
-    margin-left: 7px;
-    margin-right: 7px;
+.TableCell {
+    vertical-align: center;
+    padding: 3px 8px;
 }

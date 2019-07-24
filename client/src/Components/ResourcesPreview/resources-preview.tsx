@@ -31,12 +31,14 @@ const resourcesData = [
         pageName: "contacts"
     },
     {
-        label: "Guides",
-        src: image2
+        label: "News",
+        src: image2,
+        pageName: "news"
     },
     {
-        label: "Mediation",
-        src: image3
+        label: "Events",
+        src: image3,
+        pageName: "events"
     }
 
 ];

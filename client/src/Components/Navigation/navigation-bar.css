@@ -35,3 +35,10 @@
     text-decoration: none;
     color: #FFFFFF
 }
+
+.Link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 20px;
+    margin-left: 20px;
+}

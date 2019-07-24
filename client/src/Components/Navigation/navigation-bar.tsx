@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import * as classes from "./navigation-bar.css";
 import { IUserContext, UserDataContext } from '../App';
@@ -43,6 +43,10 @@ const NavigationBar = () => {
                 <NavLink exact to="/" className={classes.NavigationBarTitleLink}>
                     <img src={homeIcon} style={{ width: 30, height: 30 }} />
                 </NavLink>
+                <Link className={classes.Link} to={`/topics`}>Forums</Link>
+                <Link className={classes.Link} to={`/contacts`}>Contacts</Link>
+                <Link className={classes.Link} to={`/news`}>News</Link>
+                <Link className={classes.Link} to={`/events`}>Events</Link>
             </div>
             <div className={classes.NavigationBarRight}>
                 <UserDataContext.Consumer>

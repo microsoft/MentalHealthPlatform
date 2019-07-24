@@ -100,7 +100,7 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 		if (err) throw err;
 
 		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(3)
+		dbo.collection(CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(5)
 		.toArray((chatErr, chatRes) => {
 			if (chatErr) throw chatErr;
 

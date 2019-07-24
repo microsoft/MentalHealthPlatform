@@ -13,7 +13,8 @@ interface ITrendingKeywordsPreviewProps {
 const getFontSizeIncrement = (count: number, maxCount: number, minCount: number) => {
     const MAX_SIZE = 30;
     const MIN_SIZE = 20;
-    const percentage = (count - minCount) / (maxCount - minCount);
+    const denominator = maxCount - minCount;
+    const percentage = denominator === 0 ? 1 : (count - minCount) / denominator;
     const size = (percentage * (MAX_SIZE - MIN_SIZE)) + MIN_SIZE;
     return size + "px";
 };

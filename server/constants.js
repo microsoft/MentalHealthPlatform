@@ -3,6 +3,8 @@ const USERS_COLLECTION = "Users";
 const TOPICS_COLLECTION = "Topics";
 const CHATS_COLLECTION = "Chats";
 const MESSAGE_COLLECTION = "Message";
+const THERAPISTS_COLLECTION = "Therapists";
+const EVENTS_COLLECTION = "Events";
 
 // Status messages
 const SUCCESS_STATUS_MESSAGE = 1;
@@ -17,6 +19,8 @@ module.exports = {
     TOPICS_COLLECTION,
     CHATS_COLLECTION,
     MESSAGE_COLLECTION,
+    THERAPISTS_COLLECTION,
+    EVENTS_COLLECTION,
     MONGO_URL,
     DATABASE_NAME,
     SUCCESS_STATUS_MESSAGE,

@@ -9,6 +9,8 @@ db.createCollection("Users");
 db.createCollection("Topics");
 db.createCollection("Chats");
 db.createCollection("Message");
+db.createCollection("Therapists");
+db.createCollection("Events");
 
 // Create date object for populating collections
 var myDateString = Date();
@@ -18,6 +20,16 @@ db.Users.insertOne({_id:'Aldo',pass:'Aldo',displayname:'Aldo',avatarID:'1'});
 db.Users.insertOne({_id:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'});
 db.Users.insertOne({_id:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'});
 db.Users.insertOne({_id:'Aileen',pass:'Aileen',displayname:'Aileen',avatarID:'4'});
+
+// CREATE THERAPISTS
+db.Therapists.insertOne({title:'Michael Johnson',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Seattle, WA'});
+db.Therapists.insertOne({title:'Samantha Smith',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Bellevue, WA'});
+db.Therapists.insertOne({title:'Tim Howard',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Redmond, WA'});
+
+// CREATE EVENTS
+db.Events.insertOne({title:'Monthly Stress Forum',date:Date(),location:'Microsoft Building 321',desc:'At building 321, discussion about stress and how it affects our bodies'});
+db.Events.insertOne({title:'Picnic',date:Date(),location:'Marymour Park',desc:'Come for a picnic at Marymour park. All are welcome!'});
+db.Events.insertOne({title:'Roundtable Discussion about Anxiety',date:Date(),location:'Chattime, Bellevue',desc:'Open dialog about anxiety'});
 
 // TOPIC
 stressId = db.Topics.insertOne({topicTitle:'Stress',image:'1'}).insertedId.str;

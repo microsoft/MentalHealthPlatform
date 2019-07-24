@@ -1,7 +1,7 @@
 const ObjectId = require('mongodb').ObjectID;
 
 const {
-	TOPICS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE
+	TOPICS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, THERAPISTS_COLLECTION, EVENTS_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE
 } = require('../constants.js');
 
 const getTopics = (mongoClient, postReq, postRes) => {
@@ -271,6 +271,58 @@ const getChat = (mongoClient, postReq, postRes) => {
 	});
 };
 
+const getTherapists = (mongoClient, postReq, postRes) => {
+	console.log("Getting therapists...");
+	
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+		if (err) throw err;
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(THERAPISTS_COLLECTION).find().limit(3)
+		.toArray((therapistsErr, therapistsRes) => {
+			if (therapistsErr) throw therapistsErr;
+			
+			if (therapistsRes.length <= 0) {
+				postRes.json([]);
+				return;
+			}
+
+			const therapistsObj = {
+				therapists: therapistsRes
+			};
+			postRes.json(therapistsObj);
+
+			db.close();
+		});
+	});
+};
+
+const getEvents = (mongoClient, postReq, postRes) => {
+	console.log("Getting events...");
+	
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+		if (err) throw err;
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(EVENTS_COLLECTION).find().limit(3)
+		.toArray((eventsErr, eventsRes) => {
+			if (eventsErr) throw eventsErr;
+			
+			if (eventsRes.length <= 0) {
+				postRes.json([]);
+				return;
+			}
+
+			const eventsObj = {
+				events: eventsRes
+			};
+			postRes.json(eventsObj);
+
+			db.close();
+		});
+	});
+};
+
 module.exports = {
-    getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat
+    getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents
 };

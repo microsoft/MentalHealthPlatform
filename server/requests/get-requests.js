@@ -116,7 +116,8 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 				return {
 					title: chat.chatTitle,
 					description: chat.desc,
-					_id: chat._id
+					chat_id: chat._id,
+					topic_id: chat.topic_id
 				};
 			});
 

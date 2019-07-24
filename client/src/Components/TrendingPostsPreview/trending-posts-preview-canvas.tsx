@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import message_icon from './../../images/message_icon.png';
 import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
@@ -12,14 +13,19 @@ interface ITrendingPostsPreviewProps {
 }
 
 const renderTrendingPostPreview = (postData: IPostPreviewData, key: number) => {
+    const topicId = postData.topic_id;
+    const chatId = postData.chat_id;
+    const url = `/topics/topic${topicId}/chat/${chatId}`;
     return (
-        <div key={key} className={classes.TrendingPostsPreviewMessage}>
-            <img src={message_icon} className={classes.TrendingPostsPreviewImage}/>
-            <div className={classes.TrendingPostsPreviewLabel}>
-                <label style={{ fontSize: 18, fontWeight: "bold", marginBottom: 5 }}>{postData.title}</label>
-                <label style={{ fontSize: 16 }}>{postData.description}</label>
-            </div>      
-        </div>
+        <Link key={key} to={url} className={classes.TrendingPostsPreviewMessageLink}>
+            <div className={classes.TrendingPostsPreviewMessage}>
+                <img src={message_icon} className={classes.TrendingPostsPreviewImage}/>
+                <div className={classes.TrendingPostsPreviewLabel}>
+                    <label style={{ fontSize: 18, fontWeight: "bold", marginBottom: 5, cursor: "pointer" }}>{postData.title}</label>
+                    <label style={{ fontSize: 16, cursor: "pointer" }}>{postData.description}</label>
+                </div>      
+            </div>
+        </Link>
     );
 };
 

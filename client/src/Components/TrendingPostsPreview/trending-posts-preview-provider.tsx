@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 import * as React from "react";
-import { Header } from './../Dashboard/dashboard.css';
 
 import { baseGetRequest } from "./../../util/base-requests";
 import TrendingPostsCanvas from './trending-posts-preview-canvas';
@@ -11,6 +10,8 @@ export interface IPostPreviewData {
     icon: any;
     title: string;
     description: string;
+    chat_id: string;
+    topic_id: string;
 };
 
 interface ITrendingPostsProviderProps {

@@ -4,12 +4,20 @@
     margin-left: 10px;
 }
 
+.TrendingPostsPreviewMessageLink {
+    text-decoration: none;
+    color: #000000;
+    display: flex;
+}
+
 .TrendingPostsPreviewMessage {
     display: flex;
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid #CCCCCC;
     padding: 10px;
+    flex-grow: 1;
+    cursor: pointer;
 }
 
 .TrendingPostsPreviewImage {

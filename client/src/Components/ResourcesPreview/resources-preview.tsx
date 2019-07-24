@@ -40,11 +40,11 @@ const resourcesData = [
 
 ];
 
-const renderPreview = (data: IResourcesData) => {
+const renderPreview = (data: IResourcesData, key: number) => {
     if (data.pageName)
     {
         return (
-            <Link to={`/${data.pageName}`} style={{textDecoration:"none"}}>
+            <Link key={key} to={`/${data.pageName}`} style={{textDecoration:"none"}}>
                 <div className={classes.ResourcePreviewContainer}>
                     <img src={data.src} className={classes.ResourcePreviewImage} />
                     <label >{data.label}</label>
@@ -53,7 +53,7 @@ const renderPreview = (data: IResourcesData) => {
         );
     } 
     return (
-        <div className={classes.ResourcePreviewContainer}>
+        <div key={key} className={classes.ResourcePreviewContainer}>
             <img src={data.src} className={classes.ResourcePreviewImage} />
             <label className={classes.ResourcesPreviewLabel}>{data.label}</label>
         </div>
@@ -68,12 +68,11 @@ const ResourcesPreview = (props: IResourcesPreviewProps) => {
     const previews = [];
     for (let i = 0; i < resourcesData.length; i++)
     {
-        previews.push(renderPreview(resourcesData[i]));
+        previews.push(renderPreview(resourcesData[i], i));
     }
     return (
         <div className={classes.ResourcesBox}>
             <div className={Header}>Resources</div>
-            
             <div className={classes.ResourcePreviews}>
                 {previews}
             </div>

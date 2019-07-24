@@ -67,7 +67,6 @@ const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
         minCount = Math.min(minCount, trendingKeywords[i].count);
     }
 
-
     for (let i = 0; i < trendingKeywords.length; i++)
     {
         const opacity = (Math.random() * 0.5) + 0.5;
@@ -81,10 +80,12 @@ const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
     }
 
     return (
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <div className={Header}>Trending Keywords</div>
-            <div className={classes.TrendingKeywordsWords}>
-                {keywords}
+            <div className={classes.TrendingKeywordsWordsContainer}>
+                <div className={classes.TrendingKeywordsWords}>
+                    {keywords}
+                </div>
             </div>
         </div>
     );

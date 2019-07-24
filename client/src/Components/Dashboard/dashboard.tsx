@@ -22,7 +22,6 @@ interface ITileProps {
 }
 
 const Tile = (props: ITileProps) => {
-
     let className = classes.Tile + " ";
     if (props.isBlue)
     {

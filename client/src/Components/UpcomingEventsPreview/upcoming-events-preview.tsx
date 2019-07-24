@@ -35,8 +35,8 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
             <div className={classes.UpcomingEventsPreviewDataContainer}>
                 <img src={upcomingEventsData[0].calendarIcon} className={classes.UpcomingEventsPreviewImage} />
                 <div className={classes.UpcomingEventsPreviewDataText}>
-                    <label>{upcomingEventsData[0].eventName}</label>
-                    <label>{upcomingEventsData[0].eventDate}</label>
+                    <label style={{ fontWeight: "bold", fontSize: "18px", marginBottom: "5px" }}>{upcomingEventsData[0].eventName}</label>
+                    <label style={{ fontSize: "16px", marginBottom: "5px" }}>{upcomingEventsData[0].eventDate}</label>
                     <label>{upcomingEventsData[0].eventDescription}</label>
                 </div>
                 

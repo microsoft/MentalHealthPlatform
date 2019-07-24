@@ -20,7 +20,7 @@ const TherapistsPreview = (props: ITherapistsPreviewProps) => {
                 Take advantage of this opportunity by finding a therapist from
                 our list of certified professionals.
             </label>
-            <Link to={`/therapists`} style={{textDecoration:"none"}}>
+            <Link to={`/therapists`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
                 <div className={classes.TherapistsPreviewButtonContainer}>
                     <button className={classes.TherapistsPreviewButton}>Talk to someone</button>
                 </div>

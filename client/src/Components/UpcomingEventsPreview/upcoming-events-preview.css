@@ -1,12 +1,14 @@
 .UpcomingEventsPreviewImage {
-    max-width: 50px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
 }
 
 .UpcomingEventsPreviewDataText {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 .UpcomingEventsPreviewDataContainer {

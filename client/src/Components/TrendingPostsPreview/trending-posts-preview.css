@@ -1,16 +1,19 @@
 .TrendingPostsPreviewLabel {
     display: flex;
     flex-direction: column;
-    /* align-items: center */
+    margin-left: 10px;
 }
 
 .TrendingPostsPreviewMessage {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 2px solid lightslategray;
+    border-bottom: 1px solid #CCCCCC;
+    padding: 10px;
 }
 
 .TrendingPostsPreviewImage {
-    min-width: 75px;
+    max-width: 42px;
+    width: 42px;
+    height: 42px;
 }

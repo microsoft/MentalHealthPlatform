@@ -16,8 +16,8 @@ const renderTrendingPostPreview = (postData: IPostPreviewData, key: number) => {
         <div key={key} className={classes.TrendingPostsPreviewMessage}>
             <img src={message_icon} className={classes.TrendingPostsPreviewImage}/>
             <div className={classes.TrendingPostsPreviewLabel}>
-                <label>{postData.title}</label>
-                <label>{postData.description}</label>
+                <label style={{ fontSize: 18, fontWeight: "bold", marginBottom: 5 }}>{postData.title}</label>
+                <label style={{ fontSize: 16 }}>{postData.description}</label>
             </div>      
         </div>
     );
@@ -36,7 +36,9 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
     return (
         <div>
             <div className={Header}>Trending posts in your network</div>
-            <label>Posts based on your preferences</label>
+            <div style={{ paddingBottom: "15px", borderBottom: "1px solid #CCCCCC" }}>
+                <label style={{ fontStyle: "italic" }}>Posts based on your preferences</label>
+            </div>
             {posts}
         </div>  
     );

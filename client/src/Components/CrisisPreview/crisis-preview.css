@@ -10,13 +10,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-   
 }
 
 .CrisisPreviews {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 
 .CrisisPreviewsButton {
@@ -26,6 +26,7 @@
     border: none;
     color: rgb(13, 103, 151);
     font-size: 16px;
+    cursor: pointer;
 }
 
 .CrisisPreviewsButton:hover {
@@ -42,15 +43,17 @@
 .CrisisPreviewsSupportContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .CrisisPreviewsText {
     font-size: 30px;
     color: white;
     padding-left: 10px;
+    display: flex;
 }
 .CrisisPreviewSupportText {
     color: white;
@@ -60,5 +63,5 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    
+    height: 100%;
 }

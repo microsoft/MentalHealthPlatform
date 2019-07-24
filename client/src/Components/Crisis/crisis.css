@@ -1,0 +1,74 @@
+.CrisisContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+}
+
+.CrisisWrapper {
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 3px 3px 3px #CCCCCC;
+}
+
+.LeftPane {
+    background-color: rgb(13, 103, 151);
+    color: #FFFFFF;
+    padding: 30px;
+    width: 50%;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.RightPane {
+    background-color: #FFFFFF;
+    color: rgb(13, 103, 151);
+    padding: 30px;
+    width: 50%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Label1 {
+    font-size: 26px;
+    display: flex;
+    flex-direction: row;
+    height: 40%;
+    max-height: 40%;
+    max-width: 80%;
+    align-items: center;
+}
+
+.Label2 {
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    height: 40%;
+    max-height: 40%;
+    max-width: 80%;
+    align-items: center;
+}
+
+.Label3 {
+    font-size: 28px;
+    display: flex;
+    flex-direction: row;
+    height: 20%;
+    max-height: 20%;
+    max-width: 80%;
+    align-items: center;
+}
+
+.TalkButton {
+    background-color: rgb(13, 103, 151);
+    color: #FFFFFF;
+}

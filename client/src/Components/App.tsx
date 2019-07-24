@@ -13,6 +13,7 @@ import { CreateChat } from './CreateChat/create-chat-provider';
 import Dashboard from './Dashboard/dashboard';
 import Crisis from './Crisis/crisis';
 import Therapists from './Therapists/therapists';
+import Events from './Events/events';
 
 export type UserDataType = {
     userId: number;
@@ -63,6 +64,7 @@ export class UserProvider extends React.Component<{}, IUserContext> {
                             <Route exact path="/dashboard" component={() => <Dashboard />} />
                             <Route exact path="/crisis" component={() => <Crisis />} />
                             <Route exact path="/therapists" component={() => <Therapists />} />
+                            <Route exact path="/events" component={() => <Events />} />
                             <Route exact path="/topics" component={() => <Topics />} />
                             <Route exact path="/login" component={() => <SignupLogin />} />
                             <Route exact path={`/topics/topic:topicID`} component={() => <Forum />} />

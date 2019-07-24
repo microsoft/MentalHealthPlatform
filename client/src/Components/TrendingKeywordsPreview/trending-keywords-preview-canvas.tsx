@@ -4,77 +4,43 @@
 import * as React from 'react';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./trending-keywords-preview.css";
+import { IKeywordPreviewData } from "./trending-keywords-preview-provider";
 
 interface ITrendingKeywordsPreviewProps {
+    keywordsData: IKeywordPreviewData[];
 }
-
-interface ITrendingKeywords {
-    word: string;
-    count: number;
-}
-
-const trendingKeywords = [
-    {
-        word: "Anxiety",
-        count: 20
-    },
-    {
-        word: "Stressed",
-        count: 10
-    },
-    {
-        word: "Depressed",
-        count: 15
-    },
-    {
-        word: "tired",
-        count: 5
-    },
-    {
-        word: "anxious",
-        count: 12
-    },
-    {
-        word: "sleepy",
-        count: 25
-    },
-    {
-        word: "triggered",
-        count: 30
-    }
-];
 
 const getFontSizeIncrement = (count: number, maxCount: number, minCount: number) => {
     const MAX_SIZE = 30;
-    const MIN_SIZE = 5;
-    const percentage = count / (maxCount - minCount);
+    const MIN_SIZE = 20;
+    const percentage = (count - minCount) / (maxCount - minCount);
     const size = (percentage * (MAX_SIZE - MIN_SIZE)) + MIN_SIZE;
     return size + "px";
 };
 
-
 const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
     const {
+        keywordsData
     } = props;
 
     const keywords = [];
 
     let maxCount = Number.MIN_VALUE;
     let minCount = Number.MAX_VALUE;
-    for (let i = 0; i < trendingKeywords.length; i++)
+    for (let i = 0; i < keywordsData.length; i++)
     {
-        maxCount = Math.max(maxCount, trendingKeywords[i].count);
-        minCount = Math.min(minCount, trendingKeywords[i].count);
+        maxCount = Math.max(maxCount, keywordsData[i].count);
+        minCount = Math.min(minCount, keywordsData[i].count);
     }
 
-    for (let i = 0; i < trendingKeywords.length; i++)
+    for (let i = 0; i < keywordsData.length; i++)
     {
         const opacity = (Math.random() * 0.5) + 0.5;
         const degrees = (Math.random() * 20) - 10;
-        const fontSize = getFontSizeIncrement(trendingKeywords[i].count, maxCount, minCount);
+        const fontSize = getFontSizeIncrement(keywordsData[i].count, maxCount, minCount);
         keywords.push(
             <label style={{fontSize:fontSize, transform:`rotate(${degrees}deg)`, opacity:opacity}} className={classes.TrendingKeywordsPreviewWords} key={i}>
-                {trendingKeywords[i].word}
+                {keywordsData[i].word}
             </label>
         );
     }

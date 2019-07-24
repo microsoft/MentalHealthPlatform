@@ -42,7 +42,7 @@ export class TrendingPostsProvider extends React.Component<ITrendingPostsProvide
     }
 
     componentDidMount = () => {
-        this.retrieveChatPreviews();
+        this.retrieveTrendingPosts();
     }
 
     retrieveTrendingPostsResponseHandler = (data: any) => {
@@ -55,7 +55,7 @@ export class TrendingPostsProvider extends React.Component<ITrendingPostsProvide
         console.error(error);
     }
 
-    retrieveChatPreviews = () => {
+    retrieveTrendingPosts = () => {
         const params = [{}];
         baseGetRequest("gettrendingposts", params, this.retrieveTrendingPostsResponseHandler, this.retrieveTrendingPostsErrorHandler);
     }

@@ -96,7 +96,6 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 const getTrendingPosts = (mongoClient, postReq, postRes) => {
 	console.log("Getting trending posts...");
 
-	const obj = postReq.query;
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
@@ -110,9 +109,9 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 				return;
 			}
 
-			const chatPreviewsObj = {};
+			const trendingPostsObj = {};
 
-			chatPreviewsObj.chatPreviews = chatRes.map(chat => {
+			trendingPostsObj.chatPreviews = chatRes.map(chat => {
 				return {
 					title: chat.chatTitle,
 					description: chat.desc,
@@ -121,7 +120,72 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 				};
 			});
 
-			postRes.json(chatPreviewsObj);
+			postRes.json(trendingPostsObj);
+
+			db.close();
+		});
+	});
+};
+
+const getTrendingKeywords = (mongoClient, postReq, postRes) => {
+	console.log("Getting trending keywords...");
+	
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+		if (err) throw err;
+
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(MESSAGE_COLLECTION).find().sort({ date : -1 }).limit(10)
+		.toArray((messageErr, messageRes) => {
+			if (messageErr) throw messageErr;
+
+			if (messageRes.length === 0) {
+				postRes.json([]);
+				return;
+			}
+
+			const chatPreviewsObj = {};
+
+			console.log(messageRes.map(current => current.messageBody))
+
+			const messages = messageRes.reduce((accumulator, current) => {
+				return accumulator += " " + current.messageBody;
+			}, "");
+
+			const words = messages.split(" ");
+
+			const map = {};
+			for (const word of words) {
+				const currentWord = word.replace("?", "").replace("!", "").replace(".", "").replace(",", "");
+				if (map[currentWord]) {
+					map[currentWord]++;
+				}
+				else {
+					map[currentWord] = 1;
+				}
+			}
+
+			let countedWords = [];
+
+			const keys = Object.keys(map);
+			for (let i = 0; i < keys.length; i++) {
+				const currentWord = keys[i];
+				if (currentWord.length > 5) {
+					countedWords.push([currentWord, map[currentWord]]);
+				}
+			}
+
+			countedWords.sort((a, b) => b[1] - a[1]);
+			countedWords = countedWords.slice(0, 10);
+
+			const trendingKeywordsObj = {};
+			trendingKeywordsObj.trendingKeywords = countedWords.map(current => {
+				return {
+					word: current[0],
+					count: current[1]
+				};
+			});
+
+			postRes.json(trendingKeywordsObj);
 
 			db.close();
 		});
@@ -208,5 +272,5 @@ const getChat = (mongoClient, postReq, postRes) => {
 };
 
 module.exports = {
-    getTopics, getChatPreviews, getTrendingPosts, getChat
+    getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat
 };

@@ -10,7 +10,7 @@ import CrisisPreview from './../CrisisPreview/crisis-preview';
 import StatisticsPreview from './../StatisticsPreview/statistics-preview';
 import TherapistsPreview from './../TherapistsPreview/therapists-preview';
 import { TrendingPostsProvider } from '../TrendingPostsPreview/trending-posts-preview-provider';
-import TrendingKeywordsPreview from './../TrendingKeywordsPreview/trending-keywords-preview';
+import { TrendingKeywordsProvider } from './../TrendingKeywordsPreview/trending-keywords-preview-provider';
 import UpcomingEventsPreview from './../UpcomingEventsPreview/upcoming-events-preview';
 
 interface IDashboardProps {
@@ -72,7 +72,7 @@ const Dashboard = (props: IDashboardProps) => {
                 </div>
                 <div className={classes.ColC}>
                     <div className={classes.RowA}>
-                        <Tile><TrendingKeywordsPreview /></Tile>
+                        <Tile><TrendingKeywordsProvider /></Tile>
                     </div>
                     <div className={classes.RowA}>
                         <Tile><UpcomingEventsPreview /></Tile>

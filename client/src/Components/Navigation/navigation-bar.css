@@ -21,6 +21,9 @@
     text-decoration: none;
     color: #FFFFFF;
     font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }  
 
 .NavigationBarRight {

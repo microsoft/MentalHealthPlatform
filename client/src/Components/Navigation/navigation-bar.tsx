@@ -6,13 +6,18 @@ import { NavLink } from 'react-router-dom';
 
 import * as classes from "./navigation-bar.css";
 import { IUserContext, UserDataContext } from '../App';
+import profilePicturePlaceholder from "./../../images/profile_picture_placeholder.png";
+import homeIcon from "./../../images/home_icon.png";
 
 const renderNameField = (userContext: IUserContext) => {
     if (userContext.user && userContext.user.username && userContext.user.username.length > 0) {
         return (
             <div style={{display: "flex", flexDirection: "row"}}>
-                {`Welcome ${userContext.user.username}!`}
-                <div style={{marginLeft: 22, cursor: "pointer"}} onClick={() => {
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                    <img src={profilePicturePlaceholder} style={{ height: 30, width: 30, borderRadius: "50%", marginRight: 10 }} />
+                    {userContext.user.username}
+                </div>
+                <div style={{ marginLeft: 30, cursor: "pointer" }} onClick={() => {
                     const userInfo = {
                         userId: -1,
                         username: ""
@@ -35,7 +40,9 @@ const NavigationBar = () => {
     return (
         <div className={classes.NavigationBar}>
             <div className={classes.NavigationBarLeft}>                
-                <NavLink exact to="/" className={classes.NavigationBarTitleLink}>Mental Health Platform</NavLink>
+                <NavLink exact to="/" className={classes.NavigationBarTitleLink}>
+                    <img src={homeIcon} style={{ width: 30, height: 30 }} />
+                </NavLink>
             </div>
             <div className={classes.NavigationBarRight}>
                 <UserDataContext.Consumer>

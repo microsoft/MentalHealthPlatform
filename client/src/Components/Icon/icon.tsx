@@ -26,20 +26,18 @@ const renderIcon = (type: string) => {
             break;
     }
 
-    return <img className={classes.Icon} src={icon} />
+    return <img className={classes.Icon} src={icon} style={{ display: "table-cell" }} />
 }
 
 const Icon = (props: IIconProps) => {
     const { type, count, text } = props;
 
-    return (
-        <span className={classes.Container}>
-            {renderIcon(type)}
-            <div className={classes.IconInfo}>
-                {count != undefined && <span className={classes.Text}>{count}</span>}
-                {text && <span>{'\u00A0'}{text}</span>}
-            </div>
-        </span>
+    return (        
+        <tr>
+            <td className={classes.TableCell}>{renderIcon(type)}</td>
+            <td className={classes.TableCell} style={{ textAlign: "end" }}>{count != undefined ? count : null}</td>
+            <td className={classes.TableCell}>{text}</td>
+        </tr>
     );
 }
 

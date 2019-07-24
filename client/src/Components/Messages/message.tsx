@@ -26,7 +26,7 @@ const renderProfilePicture = (isCurrentUser: boolean) => {
 
 const renderMessageBody = (isCurrentUser: boolean, messageBody: string) => {
     var messageBodyContainerStyle = {
-        backgroundColor: isCurrentUser ? "#F2F2F2" : "#E2F0D9"
+        backgroundColor: isCurrentUser ? "#F2F2F2" : "rgb(190, 230, 255)"
     };
 
     return (

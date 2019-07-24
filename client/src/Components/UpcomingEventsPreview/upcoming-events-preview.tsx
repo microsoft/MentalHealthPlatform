@@ -5,43 +5,37 @@ import * as React from 'react';
 import calendar_icon from './../../images/calendar_icon.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
+import { IUpcomingEventData } from './upcoming-events-preview-provider';
+
+const NUMBER_OF_EVENTS = 1;
 
 interface IUpcomingEventsPreviewProps {
+    eventsData: IUpcomingEventData[]
 }
-
-interface IUpcomingEventsData {
-    calendarIcon: any;
-    eventName: string;
-    eventDate: string;
-    eventDescription: string;
-}
-
-const upcomingEventsData = [
-    {
-        calendarIcon: calendar_icon,
-        eventName: "Monthly Stress Forum",
-        eventDate: "July 31, 2019",
-        eventDescription: "At building 321, discussion about stress and how it affects our bodies"
-    }
-];
 
 const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
     const {
-    } = props;
+        eventsData
+    } = props;    
+
+    const events = [];
+    for (let i = 0; i < Math.min(NUMBER_OF_EVENTS, eventsData.length); i++) {
+        events.push(
+            <div key={i} className={classes.UpcomingEventsPreviewDataContainer}>
+                <img src={calendar_icon} className={classes.UpcomingEventsPreviewImage} />
+                <div className={classes.UpcomingEventsPreviewDataText}>
+                    <label style={{ fontWeight: "bold", fontSize: "18px", marginBottom: "5px" }}>{eventsData[0].title}</label>
+                    <label style={{ fontSize: "16px", marginBottom: "5px" }}>{eventsData[0].date}</label>
+                    <label>{eventsData[0].desc}</label>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>
             <div className={Header}>Upcoming Events</div>
-            <div className={classes.UpcomingEventsPreviewDataContainer}>
-                <img src={upcomingEventsData[0].calendarIcon} className={classes.UpcomingEventsPreviewImage} />
-                <div className={classes.UpcomingEventsPreviewDataText}>
-                    <label style={{ fontWeight: "bold", fontSize: "18px", marginBottom: "5px" }}>{upcomingEventsData[0].eventName}</label>
-                    <label style={{ fontSize: "16px", marginBottom: "5px" }}>{upcomingEventsData[0].eventDate}</label>
-                    <label>{upcomingEventsData[0].eventDescription}</label>
-                </div>
-                
-
-            </div>
+            {events}
         </div>
     );
 };

@@ -43,6 +43,7 @@ const NavigationBar = () => {
                 <NavLink exact to="/" className={classes.NavigationBarTitleLink}>
                     <img src={homeIcon} style={{ width: 30, height: 30 }} />
                 </NavLink>
+                <Link className={classes.Link} to={`/`}>Dashboard</Link>
                 <Link className={classes.Link} to={`/topics`}>Forums</Link>
                 <Link className={classes.Link} to={`/contacts`}>Contacts</Link>
                 <Link className={classes.Link} to={`/news`}>News</Link>

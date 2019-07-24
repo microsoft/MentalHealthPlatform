@@ -32,9 +32,9 @@ db.Contacts.insertOne({title:'National Suicide Prevention Lifeline, 1-800-273-TA
 db.Contacts.insertOne({title:'SAMHSA\'s National Helpline – 1-800-662-HELP (4357)',desc:'SAMHSA\`s National Helpline is a free, confidential, 24/7, 365-day-a-year treatment referral and information service (in English and Spanish) for individuals and families facing mental and/or substance use disorders.',link:'https://www.samhsa.gov/find-help/national-helpline'});
 
 // CREATE THERAPISTS
-db.Therapists.insertOne({title:'Michael Johnson',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Seattle, WA'});
-db.Therapists.insertOne({title:'Samantha Smith',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Bellevue, WA'});
-db.Therapists.insertOne({title:'Tim Howard',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(123) 456-7890',location:'Redmond, WA'});
+db.Therapists.insertOne({title:'Michael Johnson',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Seattle, WA'});
+db.Therapists.insertOne({title:'Samantha Smith',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Bellevue, WA'});
+db.Therapists.insertOne({title:'Tim Howard',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Redmond, WA'});
 
 // CREATE EVENTS
 db.Events.insertOne({title:'Monthly Stress Forum',date:Date(),location:'Microsoft Building 321',desc:'At building 321, discussion about stress and how it affects our bodies'});
@@ -85,3 +85,23 @@ lonelinessChatId1 = db.Chats.insertOne({chatTitle:'Feeling isolated while studyi
 db.Message.insertOne({chat_id:lonelinessChatId1,messageBody:"I've been feeling really lonely while studying abroad here in Paris. I went into Paris not knowing anybody, and I had expected to immediately find people who I vibed with. It's been three weeks so far, and I don't really get along with my school cohort here; there are little opportunities for me to interact with French people, and its hard to keep in touch with friends at home because of the time difference. My feelings of loneliness spiral a lot, and often grow into desperation. I don't know how to deal with this.",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:lonelinessChatId1,messageBody:"I've experienced the same thing while I was studying abroad in Beijing. Even thoughs studying abroad can be a fun experience, people don't really tell you the negatives of their experiences abroad. For me, I joined a local soccer team, and even though I didn't speak a lot of Chinese, I found a community that I felt a part of and could have fun with. ",user_id:'Aldo',date:myDateString});
 db.Message.insertOne({chat_id:lonelinessChatId1,messageBody:"Try to make the best of your situation! Talk to locals, go on spontaneous adventures with new people, and  out to your host family.  Most importantly, remember you're not alone in this, and don't doubt yourself. Best of luck to the rest of your time abroad!",user_id:'Aldo',date:myDateString});
+
+// TOPIC
+adhdId = db.Topics.insertOne({topicTitle:'ADHD',image:'5'}).insertedId.str;
+adhdChatId1 = db.Chats.insertOne({chatTitle:'Recently diagnosed with ADHD',user_id:'Aileen',PostedDate:myDateString,numberofviews:28,numberofreplies:2,topic_id:adhdId,desc:'Looking for resources'}).insertedId.str;
+db.Message.insertOne({chat_id:adhdChatId1,messageBody:"Does anyone have any recommendations on resources for ADHD?",user_id:'Aldo',date:myDateString});
+
+// TOPIC
+bipolarId = db.Topics.insertOne({topicTitle:'Bipolar Disorder',image:'6'}).insertedId.str;
+bipolarChatId1 = db.Chats.insertOne({chatTitle:'Recently diagnosed with bipolar disorder',user_id:'Aileen',PostedDate:myDateString,numberofviews:28,numberofreplies:2,topic_id:bipolarId,desc:'Looking for resources'}).insertedId.str;
+db.Message.insertOne({chat_id:bipolarChatId1,messageBody:"Does anyone have any recommendations on resources for bipolar disorder?",user_id:'Aldo',date:myDateString});
+
+// TOPIC
+eatingId = db.Topics.insertOne({topicTitle:'Eating Disorders',image:'7'}).insertedId.str;
+eatingChatId1 = db.Chats.insertOne({chatTitle:'I have been binge eating',user_id:'Aileen',PostedDate:myDateString,numberofviews:28,numberofreplies:2,topic_id:eatingId,desc:'Looking for resources'}).insertedId.str;
+db.Message.insertOne({chat_id:eatingChatId1,messageBody:"Does anyone have any recommendations on resources for how to put an end on my disorder?",user_id:'Aldo',date:myDateString});
+
+// TOPIC
+autismId = db.Topics.insertOne({topicTitle:'Autism',image:'8'}).insertedId.str;
+autismChatId1 = db.Chats.insertOne({chatTitle:'How to communicate with a family member who has Autism',user_id:'Aileen',PostedDate:myDateString,numberofviews:28,numberofreplies:2,topic_id:autismId,desc:'Looking for resources'}).insertedId.str;
+db.Message.insertOne({chat_id:autismChatId1,messageBody:"Does anyone have any recommendations on resources for autism?",user_id:'Aldo',date:myDateString});

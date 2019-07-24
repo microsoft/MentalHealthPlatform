@@ -14,6 +14,10 @@ import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";
 import topic_image_2 from "../../images/topic_image_2.jpg";
 import topic_image_3 from "../../images/topic_image_3.jpg";
+import topic_image_4 from "../../images/topic_image_4.jpg";
+import topic_image_5 from "../../images/topic_image_5.jpg";
+import topic_image_6 from "../../images/topic_image_6.jpg";
+import topic_image_7 from "../../images/topic_image_7.jpg";
 
 interface ITopicsCanvasProps {
     match: match<{}>;
@@ -33,7 +37,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
     } = props;
 
     // TODO: Migrate images from client to server
-    const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3];
+    const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3, topic_image_4, topic_image_5, topic_image_6, topic_image_7];
     
     let baseUrl = match.url;
     if (baseUrl.charAt(baseUrl.length - 1) === '/') {

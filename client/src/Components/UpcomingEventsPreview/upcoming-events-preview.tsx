@@ -42,7 +42,7 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
             <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
                 <div className={Header}>Upcoming Events</div>
                 <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={80} width={80} />
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
                 </div>
             </div>
         </div>

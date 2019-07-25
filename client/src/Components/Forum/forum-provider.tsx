@@ -12,7 +12,7 @@ interface IForumProviderState {
         chatTitle: string,
         chatPreviews: IDiscussionPreviewData[]
     },
-    loading: boolean;
+    isLoading: boolean;
 }
 
 class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForumProviderState> {
@@ -20,12 +20,12 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
         super(props);
         this.state = {
             forumData: undefined,
-            loading: true
+            isLoading: true
         };
     }
 
     getTopicId = () => {
-        let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");        
+        let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");
         
         let list = subUrl.split("/");
         list = list.filter((item) => item != "");
@@ -43,7 +43,7 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
             <ForumCanvas
                 forumData={this.state.forumData}
                 match={this.props.match}
-                loading={this.state.loading}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -55,12 +55,15 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
     retrieveChatPreviewsResponseHandler = (data: any) => {
         this.setState({
             forumData: data,
-            loading: false
+            isLoading: false
         });
     }
 
     retrieveChatPreviewsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        });
     }
 
     retrieveChatPreviews = () => {

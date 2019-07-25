@@ -46,7 +46,7 @@ const NewsPreview = (props: INewsPreviewProps) => {
             <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
                 <div className={Header}>Latest News</div>
                 <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={80} width={80} />
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
                 </div>
             </div>
         </div>

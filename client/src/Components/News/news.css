@@ -1,8 +1,10 @@
 .Container {
     display: flex;
+    flex-direction: column;
     padding: 20px;
     flex-direction: column;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    align-items: center;
 }
 
 .Header {
@@ -11,24 +13,33 @@
 
 .NewsContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: #FFFFFF;
     box-shadow: 3px 3px 3px #CCCCCC;
     padding: 20px;
     margin-bottom: 20px;
     max-width: 1200px;
+    width: 1200px;
 }
 
 .Title {
-    color: #333333;
+    color: rgb(13, 103, 151);
     margin-top: 0;
+    margin-bottom: 5px;
 }
 
 .Description {
     color: #333333;
+    margin-top: 10px;
 }
 
 .Link {
     font-weight: bold;
     color: #333333;
+}
+
+.Image {
+    width: 150px;
+    max-width: 150px;
+    max-height: 100px;
 }

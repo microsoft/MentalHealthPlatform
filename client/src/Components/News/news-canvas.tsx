@@ -6,6 +6,10 @@ import * as classes from "./news.css";
 import { INewsData } from './news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
 
+// TODO: Remove hardcoded images
+import satya_nadella from './../../images/satya_nadella.jpg'
+import headspace from './../../images/headspace.png'
+
 interface IContactsProps {
     newsData: INewsData[]
 }
@@ -13,9 +17,12 @@ interface IContactsProps {
 const renderNews = (newsData: INewsData, key: number) => {
     return (
         <div className={classes.NewsContainer} key={key}>
-            <h2 className={classes.Title}>{newsData.title}</h2>
-            <div className={classes.Date}>{getShortenedTimeAndDate(new Date(newsData.date))}</div>
-            <div className={classes.Description}>{newsData.desc}</div>
+            <img src={newsData.title.indexOf("Executive") >= 0 ? satya_nadella : headspace} className={classes.Image} />
+            <div style={{ display: "flex", flexDirection: "column", marginLeft: 20 }}>
+                <h2 className={classes.Title}>{newsData.title}</h2>
+                <div className={classes.Date}>{getShortenedTimeAndDate(new Date(newsData.date))}</div>
+                <div className={classes.Description}>{newsData.desc}</div>
+            </div>
         </div>
     );
 };

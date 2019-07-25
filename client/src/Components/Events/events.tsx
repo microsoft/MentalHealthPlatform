@@ -6,6 +6,8 @@ import DataCard from '../DataCard/data-card';
 import { withRouter, RouteComponentProps, match } from 'react-router-dom';
 import { baseGetRequest } from '../../util/base-requests';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
+import * as classes from './events.css';
+import searchIcon from '../../images/search_icon.png';
 
 interface IEventsData {
     _id: string,
@@ -63,7 +65,8 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
         this.setState((prevState: any) => {
             const filteredEventData = prevState.eventData.filter((element: any) => {
                 return element.title.toLowerCase().includes(query.toLowerCase()) 
-                || element.desc.toLowerCase().includes(query.toLowerCase());
+                || element.desc.toLowerCase().includes(query.toLowerCase())
+                || element.location.toLowerCase().includes(query.toLowerCase());
             });
 
             return {
@@ -75,14 +78,19 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
 
     render() {
         return (
-            <div>
-                <form>
+            <div style={{ padding: 20 }}>
+                <div className={classes.SearchBar}>
                     <input
-                        placeholder="Search for..."
+                        className={classes.TextInput}
+                        placeholder="Search for events by title, description, or location..."
                         value={this.state.query}
                         onChange={this.handleInputChange}
                     />
-                </form>
+                    <button
+                        className={classes.SubmitInput}>
+                        <input type="image" src={searchIcon} className={classes.SearchIcon} />
+                    </button>
+                </div>
                 {this.state.filteredEventData.map(event => {
                     return (
                         <DataCard

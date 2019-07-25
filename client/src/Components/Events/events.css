@@ -1,0 +1,37 @@
+.SearchBar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+    width: 940px;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px #CCCCCC;
+}
+
+.TextInput {
+    flex: 1 1 auto;
+    line-height: 30px;
+    font-size: large;
+    padding: 0px 10px;
+    border: 0px;
+    padding: 15px 55px 10px 10px;
+    border-radius: 8px;
+}
+
+.SubmitInput {   
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+    border: 0px;
+}
+
+.SearchIcon {
+    height: 36px;
+    width: 36px;
+}

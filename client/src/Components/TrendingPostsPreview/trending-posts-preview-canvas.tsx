@@ -52,7 +52,7 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
             </div>  
             <Link to={`/topics`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
                 <div className={classes.ButtonContainer}>
-                    <button className={classes.Button}>View all posts news &rarr;</button>
+                    <button className={classes.Button}>View all posts &rarr;</button>
                 </div>
             </Link>
         </div>

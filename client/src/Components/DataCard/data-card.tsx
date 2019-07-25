@@ -3,10 +3,7 @@
 
 import * as React from "react";
 import { Link, match } from 'react-router-dom';
-import Icon from '../Icon/Icon';
 import * as classes from "./data-card.css";
-
-import { getShortenedTimeAndDate } from '../../util/Helpers';
 
 type DataCardDataType = {
     url: string;
@@ -44,7 +41,7 @@ const DataCard = (props: IDataCardProps): JSX.Element => {
                     {data.footer && <div className={classes.Footer}>{data.footer}</div>}
                 </div>
                 {data.rightText && <div style={{ marginLeft: 32, display: "flex", flexDirection: "row" }}>
-                    <div style={{ display: "flex", flexDirection: "column", marginLeft: 8 }}>
+                    <div style={{ display: "flex", flexDirection: "column", marginLeft: 8, alignItems: "flex-end" }}>
                         <div className={classes.Subtitle}>{data.rightText}</div>
                         {data.rightSubText && <div className={classes.Subtitle}>{data.rightSubText}</div>}
                     </div>

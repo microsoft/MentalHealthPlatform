@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import calendar_icon from './../../images/calendar_icon.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
@@ -34,9 +35,16 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
     }
 
     return (
-        <div>
-            <div className={Header}>Upcoming Events</div>
-            {events}
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <div className={Header}>Upcoming Events</div>
+                {events}
+            </div>
+            <Link to={`/events`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
+                <div className={classes.ButtonContainer}>
+                    <button className={classes.Button}>View all upcoming events &rarr;</button>
+                </div>
+            </Link>
         </div>
     );
 };

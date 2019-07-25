@@ -25,6 +25,5 @@
     flex-grow: 1;
     align-items: flex-end;
     justify-content: flex-end;
-    /* padding: 10px; */
     box-sizing: border-box;
 }

@@ -25,8 +25,6 @@ const TherapistsPreview = (props: ITherapistsPreviewProps) => {
                     <button className={classes.TherapistsPreviewButton}>Talk to someone</button>
                 </div>
             </Link>
-            
-
         </div>
     );
 };

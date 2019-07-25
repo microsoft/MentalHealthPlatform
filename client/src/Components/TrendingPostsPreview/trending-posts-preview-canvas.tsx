@@ -12,6 +12,8 @@ interface ITrendingPostsPreviewProps {
     postsData: IPostPreviewData[]
 }
 
+const NUMBER_OF_TRENDING_POSTS_PREVIEWS = 4;
+
 const renderTrendingPostPreview = (postData: IPostPreviewData, key: number) => {
     const topicId = postData.topic_id;
     const chatId = postData.chat_id;
@@ -35,18 +37,25 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
     } = props;
 
     const posts = [];
-    for (let i = 0; i < postsData.length; i++) {
+    for (let i = 0; i < Math.min(NUMBER_OF_TRENDING_POSTS_PREVIEWS, postsData.length); i++) {
         posts.push(renderTrendingPostPreview(postsData[i], i));
     }
 
     return (
-        <div>
-            <div className={Header}>Trending posts in your network</div>
-            <div style={{ paddingBottom: "15px", borderBottom: "1px solid #CCCCCC" }}>
-                <label style={{ fontStyle: "italic" }}>Posts based on your preferences</label>
-            </div>
-            {posts}
-        </div>  
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <div className={Header}>Trending posts in your network</div>
+                <div style={{ paddingBottom: "15px", borderBottom: "1px solid #CCCCCC" }}>
+                    <label style={{ fontStyle: "italic" }}>Posts based on your preferences</label>
+                </div>
+                {posts}
+            </div>  
+            <Link to={`/topics`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
+                <div className={classes.ButtonContainer}>
+                    <button className={classes.Button}>View all posts news &rarr;</button>
+                </div>
+            </Link>
+        </div>
     );
 };
 

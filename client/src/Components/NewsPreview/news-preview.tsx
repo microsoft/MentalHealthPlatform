@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import headspace from './../../images/headspace.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./news-preview.css";
@@ -38,9 +39,16 @@ const NewsPreview = (props: INewsPreviewProps) => {
     }
 
     return (
-        <div>
-            <div className={Header}>Latest News</div>
-            {news}
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <div className={Header}>Latest News</div>
+                {news}
+            </div>
+            <Link to={`/news`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
+                <div className={classes.ButtonContainer}>
+                    <button className={classes.Button}>View all latest news &rarr;</button>
+                </div>
+            </Link>
         </div>
     );
 };

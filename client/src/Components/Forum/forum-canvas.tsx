@@ -30,6 +30,18 @@ interface IForumCanvasProps {
 const ForumCanvas = (props: IForumCanvasProps) => {
     const { forumData, match, isLoading } = props;
 
+    if (isLoading) {
+        return (
+            <div className={classes.ForumContainer}>
+                <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
+                    <div className={classes.Loading}>
+                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     if (!(forumData && forumData.chatPreviews)) {
         return null;
     }
@@ -43,15 +55,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
         baseUrl = baseUrl.substring(0, baseUrl.length - 1);
     }
 
-    return isLoading ? (
-        <div className={classes.ForumContainer}>
-            <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
-                <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-                </div>
-            </div>
-        </div>
-    ) : (
+    return (
         <div className={classes.ForumContainer}>
             <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
                 <h1 className={classes.ForumTitle} style={{ textAlign: "center" }}>{forumData.chatTitle}</h1>

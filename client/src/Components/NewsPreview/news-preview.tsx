@@ -2,52 +2,45 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import satya_nadella from './../../images/satya_nadella.jpg';
 import headspace from './../../images/headspace.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./news-preview.css";
+import { INewsData } from './../News/news-provider';
+import { getShortenedTimeAndDate } from './../../util/Helpers';
 
 interface INewsPreviewProps {
+    newsData: INewsData[];
 }
 
-interface INewsData {
-    date: string;
-    title: string;
-    description: string;
-    picture: string;
-}
+const NUMBER_OF_NEWS_PREVIEWS = 1;
 
-const newsData = [
-    {
-        date: "July 22, 2019",
-        title: "New headspace partnership!",
-        description: "Employees now get 20% off any Headspace membership. Come get your discount now!", 
-        picture: headspace
-    },
-    {
-        date: "July 21, 2019",
-        title: "Executive discussion",
-        description: "Satya Nadella sits down to discuss about the importance of mental health",
-        picture: satya_nadella
-    }
-];
+const renderNewsPreview = (newsData: INewsData, key: number) => {
+    return (
+        <div className={classes.NewsDataContainer}>
+            <img src={headspace} className={classes.NewsDataImage}/>
+            <div className={classes.NewsDataTextContainer}>
+                <label className={classes.NewsDataTitle}>{newsData.title}</label>
+                <label className={classes.NewsDataDate}>{getShortenedTimeAndDate(new Date(newsData.date))}</label>
+                <label>{newsData.desc}</label>
+            </div>
+        </div>
+    );
+}
 
 const NewsPreview = (props: INewsPreviewProps) => {
     const {
+        newsData
     } = props;
+
+    const news = [];
+    for (let i = 0; i < Math.min(NUMBER_OF_NEWS_PREVIEWS, newsData.length); i++) {
+        news.push(renderNewsPreview(newsData[i], i));
+    }
 
     return (
         <div>
             <div className={Header}>Latest News</div>
-            <div className={classes.NewsDataContainer}>
-                <img src={newsData[0].picture} className={classes.NewsDataImage}/>
-                <div className={classes.NewsDataTextContainer}>
-                    <label className={classes.NewsDataTitle}>{newsData[0].title}</label>
-                    <label className={classes.NewsDataDate}>{newsData[0].date}</label>
-                    <label>{newsData[0].description}</label>
-                </div>
-            </div>
-           
+            {news}
         </div>
     );
 };

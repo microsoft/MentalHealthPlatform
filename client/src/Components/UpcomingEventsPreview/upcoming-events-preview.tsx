@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import calendar_icon from './../../images/calendar_icon.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
@@ -12,12 +13,14 @@ import { getShortenedTimeAndDate } from './../../util/Helpers';
 const NUMBER_OF_EVENTS = 1;
 
 interface IUpcomingEventsPreviewProps {
-    eventsData: IUpcomingEventData[]
+    eventsData: IUpcomingEventData[],
+    isLoading: boolean
 }
 
 const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
     const {
-        eventsData
+        eventsData,
+        isLoading
     } = props;    
 
     const events = [];
@@ -34,7 +37,16 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
         );
     }
 
-    return (
+    return isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <div className={Header}>Upcoming Events</div>
+                <div className={classes.Loading}>
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={80} width={80} />
+                </div>
+            </div>
+        </div>
+        ) : (
         <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
                 <div className={Header}>Upcoming Events</div>

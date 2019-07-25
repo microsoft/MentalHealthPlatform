@@ -71,7 +71,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         })}
                         {loading ? (
                             <div className={classes.Loading}>
-                                <ReactLoading type="bubbles" color="#333" height={'5%'} width={'5%'} />
+                                <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
                             </div>
                         ) : null}
                     </div>

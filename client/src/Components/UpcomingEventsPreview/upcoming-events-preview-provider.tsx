@@ -18,14 +18,16 @@ interface IUpcomingEventsPreviewProviderProps {
 }
 
 interface IUpcomingEventsPreviewProviderState {
-    eventsData: IUpcomingEventData[]
+    eventsData: IUpcomingEventData[],
+    isLoading: boolean;
 }
 
 export class UpcomingEventsPreviewProvider extends React.Component<IUpcomingEventsPreviewProviderProps, IUpcomingEventsPreviewProviderState> {
     constructor(props: IUpcomingEventsPreviewProviderProps) {
         super(props);
         this.state = {
-            eventsData: []
+            eventsData: [],
+            isLoading: true
         };
     }
 
@@ -33,6 +35,7 @@ export class UpcomingEventsPreviewProvider extends React.Component<IUpcomingEven
         return (
             <UpcomingEventsCanvas
                 eventsData={this.state.eventsData}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -43,12 +46,16 @@ export class UpcomingEventsPreviewProvider extends React.Component<IUpcomingEven
 
     retrieveUpcomingEventsResponseHandler = (data: any) => {
         this.setState({
-            eventsData: data && data.events
+            eventsData: data && data.events,
+            isLoading: false
         });
     }
 
     retrieveUpcomingEventsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        });
     }
 
     retrieveUpcomingEvents = () => {

@@ -3,13 +3,15 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import message_icon from './../../images/message_icon.png';
 import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
 import { Header } from './../Dashboard/dashboard.css';
 
 interface ITrendingPostsPreviewProps {
-    postsData: IPostPreviewData[]
+    postsData: IPostPreviewData[],
+    isLoading: boolean
 }
 
 const NUMBER_OF_TRENDING_POSTS_PREVIEWS = 4;
@@ -33,7 +35,8 @@ const renderTrendingPostPreview = (postData: IPostPreviewData, key: number) => {
 
 const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
     const {
-        postsData
+        postsData,
+        isLoading
     } = props;
 
     const posts = [];
@@ -41,7 +44,16 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
         posts.push(renderTrendingPostPreview(postsData[i], i));
     }
 
-    return (
+    return isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <div className={Header}>Trending posts in your network</div>
+                <div className={classes.Loading}>
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={80} width={80} />
+                </div>
+            </div>
+        </div>
+        ) : (
         <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
                 <div className={Header}>Trending posts in your network</div>

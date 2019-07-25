@@ -47,7 +47,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
         <div className={classes.Container}>
             {loading ? (
                 <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="#333333" height={'5%'} width={'5%'} />
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
                 </div>
             ) : (
                 <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>

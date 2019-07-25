@@ -5,3 +5,4 @@ export const NewsDataTitle: string;
 export const NewsDataDate: string;
 export const ButtonContainer: string;
 export const Button: string;
+export const Loading: string;

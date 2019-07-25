@@ -11,14 +11,16 @@ interface INewsPreviewProviderProps {
 }
 
 interface INewsPreviewProviderState {
-    newsData: INewsData[]
+    newsData: INewsData[],
+    isLoading: boolean
 }
 
 export class NewsPreviewProvider extends React.Component<INewsPreviewProviderProps, INewsPreviewProviderState> {
     constructor(props: INewsPreviewProviderProps) {
         super(props);
         this.state = {
-            newsData: []
+            newsData: [],
+            isLoading: true
         };
     }
 
@@ -26,6 +28,7 @@ export class NewsPreviewProvider extends React.Component<INewsPreviewProviderPro
         return (
             <NewsPreviewCanvas
                 newsData={this.state.newsData}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -36,12 +39,16 @@ export class NewsPreviewProvider extends React.Component<INewsPreviewProviderPro
 
     retrieveNewsResponseHandler = (data: any) => {
         this.setState({
-            newsData: data && data.news
+            newsData: data && data.news,
+            isLoading: false
         });
     }
 
     retrieveNewsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        });
     }
 
     retreiveNews = () => {

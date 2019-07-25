@@ -15,14 +15,16 @@ interface ITrendingKeywordsProviderProps {
 }
 
 interface ITrendingKeywordsProviderState {
-    keywordsData: IKeywordPreviewData[]
+    keywordsData: IKeywordPreviewData[],
+    isLoading: boolean;
 }
 
 export class TrendingKeywordsProvider extends React.Component<ITrendingKeywordsProviderProps, ITrendingKeywordsProviderState> {
     constructor(props: ITrendingKeywordsProviderProps) {
         super(props);
         this.state = {
-            keywordsData: []
+            keywordsData: [],
+            isLoading: true
         };
     }
 
@@ -34,6 +36,7 @@ export class TrendingKeywordsProvider extends React.Component<ITrendingKeywordsP
         return (
             <TrendingKeywordsCanvas
                 keywordsData={this.state.keywordsData}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -44,12 +47,16 @@ export class TrendingKeywordsProvider extends React.Component<ITrendingKeywordsP
 
     retrieveTrendingKeywordsResponseHandler = (data: any) => {
         this.setState({
-            keywordsData: data && data.trendingKeywords
+            keywordsData: data && data.trendingKeywords,
+            isLoading: false
         });
     }
 
     retrieveTrendingKeywordsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        })
     }
 
     retrieveTrendingKeywords = () => {

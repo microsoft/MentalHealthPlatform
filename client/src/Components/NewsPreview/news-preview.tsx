@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import headspace from './../../images/headspace.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./news-preview.css";
@@ -11,6 +12,7 @@ import { getShortenedTimeAndDate } from './../../util/Helpers';
 
 interface INewsPreviewProps {
     newsData: INewsData[];
+    isLoading: boolean
 }
 
 const NUMBER_OF_NEWS_PREVIEWS = 1;
@@ -30,7 +32,8 @@ const renderNewsPreview = (newsData: INewsData, key: number) => {
 
 const NewsPreview = (props: INewsPreviewProps) => {
     const {
-        newsData
+        newsData,
+        isLoading
     } = props;
 
     const news = [];
@@ -38,7 +41,16 @@ const NewsPreview = (props: INewsPreviewProps) => {
         news.push(renderNewsPreview(newsData[i], i));
     }
 
-    return (
+    return isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <div className={Header}>Latest News</div>
+                <div className={classes.Loading}>
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={80} width={80} />
+                </div>
+            </div>
+        </div>
+    ) : (
         <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
                 <div className={Header}>Latest News</div>

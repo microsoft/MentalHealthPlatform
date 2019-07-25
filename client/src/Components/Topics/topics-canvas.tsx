@@ -68,7 +68,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
                 <TopicsSearchBar inputChanged={updateSearchString}/>
                 {loading ? (
                     <div className={classes.Loading}>
-                        <ReactLoading type="bubbles" color="#333333" height={'5%'} width={'5%'} />
+                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
                     </div>
                 ) : (
                     <div className={classes.TileContainer}>{tiles}</div>

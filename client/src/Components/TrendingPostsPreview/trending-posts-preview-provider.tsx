@@ -18,14 +18,16 @@ interface ITrendingPostsProviderProps {
 }
 
 interface ITrendingPostsProviderState {
-    postsData: IPostPreviewData[]
+    postsData: IPostPreviewData[],
+    isLoading: boolean;
 }
 
 export class TrendingPostsProvider extends React.Component<ITrendingPostsProviderProps, ITrendingPostsProviderState> {
     constructor(props: ITrendingPostsProviderProps) {
         super(props);
         this.state = {
-            postsData: []
+            postsData: [],
+            isLoading: true
         };
     }
 
@@ -37,6 +39,7 @@ export class TrendingPostsProvider extends React.Component<ITrendingPostsProvide
         return (
             <TrendingPostsCanvas
                 postsData={this.state.postsData}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -47,12 +50,16 @@ export class TrendingPostsProvider extends React.Component<ITrendingPostsProvide
 
     retrieveTrendingPostsResponseHandler = (data: any) => {
         this.setState({
-            postsData: data && data.chatPreviews
+            postsData: data && data.chatPreviews,
+            isLoading: false
         });
     }
 
     retrieveTrendingPostsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        });
     }
 
     retrieveTrendingPosts = () => {

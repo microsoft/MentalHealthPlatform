@@ -2,12 +2,14 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import ReactLoading from 'react-loading';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./trending-keywords-preview.css";
 import { IKeywordPreviewData } from "./trending-keywords-preview-provider";
 
 interface ITrendingKeywordsPreviewProps {
     keywordsData: IKeywordPreviewData[];
+    isLoading: boolean;
 }
 
 const getFontSizeIncrement = (count: number, maxCount: number, minCount: number) => {
@@ -21,7 +23,8 @@ const getFontSizeIncrement = (count: number, maxCount: number, minCount: number)
 
 const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
     const {
-        keywordsData
+        keywordsData,
+        isLoading
     } = props;
 
     const keywords = [];
@@ -46,7 +49,16 @@ const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
         );
     }
 
-    return (
+    return isLoading ? (
+        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            <div className={Header}>Trending Keywords</div>
+            <div className={classes.TrendingKeywordsWordsContainer}>
+                <div className={classes.Loading}>
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={80} width={80} />
+                </div>
+            </div>
+        </div>       
+        ) : (
         <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <div className={Header}>Trending Keywords</div>
             <div className={classes.TrendingKeywordsWordsContainer}>

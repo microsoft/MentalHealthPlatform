@@ -15,3 +15,11 @@
 .TrendingKeywordsWords {
     text-align: center;
 }
+
+.Loading {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}

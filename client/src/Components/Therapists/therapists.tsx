@@ -18,20 +18,24 @@ interface ITherapistData {
     location: string
 }
 
-interface ITherapistsProps { 
+interface ITherapistsProps {
     type: string
 }
 
 interface ITherapistsState {
     therapistData: ITherapistData[],
-    loading: boolean
+    filteredTherapistData: ITherapistData[],
+    loading: boolean,
+    query: string
 }
 
 class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, ITherapistsState> {
     constructor(props: RouteComponentProps<ITherapistsProps>) {
         super(props);
         this.state = {
+            query: "",
             therapistData: [],
+            filteredTherapistData: [],
             loading: true
         };
     }
@@ -43,6 +47,7 @@ class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, 
     retrieveTherapistsResponseHandler = (data: any) => {
         this.setState({
             therapistData: data.therapists,
+            filteredTherapistData: data.therapists,
             loading: false
         });
     }
@@ -55,28 +60,51 @@ class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, 
         baseGetRequest("gettherapists", [], this.retrieveTherapistsResponseHandler, this.retrieveTherapistsErrorHandler);
     }
 
+    handleInputChange = (event: any) => {
+        const query = event.target.value;
+
+        this.setState((prevState: any) => {
+            const filteredTherapistData = prevState.therapistData.filter((element: any) => {
+                return element.title.toLowerCase().includes(query.toLowerCase())
+                    || element.desc.toLowerCase().includes(query.toLowerCase());
+            });
+
+            return {
+                query,
+                filteredTherapistData
+            };
+        });
+    };
+
     render() {
         return (
             <div>
-                {this.state.therapistData.map(therapist => {
+                <form>
+                    <input
+                        placeholder="Search for..."
+                        value={this.state.query}
+                        onChange={this.handleInputChange}
+                    />
+                </form>
+                {this.state.filteredTherapistData.map(therapist => {
                     return (
                         <DataCard
-                        key={therapist._id}
-                        match={{
-                            url: 'http://www.google.com',
-                            params: {}, isExact: false,
-                            path: ''
-                        }}
-                        data={{
-                            url: '/pages/stuff',
-                            title: therapist.title,
-                            subtitle: therapist.subtitle,
-                            description: therapist.desc,
-                            rightText: therapist.phone,
-                            rightSubText: therapist.location,
-                            footer: 'Specializes in: Stress, Trauma, Anxiety'
-                        }}
-                    />
+                            key={therapist._id}
+                            match={{
+                                url: 'http://www.google.com',
+                                params: {}, isExact: false,
+                                path: ''
+                            }}
+                            data={{
+                                url: '/pages/stuff',
+                                title: therapist.title,
+                                subtitle: therapist.subtitle,
+                                description: therapist.desc,
+                                rightText: therapist.phone,
+                                rightSubText: therapist.location,
+                                footer: 'Specializes in: Stress, Trauma, Anxiety'
+                            }}
+                        />
                     );
                 })}
             </div>

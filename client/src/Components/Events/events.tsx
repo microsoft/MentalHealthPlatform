@@ -15,12 +15,14 @@ interface IEventsData {
     desc: string,
 }
 
-interface IEventsProps { 
+interface IEventsProps {
     type: string
 }
 
 interface IEventsState {
+    query: string,
     eventData: IEventsData[],
+    filteredEventData: IEventsData[],
     loading: boolean
 }
 
@@ -28,7 +30,9 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
     constructor(props: RouteComponentProps<IEventsProps>) {
         super(props);
         this.state = {
+            query: "",
             eventData: [],
+            filteredEventData: [],
             loading: true
         };
     }
@@ -40,6 +44,7 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
     retrieveEventsResponseHandler = (data: any) => {
         this.setState({
             eventData: data.events,
+            filteredEventData: data.events,
             loading: false
         });
     }
@@ -52,26 +57,49 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
         baseGetRequest("getevents", [], this.retrieveEventsResponseHandler, this.retrieveEventsErrorHandler);
     }
 
+    handleInputChange = (event: any) => {
+        const query = event.target.value;
+
+        this.setState((prevState: any) => {
+            const filteredEventData = prevState.eventData.filter((element: any) => {
+                return element.title.toLowerCase().includes(query.toLowerCase()) 
+                || element.desc.toLowerCase().includes(query.toLowerCase());
+            });
+
+            return {
+                query,
+                filteredEventData
+            };
+        });
+    };
+
     render() {
         return (
             <div>
-                {this.state.eventData.map(event => {
+                <form>
+                    <input
+                        placeholder="Search for..."
+                        value={this.state.query}
+                        onChange={this.handleInputChange}
+                    />
+                </form>
+                {this.state.filteredEventData.map(event => {
                     return (
                         <DataCard
-                        key={event._id}
-                        match={{
-                            url: 'http://www.google.com',
-                            params: {}, isExact: false,
-                            path: ''
-                        }}
-                        data={{
-                            url: '/pages/stuff',
-                            title: event.title,
-                            subtitle: getShortenedTimeAndDate(new Date(event.date)),
-                            secondarySubtitle: event.location,
-                            description: event.desc,
-                        }}
-                    />
+                            key={event._id}
+                            match={{
+                                url: 'http://www.google.com',
+                                params: {}, isExact: false,
+                                path: ''
+                            }}
+                            data={{
+                                url: '/pages/stuff',
+                                title: event.title,
+                                subtitle: getShortenedTimeAndDate(new Date(event.date)),
+                                secondarySubtitle: event.location,
+                                description: event.desc,
+                            }}
+                        />
                     );
                 })}
             </div>

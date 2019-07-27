@@ -16,7 +16,7 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
 
     return (
         <div className={classes.CrisisPreviewsOverallContainer}>
-            <div>
+            <div style={{ display: "flex", flexGrow: 1 }}>
                 <label className={classes.CrisisPreviewsText}>
                     Are you currently experiencing a crisis?
                 </label>

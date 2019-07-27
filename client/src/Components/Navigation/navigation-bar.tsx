@@ -48,6 +48,7 @@ const NavigationBar = () => {
                 <Link className={classes.Link} to={`/contacts`}>Contacts</Link>
                 <Link className={classes.Link} to={`/news`}>News</Link>
                 <Link className={classes.Link} to={`/events`}>Events</Link>
+                <Link className={classes.Link} to={`/therapists`}>Therapists</Link>
             </div>
             <div className={classes.NavigationBarRight}>
                 <UserDataContext.Consumer>

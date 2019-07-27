@@ -2,12 +2,19 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import ReactLoading from 'react-loading';
+
 import DataCard from '../DataCard/data-card';
-import { withRouter, RouteComponentProps, match } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { baseGetRequest } from '../../util/base-requests';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
 import * as classes from './events.css';
 import searchIcon from '../../images/search_icon.png';
+
+// TODO: Remove hardcoded images
+import event_forum from './../../images/event_forum.png';
+import event_picnic from './../../images/event_picnic.jpg';
+import event_roundtable from '../../images/event_roundtable.png';
 
 interface IEventsData {
     _id: string,
@@ -79,6 +86,7 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
     render() {
         return (
             <div style={{ padding: 20 }}>
+                <h1 className={classes.Header}>Upcoming Events</h1>
                 <div className={classes.SearchBar}>
                     <input
                         className={classes.TextInput}
@@ -91,7 +99,19 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
                         <input type="image" src={searchIcon} className={classes.SearchIcon} />
                     </button>
                 </div>
-                {this.state.filteredEventData.map(event => {
+                {this.state.loading ? (
+                    <div className={classes.Loading}>
+                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
+                    </div>
+                ) : this.state.filteredEventData.map(event => {
+                    let src = event_forum;
+                    if (event.title.indexOf("Picnic") >= 0) {
+                        src = event_picnic;
+                    }
+                    else if (event.title.indexOf("Roundtable") >= 0) {
+                        src = event_roundtable;
+                    }
+
                     return (
                         <DataCard
                             key={event._id}
@@ -100,6 +120,7 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
                                 params: {}, isExact: false,
                                 path: ''
                             }}
+                            src={src}
                             data={{
                                 url: '/pages/stuff',
                                 title: event.title,

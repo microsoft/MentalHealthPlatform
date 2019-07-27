@@ -24,7 +24,7 @@ const Crsis = (props: ICrsisProps) => {
                     <div className={classes.Label1}>I would like to message a therapist online</div>
                     <div className={classes.Label2}>Online messaging services open Monday to Friday 8 am to 5 pm</div>
                     <div className={classes.TalkButtonContainer}>
-                        <div className={classes.TalkButton}>Talk to someone</div>
+                        <div className={classes.TalkButton}>Talk to someone  &rarr;</div>
                     </div>
                 </div>
             </div>

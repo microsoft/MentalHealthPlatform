@@ -5,3 +5,5 @@ export const Container: string;
 export const Header: string;
 export const Date: string;
 export const Image: string;
+export const Loading: string;
+export const ImageContainer: string;

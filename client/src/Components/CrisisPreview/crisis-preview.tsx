@@ -34,7 +34,7 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
                 </div>
                 <Link to={`/crisis`} style={{textDecoration:"none"}}>
                     <div className={classes.CrisisPreviewsButtonContainer}>
-                        <button className={classes.CrisisPreviewsButton}>Get help now</button>
+                        <button className={classes.CrisisPreviewsButton}>Get help now  &rarr;</button>
                     </div>
                 </Link>
                

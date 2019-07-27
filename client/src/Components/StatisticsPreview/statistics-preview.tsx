@@ -7,6 +7,7 @@ import outlook_icon from './../../images/outlook_icon.png';
 import twitter_icon from './../../images/twitter_icon.png';
 import * as classes from './statistics-preview.css'
 import { Header } from './../Dashboard/dashboard.css';
+import { Link } from 'react-router-dom';
 
 interface IStatisticsPreviewProps {
 }
@@ -56,13 +57,22 @@ const StatisticsPreview = (props: IStatisticsPreviewProps) => {
     }
 
     return (
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div className={Header}>Your statistics this week</div>
-            <table>
-                <tbody>
-                    {statistics}
-                </tbody>
-            </table>
+            <div>
+                <table>
+                    <tbody>
+                        {statistics}
+                    </tbody>
+                </table>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                <Link to={`/events`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
+                    <div className={classes.ButtonContainer}>
+                        <button className={classes.Button}>View statistics &rarr;</button>
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 };

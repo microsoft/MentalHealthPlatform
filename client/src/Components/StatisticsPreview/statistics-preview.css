@@ -6,3 +6,26 @@
     vertical-align: center;
     padding: 3px 8px;
 }
+
+.Button {
+    height: 42px;
+    border: none;
+    font-size: 16px;
+    color: rgb(13, 103, 151);
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.Button:hover {
+    opacity: 0.7;
+}
+
+.ButtonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: flex-end;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}

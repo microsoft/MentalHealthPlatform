@@ -17,14 +17,16 @@ interface IContactsProviderProps {
 }
 
 interface IContactsProviderState {
-    contactsData: IContactData[]
+    contactsData: IContactData[],
+    isLoading: boolean
 }
 
 export class Contacts extends React.Component<IContactsProviderProps, IContactsProviderState> {
     constructor(props: IContactsProviderProps) {
         super(props);
         this.state = {
-            contactsData: []
+            contactsData: [],
+            isLoading: true
         };
     }
 
@@ -36,6 +38,7 @@ export class Contacts extends React.Component<IContactsProviderProps, IContactsP
         return (
             <ContactsCanvas
                 contactsData={this.state.contactsData}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -46,12 +49,16 @@ export class Contacts extends React.Component<IContactsProviderProps, IContactsP
 
     retrieveContactsResponseHandler = (data: any) => {
         this.setState({
-            contactsData: data && data.contacts
+            contactsData: data && data.contacts,
+            isLoading: false
         });
     }
 
     retrieveContactsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        });
     }
 
     retrieveContacts = () => {

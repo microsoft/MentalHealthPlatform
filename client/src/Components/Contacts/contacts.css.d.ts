@@ -4,3 +4,4 @@ export const Description: string;
 export const Link: string;
 export const Container: string;
 export const Header: string;
+export const Loading: string;

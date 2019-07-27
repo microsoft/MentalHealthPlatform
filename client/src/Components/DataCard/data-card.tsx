@@ -20,11 +20,12 @@ type DataCardDataType = {
 interface IDataCardProps {
     key: string;
     match: match<{}>;
+    src?: string;
     data?: DataCardDataType;
 }
 
 const DataCard = (props: IDataCardProps): JSX.Element => {
-    const { data, match } = props;
+    const { data, match, src } = props;
     let baseUrl = match.url;
     if (baseUrl.charAt(baseUrl.length - 1) == '/') {
         baseUrl = baseUrl.substring(0, baseUrl.length - 1);
@@ -32,6 +33,9 @@ const DataCard = (props: IDataCardProps): JSX.Element => {
 
     return (
         <Link className={classes.DataCardLinkContainer} to={`${baseUrl}/${data.url}`}>
+            <div className={classes.ImageContainer}>
+                <img src={src} className={classes.Image} />
+            </div>
             <div className={classes.DataCardContainer}>
                 <div style={{ flex: 1 }}>
                     <div className={classes.Title}>{data.title}</div>

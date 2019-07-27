@@ -2,11 +2,18 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import ReactLoading from 'react-loading';
+
 import DataCard from '../DataCard/data-card';
-import { withRouter, RouteComponentProps, match } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { baseGetRequest } from '../../util/base-requests';
 import * as classes from './therapists.css';
 import searchIcon from '../../images/search_icon.png';
+
+// TODO: Remove hardcoded images
+import therapist_1 from './../../images/therapist_1.jpg';
+import therapist_2 from './../../images/therapist_2.jpg';
+import therapist_3 from './../../images/therapist_3.png';
 
 interface ITherapistsProps {
 }
@@ -83,6 +90,7 @@ class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, 
     render() {
         return (
             <div style={{ padding: 20 }}>
+                <h1 className={classes.Header}>Therapists</h1>
                 <div className={classes.SearchBar}>
                     <input
                         className={classes.TextInput}
@@ -95,7 +103,19 @@ class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, 
                         <input type="image" src={searchIcon} className={classes.SearchIcon} />
                     </button>
                 </div>
-                {this.state.filteredTherapistData.map(therapist => {
+                {this.state.loading ? (
+                    <div className={classes.Loading}>
+                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
+                    </div>
+                ) :
+                this.state.filteredTherapistData.map(therapist => {
+                    let src = therapist_1;
+                    if (therapist.title.indexOf("Samantha") >= 0) {
+                        src = therapist_2;
+                    }
+                    else if (therapist.title.indexOf("Tim") >= 0) {
+                        src = therapist_3;
+                    }
                     return (
                         <DataCard
                             key={therapist._id}
@@ -104,6 +124,7 @@ class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, 
                                 params: {}, isExact: false,
                                 path: ''
                             }}
+                            src={src}
                             data={{
                                 url: '/pages/stuff',
                                 title: therapist.title,

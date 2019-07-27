@@ -33,8 +33,8 @@ db.Contacts.insertOne({title:'SAMHSA\'s National Helpline – 1-800-662-HELP (43
 
 // CREATE THERAPISTS
 db.Therapists.insertOne({title:'Michael Johnson',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Seattle, WA'});
-db.Therapists.insertOne({title:'Samantha Smith',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Bellevue, WA'});
-db.Therapists.insertOne({title:'Tim Howard',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Redmond, WA'});
+db.Therapists.insertOne({title:'Samantha Smith',subtitle:'Counselor, MA, LMHCA',desc:'I have over 10 years of experience in providing mental therapy.',phone:'(206) 456-7890',location:'Bellevue, WA'});
+db.Therapists.insertOne({title:'Tim Howard',subtitle:'Counselor, MA, LMHCA',desc:'If you need help with you mental health, I'm here to help.',phone:'(206) 456-7890',location:'Redmond, WA'});
 
 // CREATE EVENTS
 db.Events.insertOne({title:'Monthly Stress Forum',date:Date(),location:'Microsoft Building 321',desc:'At building 321, discussion about stress and how it affects our bodies'});

@@ -20,6 +20,7 @@
     margin-bottom: 20px;
     max-width: 1200px;
     width: 1200px;
+    cursor: pointer;
 }
 
 .Title {
@@ -38,8 +39,22 @@
     color: #333333;
 }
 
-.Image {
+.ImageContainer {
     width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Image {
     max-width: 150px;
     max-height: 100px;
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
 }

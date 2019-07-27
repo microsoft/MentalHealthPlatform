@@ -22,7 +22,7 @@ const TherapistsPreview = (props: ITherapistsPreviewProps) => {
             </label>
             <Link to={`/therapists`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
                 <div className={classes.TherapistsPreviewButtonContainer}>
-                    <button className={classes.TherapistsPreviewButton}>Talk to someone</button>
+                    <button className={classes.TherapistsPreviewButton}>Talk to someone  &rarr;</button>
                 </div>
             </Link>
         </div>

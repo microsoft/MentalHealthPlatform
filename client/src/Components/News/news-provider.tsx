@@ -17,14 +17,16 @@ interface INewsProviderProps {
 }
 
 interface INewsProviderState {
-    newsData: INewsData[]
+    newsData: INewsData[],
+    isLoading: boolean
 }
 
 export class News extends React.Component<INewsProviderProps, INewsProviderState> {
     constructor(props: INewsProviderProps) {
         super(props);
         this.state = {
-            newsData: []
+            newsData: [],
+            isLoading: true
         };
     }
 
@@ -36,6 +38,7 @@ export class News extends React.Component<INewsProviderProps, INewsProviderState
         return (
             <NewsCanvas
                 newsData={this.state.newsData}
+                isLoading={this.state.isLoading}
             />
         );
     }
@@ -46,12 +49,16 @@ export class News extends React.Component<INewsProviderProps, INewsProviderState
 
     retrieveNewsResponseHandler = (data: any) => {
         this.setState({
-            newsData: data && data.news
+            newsData: data && data.news,
+            isLoading: false
         });
     }
 
     retrieveNewsErrorHandler = (error: any) => {
         console.error(error);
+        this.setState({
+            isLoading: false
+        });
     }
 
     retreiveNews = () => {

@@ -2,11 +2,14 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
+import ReactLoading from 'react-loading';
+
 import * as classes from "./contacts.css";
 import { IContactData } from './contacts-provider';
 
 interface IContactsProps {
-    contactsData: IContactData[]
+    contactsData: IContactData[],
+    isLoading: boolean
 }
 
 const renderContact = (contactData: IContactData, key: number) => {
@@ -21,7 +24,8 @@ const renderContact = (contactData: IContactData, key: number) => {
 
 const Contacts = (props: IContactsProps) => {
     const {
-        contactsData
+        contactsData,
+        isLoading
     } = props;
 
     const contacts = [];
@@ -32,7 +36,11 @@ const Contacts = (props: IContactsProps) => {
     return (
         <div className={classes.Container}>
             <h1 className={classes.Header}>Contacts</h1>
-            {contacts}
+            {isLoading ? (
+                <div className={classes.Loading}>
+                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
+                </div>
+            ) : contacts}
         </div>  
     );
 };

@@ -7,6 +7,7 @@
     border-radius: 8px;
     box-shadow: 3px 3px 3px #CCCCCC;
     width: 1200px;
+    padding: 20px;
 }
 
 .DataCardLinkContainer :hover {
@@ -17,7 +18,7 @@
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 20px;
+    margin-left: 20px;
     font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;    
     background-color: transparent;
 }
@@ -60,4 +61,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;   
+}
+
+.ImageContainer {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Image {
+    max-width: 150px;
+    max-height: 100px;
 }

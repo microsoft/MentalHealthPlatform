@@ -8,6 +8,7 @@ import message_icon from './../../images/message_icon.png';
 import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
 import { Header } from './../Dashboard/dashboard.css';
+import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
 
 interface ITrendingPostsPreviewProps {
     postsData: IPostPreviewData[],
@@ -61,12 +62,10 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
                     <label style={{ fontStyle: "italic" }}>Posts based on your preferences</label>
                 </div>
                 {posts}
-            </div>  
-            <Link to={`/topics`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
-                <div className={classes.ButtonContainer}>
-                    <button className={classes.Button}>View all posts &rarr;</button>
-                </div>
-            </Link>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                <DashboardTileButton link={`/topics`} label={`View all posts \u2192`} isBlueBackground={false} />
+            </div>
         </div>
     );
 };

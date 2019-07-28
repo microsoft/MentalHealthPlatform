@@ -2,13 +2,13 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import headspace from './../../images/headspace.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./news-preview.css";
 import { INewsData } from './../News/news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
+import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
 
 interface INewsPreviewProps {
     newsData: INewsData[];
@@ -56,11 +56,9 @@ const NewsPreview = (props: INewsPreviewProps) => {
                 <div className={Header}>Latest News</div>
                 {news}
             </div>
-            <Link to={`/news`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
-                <div className={classes.ButtonContainer}>
-                    <button className={classes.Button}>View all latest news &rarr;</button>
-                </div>
-            </Link>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                <DashboardTileButton link={`/news`} label={`View all latest news \u2192`} isBlueBackground={false} />
+            </div>
         </div>
     );
 };

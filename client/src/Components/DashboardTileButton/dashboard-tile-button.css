@@ -1,0 +1,44 @@
+.DashboardTileButtonLink {
+    text-decoration: none;
+    width: 220px;
+}
+
+.DashboardTileButtonLink :hover {
+    opacity: 0.7;
+}
+
+.DashboardTileButtonWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: flex-end;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.DashboardTileButton {
+    height: 42px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.DashboardTileButton_BlueBackground {
+    background-color: rgb(13, 103, 151);
+    color: white;
+}
+
+.DashboardTileButton_WhiteBackground {
+    background-color: white;
+    color: rgb(13, 103, 151);
+}
+
+.TextAlignCenter {
+    text-align: center;
+}
+
+.TextAlignEnd {
+    text-align: end;
+}

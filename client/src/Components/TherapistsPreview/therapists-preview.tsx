@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./therapists-preview.css";
-import { Link } from 'react-router-dom';
+import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
 
 interface ITherapistsPreviewProps {
 }
@@ -15,16 +15,14 @@ const TherapistsPreview = (props: ITherapistsPreviewProps) => {
 
     return (
         <div className={classes.TherapistsPreviewContainer}>
-        <div className={Header}>Find a therapist in your area</div>
+            <div className={Header}>Find a therapist in your area</div>
             <label>You are eligible for 10 free therapy sessions per year.
                 Take advantage of this opportunity by finding a therapist from
                 our list of certified professionals.
             </label>
-            <Link to={`/therapists`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
-                <div className={classes.TherapistsPreviewButtonContainer}>
-                    <button className={classes.TherapistsPreviewButton}>Talk to someone  &rarr;</button>
-                </div>
-            </Link>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                <DashboardTileButton link={`/therapists`} label={`Talk to someone \u2192`} isBlueBackground={true} />
+            </div>
         </div>
     );
 };

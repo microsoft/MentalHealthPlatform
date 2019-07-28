@@ -7,7 +7,7 @@ import outlook_icon from './../../images/outlook_icon.png';
 import twitter_icon from './../../images/twitter_icon.png';
 import * as classes from './statistics-preview.css'
 import { Header } from './../Dashboard/dashboard.css';
-import { Link } from 'react-router-dom';
+import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
 
 interface IStatisticsPreviewProps {
 }
@@ -66,12 +66,8 @@ const StatisticsPreview = (props: IStatisticsPreviewProps) => {
                     </tbody>
                 </table>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <Link to={`/events`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
-                    <div className={classes.ButtonContainer}>
-                        <button className={classes.Button}>View statistics &rarr;</button>
-                    </div>
-                </Link>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                <DashboardTileButton link={`/`} label={`View statistics \u2192`} isBlueBackground={false} />
             </div>
         </div>
     );

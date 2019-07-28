@@ -2,13 +2,13 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import calendar_icon from './../../images/calendar_icon.png';
 import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
 import { IUpcomingEventData } from './upcoming-events-preview-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
+import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
 
 const NUMBER_OF_EVENTS = 1;
 
@@ -52,11 +52,9 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
                 <div className={Header}>Upcoming Events</div>
                 {events}
             </div>
-            <Link to={`/events`} style={{ textDecoration:"none", display: "flex", flexGrow: 1 }}>
-                <div className={classes.ButtonContainer}>
-                    <button className={classes.Button}>View all upcoming events &rarr;</button>
-                </div>
-            </Link>
+            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                <DashboardTileButton link={`/events`} label={`View all upcoming events \u2192`} isBlueBackground={false} />
+            </div>
         </div>
     );
 };

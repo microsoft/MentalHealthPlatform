@@ -25,7 +25,7 @@ const renderNews = (newsData: INewsData, key: number) => {
             </div>
             <div style={{ display: "flex", flexDirection: "column", marginLeft: 20 }}>
                 <h2 className={classes.Title}>{newsData.title}</h2>
-                <div className={classes.Date}>{getShortenedTimeAndDate(new Date(newsData.date))}</div>
+                <div>{getShortenedTimeAndDate(new Date(newsData.date))}</div>
                 <div className={classes.Description}>{newsData.desc}</div>
             </div>
         </div>

@@ -3,12 +3,11 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import ReactLoading from 'react-loading';
-import message_icon from './../../images/message_icon.png';
+
 import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
-import { Header } from './../Dashboard/dashboard.css';
-import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
+import DashboardTile from './../DashboardTile/dashboard-tile';
+import message_icon from './../../images/message_icon.png';
 
 interface ITrendingPostsPreviewProps {
     postsData: IPostPreviewData[],
@@ -17,7 +16,7 @@ interface ITrendingPostsPreviewProps {
 
 const NUMBER_OF_TRENDING_POSTS_PREVIEWS = 4;
 
-const renderTrendingPostPreview = (postData: IPostPreviewData, key: number) => {
+const renderPost = (postData: IPostPreviewData, key: number) => {
     const topicId = postData.topic_id;
     const chatId = postData.chat_id;
     const url = `/topics/topic${topicId}/chat/${chatId}`;
@@ -34,39 +33,33 @@ const renderTrendingPostPreview = (postData: IPostPreviewData, key: number) => {
     );
 };
 
+const renderAllPosts = (postsData: IPostPreviewData[]) => {
+    const posts = [];
+    for (let i = 0; i < Math.min(NUMBER_OF_TRENDING_POSTS_PREVIEWS, postsData.length); i++) {
+        posts.push(renderPost(postsData[i], i));
+    }
+    return posts;
+};
+
 const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
     const {
         postsData,
         isLoading
     } = props;
 
-    const posts = [];
-    for (let i = 0; i < Math.min(NUMBER_OF_TRENDING_POSTS_PREVIEWS, postsData.length); i++) {
-        posts.push(renderTrendingPostPreview(postsData[i], i));
-    }
-
-    return isLoading ? (
-        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <div className={Header}>Trending posts in your network</div>
-                <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-                </div>
-            </div>
-        </div>
-        ) : (
-        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <div className={Header}>Trending posts in your network</div>
-                <div style={{ paddingBottom: "15px", borderBottom: "1px solid #CCCCCC" }}>
-                    <label style={{ fontStyle: "italic" }}>Posts based on your preferences</label>
-                </div>
-                {posts}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                <DashboardTileButton link={`/topics`} label={`View all posts \u2192`} isBlueBackground={false} />
-            </div>
-        </div>
+    return (
+        <DashboardTile
+            buttonProps={{
+                link: `/topics`,
+                label: `View all posts \u2192`,
+                isBlueBackground: false,
+                isCentered: false
+            }}
+            header={"Trending posts in your network"}
+            isLoading={isLoading}
+        >
+            {renderAllPosts(postsData)}
+        </DashboardTile>
     );
 };
 

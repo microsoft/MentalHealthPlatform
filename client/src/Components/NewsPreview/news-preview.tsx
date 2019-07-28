@@ -2,13 +2,14 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import ReactLoading from 'react-loading';
-import headspace from './../../images/headspace.png';
-import { Header } from './../Dashboard/dashboard.css';
+
 import * as classes from "./news-preview.css";
 import { INewsData } from './../News/news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
-import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
+import DashboardTile from './../DashboardTile/dashboard-tile';
+
+// TODO: Remove hardcoded images
+import headspace from './../../images/headspace.png';
 
 interface INewsPreviewProps {
     newsData: INewsData[];
@@ -28,6 +29,14 @@ const renderNewsPreview = (newsData: INewsData, key: number) => {
             </div>
         </div>
     );
+};
+
+const renderAllNewsPreview = (newsData: INewsData[]) => {
+    const news = [];
+    for (let i = 0; i < Math.min(NUMBER_OF_NEWS_PREVIEWS, newsData.length); i++) {
+        news.push(renderNewsPreview(newsData[i], i));
+    }
+    return news;
 }
 
 const NewsPreview = (props: INewsPreviewProps) => {
@@ -35,31 +44,20 @@ const NewsPreview = (props: INewsPreviewProps) => {
         newsData,
         isLoading
     } = props;
-
-    const news = [];
-    for (let i = 0; i < Math.min(NUMBER_OF_NEWS_PREVIEWS, newsData.length); i++) {
-        news.push(renderNewsPreview(newsData[i], i));
-    }
-
-    return isLoading ? (
-        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <div className={Header}>Latest News</div>
-                <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-                </div>
-            </div>
-        </div>
-    ) : (
-        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <div className={Header}>Latest News</div>
-                {news}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                <DashboardTileButton link={`/news`} label={`View all latest news \u2192`} isBlueBackground={false} />
-            </div>
-        </div>
+    
+    return (
+        <DashboardTile
+            buttonProps={{
+                link: `/news`,
+                label: `View all latest news \u2192`,
+                isBlueBackground: false,
+                isCentered: false
+            }}
+            header={"Latest News"}
+            isLoading={isLoading}
+        >
+            {renderAllNewsPreview(newsData)}
+        </DashboardTile>
     );
 };
 

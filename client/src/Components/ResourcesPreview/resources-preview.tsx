@@ -3,15 +3,12 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import DashboardTile from './../DashboardTile/dashboard-tile';
 import image0 from './../../images/topic_image_0.jpg';
 import image1 from './../../images/topic_image_1.jpg';
 import image2 from './../../images/topic_image_2.jpg';
 import image3 from './../../images/topic_image_3.jpg';
 import * as classes from "./resources-preview.css";
-import { Header } from './../Dashboard/dashboard.css';
-
-interface IResourcesPreviewProps {
-}
 
 interface IResourcesData {
     label: string;
@@ -40,7 +37,6 @@ const resourcesData = [
         src: image3,
         pageName: "events"
     }
-
 ];
 
 const renderPreview = (data: IResourcesData, key: number) => {
@@ -64,22 +60,23 @@ const renderPreview = (data: IResourcesData, key: number) => {
     );
 };
 
-const ResourcesPreview = (props: IResourcesPreviewProps) => {
-    const {
-    } = props;
-
+const renderPreviews = () => {
     const previews = [];
-    for (let i = 0; i < resourcesData.length; i++)
-    {
+    for (let i = 0; i < resourcesData.length; i++) {
         previews.push(renderPreview(resourcesData[i], i));
     }
     return (
-        <div className={classes.ResourcesBox}>
-            <div className={Header}>Resources</div>
-            <div className={classes.ResourcePreviews}>
-                {previews}
-            </div>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+            {previews}
         </div>
+    );
+}
+
+const ResourcesPreview = () => {
+    return (
+        <DashboardTile header={"Resources"}>
+            {renderPreviews()}
+        </DashboardTile>
     );
 };
 

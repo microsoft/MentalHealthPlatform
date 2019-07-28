@@ -6,21 +6,23 @@ import { Link } from 'react-router-dom';
 
 import * as classes from './dashboard-tile-button.css';
 
-interface IDashboardTileButtonProps {
+export interface IDashboardTileButtonProps {
     label: string,
     link: string,
-    isBlueBackground: boolean
+    isBlueBackground: boolean,
+    isCentered: boolean
 }
 
-const DashboardTileButton = (props: IDashboardTileButtonProps) => {
+export const DashboardTileButton = (props: IDashboardTileButtonProps) => {
     const {
         label,
         link,
-        isBlueBackground
+        isBlueBackground,
+        isCentered
     } = props;
 
     const backgroundClass = isBlueBackground ? classes.DashboardTileButton_BlueBackground : classes.DashboardTileButton_WhiteBackground;
-    const textAlign = isBlueBackground ? classes.TextAlignCenter : classes.TextAlignEnd;
+    const textAlign = isCentered ? classes.TextAlignCenter : classes.TextAlignEnd;
     const buttonClass = [classes.DashboardTileButton, backgroundClass, textAlign].join(' ');
 
     return (
@@ -31,5 +33,3 @@ const DashboardTileButton = (props: IDashboardTileButtonProps) => {
         </Link>
     );
 };
-
-export default DashboardTileButton;

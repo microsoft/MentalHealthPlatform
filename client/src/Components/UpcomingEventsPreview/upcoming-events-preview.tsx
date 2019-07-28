@@ -2,13 +2,11 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import ReactLoading from 'react-loading';
 import calendar_icon from './../../images/calendar_icon.png';
-import { Header } from './../Dashboard/dashboard.css';
 import * as classes from "./upcoming-events-preview.css";
 import { IUpcomingEventData } from './upcoming-events-preview-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
-import DashboardTileButton from './../DashboardTileButton/dashboard-tile-button';
+import DashboardTile from './../DashboardTile/dashboard-tile';
 
 const NUMBER_OF_EVENTS = 1;
 
@@ -17,15 +15,9 @@ interface IUpcomingEventsPreviewProps {
     isLoading: boolean
 }
 
-const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
-    const {
-        eventsData,
-        isLoading
-    } = props;    
-
-    const events = [];
-    for (let i = 0; i < Math.min(NUMBER_OF_EVENTS, eventsData.length); i++) {
-        events.push(
+const renderEvents = (eventsData: IUpcomingEventData[]) => {
+    return eventsData.slice(0, NUMBER_OF_EVENTS).map((data, i) => {
+        return (
             <div key={i} className={classes.UpcomingEventsPreviewDataContainer}>
                 <img src={calendar_icon} className={classes.UpcomingEventsPreviewImage} />
                 <div className={classes.UpcomingEventsPreviewDataText}>
@@ -35,27 +27,28 @@ const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
                 </div>
             </div>
         );
-    }
+    });
+};
 
-    return isLoading ? (
-        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <div className={Header}>Upcoming Events</div>
-                <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-                </div>
-            </div>
-        </div>
-        ) : (
-        <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                <div className={Header}>Upcoming Events</div>
-                {events}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                <DashboardTileButton link={`/events`} label={`View all upcoming events \u2192`} isBlueBackground={false} />
-            </div>
-        </div>
+const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
+    const {
+        eventsData,
+        isLoading
+    } = props;
+
+    return (
+        <DashboardTile
+            buttonProps={{
+                link: `/events`,
+                label: `View all upcoming events \u2192`,
+                isBlueBackground: false,
+                isCentered: false
+            }}
+            header={"Upcoming Events"}
+            isLoading={isLoading}
+        >
+            {renderEvents(eventsData)}
+        </DashboardTile>
     );
 };
 

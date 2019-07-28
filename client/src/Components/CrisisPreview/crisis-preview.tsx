@@ -6,6 +6,7 @@ import phone from './../../images/phone.jpg';
 import online_support from './../../images/online_support.jpg';
 import { Link } from 'react-router-dom';
 import * as classes from "./crisis-preview.css";
+import { DashboardTileButton } from './../DashboardTileButton/dashboard-tile-button';
 
 interface ICrisisPreviewProps {
 }
@@ -32,14 +33,10 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
                         <label className={classes.CrisisPreviewSupportText}>Online</label>
                     </div>  
                 </div>
-                <Link to={`/crisis`} style={{textDecoration:"none"}}>
-                    <div className={classes.CrisisPreviewsButtonContainer}>
-                        <button className={classes.CrisisPreviewsButton}>Get help now  &rarr;</button>
-                    </div>
-                </Link>
-               
+                <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
+                    <DashboardTileButton link={`/crisis`} label={`Get help now \u2192`} isBlueBackground={false} isCentered={true} />
+                </div>
             </div>
-            
         </div>
     );
 };

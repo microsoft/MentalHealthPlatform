@@ -9,7 +9,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { baseGetRequest } from '../../util/base-requests';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
 import * as classes from './events.css';
-import searchIcon from '../../images/search_icon.png';
+import SearchBar from './../SearchBar/search-bar-provider';
 
 // TODO: Remove hardcoded images
 import event_forum from './../../images/event_forum.png';
@@ -87,18 +87,11 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
         return (
             <div style={{ padding: 20 }}>
                 <h1 className={classes.Header}>Upcoming Events</h1>
-                <div className={classes.SearchBar}>
-                    <input
-                        className={classes.TextInput}
-                        placeholder="Search for events by title, description, or location..."
-                        value={this.state.query}
-                        onChange={this.handleInputChange}
-                    />
-                    <button
-                        className={classes.SubmitInput}>
-                        <input type="image" src={searchIcon} className={classes.SearchIcon} />
-                    </button>
-                </div>
+                <SearchBar
+                    placeholder="Search for events by title, description, or location..."
+                    query={this.state.query}
+                    handleInputChange={this.handleInputChange}
+                />
                 {this.state.loading ? (
                     <div className={classes.Loading}>
                         <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />

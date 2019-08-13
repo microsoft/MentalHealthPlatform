@@ -35,8 +35,8 @@ class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsPro
         };
     }
 
-    updateSearchString = (searchString: string) => {
-        this.setState({searchString});
+    updateSearchString = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({searchString: event.target.value});
     }
     /**
      * Renders topics component including search bar and topics table

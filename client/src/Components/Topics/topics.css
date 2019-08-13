@@ -3,6 +3,14 @@
     height: 100%;
 }
 
+.SearchBarContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px 0;
+}
+
 .ForumTable {
     margin: 0 auto;
     font-family: Calibri;

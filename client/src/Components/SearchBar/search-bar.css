@@ -1,10 +1,11 @@
-.TopicsSearchBar {
+.SearchBar {
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
+	align-items: center;
+	justify-content: flex-start;
     width: 940px;
-    margin: 32px auto 22px auto;
+    margin-bottom: 20px;
     background-color: #FFFFFF;
     border-radius: 8px;
     box-shadow: 3px 3px 3px #CCCCCC;

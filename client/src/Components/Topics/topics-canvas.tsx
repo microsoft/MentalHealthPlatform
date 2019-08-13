@@ -6,7 +6,7 @@ import { Link, match } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import { ITopicData } from "./topics-provider";
-import TopicsSearchBar from '../TopicsSearchBar/topics-search-bar';
+import SearchBar from '../SearchBar/search-bar-provider';
 import * as classes from "./Topics.css";
 import Topic from "../Topic/topic";
 
@@ -24,7 +24,7 @@ interface ITopicsCanvasProps {
     searchString: string;
     topicsData: ITopicData[];
     loading: boolean;
-    updateSearchString: (searchString: string) => void;
+    updateSearchString: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TopicsCanvas = (props: ITopicsCanvasProps) => {
@@ -65,7 +65,13 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div className={classes.Container}>
-                <TopicsSearchBar inputChanged={updateSearchString}/>
+                <div className={classes.SearchBarContainer}>
+                    <SearchBar
+                        handleInputChange={updateSearchString}
+                        placeholder={"Search for topics"}
+                        query={searchString}
+                    />
+                </div>
                 {loading ? (
                     <div className={classes.Loading}>
                         <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />

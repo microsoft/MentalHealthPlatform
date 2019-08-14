@@ -5,7 +5,7 @@ import * as React from "react";
 
 import SearchBarCanvas from './search-bar-canvas';
 
-interface ISearchBarProviderProps {
+export interface ISearchBarProviderProps {
     placeholder: string;
     query: string;
     handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,7 +14,7 @@ interface ISearchBarProviderProps {
 interface ISearchBarProviderStates {
 }
 
-export default class SearchBarProvider extends React.Component<ISearchBarProviderProps, ISearchBarProviderStates> {
+export class SearchBarProvider extends React.Component<ISearchBarProviderProps, ISearchBarProviderStates> {
     constructor(props: ISearchBarProviderProps) {
         super(props);
         this.state = {

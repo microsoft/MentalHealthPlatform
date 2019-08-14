@@ -9,7 +9,9 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { baseGetRequest } from '../../util/base-requests';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
 import * as classes from './events.css';
-import SearchBar from './../SearchBar/search-bar-provider';
+import { SearchBarProvider } from './../SearchBar/search-bar-provider';
+
+import SearchPage from './../SearchPage/search-page';
 
 // TODO: Remove hardcoded images
 import event_forum from './../../images/event_forum.png';
@@ -83,48 +85,50 @@ class Events extends React.Component<RouteComponentProps<IEventsProps>, IEventsS
         });
     };
 
+    renderEvents = () => {
+        return this.state.filteredEventData.map(event => {
+            let src = event_forum;
+            if (event.title.indexOf("Picnic") >= 0) {
+                src = event_picnic;
+            }
+            else if (event.title.indexOf("Roundtable") >= 0) {
+                src = event_roundtable;
+            }
+
+            return (
+                <DataCard
+                    key={event._id}
+                    match={{
+                        url: 'http://www.google.com',
+                        params: {}, isExact: false,
+                        path: ''
+                    }}
+                    src={src}
+                    data={{
+                        url: '/pages/stuff',
+                        title: event.title,
+                        subtitle: getShortenedTimeAndDate(new Date(event.date)),
+                        secondarySubtitle: event.location,
+                        description: event.desc,
+                    }}
+                />
+            );
+        });
+    };
+
     render() {
         return (
-            <div style={{ padding: 20 }}>
-                <h1 className={classes.Header}>Upcoming Events</h1>
-                <SearchBar
-                    placeholder="Search for events by title, description, or location..."
-                    query={this.state.query}
-                    handleInputChange={this.handleInputChange}
-                />
-                {this.state.loading ? (
-                    <div className={classes.Loading}>
-                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
-                    </div>
-                ) : this.state.filteredEventData.map(event => {
-                    let src = event_forum;
-                    if (event.title.indexOf("Picnic") >= 0) {
-                        src = event_picnic;
-                    }
-                    else if (event.title.indexOf("Roundtable") >= 0) {
-                        src = event_roundtable;
-                    }
-
-                    return (
-                        <DataCard
-                            key={event._id}
-                            match={{
-                                url: 'http://www.google.com',
-                                params: {}, isExact: false,
-                                path: ''
-                            }}
-                            src={src}
-                            data={{
-                                url: '/pages/stuff',
-                                title: event.title,
-                                subtitle: getShortenedTimeAndDate(new Date(event.date)),
-                                secondarySubtitle: event.location,
-                                description: event.desc,
-                            }}
-                        />
-                    );
-                })}
-            </div>
+            <SearchPage
+                loading={this.state.loading}
+                header={"Upcoming Events"}
+                searchBarProps={{
+                    placeholder: "Search for events by title, description, or location...",
+                    query: this.state.query,
+                    handleInputChange: this.handleInputChange
+                }}
+            >
+                {this.renderEvents()}
+            </SearchPage>
         );
     }
 }

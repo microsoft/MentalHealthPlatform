@@ -6,7 +6,7 @@ import { Link, match } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import { ITopicData } from "./topics-provider";
-import SearchBar from '../SearchBar/search-bar-provider';
+import { SearchBarProvider } from '../SearchBar/search-bar-provider';
 import * as classes from "./Topics.css";
 import Topic from "../Topic/topic";
 
@@ -66,7 +66,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div className={classes.Container}>
                 <div className={classes.SearchBarContainer}>
-                    <SearchBar
+                    <SearchBarProvider
                         handleInputChange={updateSearchString}
                         placeholder={"Search for topics"}
                         query={searchString}

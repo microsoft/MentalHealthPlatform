@@ -8,7 +8,7 @@ import DataCard from '../DataCard/data-card';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { baseGetRequest } from '../../util/base-requests';
 import * as classes from './therapists.css';
-import SearchBar from './../SearchBar/search-bar-provider';
+import { SearchBarProvider } from './../SearchBar/search-bar-provider';
 
 // TODO: Remove hardcoded images
 import therapist_1 from './../../images/therapist_1.jpg';
@@ -91,7 +91,7 @@ class Therapists extends React.Component<RouteComponentProps<ITherapistsProps>, 
         return (
             <div style={{ padding: 20 }}>
                 <h1 className={classes.Header}>Therapists</h1>
-                <SearchBar
+                <SearchBarProvider
                     placeholder={"Search for therapists by name, title, location, or description"}
                     handleInputChange={this.handleInputChange}
                     query={this.state.query}

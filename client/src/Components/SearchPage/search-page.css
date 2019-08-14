@@ -1,0 +1,12 @@
+.Header {
+	font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+	flex-grow: 1;
+	width: 1200px;
+}

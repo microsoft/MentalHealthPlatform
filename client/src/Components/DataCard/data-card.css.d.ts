@@ -7,5 +7,5 @@ export const Footer: string;
 export const Name: string;
 export const ProfilePicture: string;
 export const IconDetailsContainer: string;
-export const Image: string;
 export const ImageContainer: string;
+export const Image: string;

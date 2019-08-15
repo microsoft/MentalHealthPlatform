@@ -14,8 +14,8 @@ import { Contacts } from './Contacts/contacts-provider';
 import { News } from './News/news-provider';
 import Dashboard from './Dashboard/dashboard';
 import Crisis from './Crisis/crisis';
-import Therapists from './Therapists/therapists';
-import Events from './Events/events';
+import Therapists from './Therapists/therapists-provider';
+import Events from './Events/events-provider';
 
 export type UserDataType = {
     userId: number;

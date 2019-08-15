@@ -6,20 +6,20 @@ import * as React from "react";
 import * as classes from "./topic.css";
 
 export interface ITopicProps {
-    name: string;
     image: string;
     title: string;
 }
 
 const Topic = (props: ITopicProps): JSX.Element => {
+    const { image, title } = props;
+
     return (
         <div className={classes.TopicTile}>
-            <p 
-                className={classes.Image}
+            <p className={classes.Image}
                 style={{
-                    backgroundImage: `url(${props.image})`,
+                    backgroundImage: `url(${image})`,
                     backgroundSize: "cover"
-                }}>{props.title}</p>
+                }}>{title}</p>
         </div>
     )
 };

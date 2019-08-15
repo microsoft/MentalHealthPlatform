@@ -3,12 +3,11 @@
 
 import * as React from 'react';
 import { Link, match } from 'react-router-dom';
-import ReactLoading from 'react-loading';
 
 import { ITopicData } from "./topics-provider";
-import { SearchBarProvider } from '../SearchBar/search-bar-provider';
 import * as classes from "./Topics.css";
 import Topic from "../Topic/topic";
+import SearchPage from './../SearchPage/search-page';
 
 import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";
@@ -56,7 +55,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         tiles = newTopicsData.map((topic, index: number) => {
             return (
                 <Link key={index} to={`${baseUrl}/topic${topic._id}`}>
-                    <Topic name={"jksbvjv"} title={topic.topicTitle} image={images[parseInt(topic.image) - 1]} />
+                    <Topic title={topic.topicTitle} image={images[parseInt(topic.image) - 1]} />
                 </Link>
             );
         });
@@ -65,20 +64,17 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div className={classes.Container}>
-                <div className={classes.SearchBarContainer}>
-                    <SearchBarProvider
-                        handleInputChange={updateSearchString}
-                        placeholder={"Search for topics"}
-                        query={searchString}
-                    />
-                </div>
-                {loading ? (
-                    <div className={classes.Loading}>
-                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
-                    </div>
-                ) : (
+                <SearchPage
+                    loading={loading}
+                    centerSearch={true}
+                    searchBarProps={{
+                        placeholder: "Search for topics",
+                        query: searchString,
+                        handleInputChange: updateSearchString
+                    }}
+                >
                     <div className={classes.TileContainer}>{tiles}</div>
-                )}
+                </SearchPage>
             </div>
         </div>
     );

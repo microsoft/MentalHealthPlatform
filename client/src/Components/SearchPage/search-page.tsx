@@ -12,8 +12,9 @@ import * as classes from './search-page.css';
 interface ISearchBarProps {
     children: any;
     loading: boolean;
-    header: string;
     searchBarProps: ISearchBarProviderProps;
+    header?: string;
+    centerSearch?: boolean;
 }
 
 const SearchPage = (props: ISearchBarProps) => {
@@ -21,14 +22,15 @@ const SearchPage = (props: ISearchBarProps) => {
         children,
         loading,
         searchBarProps,
-        header
+        header,
+        centerSearch
     } = props;
 
     const { handleInputChange, query, placeholder } = searchBarProps;
 
     return (
-        <div style={{ padding: 20 }}>
-            <h1 className={classes.Header}>{header}</h1>
+        <div style={{ padding: 20, display: "flex", flexDirection: "column", alignItems: centerSearch ? "center" : "flex-start" }}>
+            {header !== undefined ? <h1 className={classes.Header}>{header}</h1> : null}
             <SearchBarProvider
                 placeholder={placeholder}
                 query={query}

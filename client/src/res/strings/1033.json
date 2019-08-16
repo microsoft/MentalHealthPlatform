@@ -1,0 +1,34 @@
+{
+	"NAVIGATION_BAR_DASHBOARD": {
+		"description": "Dashboard menu item",
+		"value": "Dashboard"
+	},
+	"NAVIGATION_BAR_FORUMS": {
+		"description": "Forums menu item",
+		"value": "Forums"
+	},
+	"NAVIGATION_BAR_CONTACTS": {
+		"description": "Contacts menu item",
+		"value": "Contacts"
+	},
+	"NAVIGATION_BAR_NEWS": {
+		"description": "News menu item",
+		"value": "News"
+	},
+	"NAVIGATION_BAR_EVENTS": {
+		"description": "Events menu item",
+		"value": "Events"
+	},
+	"NAVIGATION_BAR_THERAPISTS": {
+		"description": "Therapists menu item",
+		"value": "Therapists"
+	},
+	"NAVIGATION_BAR_LOGIN": {
+		"description": "Login button",
+		"value": "Login"
+	},
+	"NAVIGATION_BAR_LOGOUT": {
+		"description": "Logout button",
+		"value": "Logout"
+	}
+}

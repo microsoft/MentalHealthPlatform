@@ -6,7 +6,6 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import SignUpLoginCanvas from "./signup-login-canvas";
 import { IUserContext } from '../App';
-import { BASE_URL } from "./../../util/Helpers";
 import { basePostRequest } from "./../../util/base-requests";
 
 export interface ISignupLoginProviderState {
@@ -21,6 +20,8 @@ export interface ISignupLoginProviderState {
 }
 
 class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, ISignupLoginProviderState> {
+    private _userData: IUserContext;
+
     constructor(props: RouteComponentProps<{}>) {
         super(props);
         this.state = {
@@ -66,43 +67,38 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
         basePostRequest("signup", postRequestData, this.submitSignupResponseHandler, this.submitSignupErrorHandler);
     }
 
-    // TODO: Refactor submit login request
-    submitLogin = (userData: IUserContext) => {        
-        const username = this.state.username;
-        const pass = this.state.password;
-        const _this = this;
-        fetch(`${BASE_URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                pass: pass,
-            })
-        }).then(function(response) {
-            const output = response.json();
-            return output;
-        }).then(function(data) {
-            if (data && data.statusMessage == 1) {
-                console.log("Log in success for user " + username);
-                const userInfo = {
-                    userId: 0,
-                    username: username
-                };
-                userData.updateUser(userInfo);
-                localStorage.setItem('userId', userInfo.userId.toString());
-                localStorage.setItem('username', userInfo.username.toString());
-                
-                _this.props.history.push("/");
-                _this.setState({ loginErrorMessage: "" });
-            }
-            else {
-                _this.setState({ loginErrorMessage: "Log in failure" });
-                console.log("Log in failure")
-            }
-        });
+    submitLoginResponseHandler = (data: any) => {
+        if (data && data.statusMessage == 1) {
+            const username = this.state.username;
+            console.log("Log in success for user " + username);
+            const userInfo = {
+                userId: 0,
+                username
+            };
+            this._userData.updateUser(userInfo);
+            localStorage.setItem('userId', userInfo.userId.toString());
+            localStorage.setItem('username', userInfo.username.toString());
+            
+            this.props.history.push("/");
+            this.setState({ loginErrorMessage: "" });
+        }
+        else {
+            this.setState({ loginErrorMessage: "Log in failure" });
+            console.log("Log in failure")
+        }
+    }
+
+    submitLoginErrorHandler = (error: any) => {
+        console.log(error);
+    }
+    
+    submitLogin = (userData: IUserContext) => {
+        this._userData = userData;
+        const postRequestData = {
+            username: this.state.username,
+            pass: this.state.password
+        };
+        basePostRequest("login", postRequestData, this.submitLoginResponseHandler, this.submitLoginErrorHandler);
     }
 
     updateInputValues = (inputType: string, value: string) => {
@@ -155,4 +151,4 @@ class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, 
     }
 }
 
-export const SignupLogin =  withRouter(SignupLoginProviderClass);
+export const SignupLogin = withRouter(SignupLoginProviderClass);

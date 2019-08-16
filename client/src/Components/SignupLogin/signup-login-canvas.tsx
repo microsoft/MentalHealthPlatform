@@ -69,7 +69,7 @@ const createSignupPane = (signUpFirstName: string, signUpUsername: string, signU
                 {renderInput("password", signUpPass1, "Password", "password", "signUpPass1", handlers)}
                 {renderInput("password", signUpPass2, "Confirm Password", "confirm-password", "signUpPass2", handlers)}
                 <div className={classes.InvalidMessage}>{signupErrorMessage}</div>
-                <button type="submit" onClick={(e) => submitSignup()} className={signupButtonClasses} disabled={!isSignUpButtonEnabled()}>Sign Up</button>
+                <button type="submit" onClick={submitSignup} className={signupButtonClasses} disabled={!isSignUpButtonEnabled()}>Sign Up</button>
             </div>
         </div>
     )
@@ -89,6 +89,10 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
         updateInput: updateInputValues
     };
 
+    const onClickHandler = () => {
+        submitLogin(userData)
+    };
+
     return (
         <div className={classes.Pane} style={{ borderLeft: "1px solid #CCCCCC" }}>
             <h1 className={classes.FormTitle}>Log In</h1>
@@ -96,7 +100,7 @@ const createLoginPane = (userData: IUserContext, username: string, password: str
                 {renderInput("text", username, "Username", "username", "username", handlers, userData)}
                 {renderInput("password", password, "Password", "password", "password", handlers, userData)}
                 <div className={classes.InvalidMessage}>{loginErrorMessage}</div>
-                <button onClick={(e) => submitLogin(userData)} disabled={!isLoginButtonEnabled()} type="submit" className={loginButtonClasses}>Login</button>
+                <button onClick={onClickHandler} disabled={!isLoginButtonEnabled()} type="submit" className={loginButtonClasses}>Login</button>
             </div>
         </div>
     )
@@ -128,7 +132,7 @@ const SignUpLoginCanvas = (props: ISignupLoginCanvasProps) => {
             <div className={classes.SignupLoginForm}>
                 {createSignupPane(signUpFirstName, signUpUsername, signUpPass1, signUpPass2, isSignUpButtonEnabled, submitSignup, updateInputValues, signupErrorMessage)}
                 <UserDataContext.Consumer>
-                    {(userData) => {return createLoginPane(userData, username, password, isLoginButtonEnabled, submitLogin, updateInputValues, loginErrorMessage)}}
+                    {(userData) => createLoginPane(userData, username, password, isLoginButtonEnabled, submitLogin, updateInputValues, loginErrorMessage)}
                 </UserDataContext.Consumer>
             </div>
         </div>

@@ -10,6 +10,16 @@ import profilePicturePlaceholder from "./../../images/profile_picture_placeholde
 import homeIcon from "./../../images/home_icon.png";
 
 const renderNameField = (userContext: IUserContext) => {
+    const onClickHandler = () => {
+        const userInfo = {
+            userId: -1,
+            username: ""
+        };
+        userContext.updateUser(userInfo);
+        localStorage.setItem('userId', userInfo.userId.toString());
+        localStorage.setItem('username', userInfo.username.toString());
+    };
+
     if (userContext.user && userContext.user.username && userContext.user.username.length > 0) {
         return (
             <div style={{display: "flex", flexDirection: "row"}}>
@@ -17,15 +27,7 @@ const renderNameField = (userContext: IUserContext) => {
                     <img src={profilePicturePlaceholder} style={{ height: 30, width: 30, borderRadius: "50%", marginRight: 10 }} />
                     {userContext.user.username}
                 </div>
-                <div style={{ marginLeft: 30, cursor: "pointer", fontWeight: "lighter" }} onClick={() => {
-                    const userInfo = {
-                        userId: -1,
-                        username: ""
-                    };
-                    userContext.updateUser(userInfo);
-                    localStorage.setItem('userId', userInfo.userId.toString());
-                    localStorage.setItem('username', userInfo.username.toString());
-                }}>Logout</div>
+                <div style={{ marginLeft: 30, cursor: "pointer", fontWeight: "lighter" }} onClick={onClickHandler}>Logout</div>
             </div>
         );
     }

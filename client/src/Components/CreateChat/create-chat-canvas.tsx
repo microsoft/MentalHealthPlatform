@@ -28,34 +28,34 @@ const CreateChatCanvas = (props: ICreateChatCanvasProps) => {
     let submitButtonClass = classes.SubmitButton + " ";
     submitButtonClass += isSubmitButtonDisabled() ? classes.Green : classes.Gray;
     
+    const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        handleSubmit(event, inputTitle, inputDescription);
+    };
+
     return (
         <div className={classes.Container}>
             <div className={classes.FormContainer}>
                 <div className={classes.Pane}>
-                    <UserDataContext.Consumer>
-                        {(userData) => (
-                            <form onSubmit={(e) => handleSubmit(e, inputTitle, inputDescription)} className={classes.FormWrapper}>
-                                <h1 className={classes.FormTitle}>Create New Chat</h1>
-                                <input
-                                    className={classes.InputTitle}
-                                    type='text'
-                                    value={inputTitle}
-                                    placeholder="Enter chat title"
-                                    onChange={(e) => handleInputTitleChange(e)} />
-                                <textarea
-                                    className={classes.InputDescription}
-                                    value={inputDescription}
-                                    placeholder="Enter chat description"
-                                    onChange={(e) => handleInputDescriptionChange(e)}></textarea>
-                                <button
-                                    disabled={!isSubmitButtonDisabled()}
-                                    className={submitButtonClass}
-                                    type='submit'>
-                                    Submit
-                                </button>
-                            </form>
-                        )}
-                    </UserDataContext.Consumer>
+                    <form onSubmit={onSubmitHandler} className={classes.FormWrapper}>
+                        <h1 className={classes.FormTitle}>Create New Chat</h1>
+                        <input
+                            className={classes.InputTitle}
+                            type='text'
+                            value={inputTitle}
+                            placeholder="Enter chat title"
+                            onChange={handleInputTitleChange} />
+                        <textarea
+                            className={classes.InputDescription}
+                            value={inputDescription}
+                            placeholder="Enter chat description"
+                            onChange={handleInputDescriptionChange}></textarea>
+                        <button
+                            disabled={!isSubmitButtonDisabled()}
+                            className={submitButtonClass}
+                            type='submit'>
+                            Submit
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

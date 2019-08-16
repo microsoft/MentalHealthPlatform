@@ -35,6 +35,39 @@ const ChatCanvas = (props: IChatCanvasProps) => {
         handleSubmit
     } = props;
 
+    const renderForm = (userData: IUserContext) => {
+        const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Enter" && messageBody && messageBody.length > 0) {
+                handleSubmit(e, userData);
+            }
+        }
+
+        const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+            if (messageBody && messageBody.length > 0) {
+                handleSubmit(event, userData);
+            }
+        }
+
+        return (
+            <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
+                <input
+                    className={classes.InputField}
+                    type='text'
+                    value={messageBody}
+                    placeholder="Enter your messsage here"
+                    onKeyDown={onKeyDownHandler}
+                    onChange={handleInputChange} />
+                <button
+                    onClick={onClickHandler}
+                    className={classes.SubmitButton}
+                    type='submit'
+                    disabled={!(messageBody && messageBody.length > 0)}>
+                    <input type="image" src={sendIcon} className={classes.SendIcon} />
+                </button>
+            </div>
+        );
+    }    
+
     return (
         <div className={classes.Container}>
             <div className={classes.ChatContainer}>
@@ -78,26 +111,9 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                     <div className={classes.Form}>
                         <UserDataContext.Consumer>
                         {
-                            (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ? (
-                                <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
-                                    <input
-                                        className={classes.InputField}
-                                        type='text'
-                                        value={messageBody}
-                                        placeholder="Enter your messsage here"
-                                        onKeyDown={(e) => { if (e.key === "Enter" && messageBody && messageBody.length > 0) handleSubmit(e, userData) }}
-                                        onChange={(e) => handleInputChange(e)} />
-                                    <button
-                                        onClick={(e) => messageBody && messageBody.length > 0 ? handleSubmit(e, userData) : null}
-                                        className={classes.SubmitButton}
-                                        type='submit'
-                                        disabled={!(messageBody && messageBody.length > 0)}>
-                                        <input type="image" src={sendIcon} className={classes.SendIcon} />
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>Please log in to send messages in this chat</div>
-                            )
+                            (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ?
+                                renderForm(userData)
+                                : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>Please log in to send messages in this chat</div>
                         }
                         </UserDataContext.Consumer>
                     </div>

@@ -4,9 +4,9 @@
 import * as React from 'react';
 import phone from './../../images/phone.jpg';
 import online_support from './../../images/online_support.jpg';
-import { Link } from 'react-router-dom';
 import * as classes from "./crisis-preview.css";
 import { DashboardTileButton } from './../DashboardTileButton/dashboard-tile-button';
+import localization from './../../res/strings/localization';
 
 interface ICrisisPreviewProps {
 }
@@ -34,7 +34,7 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
                     </div>  
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                    <DashboardTileButton link={`/crisis`} label={`Get help now \u2192`} isBlueBackground={false} isCentered={true} />
+                    <DashboardTileButton link={`/crisis`} label={localization.getLocalizedString("DASHBOARD_PREVIEW_CRISIS_BUTTON")} isBlueBackground={false} isCentered={true} />
                 </div>
             </div>
         </div>

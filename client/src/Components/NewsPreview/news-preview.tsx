@@ -7,6 +7,7 @@ import * as classes from "./news-preview.css";
 import { INewsData } from './../News/news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
 import DashboardTile from './../DashboardTile/dashboard-tile';
+import localization from '../../res/strings/localization';
 
 // TODO: Remove hardcoded images
 import headspace from './../../images/headspace.png';
@@ -49,11 +50,11 @@ const NewsPreview = (props: INewsPreviewProps) => {
         <DashboardTile
             buttonProps={{
                 link: `/news`,
-                label: `View all latest news \u2192`,
+                label: localization.getLocalizedString("DASHBOARD_PREVIEW_NEWS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={"Latest News"}
+            header={localization.getLocalizedString("DASHBOARD_PREVIEW_NEWS_HEADER")}
             isLoading={isLoading}
         >
             {renderAllNewsPreview(newsData)}

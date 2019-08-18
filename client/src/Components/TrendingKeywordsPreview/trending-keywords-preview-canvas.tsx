@@ -5,6 +5,7 @@ import * as React from 'react';
 import * as classes from "./trending-keywords-preview.css";
 import DashboardTile from './../DashboardTile/dashboard-tile';
 import { IKeywordPreviewData } from "./trending-keywords-preview-provider";
+import localization from './../../res/strings/localization';
 
 interface ITrendingKeywordsPreviewProps {
     keywordsData: IKeywordPreviewData[];
@@ -51,14 +52,11 @@ const renderKeywords = (keywordsData: IKeywordPreviewData[]) => {
 }
 
 const TrendingKeywordsPreview = (props: ITrendingKeywordsPreviewProps) => {
-    const {
-        keywordsData,
-        isLoading
-    } = props;
+    const { keywordsData, isLoading } = props;
 
     return (
         <DashboardTile
-            header={"Trending Keywords"}
+            header={localization.getLocalizedString("DASHBOARD_PREVIEW_TRENDING_KEYWORDS_HEADER")}
             isLoading={isLoading}
         >
             {renderKeywords(keywordsData)}

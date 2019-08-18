@@ -8,6 +8,7 @@ import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
 import DashboardTile from './../DashboardTile/dashboard-tile';
 import message_icon from './../../images/message_icon.png';
+import localization from '../../res/strings/localization';
 
 interface ITrendingPostsPreviewProps {
     postsData: IPostPreviewData[],
@@ -51,11 +52,11 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
         <DashboardTile
             buttonProps={{
                 link: `/topics`,
-                label: `View all posts \u2192`,
+                label: localization.getLocalizedString("DASHBOARD_PREVIEW_TRENDING_POSTS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={"Trending posts in your network"}
+            header={localization.getLocalizedString("DASHBOARD_PREVIEW_THRENDING_POSTS_HEADER")}
             isLoading={isLoading}
         >
             {renderAllPosts(postsData)}

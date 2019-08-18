@@ -23,16 +23,7 @@ interface ITileProps {
 }
 
 const Tile = (props: ITileProps) => {
-    let className = classes.Tile + " ";
-    if (props.isBlue)
-    {
-        className += classes.BlueBackground;
-    }
-    else
-    {
-        className += classes.WhiteBackground;
-    }
-
+    const className = `${classes.Tile} ${props.isBlue ? classes.BlueBackground : classes.WhiteBackground}`;
     return (
         <div className={className}>
             {props.children}

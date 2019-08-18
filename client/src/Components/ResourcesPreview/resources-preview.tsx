@@ -9,6 +9,7 @@ import image1 from './../../images/topic_image_1.jpg';
 import image2 from './../../images/topic_image_2.jpg';
 import image3 from './../../images/topic_image_3.jpg';
 import * as classes from "./resources-preview.css";
+import localization from './../../res/strings/localization';
 
 interface IResourcesData {
     label: string;
@@ -18,22 +19,22 @@ interface IResourcesData {
 
 const resourcesData = [
     {
-        label: "Forums",
+        label: localization.getLocalizedString("NAVIGATION_BAR_FORUMS"),
         src: image0,
         pageName: "topics"
     },
     {
-        label: "Contacts",
+        label: localization.getLocalizedString("NAVIGATION_BAR_CONTACTS"),
         src: image1,
         pageName: "contacts"
     },
     {
-        label: "News",
+        label: localization.getLocalizedString("NAVIGATION_BAR_NEWS"),
         src: image2,
         pageName: "news"
     },
     {
-        label: "Events",
+        label: localization.getLocalizedString("NAVIGATION_BAR_EVENTS"),
         src: image3,
         pageName: "events"
     }
@@ -74,7 +75,7 @@ const renderPreviews = () => {
 
 const ResourcesPreview = () => {
     return (
-        <DashboardTile header={"Resources"}>
+        <DashboardTile header={localization.getLocalizedString("DASHBOARD_PREVIEW_RESOURCES_HEADER")}>
             {renderPreviews()}
         </DashboardTile>
     );

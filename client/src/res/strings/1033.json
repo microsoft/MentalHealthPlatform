@@ -30,5 +30,65 @@
 	"NAVIGATION_BAR_LOGOUT": {
 		"description": "Logout button",
 		"value": "Logout"
+	},
+	"DASHBOARD_PREVIEW_RESOURCES_HEADER": {
+		"description": "Header for Resources dashboard preview",
+		"value": "Resources"
+	},
+	"DASHBOARD_PREVIEW_NEWS_HEADER": {
+		"description": "Header for News dashboard preview",
+		"value": "Latest News"
+	},
+	"DASHBOARD_PREVIEW_NEWS_BUTTON": {
+		"description": "Button label for News dashboard preview",
+		"value": "View all latest news \u2192"
+	},
+	"DASHBOARD_PREVIEW_THERAPISTS_HEADER": {
+		"description": "Header for Therapists dashboard preview",
+		"value": "Find a therapist in your area"
+	},
+	"DASHBOARD_PREVIEW_THERAPISTS_BUTTON": {
+		"description": "Button label for Therapists dashboard preview",
+		"value": "Talk to someone \u2192"
+	},
+	"DASHBOARD_PREVIEW_THRENDING_POSTS_HEADER": {
+		"description": "Header for Trending Posts dashboard preview",
+		"value": "Trending posts in your network"
+	},
+	"DASHBOARD_PREVIEW_TRENDING_POSTS_BUTTON": {
+		"description": "Button label for Trending Posts dashboard preview",
+		"value": "View all posts \u2192"
+	},
+	"DASHBOARD_PREVIEW_STATISTICS_HEADER": {
+		"description": "Header for Statistics dashboard preview",
+		"value": "Your statistics this week"
+	},
+	"DASHBOARD_PREVIEW_STATISTICS_BUTTON": {
+		"description": "Button label for Statistics dashboard preview",
+		"value": "View statistics \u2192"
+	},
+	"DASHBOARD_PREVIEW_STATISTICS_HOUR_LABEL": {
+		"description": "Hour unit label for Statistics dashboard preview",
+		"value": "hour"
+	},
+	"DASHBOARD_PREVIEW_STATISTICS_HOURS_LABEL": {
+		"description": "Hours unit label for Statistics dashboard preview",
+		"value": "hours"
+	},
+	"DASHBOARD_PREVIEW_TRENDING_KEYWORDS_HEADER": {
+		"description": "Header for Trending Keywords dashboard preview",
+		"value": "Trending Keywords"
+	},
+	"DASHBOARD_PREVIEW_UPCOMING_EVENTS_HEADER": {
+		"description": "Header for Upcoming Events dashboard preview",
+		"value": "Upcoming Events"
+	},
+	"DASHBOARD_PREVIEW_UPCOMING_EVENTS_BUTTON": {
+		"description": "Button label for Upcoming Events dashboard preview",
+		"value": "View all upcoming events \u2192"
+	},
+	"DASHBOARD_PREVIEW_CRISIS_BUTTON": {
+		"description": "Button label for Crisis dashboard preview",
+		"value": "Get help now \u2192"
 	}
 }

@@ -1,6 +1,9 @@
 import * as englishStrings from './1033.json';
 import * as frenchStrings from './1036.json';
 
+const EN_US = 1033; // English (USA)
+const FR_FR = 1036; // French (France)
+
 interface IStringData {
     [key: string]: {
         description: string,
@@ -10,7 +13,7 @@ interface IStringData {
 
 export default class Localization {
     static getLocalizedString = (key: string) => {
-        const languageCode = 1036;
+        const languageCode = EN_US;
         const strings = Localization.getStrings(languageCode);
 
         return strings[key] && strings[key].value || key;
@@ -18,9 +21,9 @@ export default class Localization {
 
     static getStrings = (languageCode: number) => {
         switch (languageCode) {
-						case 1036:
-								return frenchStrings as IStringData;
-            case 1033:
+            case FR_FR:
+                return frenchStrings as IStringData;
+            case EN_US:
             default:
                 return englishStrings as IStringData;
         }

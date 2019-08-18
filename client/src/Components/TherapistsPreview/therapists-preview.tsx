@@ -3,17 +3,18 @@
 
 import * as React from 'react';
 import DashboardTile from './../DashboardTile/dashboard-tile';
+import localization from './../../res/strings/localization';
 
 const TherapistsPreview = () => {
     return (
         <DashboardTile
             buttonProps={{
                 link: `/therapists`,
-                label: `Talk to someone \u2192`,
+                label: localization.getLocalizedString("DASHBOARD_PREVIEW_THERAPISTS_BUTTON"),
                 isBlueBackground: true,
                 isCentered: true
             }}
-            header={"Find a therapist in your area"}
+            header={localization.getLocalizedString("DASHBOARD_PREVIEW_THERAPISTS_HEADER")}
         >
             <label>You are eligible for 10 free therapy sessions per year. Take advantage of this opportunity by finding a therapist from our list of certified professionals.</label>
         </DashboardTile>

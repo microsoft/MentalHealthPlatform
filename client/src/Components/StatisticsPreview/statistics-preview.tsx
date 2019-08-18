@@ -7,6 +7,7 @@ import outlook_icon from './../../images/outlook_icon.png';
 import twitter_icon from './../../images/twitter_icon.png';
 import * as classes from './statistics-preview.css';
 import DashboardTile from './../DashboardTile/dashboard-tile';
+import localization from './../../res/strings/localization';
 
 interface IStatisticData {
     src: string;
@@ -38,7 +39,7 @@ const renderStatistic = (statisticData: IStatisticData, key: number) => {
         <tr key={key}>
             <td className={classes.TableCell}><img src={statisticData.src} className={classes.StatisticsPreviewImage} /></td>
             <td className={classes.TableCell} style={{ fontWeight: "bold" }}>{statisticData.label}</td>
-            <td className={classes.TableCell}>{`${hours} ${hours === 1 ? "hour" : "hours"}`}</td>
+            <td className={classes.TableCell}>{`${hours} ${hours === 1 ? localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HOUR_LABEL") : localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HOURS_LABEL")}`}</td>
         </tr>
     );
 }
@@ -64,11 +65,11 @@ const StatisticsPreview = () => {
         <DashboardTile
             buttonProps={{
                 link: `/`,
-                label: `View statistics \u2192`,
+                label: localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={"Your statistics this week"}
+            header={localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HEADER")}
         >
             {renderAllStatistics()}
         </DashboardTile>

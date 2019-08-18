@@ -12,11 +12,20 @@ interface IStringData {
 }
 
 export default class Localization {
-    static getLocalizedString = (key: string) => {
+    static getLocalizedString = (key: string, values?: string[]) => {
         const languageCode = EN_US;
         const strings = Localization.getStrings(languageCode);
 
-        return strings[key] && strings[key].value || key;
+        let resourceString = strings[key] && strings[key].value || key;
+        
+        if (values) {
+            for (let i = 0; i < values.length; i++) {
+                const placeholder = '{' + i + '}';
+                resourceString = resourceString.replace(placeholder, values[i]);
+            }
+        }
+
+        return resourceString;
     }
 
     static getStrings = (languageCode: number) => {

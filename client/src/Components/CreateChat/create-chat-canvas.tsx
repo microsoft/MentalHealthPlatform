@@ -4,7 +4,7 @@
 import * as React from 'react';
 
 import * as classes from "./create-chat.css";
-import { UserDataContext } from '../App';
+import localization from './../../res/strings/localization';
 
 interface ICreateChatCanvasProps {
     inputTitle: string;
@@ -37,23 +37,23 @@ const CreateChatCanvas = (props: ICreateChatCanvasProps) => {
             <div className={classes.FormContainer}>
                 <div className={classes.Pane}>
                     <form onSubmit={onSubmitHandler} className={classes.FormWrapper}>
-                        <h1 className={classes.FormTitle}>Create New Chat</h1>
+                        <h1 className={classes.FormTitle}>{localization.getLocalizedString("CREATE_CHAT_HEADER")}</h1>
                         <input
                             className={classes.InputTitle}
                             type='text'
                             value={inputTitle}
-                            placeholder="Enter chat title"
+                            placeholder={localization.getLocalizedString("CREATE_CHAT_INPUT_TITLE_PLACEHOLDER")}
                             onChange={handleInputTitleChange} />
                         <textarea
                             className={classes.InputDescription}
                             value={inputDescription}
-                            placeholder="Enter chat description"
+                            placeholder={localization.getLocalizedString("CREATE_CHAT_INPUT_DESCRIPTION_PLACEHOLDER")}
                             onChange={handleInputDescriptionChange}></textarea>
                         <button
                             disabled={!isSubmitButtonDisabled()}
                             className={submitButtonClass}
                             type='submit'>
-                            Submit
+                            {localization.getLocalizedString("CREATE_CHAT_SUBMIT_BUTTON_LABEL")}
                         </button>
                     </form>
                 </div>

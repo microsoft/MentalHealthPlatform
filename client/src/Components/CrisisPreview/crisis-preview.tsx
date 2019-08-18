@@ -26,11 +26,11 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
                 <div className={classes.CrisisPreviewsSupportContainer}>
                     <div className={classes.CrisisPreviewSupportContainer}>
                         <img src={phone} className={classes.CrisisPreviewImage}/>
-                        <label className={classes.CrisisPreviewSupportText}>Phone</label>
+                        <label className={classes.CrisisPreviewSupportText}>{localization.getLocalizedString("DASHBOARD_PREVIEW_CRISIS_PHONE_LABEL")}</label>
                     </div>
                     <div className={classes.CrisisPreviewSupportContainer}>
                         <img src={online_support} className={classes.CrisisPreviewImage}/>
-                        <label className={classes.CrisisPreviewSupportText}>Online</label>
+                        <label className={classes.CrisisPreviewSupportText}>{localization.getLocalizedString("DASHBOARD_PREVIEW_CRISIS_ONLINE_LABEL")}</label>
                     </div>  
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>

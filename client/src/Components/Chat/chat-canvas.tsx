@@ -6,11 +6,11 @@ import ReactLoading from 'react-loading';
 
 import * as classes from "./chat.css";
 import { MessageType } from "./chat-provider";
-
 import { IUserContext, UserDataContext } from '../App';
 import Message from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
 import Icon from '../Icon/Icon';
+import localization from './../../res/strings/localization';
 
 interface IChatCanvasProps {
     title: string;
@@ -54,7 +54,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                     className={classes.InputField}
                     type='text'
                     value={messageBody}
-                    placeholder="Enter your messsage here"
+                    placeholder={localization.getLocalizedString("CHAT_INPUT_PLACEHOLDER")}
                     onKeyDown={onKeyDownHandler}
                     onChange={handleInputChange} />
                 <button
@@ -78,8 +78,8 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         <div className={classes.SideColumn}>
                             <table>
                                 <tbody>
-                                    <Icon type='replies' count={replies || 0} text='replies' />
-                                    <Icon type='views' count={views || 0} text='views' />
+                                    <Icon type='replies' count={replies || 0} text={localization.getLocalizedString("CHAT_INFO_REPLIES")} />
+                                    <Icon type='views' count={views || 0} text={localization.getLocalizedString("CHAT_INFO_VIEWS")} />
                                 </tbody>
                             </table>
                         </div>
@@ -113,7 +113,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         {
                             (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ?
                                 renderForm(userData)
-                                : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>Please log in to send messages in this chat</div>
+                                : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>{localization.getLocalizedString("CHAT_LOGIN_MESSAGE")}</div>
                         }
                         </UserDataContext.Consumer>
                     </div>

@@ -6,6 +6,7 @@ import ReactLoading from 'react-loading';
 
 import * as classes from "./contacts.css";
 import { IContactData } from './contacts-provider';
+import localization from './../../res/strings/localization';
 
 interface IContactsProps {
     contactsData: IContactData[],
@@ -35,7 +36,7 @@ const Contacts = (props: IContactsProps) => {
 
     return (
         <div className={classes.Container}>
-            <h1 className={classes.Header}>Contacts</h1>
+            <h1 className={classes.Header}>{localization.getLocalizedString("CONTACTS_HEADER")}</h1>
             {isLoading ? (
                 <div className={classes.Loading}>
                     <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />

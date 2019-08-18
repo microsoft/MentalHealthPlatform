@@ -6,8 +6,8 @@ import * as React from 'react';
 import DataCard from '../DataCard/data-card';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
 import { IEventsData } from './events-interfaces';
-
 import SearchPage from '../SearchPage/search-page';
+import localization from './../../res/strings/localization';
 
 // TODO: Remove hardcoded images
 import event_forum from './../../images/event_forum.png';
@@ -35,13 +35,13 @@ const renderEvents = (filteredEventData: IEventsData[]) => {
             <DataCard
                 key={event._id}
                 match={{
-                    url: 'http://www.google.com',
+                    url: '',
                     params: {}, isExact: false,
                     path: ''
                 }}
                 src={src}
                 data={{
-                    url: '/pages/stuff',
+                    url: '/stuff',
                     title: event.title,
                     subtitle: getShortenedTimeAndDate(new Date(event.date)),
                     secondarySubtitle: event.location,
@@ -63,9 +63,9 @@ const EventsCanvas = (props: IEventsProps) => {
     return (
         <SearchPage
             loading={loading}
-            header={"Upcoming Events"}
+            header={localization.getLocalizedString("EVENTS_HEADER")}
             searchBarProps={{
-                placeholder: "Search for events by title, description, or location...",
+                placeholder: localization.getLocalizedString("EVENTS_INPUT_PLACEHOLDER"),
                 query,
                 handleInputChange
             }}

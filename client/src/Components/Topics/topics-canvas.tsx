@@ -8,6 +8,7 @@ import { ITopicData } from "./topics-provider";
 import * as classes from "./Topics.css";
 import Topic from "../Topic/topic";
 import SearchPage from './../SearchPage/search-page';
+import localization from './../../res/strings/localization';
 
 import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";
@@ -68,7 +69,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
                     loading={loading}
                     centerSearch={true}
                     searchBarProps={{
-                        placeholder: "Search for topics",
+                        placeholder: localization.getLocalizedString("TOPICS_INPUT_PLACEHOLDER"),
                         query: searchString,
                         handleInputChange: updateSearchString
                     }}

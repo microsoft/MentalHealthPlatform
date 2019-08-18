@@ -6,6 +6,7 @@ import * as React from 'react';
 import DataCard from '../DataCard/data-card';
 import { ITherapistData } from './therapists-interfaces';
 import SearchPage from './../SearchPage/search-page';
+import localization from './../../res/strings/localization';
 
 // TODO: Remove hardcoded images
 import therapist_1 from './../../images/therapist_1.jpg';
@@ -21,6 +22,7 @@ interface ITherapistsCanvasProps {
 
 const renderTherapists = (filteredTherapistData: ITherapistData[]) => {
     return filteredTherapistData.map(therapist => {
+        // TODO: Remove hardcoded names
         let src = therapist_1;
         if (therapist.title.indexOf("Samantha") >= 0) {
             src = therapist_2;
@@ -28,17 +30,19 @@ const renderTherapists = (filteredTherapistData: ITherapistData[]) => {
         else if (therapist.title.indexOf("Tim") >= 0) {
             src = therapist_3;
         }
+        
         return (
             <DataCard
                 key={therapist._id}
                 match={{
-                    url: 'http://www.google.com',
-                    params: {}, isExact: false,
+                    url: '',
+                    params: {},
+                    isExact: false,
                     path: ''
                 }}
                 src={src}
                 data={{
-                    url: '/pages/stuff',
+                    url: '/stuff',
                     title: therapist.title,
                     subtitle: therapist.subtitle,
                     description: therapist.desc,
@@ -62,9 +66,9 @@ const TherapistsCanvas = (props: ITherapistsCanvasProps) => {
     return (
         <SearchPage
             loading={loading}
-            header={"Therapists"}
+            header={localization.getLocalizedString("THERAPISTS_HEADER")}
             searchBarProps={{
-                placeholder: "Search for therapists by name, title, location, or description",
+                placeholder: localization.getLocalizedString("THERAPISTS_INPUT_PLACEHOLDER"),
                 query,
                 handleInputChange
             }}

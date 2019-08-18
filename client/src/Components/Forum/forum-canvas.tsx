@@ -7,6 +7,7 @@ import ReactLoading from 'react-loading';
 
 import * as classes from "./forum.css";
 import InfoCard from "../InfoCard/info-card";
+import localization from './../../res/strings/localization';
 
 interface IDiscussionPreviewData {
     _id: string;
@@ -64,7 +65,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
                         <button
                             className={classes.CreateChatButton}>
                             <span style={{fontWeight: "bold"}}>+</span>
-                            <span style={{fontFamily: "Calibri"}}> Create new discussion</span>
+                            <span style={{fontFamily: "Calibri", marginLeft: 8}}>{localization.getLocalizedString("FORUM_CREATE_BUTTON_LABEL")}</span>
                         </button>
                     </Link>
                 </div>

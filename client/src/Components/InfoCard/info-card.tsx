@@ -3,11 +3,12 @@
 
 import * as React from "react";
 import { Link, match } from 'react-router-dom';
+
 import Icon from '../Icon/Icon';
 import * as classes from "./info-card.css";
-
 import profilePicturePlaceholder from './../../images/profile_picture_placeholder.png';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
+import localization from './../../res/strings/localization';
 
 type InfoCardDataType = {
     _id: string;
@@ -49,8 +50,8 @@ const InfoCard = (props: IInfocardProps): JSX.Element => {
                 <div style={{marginLeft: 32}}>
                     <table>
                         <tbody>
-                            <Icon type='replies' count={data.numberOfReplies || 0} text='replies' />
-                            <Icon type='views' count={data.numberOfViews || 0} text='views' />
+                            <Icon type='replies' count={data.numberOfReplies || 0} text={localization.getLocalizedString("CHAT_INFO_REPLIES")} />
+                            <Icon type='views' count={data.numberOfViews || 0} text={localization.getLocalizedString("CHAT_INFO_VIEWS")} />
                         </tbody>
                     </table>
                 </div>

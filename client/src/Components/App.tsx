@@ -16,6 +16,7 @@ import Dashboard from './Dashboard/dashboard';
 import Crisis from './Crisis/crisis';
 import Therapists from './Therapists/therapists-provider';
 import Events from './Events/events-provider';
+import localization from './../res/strings/localization';
 
 export type UserDataType = {
     userId: number;
@@ -76,7 +77,7 @@ export class UserProvider extends React.Component<{}, IUserContext> {
                             <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserDataContext} />} />
                         </div>
                         <div style={{ paddingTop: 10, paddingBottom: 20, color: "#686868", fontFamily: "'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif", textAlign: "center" }}>
-                            Copyright &copy; {new Date().getFullYear()} NAME All rights reserved.
+                            {`${localization.getLocalizedString("FOOTER_COPYRIGHT", [(new Date().getFullYear()).toString(), "NAME"])}`}
                         </div>
                     </div>
                 </BrowserRouter>

@@ -1,58 +1,38 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 import { baseGetRequest } from "../../util/base-requests";
-import { INewsData } from './../News/news-provider';
 import NewsPreviewCanvas from "./news-preview";
 
-interface INewsPreviewProviderProps {
-}
+export const NewsPreviewProvider = () => {
+    const [newsData, setNewsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-interface INewsPreviewProviderState {
-    newsData: INewsData[],
-    isLoading: boolean
-}
-
-export class NewsPreviewProvider extends React.Component<INewsPreviewProviderProps, INewsPreviewProviderState> {
-    constructor(props: INewsPreviewProviderProps) {
-        super(props);
-        this.state = {
-            newsData: [],
-            isLoading: true
-        };
+    const retrieveNewsResponseHandler = (data: any) => {
+        setNewsData(data && data.news);
+        setIsLoading(false);
     }
 
-    render = () => {
-        return (
-            <NewsPreviewCanvas
-                newsData={this.state.newsData}
-                isLoading={this.state.isLoading}
-            />
-        );
-    }
-
-    componentDidMount = () => {
-        this.retreiveNews();
-    }
-
-    retrieveNewsResponseHandler = (data: any) => {
-        this.setState({
-            newsData: data && data.news,
-            isLoading: false
-        });
-    }
-
-    retrieveNewsErrorHandler = (error: any) => {
+    const retrieveNewsErrorHandler = (error: any) => {
         console.error(error);
-        this.setState({
-            isLoading: false
-        });
+        setIsLoading(false);
     }
 
-    retreiveNews = () => {
+    const retreiveNews = () => {
         const params = [{}];
-        baseGetRequest("getnews", params, this.retrieveNewsResponseHandler, this.retrieveNewsErrorHandler);
+        baseGetRequest("getnews", params, retrieveNewsResponseHandler, retrieveNewsErrorHandler);
     }
+
+    useEffect(() => {
+        retreiveNews();
+    }, []);
+
+    return (
+        <NewsPreviewCanvas
+            newsData={newsData}
+            isLoading={isLoading}
+        />
+    );
 }

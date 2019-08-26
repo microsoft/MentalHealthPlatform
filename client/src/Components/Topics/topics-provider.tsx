@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from 'react';
-import { withRouter, RouteComponentProps, match } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { withRouter, match } from 'react-router-dom';
 
 import TopicsCanvas from "./topics-canvas";
 import { baseGetRequest } from "./../../util/base-requests";
@@ -17,61 +17,42 @@ interface ITopicsProviderProps {
     match: match<{}>;
 }
 
-interface ITopicsProviderState {
-    match: match<{}>;
-    searchString: string;
-    topicsData: ITopicData[];
-    loading: boolean;
-}
+const TopicsProvider = (props: ITopicsProviderProps) => {
+    const { match } = props;
+    const [searchString, setSearchString] = useState(undefined);
+    const [topicsData, setTopicsData] = useState(undefined);
+    const [loading, setLoading] = useState(true);
 
-class TopicsProviderClass extends React.Component<RouteComponentProps<ITopicsProviderProps>, ITopicsProviderState> {
-    constructor(props: RouteComponentProps<ITopicsProviderProps>) {
-        super(props);
-        this.state = {
-            match: props.match,
-            searchString: undefined,
-            topicsData: undefined,
-            loading: true
-        };
+    const updateSearchString = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchString(event.target.value);
+    }
+    
+    const retrieveTopicsResponseHandler = (data: any) => {
+        setTopicsData(data);
+        setLoading(false);
     }
 
-    updateSearchString = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({searchString: event.target.value});
-    }
-    /**
-     * Renders topics component including search bar and topics table
-     * @return  {React.Component}   Rendered component
-     */
-    render = () => {
-        return (
-            <TopicsCanvas
-                match={this.props.match}
-                searchString={this.state.searchString}
-                topicsData={this.state.topicsData}
-                updateSearchString={this.updateSearchString}
-                loading={this.state.loading}
-            />
-        );
-    }
-
-    componentDidMount = () => {
-        this.retrieveTopics();
-    }
-
-    retrieveTopicsResponseHandler = (data: any) => {
-        this.setState({
-            topicsData: data,
-            loading: false
-        });
-    }
-
-    retrieveTopicsErrorHandler = (error: any) => {
+    const retrieveTopicsErrorHandler = (error: any) => {
         console.log(error);
     }
 
-    retrieveTopics = () => {
-        baseGetRequest("gettopics", [], this.retrieveTopicsResponseHandler, this.retrieveTopicsErrorHandler);
+    const retrieveTopics = () => {
+        baseGetRequest("gettopics", [], retrieveTopicsResponseHandler, retrieveTopicsErrorHandler);
     }
+
+    useEffect(() => {
+        retrieveTopics();
+    }, []);
+
+    return (
+        <TopicsCanvas
+            match={match}
+            searchString={searchString}
+            topicsData={topicsData}
+            updateSearchString={updateSearchString}
+            loading={loading}
+        />
+    );
 }
 
-export const Topics = withRouter(TopicsProviderClass);
+export const Topics = withRouter(TopicsProvider);

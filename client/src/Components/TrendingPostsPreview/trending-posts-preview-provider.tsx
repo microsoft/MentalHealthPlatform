@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 import { baseGetRequest } from "./../../util/base-requests";
 import TrendingPostsCanvas from './trending-posts-preview-canvas';
@@ -14,56 +14,33 @@ export interface IPostPreviewData {
     topic_id: string;
 };
 
-interface ITrendingPostsProviderProps {
-}
+export const TrendingPostsProvider = () => {
+    const [postsData, setPostsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-interface ITrendingPostsProviderState {
-    postsData: IPostPreviewData[],
-    isLoading: boolean;
-}
-
-export class TrendingPostsProvider extends React.Component<ITrendingPostsProviderProps, ITrendingPostsProviderState> {
-    constructor(props: ITrendingPostsProviderProps) {
-        super(props);
-        this.state = {
-            postsData: [],
-            isLoading: true
-        };
+    const retrieveTrendingPostsResponseHandler = (data: any) => {
+        setPostsData(data && data.chatPreviews);
+        setIsLoading(false);
     }
 
-    /**
-     * Renders forum component
-     * @return  {React.Component}   Rendered component
-     */
-    render = () => {
-        return (
-            <TrendingPostsCanvas
-                postsData={this.state.postsData}
-                isLoading={this.state.isLoading}
-            />
-        );
-    }
-
-    componentDidMount = () => {
-        this.retrieveTrendingPosts();
-    }
-
-    retrieveTrendingPostsResponseHandler = (data: any) => {
-        this.setState({
-            postsData: data && data.chatPreviews,
-            isLoading: false
-        });
-    }
-
-    retrieveTrendingPostsErrorHandler = (error: any) => {
+    const retrieveTrendingPostsErrorHandler = (error: any) => {
         console.error(error);
-        this.setState({
-            isLoading: false
-        });
+        setIsLoading(false);
     }
 
-    retrieveTrendingPosts = () => {
+    const retrieveTrendingPosts = () => {
         const params = [{}];
-        baseGetRequest("gettrendingposts", params, this.retrieveTrendingPostsResponseHandler, this.retrieveTrendingPostsErrorHandler);
+        baseGetRequest("gettrendingposts", params, retrieveTrendingPostsResponseHandler, retrieveTrendingPostsErrorHandler);
     }
+
+    useEffect(() => {
+        retrieveTrendingPosts();
+    }, []);
+
+    return (
+        <TrendingPostsCanvas
+            postsData={postsData}
+            isLoading={isLoading}
+        />
+    );
 }

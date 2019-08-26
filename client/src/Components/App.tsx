@@ -74,7 +74,7 @@ export class UserProvider extends React.Component<{}, IUserContext> {
                             <Route exact path="/news" component={News} />
                             <Route exact path={`/topics/topic:topicID`} component={Forum} />
                             <Route exact path={`/topics/topic:topicID/chat/:chatID`} component={Chat} />
-                            <Route exact path={`/topics/topic:topicID/createChat`} component={() => <CreateChat UserContext={UserDataContext} />} />
+                            <Route exact path={`/topics/topic:topicID/createChat`} component={CreateChat} />
                         </div>
                         <div style={{ paddingTop: 10, paddingBottom: 20, color: "#686868", fontFamily: "'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif", textAlign: "center" }}>
                             {`${localization.getLocalizedString("FOOTER_COPYRIGHT", [(new Date().getFullYear()).toString(), "NAME"])}`}

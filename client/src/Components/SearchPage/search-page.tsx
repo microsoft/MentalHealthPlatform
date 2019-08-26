@@ -5,14 +5,14 @@ import * as React from 'react';
 import ReactLoading from 'react-loading';
 
 // import * as classes from './search-page.css';
-import { SearchBarProvider, ISearchBarProviderProps } from '../SearchBar/search-bar-provider';
+import { SearchBar, ISearchBarComponentProps } from '../SearchBar/search-bar';
 
 import * as classes from './search-page.css';
 
 interface ISearchBarProps {
     children: any;
     loading: boolean;
-    searchBarProps: ISearchBarProviderProps;
+    searchBarProps: ISearchBarComponentProps;
     header?: string;
     centerSearch?: boolean;
 }
@@ -31,7 +31,7 @@ const SearchPage = (props: ISearchBarProps) => {
     return (
         <div style={{ padding: 20, display: "flex", flexDirection: "column", alignItems: centerSearch ? "center" : "flex-start" }}>
             {header !== undefined ? <h1 className={classes.Header}>{header}</h1> : null}
-            <SearchBarProvider
+            <SearchBar
                 placeholder={placeholder}
                 query={query}
                 handleInputChange={handleInputChange}

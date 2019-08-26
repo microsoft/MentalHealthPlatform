@@ -1,79 +1,58 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { baseGetRequest } from '../../util/base-requests';
 import TherapistsCanvas from './therapists-canvas';
-import { ITherapistData } from './therapists-interfaces';
 
-interface ITherapistsProviderState {
-    therapistData: ITherapistData[],
-    filteredTherapistData: ITherapistData[],
-    loading: boolean,
-    query: string
-}
+const TherapistsProvider = () => {
+    const [query, setQuery] = useState("");
+    const [therapistsData, setTherapistsData] = useState([]);
+    const [filteredTherapistData, setFilteredTherapistData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-class TherapistsProvider extends React.Component<RouteComponentProps<null>, ITherapistsProviderState> {
-    constructor(props: RouteComponentProps<null>) {
-        super(props);
-        this.state = {
-            query: "",
-            therapistData: [],
-            filteredTherapistData: [],
-            loading: true
-        };
+    const retrieveTherapistsResponseHandler = (data: any) => {
+        setTherapistsData(data.therapists);
+        setFilteredTherapistData(data.therapists);
+        setLoading(false);
     }
 
-    componentDidMount = () => {
-        this.retrieveTherapists();
-    }
-
-    retrieveTherapistsResponseHandler = (data: any) => {
-        this.setState({
-            therapistData: data.therapists,
-            filteredTherapistData: data.therapists,
-            loading: false
-        });
-    }
-
-    retrieveTherapistsErrorHandler = (error: any) => {
+    const retrieveTherapistsErrorHandler = (error: any) => {
         console.log(error);
     }
 
-    retrieveTherapists = () => {
-        baseGetRequest("gettherapists", [], this.retrieveTherapistsResponseHandler, this.retrieveTherapistsErrorHandler);
+    const retrieveTherapists = () => {
+        baseGetRequest("gettherapists", [], retrieveTherapistsResponseHandler, retrieveTherapistsErrorHandler);
     }
 
-    handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
+        retrieveTherapists();
+    }, []);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
+        setQuery(query);
 
-        this.setState((prevState: any) => {
-            const filteredTherapistData = prevState.therapistData.filter((element: any) => {
-                return element.title.toLowerCase().includes(query.toLowerCase())
-                    || element.desc.toLowerCase().includes(query.toLowerCase())
-                    || element.subtitle.toLowerCase().includes(query.toLowerCase())
-                    || element.location.toLowerCase().includes(query.toLowerCase());
-            });
-
-            return {
-                query,
-                filteredTherapistData
-            };
+        const filteredTherapistData = therapistsData.filter((element: any) => {
+            const queryToLowerCase = query.toLowerCase();
+            return element.title.toLowerCase().includes(queryToLowerCase)
+                || element.desc.toLowerCase().includes(queryToLowerCase)
+                || element.subtitle.toLowerCase().includes(queryToLowerCase)
+                || element.location.toLowerCase().includes(queryToLowerCase);
         });
+        setFilteredTherapistData(filteredTherapistData);
     };
 
-    render() {
-        return (
-            <TherapistsCanvas
-                filteredTherapistData={this.state.filteredTherapistData}
-                loading={this.state.loading}
-                query={this.state.query}
-                handleInputChange={this.handleInputChange}
-            />
-        );
-    }
+    return (
+        <TherapistsCanvas
+            filteredTherapistData={filteredTherapistData}
+            loading={loading}
+            query={query}
+            handleInputChange={handleInputChange}
+        />
+    );
 }
 
 export default withRouter(TherapistsProvider);

@@ -1,154 +1,137 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import * as H from 'history';
 
 import SignUpLoginCanvas from "./signup-login-canvas";
 import { IUserContext } from '../App';
 import { basePostRequest } from "./../../util/base-requests";
 
-export interface ISignupLoginProviderState {
-    username: string;
-    password: string;
-    signUpFirstName: string;
-    signUpUsername: string;
-    signUpPass1: string;
-    signUpPass2: string;
-    signupErrorMessage: string;
-    loginErrorMessage: string;
+interface ISignupLoginProviderProps {
+    history: H.History;
 }
 
-class SignupLoginProviderClass extends React.Component<RouteComponentProps<{}>, ISignupLoginProviderState> {
-    private _userData: IUserContext;
+const SignupLoginProvider = (props: ISignupLoginProviderProps) => {
+    let _userData: IUserContext;
 
-    constructor(props: RouteComponentProps<{}>) {
-        super(props);
-        this.state = {
-            username: "",
-            password: "",
-            signUpFirstName: "",
-            signUpUsername: "",
-            signUpPass1: "",
-            signUpPass2: "",
-            signupErrorMessage: "",
-            loginErrorMessage: ""
-        };
+    const { history } = props;
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [signUpFirstName, setSignUpFirstName] = useState("");
+    const [signUpUsername, setSignUpUsername] = useState("");
+    const [signUpPass1, setSignUpPass1] = useState("");
+    const [signUpPass2, setSignUpPass2] = useState("");
+    const [signupErrorMessage, setSignupErrorMessage] = useState("");
+    const [loginErrorMessage, setLoginErrorMessage] = useState("");
+
+    const isSignUpButtonEnabled = () => {
+        return signUpFirstName.length > 0
+            && signUpUsername.length > 0
+            && signUpPass1.length > 0
+            && signUpPass1 === signUpPass2;
     }
 
-    isSignUpButtonEnabled = () => {
-        return this.state.signUpFirstName.length > 0
-        && this.state.signUpUsername.length > 0
-        && this.state.signUpPass1.length > 0
-        && this.state.signUpPass1 == this.state.signUpPass2;
+    const isLoginButtonEnabled = () => {
+        return username.length > 0 && password.length > 0;
     }
 
-    isLoginButtonEnabled = () => {
-        return this.state.username.length > 0
-        && this.state.password.length > 0;
-    }
-
-    submitSignupResponseHandler = (data: any) => {
-        this.setState({ loginErrorMessage: "" });
+    const submitSignupResponseHandler = (data: any) => {
+        setLoginErrorMessage("");
         console.log(data);
     }
 
-    submitSignupErrorHandler = (error: any) => {
-        this.setState({ loginErrorMessage: "Sign up failure" });
+    const submitSignupErrorHandler = (error: any) => {
+        setLoginErrorMessage("Sign up failure");
         console.log(error);
     }
 
-    submitSignup = () => {
+    const submitSignup = () => {
         const postRequestData = {
-            username: this.state.signUpUsername,
-            pass: this.state.signUpPass1,
-            displayName: this.state.signUpFirstName
+            username: signUpUsername,
+            pass: signUpPass1,
+            displayName: signUpFirstName
         };
-        basePostRequest("signup", postRequestData, this.submitSignupResponseHandler, this.submitSignupErrorHandler);
+        basePostRequest("signup", postRequestData, submitSignupResponseHandler, submitSignupErrorHandler);
     }
 
-    submitLoginResponseHandler = (data: any) => {
+    const submitLoginResponseHandler = (data: any) => {
         if (data && data.statusMessage == 1) {
-            const username = this.state.username;
             console.log("Log in success for user " + username);
             const userInfo = {
                 userId: 0,
                 username
             };
-            this._userData.updateUser(userInfo);
+            _userData.updateUser(userInfo);
             localStorage.setItem('userId', userInfo.userId.toString());
             localStorage.setItem('username', userInfo.username.toString());
             
-            this.props.history.push("/");
-            this.setState({ loginErrorMessage: "" });
+            history.push("/");
+            setLoginErrorMessage("");
         }
         else {
-            this.setState({ loginErrorMessage: "Log in failure" });
+            setLoginErrorMessage("Log in failure");
             console.log("Log in failure")
         }
     }
 
-    submitLoginErrorHandler = (error: any) => {
+    const submitLoginErrorHandler = (error: any) => {
         console.log(error);
     }
     
-    submitLogin = (userData: IUserContext) => {
-        this._userData = userData;
+    const submitLogin = (userData: IUserContext) => {
+        _userData = userData;
         const postRequestData = {
-            username: this.state.username,
-            pass: this.state.password
+            username: username,
+            pass: password
         };
-        basePostRequest("login", postRequestData, this.submitLoginResponseHandler, this.submitLoginErrorHandler);
+        basePostRequest("login", postRequestData, submitLoginResponseHandler, submitLoginErrorHandler);
     }
 
-    updateInputValues = (inputType: string, value: string) => {
+    const updateInputValues = (inputType: string, value: string) => {
         switch (inputType) {
             case "signUpFirstName":
-                this.setState({ signUpFirstName: value });
+                setSignUpFirstName(value);
                 break;
             case "signUpUsername":
-                this.setState({ signUpUsername: value });
+                setSignUpUsername(value);
                 break;
             case "signUpPass1":
-                this.setState({ signUpPass1: value });
+                setSignUpPass1(value);
                 break;
             case "signUpPass2":
-                this.setState({ signUpPass2: value });
+                setSignUpPass2(value);
                 break;
             case "username":
-                this.setState({ username: value });
+                setUsername(value);
                 break;
             case "password":
-                this.setState({ password: value });
+                setPassword(value);
                 break;
             default:
                 break;
         }
     }
 
-    /**
-     * Renders sign-up/login form component
-     * @return  {React.Component}   Rendered component
-     */
-    render = () => {
-        return (
-            <SignUpLoginCanvas
-                username={this.state.username}
-                password={this.state.password}
-                signUpFirstName={this.state.signUpFirstName}
-                signUpUsername={this.state.signUpUsername}
-                signUpPass1={this.state.signUpPass1}
-                signUpPass2={this.state.signUpPass2}
-                isSignUpButtonEnabled={this.isSignUpButtonEnabled}
-                isLoginButtonEnabled={this.isLoginButtonEnabled}
-                submitSignup={this.submitSignup}
-                submitLogin={this.submitLogin}
-                updateInputValues={this.updateInputValues}
-                signupErrorMessage={this.state.signupErrorMessage}
-                loginErrorMessage={this.state.loginErrorMessage}
-            />
-        );
-    }
+    return (
+        <SignUpLoginCanvas
+            username={username}
+            password={password}
+            signUpFirstName={signUpFirstName}
+            signUpUsername={signUpUsername}
+            signUpPass1={signUpPass1}
+            signUpPass2={signUpPass2}
+            isSignUpButtonEnabled={isSignUpButtonEnabled}
+            isLoginButtonEnabled={isLoginButtonEnabled}
+            submitSignup={submitSignup}
+            submitLogin={submitLogin}
+            updateInputValues={updateInputValues}
+            signupErrorMessage={signupErrorMessage}
+            loginErrorMessage={loginErrorMessage}
+        />
+    );
 }
 
-export const SignupLogin = withRouter(SignupLoginProviderClass);
+export const SignupLogin = withRouter(SignupLoginProvider);

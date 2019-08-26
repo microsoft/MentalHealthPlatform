@@ -1,78 +1,57 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { baseGetRequest } from '../../util/base-requests';
-import { IEventsData } from './events-interfaces';
 import EventsCanvas from './events-canvas';
 
-interface IEventsState {
-    query: string,
-    eventData: IEventsData[],
-    filteredEventData: IEventsData[],
-    loading: boolean
-}
+const Events = () => {
+    const [query, setQuery] = useState("");
+    const [eventData, setEventData] = useState([]);
+    const [filteredEventData, setFilteredEventData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-class Events extends React.Component<RouteComponentProps<null>, IEventsState> {
-    constructor(props: RouteComponentProps<null>) {
-        super(props);
-        this.state = {
-            query: "",
-            eventData: [],
-            filteredEventData: [],
-            loading: true
-        };
+    const retrieveEventsResponseHandler = (data: any) => {
+        setEventData(data.events);
+        setFilteredEventData(data.events);
+        setLoading(false);
     }
 
-    componentDidMount = () => {
-        this.retrieveEvents();
-    }
-
-    retrieveEventsResponseHandler = (data: any) => {
-        this.setState({
-            eventData: data.events,
-            filteredEventData: data.events,
-            loading: false
-        });
-    }
-
-    retrieveEventsErrorHandler = (error: any) => {
+    const retrieveEventsErrorHandler = (error: any) => {
         console.log(error);
     }
 
-    retrieveEvents = () => {
-        baseGetRequest("getevents", [], this.retrieveEventsResponseHandler, this.retrieveEventsErrorHandler);
+    const retrieveEvents = () => {
+        baseGetRequest("getevents", [], retrieveEventsResponseHandler, retrieveEventsErrorHandler);
     }
 
-    handleInputChange = (event: any) => {
+    const handleInputChange = (event: any) => {
         const query = event.target.value;
+        setQuery(query);
 
-        this.setState((prevState: any) => {
-            const filteredEventData = prevState.eventData.filter((element: any) => {
-                return element.title.toLowerCase().includes(query.toLowerCase()) 
-                || element.desc.toLowerCase().includes(query.toLowerCase())
-                || element.location.toLowerCase().includes(query.toLowerCase());
-            });
-
-            return {
-                query,
-                filteredEventData
-            };
+        const filteredEventData = eventData.filter((element: any) => {
+            const queryInLowerCase = query.toLowerCase();
+            return element.title.toLowerCase().includes(queryInLowerCase) 
+                || element.desc.toLowerCase().includes(queryInLowerCase)
+                || element.location.toLowerCase().includes(queryInLowerCase);
         });
+        setFilteredEventData(filteredEventData);
     };
 
-    render() {
-        return (
-            <EventsCanvas
-                loading={this.state.loading}
-                handleInputChange={this.handleInputChange}
-                query={this.state.query}
-                filteredEventData={this.state.filteredEventData}
-            />
-        );
-    }
+    useEffect(() => {
+        retrieveEvents();
+    }, []);
+
+    return (
+        <EventsCanvas
+            loading={loading}
+            handleInputChange={handleInputChange}
+            query={query}
+            filteredEventData={filteredEventData}
+        />
+    );
 }
 
 export default withRouter(Events);

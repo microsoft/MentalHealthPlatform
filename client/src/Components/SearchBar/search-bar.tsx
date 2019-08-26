@@ -6,18 +6,14 @@ import * as React from 'react';
 import * as classes from './search-bar.css';
 import searchIcon from '../../images/search_icon.png';
 
-interface ISearchBarCanvasProps {
+export interface ISearchBarComponentProps {
     query: string;
     placeholder: string;
     handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBarCanvas = (props: ISearchBarCanvasProps) => {
-    const {
-        query,
-        handleInputChange,
-        placeholder
-    } = props;
+export const SearchBar = (props: ISearchBarComponentProps) => {
+    const { query, handleInputChange, placeholder } = props;
 
     return (
         <div className={classes.SearchBar}>
@@ -34,5 +30,3 @@ const SearchBarCanvas = (props: ISearchBarCanvasProps) => {
         </div>
     );
 };
-
-export default SearchBarCanvas;

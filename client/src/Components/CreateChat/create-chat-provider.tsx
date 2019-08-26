@@ -1,35 +1,26 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter, match } from 'react-router-dom';
+import * as H from 'history';
 
 import CreateChatCanvas from "./create-chat-canvas";
-
-import { IUserContext } from '../App';
-import { baseGetRequest, basePostRequest } from "./../../util/base-requests";
+import { basePostRequest } from "./../../util/base-requests";
 
 interface ICreateChatProviderProps {
-    UserContext: React.Context<IUserContext>;
-    chatID?: string;
+    match: match<{}>;
+    history: H.History;
 }
 
-interface ICreateChatProviderState {
-    inputTitle: string;
-    inputDescription: string;
-}
+const CreateChatProviderClass = (props: ICreateChatProviderProps) => {
+    const { match, history } = props;
+    
+    const [inputTitle, setInputTitle] = useState("");
+    const [inputDescription, setInputDescription] = useState("");
 
-class CreateChatProviderClass extends React.Component<RouteComponentProps<{}> & ICreateChatProviderProps, ICreateChatProviderState> {
-    constructor(props: RouteComponentProps<{}> & ICreateChatProviderProps) {
-        super(props);
-        this.state = {
-            inputTitle: "",
-            inputDescription: ""
-        };
-    }
-
-    getTopicId = () => {
-        let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");        
+    const getTopicId = () => {
+        let subUrl = match.url.replace("createChat/", "").replace("createChat", "");        
         
         let list = subUrl.split("/");
         list = list.filter((item) => item != "");
@@ -39,58 +30,52 @@ class CreateChatProviderClass extends React.Component<RouteComponentProps<{}> & 
         return topicId;
     }
 
-    handleInputTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            inputTitle: e.target.value
-        })
+    const handleInputTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputTitle(e.target.value);
     }
 
-    handleInputDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        this.setState({
-            inputDescription: e.target.value
-        })
+    const handleInputDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setInputDescription(e.target.value);
     }
 
-    isSubmitButtonDisabled = () => {
-        return this.state.inputTitle.length > 0 && this.state.inputDescription.length > 0;
+    const isSubmitButtonDisabled = () => {
+        return inputTitle.length > 0 && inputDescription.length > 0;
     }
 
-    render = () => {
-        return (
-            <CreateChatCanvas
-                inputTitle={this.state.inputTitle}
-                inputDescription={this.state.inputDescription}
-                isSubmitButtonDisabled={this.isSubmitButtonDisabled}
-                handleSubmit={this.handleSubmit}
-                handleInputTitleChange={this.handleInputTitleChange}
-                handleInputDescriptionChange={this.handleInputDescriptionChange}
-            />
-        );
-    }
-    
-    handleSubmitResponseHandler = (data: any) => {
+    const handleSubmitResponseHandler = (data: any) => {
         console.log("chat created", data);
         if (data && data.chatId !== undefined) {
-            const path = `${this.props.match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
-            this.props.history.push(path);
+            const path = `${match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
+            history.push(path);
         }
     }
 
-    handleSubmitErrorHandler = (error: any) => {
+    const handleSubmitErrorHandler = (error: any) => {
         console.log(error);
     }
 
-    handleSubmit = (e: React.FormEvent<HTMLFormElement>, title: string, description: string) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, title: string, description: string) => {
         e.preventDefault();
 
         const postRequestData = {
             chatTitle: title,
             chatDescription: description,
-            topicId: this.getTopicId(),
+            topicId: getTopicId(),
             username: "Aldo"
         };
-        basePostRequest("createchat", postRequestData, this.handleSubmitResponseHandler, this.handleSubmitErrorHandler);
+        basePostRequest("createchat", postRequestData, handleSubmitResponseHandler, handleSubmitErrorHandler);
     }
+
+    return (
+        <CreateChatCanvas
+            inputTitle={inputTitle}
+            inputDescription={inputDescription}
+            isSubmitButtonDisabled={isSubmitButtonDisabled}
+            handleSubmit={handleSubmit}
+            handleInputTitleChange={handleInputTitleChange}
+            handleInputDescriptionChange={handleInputDescriptionChange}
+        />
+    );
 }
 
 export const CreateChat = withRouter(CreateChatProviderClass);

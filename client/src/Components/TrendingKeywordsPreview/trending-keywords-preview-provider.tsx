@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 import { baseGetRequest } from "./../../util/base-requests";
 import TrendingKeywordsCanvas from './trending-keywords-preview-canvas';
@@ -11,56 +11,33 @@ export interface IKeywordPreviewData {
     count: number;
 };
 
-interface ITrendingKeywordsProviderProps {
-}
+export const TrendingKeywordsProvider = () => {
+    const [keywordsData, setKeywordsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-interface ITrendingKeywordsProviderState {
-    keywordsData: IKeywordPreviewData[],
-    isLoading: boolean;
-}
-
-export class TrendingKeywordsProvider extends React.Component<ITrendingKeywordsProviderProps, ITrendingKeywordsProviderState> {
-    constructor(props: ITrendingKeywordsProviderProps) {
-        super(props);
-        this.state = {
-            keywordsData: [],
-            isLoading: true
-        };
+    const retrieveTrendingKeywordsResponseHandler = (data: any) => {
+        setKeywordsData(data && data.trendingKeywords);
+        setIsLoading(false);
     }
 
-    /**
-     * Renders forum component
-     * @return  {React.Component}   Rendered component
-     */
-    render = () => {
-        return (
-            <TrendingKeywordsCanvas
-                keywordsData={this.state.keywordsData}
-                isLoading={this.state.isLoading}
-            />
-        );
-    }
-
-    componentDidMount = () => {
-        this.retrieveTrendingKeywords();
-    }
-
-    retrieveTrendingKeywordsResponseHandler = (data: any) => {
-        this.setState({
-            keywordsData: data && data.trendingKeywords,
-            isLoading: false
-        });
-    }
-
-    retrieveTrendingKeywordsErrorHandler = (error: any) => {
+    const retrieveTrendingKeywordsErrorHandler = (error: any) => {
         console.error(error);
-        this.setState({
-            isLoading: false
-        })
+        setIsLoading(false);
     }
 
-    retrieveTrendingKeywords = () => {
+    const retrieveTrendingKeywords = () => {
         const params = [{}];
-        baseGetRequest("gettrendingkeywords", params, this.retrieveTrendingKeywordsResponseHandler, this.retrieveTrendingKeywordsErrorHandler);
+        baseGetRequest("gettrendingkeywords", params, retrieveTrendingKeywordsResponseHandler, retrieveTrendingKeywordsErrorHandler);
     }
+
+    useEffect(() => {
+        retrieveTrendingKeywords();
+    }, []);
+
+    return (
+        <TrendingKeywordsCanvas
+            keywordsData={keywordsData}
+            isLoading={isLoading}
+        />
+    );
 }

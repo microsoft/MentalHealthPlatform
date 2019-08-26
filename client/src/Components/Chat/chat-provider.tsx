@@ -49,7 +49,7 @@ const ChatProvider = (props: IChatProviderProps) => {
         console.log(error);
     }
     
-    const retrieveChatData = (chatID: string) => {
+    const retrieveChatData = () => {
         const params = [
             { ["chatId"]: chatID}
         ];
@@ -63,7 +63,7 @@ const ChatProvider = (props: IChatProviderProps) => {
         else {
             alert("Message failed to send")
         }
-        retrieveChatData(chatID);
+        retrieveChatData();
     }
 
     const handleSubmitErrorHandler = (error: any) => {
@@ -86,8 +86,8 @@ const ChatProvider = (props: IChatProviderProps) => {
     }
 
     useEffect(() => {
-        retrieveChatData(chatID);
-    });
+        retrieveChatData();
+    }, []);
 
     return (
         <ChatCanvas

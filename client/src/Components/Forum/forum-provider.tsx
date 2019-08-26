@@ -1,31 +1,24 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from "react";
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { withRouter, match } from 'react-router-dom';
 
-import { ForumCanvas, IDiscussionPreviewData } from "./forum-canvas";
+import { ForumCanvas } from "./forum-canvas";
 import { baseGetRequest } from "./../../util/base-requests";
 
-interface IForumProviderState {
-    forumData: {
-        chatTitle: string,
-        chatPreviews: IDiscussionPreviewData[]
-    },
-    isLoading: boolean;
+interface IForumProviderProps {
+    match: match<{}>;
 }
 
-class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForumProviderState> {
-    constructor(props: RouteComponentProps<{}>) {
-        super(props);
-        this.state = {
-            forumData: undefined,
-            isLoading: true
-        };
-    }
+const ForumProviderClass = (props: IForumProviderProps) => {
+    const [forumData, setForumData] = useState(undefined);
+    const [isLoading, setIsLoading] = useState(true);
 
-    getTopicId = () => {
-        let subUrl = this.props.match.url.replace("createChat/", "").replace("createChat", "");
+    const { match } = props;
+
+    const getTopicId = () => {
+        let subUrl = match.url.replace("createChat/", "").replace("createChat", "");
         
         let list = subUrl.split("/");
         list = list.filter((item) => item != "");
@@ -34,44 +27,34 @@ class ForumProviderClass extends React.Component<RouteComponentProps<{}>, IForum
         return topicId;
     };
 
-    /**
-     * Renders forum component
-     * @return  {React.Component}   Rendered component
-     */
-    render = () => {
-        return (
-            <ForumCanvas
-                forumData={this.state.forumData}
-                match={this.props.match}
-                isLoading={this.state.isLoading}
-            />
-        );
+    const retrieveChatPreviewsResponseHandler = (data: any) => {
+        setForumData(data);
+        setIsLoading(false);
     }
 
-    componentDidMount = () => {
-        this.retrieveChatPreviews();
-    }
-
-    retrieveChatPreviewsResponseHandler = (data: any) => {
-        this.setState({
-            forumData: data,
-            isLoading: false
-        });
-    }
-
-    retrieveChatPreviewsErrorHandler = (error: any) => {
+    const retrieveChatPreviewsErrorHandler = (error: any) => {
         console.error(error);
-        this.setState({
-            isLoading: false
-        });
+        setIsLoading(false);
     }
 
-    retrieveChatPreviews = () => {
+    const retrieveChatPreviews = () => {
         const params = [
-            {["topicId"]: this.getTopicId()}
+            {["topicId"]: getTopicId()}
         ];
-        baseGetRequest("getchatpreviews", params, this.retrieveChatPreviewsResponseHandler, this.retrieveChatPreviewsErrorHandler);
+        baseGetRequest("getchatpreviews", params, retrieveChatPreviewsResponseHandler, retrieveChatPreviewsErrorHandler);
     }
+
+    useEffect(() => {
+        retrieveChatPreviews();
+    }, []);
+
+    return (
+        <ForumCanvas
+            forumData={forumData}
+            match={match}
+            isLoading={isLoading}
+        />
+    );
 }
 
 export const Forum = withRouter(ForumProviderClass);

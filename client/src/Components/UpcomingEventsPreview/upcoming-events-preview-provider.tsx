@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 import { baseGetRequest } from "../../util/base-requests";
 import UpcomingEventsCanvas from './upcoming-events-preview';
@@ -14,52 +14,33 @@ export interface IUpcomingEventData {
     _id: string;
 }
 
-interface IUpcomingEventsPreviewProviderProps {
-}
+export const UpcomingEventsPreviewProvider = () => {
+    const [eventsData, setEventsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-interface IUpcomingEventsPreviewProviderState {
-    eventsData: IUpcomingEventData[],
-    isLoading: boolean;
-}
-
-export class UpcomingEventsPreviewProvider extends React.Component<IUpcomingEventsPreviewProviderProps, IUpcomingEventsPreviewProviderState> {
-    constructor(props: IUpcomingEventsPreviewProviderProps) {
-        super(props);
-        this.state = {
-            eventsData: [],
-            isLoading: true
-        };
+    const retrieveUpcomingEventsResponseHandler = (data: any) => {
+        setEventsData(data && data.events);
+        setIsLoading(false);
     }
 
-    render = () => {
-        return (
-            <UpcomingEventsCanvas
-                eventsData={this.state.eventsData}
-                isLoading={this.state.isLoading}
-            />
-        );
-    }
-
-    componentDidMount = () => {
-        this.retrieveUpcomingEvents();
-    }
-
-    retrieveUpcomingEventsResponseHandler = (data: any) => {
-        this.setState({
-            eventsData: data && data.events,
-            isLoading: false
-        });
-    }
-
-    retrieveUpcomingEventsErrorHandler = (error: any) => {
+    const retrieveUpcomingEventsErrorHandler = (error: any) => {
         console.error(error);
-        this.setState({
-            isLoading: false
-        });
+        setIsLoading(false);
     }
 
-    retrieveUpcomingEvents = () => {
+    const retrieveUpcomingEvents = () => {
         const params = [{}];
-        baseGetRequest("getevents", params, this.retrieveUpcomingEventsResponseHandler, this.retrieveUpcomingEventsErrorHandler);
+        baseGetRequest("getevents", params, retrieveUpcomingEventsResponseHandler, retrieveUpcomingEventsErrorHandler);
     }
+
+    useEffect(() => {
+        retrieveUpcomingEvents();
+    }, []);
+
+    return (
+        <UpcomingEventsCanvas
+            eventsData={eventsData}
+            isLoading={isLoading}
+        />
+    );
 }

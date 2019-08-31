@@ -5,7 +5,7 @@ import * as React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 import * as classes from "./navigation-bar.css";
-import { IUserContext, UserDataContext } from '../App';
+import { IUserContext, UserDataContext } from '../UserProvider';
 import profilePicturePlaceholder from "./../../images/profile_picture_placeholder.png";
 import homeIcon from "./../../images/home_icon.png";
 import localization from './../../res/strings/localization';

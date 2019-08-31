@@ -6,7 +6,7 @@ import { withRouter, match } from 'react-router-dom';
 
 import ChatCanvas from "./chat-canvas";
 
-import { IUserContext } from '../App';
+import { IUserContext } from '../UserProvider';
 import { baseGetRequest, basePostRequest } from "./../../util/base-requests";
 
 export type MessageType = {

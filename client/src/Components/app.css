@@ -1,0 +1,14 @@
+.AppContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #E8E8E8;
+}
+
+.AppFooter {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    color: #686868;
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    text-align: center;
+}

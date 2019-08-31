@@ -4,7 +4,7 @@
 import * as React from 'react';
 
 import * as classes from "./signup-login.css";
-import { IUserContext, UserDataContext } from '../App';
+import { IUserContext, UserDataContext } from '../UserProvider';
 
 interface IHandlers {
     isEnabled: () => boolean,

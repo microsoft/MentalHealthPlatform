@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import * as H from 'history';
 
 import SignUpLoginCanvas from "./signup-login-canvas";
-import { IUserContext } from '../App';
+import { IUserContext } from '../UserProvider';
 import { basePostRequest } from "./../../util/base-requests";
 
 interface ISignupLoginProviderProps {

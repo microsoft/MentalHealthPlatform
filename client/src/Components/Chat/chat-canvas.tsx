@@ -6,7 +6,7 @@ import ReactLoading from 'react-loading';
 
 import * as classes from "./chat.css";
 import { MessageType } from "./chat-provider";
-import { IUserContext, UserDataContext } from '../App';
+import { IUserContext, UserDataContext } from '../UserProvider';
 import Message from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
 import Icon from '../Icon/Icon';

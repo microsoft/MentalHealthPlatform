@@ -7,7 +7,7 @@ import outlook_icon from './../../images/outlook_icon.png';
 import twitter_icon from './../../images/twitter_icon.png';
 import * as classes from './statistics-preview.css';
 import DashboardTile from './../DashboardTile/dashboard-tile';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 interface IStatisticData {
     src: string;
@@ -33,43 +33,45 @@ const statisticsData = [
     }
 ];
 
-const renderStatistic = (statisticData: IStatisticData, key: number) => {
-    const hours = statisticData.hours;
-    return (
-        <tr key={key}>
-            <td className={classes.TableCell}><img src={statisticData.src} className={classes.StatisticsPreviewImage} /></td>
-            <td className={classes.TableCell} style={{ fontWeight: "bold" }}>{statisticData.label}</td>
-            <td className={classes.TableCell}>{`${hours} ${hours === 1 ? localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HOUR_LABEL") : localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HOURS_LABEL")}`}</td>
-        </tr>
-    );
-}
-
-const renderAllStatistics = () => {
-    const statistics = [];
-    for (let i = 0; i < statisticsData.length; i++) {
-        statistics.push(renderStatistic(statisticsData[i], i));
-    }
-    return (
-        <div>
-            <table>
-                <tbody>
-                    {statistics}
-                </tbody>
-            </table>
-        </div>
-    );
-};
-
 const StatisticsPreview = () => {
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
+    const renderStatistic = (statisticData: IStatisticData, key: number) => {
+        const hours = statisticData.hours;
+        return (
+            <tr key={key}>
+                <td className={classes.TableCell}><img src={statisticData.src} className={classes.StatisticsPreviewImage} /></td>
+                <td className={classes.TableCell} style={{ fontWeight: "bold" }}>{statisticData.label}</td>
+                <td className={classes.TableCell}>{`${hours} ${hours === 1 ? getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HOUR_LABEL") : getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HOURS_LABEL")}`}</td>
+            </tr>
+        );
+    }
+    
+    const renderAllStatistics = () => {
+        const statistics = [];
+        for (let i = 0; i < statisticsData.length; i++) {
+            statistics.push(renderStatistic(statisticsData[i], i));
+        }
+        return (
+            <div>
+                <table>
+                    <tbody>
+                        {statistics}
+                    </tbody>
+                </table>
+            </div>
+        );
+    };
+
     return (
         <DashboardTile
             buttonProps={{
                 link: `/`,
-                label: localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_BUTTON"),
+                label: getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={localization.getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HEADER")}
+            header={getLocalizedString("DASHBOARD_PREVIEW_STATISTICS_HEADER")}
         >
             {renderAllStatistics()}
         </DashboardTile>

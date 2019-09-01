@@ -8,7 +8,7 @@ import { ITopicData } from "./topics-provider";
 import * as classes from "./Topics.css";
 import Topic from "../Topic/topic";
 import SearchPage from './../SearchPage/search-page';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 import topic_image_0 from "../../images/topic_image_0.jpg";
 import topic_image_1 from "../../images/topic_image_1.jpg";
@@ -35,6 +35,8 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
         updateSearchString,
         loading
     } = props;
+
+    const { getLocalizedString } = React.useContext(LocalizationContext);
 
     // TODO: Migrate images from client to server
     const images = [topic_image_0, topic_image_1, topic_image_2, topic_image_3, topic_image_4, topic_image_5, topic_image_6, topic_image_7];
@@ -69,7 +71,7 @@ const TopicsCanvas = (props: ITopicsCanvasProps) => {
                     loading={loading}
                     centerSearch={true}
                     searchBarProps={{
-                        placeholder: localization.getLocalizedString("TOPICS_INPUT_PLACEHOLDER"),
+                        placeholder: getLocalizedString("TOPICS_INPUT_PLACEHOLDER"),
                         query: searchString,
                         handleInputChange: updateSearchString
                     }}

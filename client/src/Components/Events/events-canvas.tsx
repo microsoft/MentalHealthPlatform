@@ -7,7 +7,7 @@ import DataCard from '../DataCard/data-card';
 import { getShortenedTimeAndDate } from '../../util/Helpers';
 import { IEventsData } from './events-interfaces';
 import SearchPage from '../SearchPage/search-page';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 // TODO: Remove hardcoded images
 import event_forum from './../../images/event_forum.png';
@@ -60,12 +60,14 @@ const EventsCanvas = (props: IEventsProps) => {
         filteredEventData
     } = props;
 
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
     return (
         <SearchPage
             loading={loading}
-            header={localization.getLocalizedString("EVENTS_HEADER")}
+            header={getLocalizedString("EVENTS_HEADER")}
             searchBarProps={{
-                placeholder: localization.getLocalizedString("EVENTS_INPUT_PLACEHOLDER"),
+                placeholder: getLocalizedString("EVENTS_INPUT_PLACEHOLDER"),
                 query,
                 handleInputChange
             }}

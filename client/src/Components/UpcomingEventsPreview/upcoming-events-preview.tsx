@@ -7,7 +7,7 @@ import * as classes from "./upcoming-events-preview.css";
 import { IUpcomingEventData } from './upcoming-events-preview-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
 import DashboardTile from './../DashboardTile/dashboard-tile';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 const NUMBER_OF_EVENTS = 1;
 
@@ -32,20 +32,18 @@ const renderEvents = (eventsData: IUpcomingEventData[]) => {
 };
 
 const UpcomingEvents = (props: IUpcomingEventsPreviewProps) => {
-    const {
-        eventsData,
-        isLoading
-    } = props;
+    const { eventsData, isLoading } = props;
+    const { getLocalizedString } = React.useContext(LocalizationContext);
 
     return (
         <DashboardTile
             buttonProps={{
                 link: `/events`,
-                label: localization.getLocalizedString("DASHBOARD_PREVIEW_UPCOMING_EVENTS_BUTTON"),
+                label: getLocalizedString("DASHBOARD_PREVIEW_UPCOMING_EVENTS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={localization.getLocalizedString("DASHBOARD_PREVIEW_UPCOMING_EVENTS_HEADER")}
+            header={getLocalizedString("DASHBOARD_PREVIEW_UPCOMING_EVENTS_HEADER")}
             isLoading={isLoading}
         >
             {renderEvents(eventsData)}

@@ -4,7 +4,7 @@
 import * as React from 'react';
 
 import * as classes from "./create-chat.css";
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 interface ICreateChatCanvasProps {
     inputTitle: string;
@@ -25,6 +25,8 @@ const CreateChatCanvas = (props: ICreateChatCanvasProps) => {
         handleInputDescriptionChange
     } = props;
 
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
     let submitButtonClass = classes.SubmitButton + " ";
     submitButtonClass += isSubmitButtonDisabled() ? classes.Green : classes.Gray;
     
@@ -37,23 +39,23 @@ const CreateChatCanvas = (props: ICreateChatCanvasProps) => {
             <div className={classes.FormContainer}>
                 <div className={classes.Pane}>
                     <form onSubmit={onSubmitHandler} className={classes.FormWrapper}>
-                        <h1 className={classes.FormTitle}>{localization.getLocalizedString("CREATE_CHAT_HEADER")}</h1>
+                        <h1 className={classes.FormTitle}>{getLocalizedString("CREATE_CHAT_HEADER")}</h1>
                         <input
                             className={classes.InputTitle}
                             type='text'
                             value={inputTitle}
-                            placeholder={localization.getLocalizedString("CREATE_CHAT_INPUT_TITLE_PLACEHOLDER")}
+                            placeholder={getLocalizedString("CREATE_CHAT_INPUT_TITLE_PLACEHOLDER")}
                             onChange={handleInputTitleChange} />
                         <textarea
                             className={classes.InputDescription}
                             value={inputDescription}
-                            placeholder={localization.getLocalizedString("CREATE_CHAT_INPUT_DESCRIPTION_PLACEHOLDER")}
+                            placeholder={getLocalizedString("CREATE_CHAT_INPUT_DESCRIPTION_PLACEHOLDER")}
                             onChange={handleInputDescriptionChange}></textarea>
                         <button
                             disabled={!isSubmitButtonDisabled()}
                             className={submitButtonClass}
                             type='submit'>
-                            {localization.getLocalizedString("CREATE_CHAT_SUBMIT_BUTTON_LABEL")}
+                            {getLocalizedString("CREATE_CHAT_SUBMIT_BUTTON_LABEL")}
                         </button>
                     </form>
                 </div>

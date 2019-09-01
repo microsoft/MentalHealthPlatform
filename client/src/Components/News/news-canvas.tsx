@@ -7,7 +7,7 @@ import ReactLoading from 'react-loading';
 import * as classes from "./news.css";
 import { INewsData } from './news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 // TODO: Remove hardcoded images
 import satya_nadella from './../../images/satya_nadella.jpg'
@@ -39,6 +39,8 @@ const News = (props: IContactsProps) => {
         isLoading
     } = props;
 
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
     const news = [];
     for (let i = 0; i < newsData.length; i++) {
         news.push(renderNews(newsData[i], i));
@@ -46,7 +48,7 @@ const News = (props: IContactsProps) => {
 
     return (
         <div className={classes.Container}>
-            <h1 className={classes.Header}>{localization.getLocalizedString("NEWS_HEADER")}</h1>
+            <h1 className={classes.Header}>{getLocalizedString("NEWS_HEADER")}</h1>
             {isLoading ? (
                 <div className={classes.Loading}>
                     <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />

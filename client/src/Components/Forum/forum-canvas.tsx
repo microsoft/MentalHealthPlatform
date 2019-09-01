@@ -7,7 +7,7 @@ import ReactLoading from 'react-loading';
 
 import * as classes from "./forum.css";
 import InfoCard from "../InfoCard/info-card";
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 interface IDiscussionPreviewData {
     _id: string;
@@ -30,6 +30,8 @@ interface IForumCanvasProps {
 
 const ForumCanvas = (props: IForumCanvasProps) => {
     const { forumData, match, isLoading } = props;
+
+    const { getLocalizedString } = React.useContext(LocalizationContext);
 
     if (isLoading) {
         return (
@@ -65,7 +67,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
                         <button
                             className={classes.CreateChatButton}>
                             <span style={{fontWeight: "bold"}}>+</span>
-                            <span style={{fontFamily: "Calibri", marginLeft: 8}}>{localization.getLocalizedString("FORUM_CREATE_BUTTON_LABEL")}</span>
+                            <span style={{fontFamily: "Calibri", marginLeft: 8}}>{getLocalizedString("FORUM_CREATE_BUTTON_LABEL")}</span>
                         </button>
                     </Link>
                 </div>

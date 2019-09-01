@@ -5,6 +5,8 @@ import * as React from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import { UserProvider } from './UserProvider';
+import { LocalizationProvider } from './LocalizationProvider';
+
 import NavigationBar from './Navigation/navigation-bar';
 import { Topics } from './Topics/topics-provider';
 import { SignupLogin } from './SignupLogin/signup-login-provider';
@@ -17,7 +19,7 @@ import Dashboard from './Dashboard/dashboard';
 import Crisis from './Crisis/crisis';
 import Therapists from './Therapists/therapists-provider';
 import Events from './Events/events-provider';
-import localization from './../res/strings/localization';
+import { LocalizationContext } from './LocalizationProvider';
 import * as classes from './app.css';
 
 const AppBody = () => (
@@ -37,15 +39,20 @@ const AppBody = () => (
     </div>
 );
 
-const AppFooter = () => (
-    <div className={classes.AppFooter}>
-        {`${localization.getLocalizedString("FOOTER_COPYRIGHT", [(new Date().getFullYear()).toString(), "NAME"])}`}
-    </div>
-);
+const AppFooter = () => {
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+    return (
+        <div className={classes.AppFooter}>
+            {`${getLocalizedString("FOOTER_COPYRIGHT", [(new Date().getFullYear()).toString(), "NAME"])}`}
+        </div>
+    )
+};
 
 const AppProviders = (props: { children: any }) => (
     <UserProvider>
-        {props.children}
+        <LocalizationProvider>
+            {props.children}
+        </LocalizationProvider>
     </UserProvider>
 );
 

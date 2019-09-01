@@ -5,58 +5,59 @@ import * as React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 import * as classes from "./navigation-bar.css";
-import { IUserContext, UserDataContext } from '../UserProvider';
+import { UserDataContext } from './../UserProvider';
+import { LocalizationContext } from './../LocalizationProvider';
 import profilePicturePlaceholder from "./../../images/profile_picture_placeholder.png";
 import homeIcon from "./../../images/home_icon.png";
-import localization from './../../res/strings/localization';
-
-const renderNameField = (userContext: IUserContext) => {
-    const onClickHandler = () => {
-        const userInfo = {
-            userId: -1,
-            username: ""
-        };
-        userContext.updateUser(userInfo);
-        localStorage.setItem('userId', userInfo.userId.toString());
-        localStorage.setItem('username', userInfo.username.toString());
-    };
-
-    if (userContext.user && userContext.user.username && userContext.user.username.length > 0) {
-        return (
-            <div style={{display: "flex", flexDirection: "row"}}>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                    <img src={profilePicturePlaceholder} style={{ height: 30, width: 30, borderRadius: "50%", marginRight: 10 }} />
-                    {userContext.user.username}
-                </div>
-                <div style={{ marginLeft: 30, cursor: "pointer", fontWeight: "lighter" }} onClick={onClickHandler}>{localization.getLocalizedString("NAVIGATION_BAR_LOGOUT")}</div>
-            </div>
-        );
-    }
-    return <NavLink exact to="/login" className={classes.NavigationBarLoginLink}>{localization.getLocalizedString("NAVIGATION_BAR_LOGIN")}</NavLink>;
-};
 
 /**
  * Renders navigation bar
  * @return  {React.Component}   Rendered component
  */
 const NavigationBar = () => {
+    const { user, updateUser } = React.useContext(UserDataContext);
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
+    const renderNameField = () => {
+        const onClickHandler = () => {
+            const userInfo = {
+                userId: -1,
+                username: ""
+            };
+            updateUser(userInfo);
+            localStorage.setItem('userId', userInfo.userId.toString());
+            localStorage.setItem('username', userInfo.username.toString());
+        };
+    
+        if (user && user.username && user.username.length > 0) {
+            return (
+                <div style={{display: "flex", flexDirection: "row"}}>
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                        <img src={profilePicturePlaceholder} style={{ height: 30, width: 30, borderRadius: "50%", marginRight: 10 }} />
+                        {user.username}
+                    </div>
+                    <div style={{ marginLeft: 30, cursor: "pointer", fontWeight: "lighter" }} onClick={onClickHandler}>{getLocalizedString("NAVIGATION_BAR_LOGOUT")}</div>
+                </div>
+            );
+        }
+        return <NavLink exact to="/login" className={classes.NavigationBarLoginLink}>{getLocalizedString("NAVIGATION_BAR_LOGIN")}</NavLink>;
+    };
+
     return (
         <div className={classes.NavigationBar}>
             <div className={classes.NavigationBarLeft}>                
                 <NavLink exact to="/" className={classes.NavigationBarTitleLink}>
                     <img src={homeIcon} style={{ width: 30, height: 30 }} />
                 </NavLink>
-                <Link className={classes.Link} to={`/`}>{localization.getLocalizedString("NAVIGATION_BAR_DASHBOARD")}</Link>
-                <Link className={classes.Link} to={`/topics`}>{localization.getLocalizedString("NAVIGATION_BAR_FORUMS")}</Link>
-                <Link className={classes.Link} to={`/contacts`}>{localization.getLocalizedString("NAVIGATION_BAR_CONTACTS")}</Link>
-                <Link className={classes.Link} to={`/news`}>{localization.getLocalizedString("NAVIGATION_BAR_NEWS")}</Link>
-                <Link className={classes.Link} to={`/events`}>{localization.getLocalizedString("NAVIGATION_BAR_EVENTS")}</Link>
-                <Link className={classes.Link} to={`/therapists`}>{localization.getLocalizedString("NAVIGATION_BAR_THERAPISTS")}</Link>
+                <Link className={classes.Link} to={`/`}>{getLocalizedString("NAVIGATION_BAR_DASHBOARD")}</Link>
+                <Link className={classes.Link} to={`/topics`}>{getLocalizedString("NAVIGATION_BAR_FORUMS")}</Link>
+                <Link className={classes.Link} to={`/contacts`}>{getLocalizedString("NAVIGATION_BAR_CONTACTS")}</Link>
+                <Link className={classes.Link} to={`/news`}>{getLocalizedString("NAVIGATION_BAR_NEWS")}</Link>
+                <Link className={classes.Link} to={`/events`}>{getLocalizedString("NAVIGATION_BAR_EVENTS")}</Link>
+                <Link className={classes.Link} to={`/therapists`}>{getLocalizedString("NAVIGATION_BAR_THERAPISTS")}</Link>
             </div>
             <div className={classes.NavigationBarRight}>
-                <UserDataContext.Consumer>
-                    {(userData) => renderNameField(userData)}
-                </UserDataContext.Consumer>
+                {renderNameField()}
             </div>
         </div>
     );

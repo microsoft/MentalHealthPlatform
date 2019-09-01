@@ -9,36 +9,13 @@ import image1 from './../../images/topic_image_1.jpg';
 import image2 from './../../images/topic_image_2.jpg';
 import image3 from './../../images/topic_image_3.jpg';
 import * as classes from "./resources-preview.css";
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 interface IResourcesData {
     label: string;
     src: any;
     pageName?: string;
 }
-
-const resourcesData = [
-    {
-        label: localization.getLocalizedString("NAVIGATION_BAR_FORUMS"),
-        src: image0,
-        pageName: "topics"
-    },
-    {
-        label: localization.getLocalizedString("NAVIGATION_BAR_CONTACTS"),
-        src: image1,
-        pageName: "contacts"
-    },
-    {
-        label: localization.getLocalizedString("NAVIGATION_BAR_NEWS"),
-        src: image2,
-        pageName: "news"
-    },
-    {
-        label: localization.getLocalizedString("NAVIGATION_BAR_EVENTS"),
-        src: image3,
-        pageName: "events"
-    }
-];
 
 const renderPreview = (data: IResourcesData, key: number) => {
     if (data.pageName)
@@ -57,15 +34,11 @@ const renderPreview = (data: IResourcesData, key: number) => {
             <img src={data.src} className={classes.ResourcePreviewImage} />
             <label className={classes.ResourcesPreviewLabel}>{data.label}</label>
         </div>
-        
     );
 };
 
-const renderPreviews = () => {
-    const previews = [];
-    for (let i = 0; i < resourcesData.length; i++) {
-        previews.push(renderPreview(resourcesData[i], i));
-    }
+const renderPreviews = (resourcesData: IResourcesData[]) => {
+    const previews = resourcesData.map((resourceData, i) => renderPreview(resourceData, i));
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
             {previews}
@@ -74,9 +47,34 @@ const renderPreviews = () => {
 }
 
 const ResourcesPreview = () => {
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
+    const resourcesData = [
+        {
+            label: getLocalizedString("NAVIGATION_BAR_FORUMS"),
+            src: image0,
+            pageName: "topics"
+        },
+        {
+            label: getLocalizedString("NAVIGATION_BAR_CONTACTS"),
+            src: image1,
+            pageName: "contacts"
+        },
+        {
+            label: getLocalizedString("NAVIGATION_BAR_NEWS"),
+            src: image2,
+            pageName: "news"
+        },
+        {
+            label: getLocalizedString("NAVIGATION_BAR_EVENTS"),
+            src: image3,
+            pageName: "events"
+        }
+    ];
+
     return (
-        <DashboardTile header={localization.getLocalizedString("DASHBOARD_PREVIEW_RESOURCES_HEADER")}>
-            {renderPreviews()}
+        <DashboardTile header={getLocalizedString("DASHBOARD_PREVIEW_RESOURCES_HEADER")}>
+            {renderPreviews(resourcesData)}
         </DashboardTile>
     );
 };

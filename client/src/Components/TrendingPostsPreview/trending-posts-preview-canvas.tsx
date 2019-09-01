@@ -8,7 +8,7 @@ import * as classes from "./trending-posts-preview.css";
 import { IPostPreviewData } from './trending-posts-preview-provider';
 import DashboardTile from './../DashboardTile/dashboard-tile';
 import message_icon from './../../images/message_icon.png';
-import localization from '../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 interface ITrendingPostsPreviewProps {
     postsData: IPostPreviewData[],
@@ -48,15 +48,17 @@ const TrendingPostsPreview = (props: ITrendingPostsPreviewProps) => {
         isLoading
     } = props;
 
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
     return (
         <DashboardTile
             buttonProps={{
                 link: `/topics`,
-                label: localization.getLocalizedString("DASHBOARD_PREVIEW_TRENDING_POSTS_BUTTON"),
+                label: getLocalizedString("DASHBOARD_PREVIEW_TRENDING_POSTS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={localization.getLocalizedString("DASHBOARD_PREVIEW_THRENDING_POSTS_HEADER")}
+            header={getLocalizedString("DASHBOARD_PREVIEW_THRENDING_POSTS_HEADER")}
             isLoading={isLoading}
         >
             {renderAllPosts(postsData)}

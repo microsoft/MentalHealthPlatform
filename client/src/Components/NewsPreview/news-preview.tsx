@@ -7,7 +7,7 @@ import * as classes from "./news-preview.css";
 import { INewsData } from './../News/news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
 import DashboardTile from './../DashboardTile/dashboard-tile';
-import localization from '../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 // TODO: Remove hardcoded images
 import headspace from './../../images/headspace.png';
@@ -21,7 +21,7 @@ const NUMBER_OF_NEWS_PREVIEWS = 1;
 
 const renderNewsPreview = (newsData: INewsData, key: number) => {
     return (
-        <div className={classes.NewsDataContainer}>
+        <div key={key} className={classes.NewsDataContainer}>
             <img src={headspace} className={classes.NewsDataImage}/>
             <div className={classes.NewsDataTextContainer}>
                 <label className={classes.NewsDataTitle}>{newsData.title}</label>
@@ -45,16 +45,18 @@ const NewsPreview = (props: INewsPreviewProps) => {
         newsData,
         isLoading
     } = props;
+
+    const { getLocalizedString } = React.useContext(LocalizationContext);
     
     return (
         <DashboardTile
             buttonProps={{
                 link: `/news`,
-                label: localization.getLocalizedString("DASHBOARD_PREVIEW_NEWS_BUTTON"),
+                label: getLocalizedString("DASHBOARD_PREVIEW_NEWS_BUTTON"),
                 isBlueBackground: false,
                 isCentered: false
             }}
-            header={localization.getLocalizedString("DASHBOARD_PREVIEW_NEWS_HEADER")}
+            header={getLocalizedString("DASHBOARD_PREVIEW_NEWS_HEADER")}
             isLoading={isLoading}
         >
             {renderAllNewsPreview(newsData)}

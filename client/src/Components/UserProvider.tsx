@@ -3,10 +3,6 @@
 
 import React, { useState } from 'react';
 
-interface IUserProviderProps {
-    children: any;
-}
-
 export type UserDataType = {
     userId: number;
     username: string;
@@ -22,7 +18,7 @@ export const UserDataContext = React.createContext<IUserContext>({
     updateUser: undefined
 });
 
-export const UserProvider = (props: IUserProviderProps) => {
+export const UserProvider = (props: { children: any }) => {
     const { children } = props;
     
     const userId = localStorage.getItem('userId');

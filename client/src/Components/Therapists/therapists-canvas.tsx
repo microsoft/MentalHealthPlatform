@@ -6,7 +6,7 @@ import * as React from 'react';
 import DataCard from '../DataCard/data-card';
 import { ITherapistData } from './therapists-interfaces';
 import SearchPage from './../SearchPage/search-page';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 // TODO: Remove hardcoded images
 import therapist_1 from './../../images/therapist_1.jpg';
@@ -48,7 +48,7 @@ const renderTherapists = (filteredTherapistData: ITherapistData[]) => {
                     description: therapist.desc,
                     rightText: therapist.phone,
                     rightSubText: therapist.location,
-                    footer: 'Specializes in: Stress, Trauma, Anxiety'
+                    footer: 'Specializes in: Stress, Trauma, Anxiety' // TODO: Remove hardcoded footer text
                 }}
             />
         );
@@ -63,12 +63,14 @@ const TherapistsCanvas = (props: ITherapistsCanvasProps) => {
         query
     } = props;
 
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
     return (
         <SearchPage
             loading={loading}
-            header={localization.getLocalizedString("THERAPISTS_HEADER")}
+            header={getLocalizedString("THERAPISTS_HEADER")}
             searchBarProps={{
-                placeholder: localization.getLocalizedString("THERAPISTS_INPUT_PLACEHOLDER"),
+                placeholder: getLocalizedString("THERAPISTS_INPUT_PLACEHOLDER"),
                 query,
                 handleInputChange
             }}

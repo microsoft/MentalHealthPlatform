@@ -10,7 +10,7 @@ import { IUserContext, UserDataContext } from '../UserProvider';
 import Message from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
 import Icon from '../Icon/Icon';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
 interface IChatCanvasProps {
     title: string;
@@ -35,6 +35,8 @@ const ChatCanvas = (props: IChatCanvasProps) => {
         handleSubmit
     } = props;
 
+    const { getLocalizedString } = React.useContext(LocalizationContext);
+
     const renderForm = (userData: IUserContext) => {
         const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter" && messageBody && messageBody.length > 0) {
@@ -54,7 +56,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                     className={classes.InputField}
                     type='text'
                     value={messageBody}
-                    placeholder={localization.getLocalizedString("CHAT_INPUT_PLACEHOLDER")}
+                    placeholder={getLocalizedString("CHAT_INPUT_PLACEHOLDER")}
                     onKeyDown={onKeyDownHandler}
                     onChange={handleInputChange} />
                 <button
@@ -78,8 +80,8 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         <div className={classes.SideColumn}>
                             <table>
                                 <tbody>
-                                    <Icon type='replies' count={replies || 0} text={localization.getLocalizedString("CHAT_INFO_REPLIES")} />
-                                    <Icon type='views' count={views || 0} text={localization.getLocalizedString("CHAT_INFO_VIEWS")} />
+                                    <Icon type='replies' count={replies || 0} text={getLocalizedString("CHAT_INFO_REPLIES")} />
+                                    <Icon type='views' count={views || 0} text={getLocalizedString("CHAT_INFO_VIEWS")} />
                                 </tbody>
                             </table>
                         </div>
@@ -113,7 +115,7 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         {
                             (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ?
                                 renderForm(userData)
-                                : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>{localization.getLocalizedString("CHAT_LOGIN_MESSAGE")}</div>
+                                : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>{getLocalizedString("CHAT_LOGIN_MESSAGE")}</div>
                         }
                         </UserDataContext.Consumer>
                     </div>

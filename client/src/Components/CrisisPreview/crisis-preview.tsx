@@ -6,14 +6,10 @@ import phone from './../../images/phone.jpg';
 import online_support from './../../images/online_support.jpg';
 import * as classes from "./crisis-preview.css";
 import { DashboardTileButton } from './../DashboardTileButton/dashboard-tile-button';
-import localization from './../../res/strings/localization';
+import { LocalizationContext } from './../LocalizationProvider';
 
-interface ICrisisPreviewProps {
-}
-
-const CrisisPreview = (props: ICrisisPreviewProps) => {
-    const {
-    } = props;
+const CrisisPreview = () => {
+    const { getLocalizedString } = React.useContext(LocalizationContext);
 
     return (
         <div className={classes.CrisisPreviewsOverallContainer}>
@@ -26,15 +22,15 @@ const CrisisPreview = (props: ICrisisPreviewProps) => {
                 <div className={classes.CrisisPreviewsSupportContainer}>
                     <div className={classes.CrisisPreviewSupportContainer}>
                         <img src={phone} className={classes.CrisisPreviewImage}/>
-                        <label className={classes.CrisisPreviewSupportText}>{localization.getLocalizedString("DASHBOARD_PREVIEW_CRISIS_PHONE_LABEL")}</label>
+                        <label className={classes.CrisisPreviewSupportText}>{getLocalizedString("DASHBOARD_PREVIEW_CRISIS_PHONE_LABEL")}</label>
                     </div>
                     <div className={classes.CrisisPreviewSupportContainer}>
                         <img src={online_support} className={classes.CrisisPreviewImage}/>
-                        <label className={classes.CrisisPreviewSupportText}>{localization.getLocalizedString("DASHBOARD_PREVIEW_CRISIS_ONLINE_LABEL")}</label>
+                        <label className={classes.CrisisPreviewSupportText}>{getLocalizedString("DASHBOARD_PREVIEW_CRISIS_ONLINE_LABEL")}</label>
                     </div>  
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", alignItems: "flex-end" }}>
-                    <DashboardTileButton link={`/crisis`} label={localization.getLocalizedString("DASHBOARD_PREVIEW_CRISIS_BUTTON")} isBlueBackground={false} isCentered={true} />
+                    <DashboardTileButton link={`/crisis`} label={getLocalizedString("DASHBOARD_PREVIEW_CRISIS_BUTTON")} isBlueBackground={false} isCentered={true} />
                 </div>
             </div>
         </div>

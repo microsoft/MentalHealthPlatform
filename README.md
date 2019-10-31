@@ -4,12 +4,29 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 To set up and run the application, please follow the procedures outlined in the following subsections:
 
-## Cloning the project
+## Setting up the local project
 
 1. Clone the repository to your local machine:
 
    ```
    git clone https://github.com/Microsoft/MentalHealthPlatform.git
+   ```
+
+2. Download and install Node.js onto your development machine from
+https://nodejs.org/.
+
+3. Check whether the installation of Node was successful by running the following command; a version number should be printed:
+   
+   ```
+   node -v
+   ```
+
+4. Download and install Yarn on your development machine from https://yarnpkg.com/lang/en/docs/install/.
+
+5. Similar to that of the installation of Node.js, check whether the installation of Yarn was successful by running the following command; a version number should be printed:
+   
+   ```
+   yarn -v
    ```
 
 ## Setting up the database
@@ -41,7 +58,7 @@ To set up and run the application, please follow the procedures outlined in the 
 2.  Install the dependencies:
 
     ```
-    npm install
+    yarn
     ```
 
 3.  Run the server:
@@ -65,7 +82,7 @@ To set up and run the application, please follow the procedures outlined in the 
 2.  Install all dependencies:
 
     ```
-    npm install
+    yarn
     ```
 
 ## Running the project
@@ -73,7 +90,7 @@ To set up and run the application, please follow the procedures outlined in the 
 1.  Run the client:
 
     ```
-    npm start
+    yarn start
     ```
 
     The console should then print a statement with a URL in which the application is running.

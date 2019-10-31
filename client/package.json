@@ -8,10 +8,7 @@
     "prestart": "tcm -p src/**/*.css",
     "start": "webpack-dev-server --open"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MentalHealthCommunity/website.git"
-  },
+  "repository": "git+https://github.com/MentalHealthCommunity/website.git",
   "author": "",
   "license": "ISC",
   "bugs": {

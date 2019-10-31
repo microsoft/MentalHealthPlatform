@@ -24,16 +24,10 @@ const renderContact = (contactData: IContactData, key: number) => {
 };
 
 const Contacts = (props: IContactsProps) => {
-    const {
-        contactsData,
-        isLoading
-    } = props;
-
+    const { contactsData, isLoading } = props;
     const { getLocalizedString } = React.useContext(LocalizationContext);
 
-    const contacts = contactsData.map((contactData, i) => {
-        renderContact(contactData, i);
-    });
+    const contacts = contactsData.map((contactData, i) => renderContact(contactData, i));
 
     return (
         <div className={classes.Container}>

@@ -34,17 +34,10 @@ const renderNews = (newsData: INewsData, key: number) => {
 };
 
 const News = (props: IContactsProps) => {
-    const {
-        newsData,
-        isLoading
-    } = props;
-
+    const { newsData, isLoading } = props;
     const { getLocalizedString } = React.useContext(LocalizationContext);
 
-    const news = [];
-    for (let i = 0; i < newsData.length; i++) {
-        news.push(renderNews(newsData[i], i));
-    }
+    const news = newsData.map((currentNewsData, i) => renderNews(currentNewsData, i));
 
     return (
         <div className={classes.Container}>

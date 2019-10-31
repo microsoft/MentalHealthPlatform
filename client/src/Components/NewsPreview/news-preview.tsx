@@ -33,19 +33,12 @@ const renderNewsPreview = (newsData: INewsData, key: number) => {
 };
 
 const renderAllNewsPreview = (newsData: INewsData[]) => {
-    const news = [];
-    for (let i = 0; i < Math.min(NUMBER_OF_NEWS_PREVIEWS, newsData.length); i++) {
-        news.push(renderNewsPreview(newsData[i], i));
-    }
-    return news;
+    const numberOfPreviews = Math.min(NUMBER_OF_NEWS_PREVIEWS, newsData.length);
+    return newsData.slice(0, numberOfPreviews).map((currentNewsData, i) => renderNewsPreview(currentNewsData, i));
 }
 
 const NewsPreview = (props: INewsPreviewProps) => {
-    const {
-        newsData,
-        isLoading
-    } = props;
-
+    const { newsData, isLoading } = props;
     const { getLocalizedString } = React.useContext(LocalizationContext);
     
     return (

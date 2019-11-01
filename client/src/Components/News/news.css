@@ -50,11 +50,3 @@
     max-width: 150px;
     max-height: 100px;
 }
-
-.Loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-grow: 1;
-}

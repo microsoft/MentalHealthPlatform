@@ -35,12 +35,3 @@
     font-weight: bold;
     color: #333333;
 }
-
-.Loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-grow: 1;
-    width: 100%;
-}

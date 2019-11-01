@@ -6,4 +6,3 @@ export const Description: string;
 export const Link: string;
 export const ImageContainer: string;
 export const Image: string;
-export const Loading: string;

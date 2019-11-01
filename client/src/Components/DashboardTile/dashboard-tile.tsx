@@ -2,10 +2,10 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import ReactLoading from 'react-loading';
 
 import { IDashboardTileButtonProps, DashboardTileButton } from './../DashboardTileButton/dashboard-tile-button';
 import * as classes from './dashboard-tile.css';
+import LoadingBubbles from './../LoadingBubbles/loading-bubbles';
 
 interface IDashboardTileProps {
     children: any,
@@ -25,14 +25,6 @@ const renderButton = (buttonProps: IDashboardTileButtonProps) => {
     );
 }
 
-const renderProgressIndicator = () => {
-    return (
-        <div className={classes.DashboardTileLoading}>
-            <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-        </div>
-    );
-}
-
 const DashboardTile = (props: IDashboardTileProps) => {
     const {
         children,
@@ -44,7 +36,7 @@ const DashboardTile = (props: IDashboardTileProps) => {
     return (
         <div className={classes.DashboardTileContainer}>
             <div className={classes.DashboardTileHeader}>{header}</div>
-            {isLoading ? renderProgressIndicator() : children}
+            {isLoading ? <LoadingBubbles isLoading={true} bubblesWidth={60} bubblesHeight={60} /> : children}
             {renderButton(buttonProps)}
         </div>
     );

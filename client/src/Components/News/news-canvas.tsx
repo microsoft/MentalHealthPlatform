@@ -2,12 +2,12 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import ReactLoading from 'react-loading';
 
 import * as classes from "./news.css";
 import { INewsData } from './news-provider';
 import { getShortenedTimeAndDate } from './../../util/Helpers';
 import { LocalizationContext } from './../LocalizationProvider';
+import LoadingBubbles from './../LoadingBubbles/loading-bubbles';
 
 // TODO: Remove hardcoded images
 import satya_nadella from './../../images/satya_nadella.jpg'
@@ -42,11 +42,7 @@ const News = (props: IContactsProps) => {
     return (
         <div className={classes.Container}>
             <h1 className={classes.Header}>{getLocalizedString("NEWS_HEADER")}</h1>
-            {isLoading ? (
-                <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-                </div>
-            ) : news}
+            {isLoading ? <LoadingBubbles isLoading={true} bubblesWidth={60} bubblesHeight={60} /> : news}
         </div>  
     );
 };

@@ -43,7 +43,6 @@ const CreateChatProviderClass = (props: ICreateChatProviderProps) => {
     }
 
     const handleSubmitResponseHandler = (data: any) => {
-        console.log("chat created", data);
         if (data && data.chatId !== undefined) {
             const path = `${match.url.replace("createChat/", "").replace("createChat", "")}chat/${data.chatId}`;
             history.push(path);

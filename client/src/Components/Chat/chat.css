@@ -89,9 +89,3 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-
-.Loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

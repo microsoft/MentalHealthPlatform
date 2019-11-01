@@ -143,10 +143,6 @@ const getTrendingKeywords = (mongoClient, postReq, postRes) => {
 				return;
 			}
 
-			const chatPreviewsObj = {};
-
-			console.log(messageRes.map(current => current.messageBody))
-
 			const messages = messageRes.reduce((accumulator, current) => {
 				return accumulator += " " + current.messageBody;
 			}, "");

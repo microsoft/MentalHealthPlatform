@@ -42,7 +42,6 @@ const ChatProvider = (props: IChatProviderProps) => {
         setLoading(false);
         setReplies(data.numberOfReplies);
         setViews(data.numberOfViews);
-        console.log("Data", data);
     }
     
     const retrieveChatDataErrorHandler = (error: any) => {
@@ -51,7 +50,7 @@ const ChatProvider = (props: IChatProviderProps) => {
     
     const retrieveChatData = () => {
         const params = [
-            { ["chatId"]: chatID}
+            { ["chatId"]: chatID }
         ];
         baseGetRequest("getChat", params, retrieveChatDataResponseHandler, retrieveChatDataErrorHandler);
     }

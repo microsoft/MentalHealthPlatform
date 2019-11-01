@@ -18,11 +18,3 @@
     justify-content: flex-end;
     align-items: flex-end;
 }
-
-.DashboardTileLoading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-grow: 1;
-}

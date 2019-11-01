@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import ReactLoading from 'react-loading';
 
 import * as classes from "./chat.css";
 import { MessageType } from "./chat-provider";
@@ -11,6 +10,7 @@ import Message from '../Messages/Message';
 import sendIcon from '../../images/send_icon.png';
 import Icon from '../Icon/Icon';
 import { LocalizationContext } from './../LocalizationProvider';
+import LoadingBubbles from './../LoadingBubbles/loading-bubbles';
 
 interface IChatCanvasProps {
     title: string;
@@ -80,35 +80,29 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                         <div className={classes.SideColumn}>
                             <table>
                                 <tbody>
-                                    <Icon type='replies' count={replies || 0} text={getLocalizedString("CHAT_INFO_REPLIES")} />
-                                    <Icon type='views' count={views || 0} text={getLocalizedString("CHAT_INFO_VIEWS")} />
+                                    <Icon type='replies' count={replies ? replies : 0} text={getLocalizedString("CHAT_INFO_REPLIES")} />
+                                    <Icon type='views' count={views ? views : 0} text={getLocalizedString("CHAT_INFO_VIEWS")} />
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div className={classes.ChatBody}>
-                        {messages.map((message) => {
-                            return (
-                                <div key={message.id}>
-                                    <UserDataContext.Consumer>
-                                    {
-                                        (userData) => (
-                                        <Message
-                                            name={message.authorName}
-                                            date={message.date}
-                                            messageBody={message.messageBody}
-                                            isCurrentUser={message.authorName === userData.user.username} />
-                                        )
-                                    }
-                                    </UserDataContext.Consumer>
-                                </div>
-                            );
-                        })}
-                        {loading ? (
-                            <div className={classes.Loading}>
-                                <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
+                        {messages.map((message) => (
+                            <div key={message.id}>
+                                <UserDataContext.Consumer>
+                                {
+                                    (userData) => (
+                                    <Message
+                                        name={message.authorName}
+                                        date={message.date}
+                                        messageBody={message.messageBody}
+                                        isCurrentUser={message.authorName === userData.user.username} />
+                                    )
+                                }
+                                </UserDataContext.Consumer>
                             </div>
-                        ) : null}
+                        ))}
+                        <LoadingBubbles isLoading={loading}/>
                     </div>
                     <div className={classes.Form}>
                         <UserDataContext.Consumer>

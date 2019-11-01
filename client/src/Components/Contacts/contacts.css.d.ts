@@ -4,4 +4,3 @@ export const ContactContainer: string;
 export const Title: string;
 export const Description: string;
 export const Link: string;
-export const Loading: string;

@@ -9,4 +9,3 @@ export const InputField: string;
 export const SubmitButton: string;
 export const SendIcon: string;
 export const Form: string;
-export const Loading: string;

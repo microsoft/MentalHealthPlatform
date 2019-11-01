@@ -40,7 +40,6 @@ const SignupLoginProvider = (props: ISignupLoginProviderProps) => {
 
     const submitSignupResponseHandler = (data: any) => {
         setLoginErrorMessage("");
-        console.log(data);
     }
 
     const submitSignupErrorHandler = (error: any) => {

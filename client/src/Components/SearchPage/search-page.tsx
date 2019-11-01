@@ -2,12 +2,11 @@
 // Licensed under the MIT license.
 
 import * as React from 'react';
-import ReactLoading from 'react-loading';
 
 // import * as classes from './search-page.css';
 import { SearchBar, ISearchBarComponentProps } from '../SearchBar/search-bar';
-
 import * as classes from './search-page.css';
+import LoadingBubbles from './../LoadingBubbles/loading-bubbles';
 
 interface ISearchBarProps {
     children: any;
@@ -36,11 +35,7 @@ const SearchPage = (props: ISearchBarProps) => {
                 query={query}
                 handleInputChange={handleInputChange}
             />
-            {loading ? (
-                <div className={classes.Loading}>
-                    <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={'5%'} width={'5%'} />
-                </div>
-            ) : children}
+            {loading ? <LoadingBubbles containerStyles={{width: 1200}} isLoading={true} /> : children}
         </div>
     );
 };

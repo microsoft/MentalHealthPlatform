@@ -3,11 +3,11 @@
 
 import * as React from "react";
 import { Link, match } from 'react-router-dom';
-import ReactLoading from 'react-loading';
 
 import * as classes from "./forum.css";
 import InfoCard from "../InfoCard/info-card";
 import { LocalizationContext } from './../LocalizationProvider';
+import LoadingBubbles from './../LoadingBubbles/loading-bubbles';
 
 interface IDiscussionPreviewData {
     _id: string;
@@ -37,9 +37,7 @@ const ForumCanvas = (props: IForumCanvasProps) => {
         return (
             <div className={classes.ForumContainer}>
                 <div style={{ width: "80%", display: "flex", flexDirection: "column", fontFamily: "Calibri" }}>
-                    <div className={classes.Loading}>
-                        <ReactLoading type="bubbles" color="rgb(13, 103, 151)" height={60} width={60} />
-                    </div>
+                    <LoadingBubbles isLoading={true} containerStyles={{width: "100%", height: "100%"}} bubblesWidth={60} bubblesHeight={60} />
                 </div>
             </div>
         );

@@ -20,6 +20,7 @@
     width: 1200px;
     overflow-x: hidden;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .Title {

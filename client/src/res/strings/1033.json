@@ -166,5 +166,25 @@
 	"CONTACTS_HEADER": {
 		"description": "Header for Contacts page",
 		"value": "Contacts"
+	},
+	"CONTACTS_CREATE_FORM_HEADER": {
+		"description": "Create form header for Contacts page",
+		"value": "Add Contact"
+	},
+	"CONTACTS_CREATE_FORM_INPUT_TITLE": {
+		"description": "Create form input placeholder for Contacts page",
+		"value": "Contact title"
+	},
+	"CONTACTS_CREATE_FORM_INPUT_DESCRIPTION": {
+		"description": "Create form input placeholder for Contacts page",
+		"value": "Contact description"
+	},
+	"CONTACTS_CREATE_FORM_INPUT_LINK": {
+		"description": "Create form input placeholder for Contacts page",
+		"value": "Link (ex. https://suicidepreventionlifeline.org)"
+	},
+	"CREATE_FORM_SUBMIT": {
+		"description": "Submit button label for create form",
+		"value": "Submit"
 	}
 }

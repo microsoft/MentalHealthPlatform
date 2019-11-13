@@ -1,0 +1,38 @@
+.CreateForm {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 1200px;
+	box-sizing: border-box;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	margin-bottom: 30px;
+};
+
+.CreateFormTitle {
+	color: rgb(13, 103, 151);
+	margin-top: 0;
+}
+
+.SubmitButton {
+	background-color: rgb(13, 103, 151);
+	color: #FFFFFF;
+	border-radius: 5px;
+	border-width: 0;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+	font-size: large;
+	height: 42px;
+}
+
+.TextInput {
+	padding: 5px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	font-size: large;
+	border: 1px solid #CCCCCC;
+	height: 42px;
+	box-sizing: border-box;
+}

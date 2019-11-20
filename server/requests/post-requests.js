@@ -1,5 +1,12 @@
 const {
-	USERS_COLLECTION, CHATS_COLLECTION, MESSAGE_COLLECTION, MONGO_URL, DATABASE_NAME, SUCCESS_STATUS_MESSAGE, FAILED_STATUS_MESSAGE
+	USERS_COLLECTION,
+	CHATS_COLLECTION,
+	MESSAGE_COLLECTION,
+	CONTACTS_COLLECTION,
+	MONGO_URL,
+	DATABASE_NAME,
+	SUCCESS_STATUS_MESSAGE,
+	FAILED_STATUS_MESSAGE
 } = require('../constants.js');
 
 const signUp = (mongoClient, postReq, postRes) => {
@@ -128,6 +135,38 @@ const createChat = (mongoClient, postReq, postRes) => {
 	});
 };
 
+const createContact = (mongoClient, postReq, postRes) => {
+	console.log("Creating contact...");
+
+	const obj = postReq.body;
+	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+		if (connerErr) throw connerErr;
+
+		// Create new contact object
+		const contactObj = {
+			title: obj.title,
+			desc: obj.desc,
+			link: obj.link
+		};
+
+		// Insert newly created contact into database
+		const dbo = db.db(DATABASE_NAME);
+		dbo.collection(CONTACTS_COLLECTION).insertOne(contactObj, (insertChatErr, insertChatRes) => {
+			if (insertChatErr) throw insertChatErr;
+
+			db.close();
+			postRes.json({
+				statusMessage: SUCCESS_STATUS_MESSAGE,
+				chatId: insertChatRes.ops[0]._id
+			});
+		});
+	});
+};
+
 module.exports = {
-    signUp, login, sendMessage, createChat
+	signUp,
+	login,
+	sendMessage,
+	createChat,
+	createContact
 };

@@ -32,6 +32,21 @@ export const Contacts = () => {
         baseGetRequest("getcontacts", params, retrieveContactsResponseHandler, retrieveContactsErrorHandler);
     }
 
+    // TODO: Add progress indicator upon submission
+    // Issue #42: Add progress indicator for submission of contact creation
+
+    const submitContactsResponseHandler = (data: any) => {
+        // TODO: Add status message constants
+        // Issue #43: Add status message constants in client
+		if (data && data.statusMessage === 1) {
+            retrieveContacts();
+        }
+	}
+
+	const submitContactsErrorHandler = (error: any) => {
+        console.log(error);
+	}
+
     useEffect(() => {
         retrieveContacts();
     }, []);
@@ -40,6 +55,8 @@ export const Contacts = () => {
         <ContactsCanvas
             contactsData={contactsData}
             isLoading={isLoading}
+            submitContactsResponseHandler={submitContactsResponseHandler}
+            submitContactsErrorHandler={submitContactsErrorHandler}
         />
     );
 }

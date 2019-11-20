@@ -10,8 +10,24 @@ const bodyParser = require('body-parser');
 const mongoClient = require('mongodb').MongoClient;
 
 // Import requests
-const { getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents, getContacts, getNews } = require('./requests/get-requests.js');
-const { signUp, login, sendMessage, createChat } = require('./requests/post-requests');
+const {
+	getTopics,
+	getChatPreviews,
+	getTrendingPosts,
+	getTrendingKeywords,
+	getChat,
+	getTherapists,
+	getEvents,
+	getContacts,
+	getNews
+} = require('./requests/get-requests.js');
+const {
+	signUp,
+	login,
+	sendMessage,
+	createChat,
+	createContact
+} = require('./requests/post-requests');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -40,6 +56,7 @@ app.post('/signup', (postReq, postRes) => signUp(mongoClient, postReq, postRes))
 app.post('/login', (postReq, postRes) => login(mongoClient, postReq, postRes));
 app.post('/sendmessage', (postReq, postRes) => sendMessage(mongoClient, postReq, postRes));
 app.post('/createchat', (postReq, postRes) => createChat(mongoClient, postReq, postRes));
+app.post('/createcontact', (postReq, postRes) => createContact(mongoClient, postReq, postRes));
 
 app.listen(app.get('port'), () => {
     console.log(`Server is running on Port ${port}...`);

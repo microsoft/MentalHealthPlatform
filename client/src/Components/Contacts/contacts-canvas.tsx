@@ -11,8 +11,10 @@ import { CreateFormProvider } from './../CreateForm/create-form-provider';
 import { FORM_TYPE } from './../CreateForm/create-form-interfaces';
 
 interface IContactsProps {
-    contactsData: IContactData[],
-    isLoading: boolean
+    contactsData: IContactData[];
+    isLoading: boolean;
+    submitContactsResponseHandler: (data: any) => void;
+    submitContactsErrorHandler: (error: any) => void;
 }
 
 const renderContact = (contactData: IContactData, key: number) => (
@@ -24,12 +26,18 @@ const renderContact = (contactData: IContactData, key: number) => (
 );
 
 const Contacts = (props: IContactsProps) => {
-    const { contactsData, isLoading } = props;
+    const {
+        contactsData,
+        isLoading,
+        submitContactsResponseHandler,
+        submitContactsErrorHandler
+    } = props;
     const { getLocalizedString } = React.useContext(LocalizationContext);
 
     const contacts = contactsData.map((contactData, i) => renderContact(contactData, i));
 
     const createFormParameters = {
+        requestName: "createcontact",
 		header: getLocalizedString("CONTACTS_CREATE_FORM_HEADER"),
 		fields: [
             {
@@ -43,17 +51,21 @@ const Contacts = (props: IContactsProps) => {
                 description: getLocalizedString("CONTACTS_CREATE_FORM_INPUT_DESCRIPTION")
             },
             {
-                key: "title",
+                key: "link",
                 type: FORM_TYPE.TEXT_INPUT,
                 description: getLocalizedString("CONTACTS_CREATE_FORM_INPUT_LINK")
             }
 		]
-	}
+    };
 
     return (
         <div className={classes.Container}>
             <h1 className={classes.Header}>{getLocalizedString("CONTACTS_HEADER")}</h1>
-            <CreateFormProvider createFormParameters={createFormParameters} />
+            <CreateFormProvider
+                createFormParameters={createFormParameters}
+                handleSubmitResponseHandler={submitContactsResponseHandler}
+                handleSubmitErrorHandler={submitContactsErrorHandler}
+            />
             {isLoading ? <LoadingBubbles isLoading={true} containerStyles={{width: "100%"}} /> : contacts}
         </div>  
     );

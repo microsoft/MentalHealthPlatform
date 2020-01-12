@@ -1,4 +1,6 @@
-const {
+import mongodb from 'mongodb';
+
+import {
 	USERS_COLLECTION,
 	CHATS_COLLECTION,
 	MESSAGE_COLLECTION,
@@ -7,9 +9,9 @@ const {
 	DATABASE_NAME,
 	SUCCESS_STATUS_MESSAGE,
 	FAILED_STATUS_MESSAGE
-} = require('../constants.js');
+} from './../constants';
 
-const signUp = (mongoClient, postReq, postRes) => {
+export const signUp = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Signing up...");
 
 	const obj = postReq.body;
@@ -42,7 +44,7 @@ const signUp = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const login = (mongoClient, postReq, postRes) => {
+export const login = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Logging in...");
 
 	const obj = postReq.body;
@@ -67,7 +69,7 @@ const login = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const sendMessage = (mongoClient, postReq, postRes) => {
+export const sendMessage = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Sending message...");
 
 	const obj = postReq.body;
@@ -93,7 +95,7 @@ const sendMessage = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const createChat = (mongoClient, postReq, postRes) => {
+export const createChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Creating chat...");
 
 	const obj = postReq.body;
@@ -135,7 +137,7 @@ const createChat = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const createContact = (mongoClient, postReq, postRes) => {
+export const createContact = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Creating contact...");
 
 	const obj = postReq.body;
@@ -161,12 +163,4 @@ const createContact = (mongoClient, postReq, postRes) => {
 			});
 		});
 	});
-};
-
-module.exports = {
-	signUp,
-	login,
-	sendMessage,
-	createChat,
-	createContact
 };

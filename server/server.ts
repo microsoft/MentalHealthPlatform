@@ -2,15 +2,16 @@
 // Licensed under the MIT license.
 
 // Imports for Express
-const express = require('express');
+import express from 'express';
 const app = express();
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 
 // Imports for MongoDB
-const mongoClient = require('mongodb').MongoClient;
+import mongodb from 'mongodb';
+const mongoClient = mongodb.MongoClient;
 
 // Import requests
-const {
+import {
 	getTopics,
 	getChatPreviews,
 	getTrendingPosts,
@@ -20,14 +21,14 @@ const {
 	getEvents,
 	getContacts,
 	getNews
-} = require('./requests/get-requests.js');
-const {
+} from './requests/get-requests';
+import {
 	signUp,
 	login,
 	sendMessage,
 	createChat,
 	createContact
-} = require('./requests/post-requests');
+} from './requests/post-requests';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

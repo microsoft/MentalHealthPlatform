@@ -1,6 +1,7 @@
-const ObjectId = require('mongodb').ObjectID;
+import mongodb from 'mongodb';
+const ObjectId = mongodb.ObjectID;
 
-const {
+import {
 	TOPICS_COLLECTION,
 	CHATS_COLLECTION,
 	MESSAGE_COLLECTION,
@@ -11,9 +12,9 @@ const {
 	MONGO_URL,
 	DATABASE_NAME,
 	SUCCESS_STATUS_MESSAGE
-} = require('../constants.js');
+} from './../constants';
 
-const getTopics = (mongoClient, postReq, postRes) => {
+export const getTopics = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Retrieving topics...");
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
@@ -28,7 +29,7 @@ const getTopics = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getChatPreviews = (mongoClient, postReq, postRes) => {
+export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting chat previews...");
 
 	const obj = postReq.query;
@@ -64,11 +65,9 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 			if (chatRes.length === 0) {
 				postRes.json([]);
 				return;
-			}
+			}			
 
-			const chatPreviewsObj = {};
-
-			chatPreviewsObj.chatPreviews = chatRes.map(chat => {
+			const chatPreviews =  chatRes.map(chat => {
 				return {
 					_id: chat._id,
 					avatarId: chat.userdetail.avatarID,
@@ -82,7 +81,7 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 				};
 			});
 
-			dbo.collection(TOPICS_COLLECTION).find({ _id: ObjectId(obj.topicId) }).toArray((topicErr, topicRes) => {
+			dbo.collection(TOPICS_COLLECTION).find({ _id: new ObjectId(obj.topicId) }).toArray((topicErr, topicRes) => {
 				if (topicErr) throw topicErr;
 	
 				const title = topicRes && topicRes[0] && topicRes[0].topicTitle;
@@ -91,10 +90,13 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 					console.log("Topic title cannot be found");
 				}
 				else {
-					chatPreviewsObj.chatTitle = title;
-				}
+					const chatPreviewsObj = {
+						chatPreviews,
+						chatTitle: title
+					};
 
-				postRes.json(chatPreviewsObj);
+					postRes.json(chatPreviewsObj);
+				}				
 			});
 
 			db.close();
@@ -102,7 +104,7 @@ const getChatPreviews = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getTrendingPosts = (mongoClient, postReq, postRes) => {
+export const getTrendingPosts = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting trending posts...");
 
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
@@ -118,9 +120,7 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 				return;
 			}
 
-			const trendingPostsObj = {};
-
-			trendingPostsObj.chatPreviews = chatRes.map(chat => {
+			const chatPreviews = chatRes.map(chat => {
 				return {
 					title: chat.chatTitle,
 					description: chat.desc,
@@ -129,6 +129,10 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 				};
 			});
 
+			const trendingPostsObj = {
+				chatPreviews
+			};
+
 			postRes.json(trendingPostsObj);
 
 			db.close();
@@ -136,7 +140,7 @@ const getTrendingPosts = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getTrendingKeywords = (mongoClient, postReq, postRes) => {
+export const getTrendingKeywords = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting trending keywords...");
 	
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
@@ -158,7 +162,7 @@ const getTrendingKeywords = (mongoClient, postReq, postRes) => {
 
 			const words = messages.split(" ");
 
-			const map = {};
+			const map: { [key: string]: number } = {};
 			for (const word of words) {
 				const currentWord = word.replace("?", "").replace("!", "").replace(".", "").replace(",", "");
 				if (map[currentWord]) {
@@ -169,26 +173,30 @@ const getTrendingKeywords = (mongoClient, postReq, postRes) => {
 				}
 			}
 
-			let countedWords = [];
+			interface ICountedWord {
+				word: string;
+				count: number;
+			}
+
+			let countedWords: ICountedWord[] = [];
 
 			const keys = Object.keys(map);
 			for (let i = 0; i < keys.length; i++) {
 				const currentWord = keys[i];
 				if (currentWord.length > 5) {
-					countedWords.push([currentWord, map[currentWord]]);
+					countedWords.push({
+						word: currentWord,
+						count: map[currentWord]
+					});
 				}
 			}
 
-			countedWords.sort((a, b) => b[1] - a[1]);
+			countedWords.sort((a, b) => b.count - a.count);
 			countedWords = countedWords.slice(0, 10);
 
-			const trendingKeywordsObj = {};
-			trendingKeywordsObj.trendingKeywords = countedWords.map(current => {
-				return {
-					word: current[0],
-					count: current[1]
-				};
-			});
+			const trendingKeywordsObj = {
+				trendingKeywords: countedWords
+			};
 
 			postRes.json(trendingKeywordsObj);
 
@@ -197,7 +205,7 @@ const getTrendingKeywords = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getChat = (mongoClient, postReq, postRes) => {
+export const getChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting chat...");
 
 	const obj = postReq.query;
@@ -238,8 +246,7 @@ const getChat = (mongoClient, postReq, postRes) => {
 			
 			dbo.collection(CHATS_COLLECTION).updateOne(
 				{ "chatID": obj.chatId },
-				{ $inc: { numberofviews: SUCCESS_STATUS_MESSAGE } },
-				true
+				{ $inc: { numberofviews: SUCCESS_STATUS_MESSAGE } }
 			);
 
 			const messages = chatRes.map(message => {
@@ -251,22 +258,22 @@ const getChat = (mongoClient, postReq, postRes) => {
 				};
 			});
 
-			const chatObj = {
-				numberOfReplies: chatRes.length,
-				messages: messages
-			};
+			
 
-			dbo.collection(CHATS_COLLECTION).find({ _id: ObjectId(obj.chatId) }).toArray((chatErr, chatRes) => {
+			dbo.collection(CHATS_COLLECTION).find({ _id: new ObjectId(obj.chatId) }).toArray((chatErr, chatRes) => {
 				if (chatErr) throw chatErr;
 	
 				const title = chatRes && chatRes[0] && chatRes[0].chatTitle;
 				
-				if (title === undefined) {
+				if (!title) {
 					console.log("Chat title cannot be found");
 				}
-				else {
-					chatObj.chatTitle = title;
-				}
+
+				const chatObj = {
+					numberOfReplies: chatRes.length,
+					messages: messages,
+					chatTitle: title ?? ""
+				};
 
 				postRes.json(chatObj);
 			});
@@ -276,7 +283,7 @@ const getChat = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getTherapists = (mongoClient, postReq, postRes) => {
+export const getTherapists = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting therapists...");
 	
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
@@ -302,7 +309,7 @@ const getTherapists = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getEvents = (mongoClient, postReq, postRes) => {
+export const getEvents = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting events...");
 	
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
@@ -328,7 +335,7 @@ const getEvents = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getContacts = (mongoClient, postReq, postRes) => {
+export const getContacts = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting contacts...");
 	
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
@@ -354,7 +361,7 @@ const getContacts = (mongoClient, postReq, postRes) => {
 	});
 };
 
-const getNews = (mongoClient, postReq, postRes) => {
+export const getNews = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting news...");
 	
 	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
@@ -378,8 +385,4 @@ const getNews = (mongoClient, postReq, postRes) => {
 			db.close();
 		});
 	});
-};
-
-module.exports = {
-    getTopics, getChatPreviews, getTrendingPosts, getTrendingKeywords, getChat, getTherapists, getEvents, getContacts, getNews
 };

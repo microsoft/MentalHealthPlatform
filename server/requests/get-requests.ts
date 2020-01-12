@@ -2,25 +2,18 @@ import mongodb from 'mongodb';
 const ObjectId = mongodb.ObjectID;
 
 import {
-	TOPICS_COLLECTION,
-	CHATS_COLLECTION,
-	MESSAGE_COLLECTION,
-	THERAPISTS_COLLECTION,
-	EVENTS_COLLECTION,
-	CONTACTS_COLLECTION,
-	NEWS_COLLECTION,
-	MONGO_URL,
-	DATABASE_NAME,
-	SUCCESS_STATUS_MESSAGE
+	COLLECTIONS,
+	STATUS_CODE,
+	MONGO_CONSTANTS
 } from './../constants';
 
 export const getTopics = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Retrieving topics...");
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(TOPICS_COLLECTION).find().toArray((findErr, findRes) => {
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.TOPICS_COLLECTION).find().toArray((findErr, findRes) => {
 			if (findErr) throw findErr;
 
 			db.close();
@@ -33,11 +26,11 @@ export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq
 	console.log("Getting chat previews...");
 
 	const obj = postReq.query;
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(CHATS_COLLECTION).aggregate(
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.CHATS_COLLECTION).aggregate(
 			[
 				{
 					$lookup: {
@@ -81,7 +74,7 @@ export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq
 				};
 			});
 
-			dbo.collection(TOPICS_COLLECTION).find({ _id: new ObjectId(obj.topicId) }).toArray((topicErr, topicRes) => {
+			dbo.collection(COLLECTIONS.TOPICS_COLLECTION).find({ _id: new ObjectId(obj.topicId) }).toArray((topicErr, topicRes) => {
 				if (topicErr) throw topicErr;
 	
 				const title = topicRes && topicRes[0] && topicRes[0].topicTitle;
@@ -107,11 +100,11 @@ export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq
 export const getTrendingPosts = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting trending posts...");
 
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(5)
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(5)
 		.toArray((chatErr, chatRes) => {
 			if (chatErr) throw chatErr;
 
@@ -143,11 +136,11 @@ export const getTrendingPosts = (mongoClient: typeof mongodb.MongoClient, postRe
 export const getTrendingKeywords = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting trending keywords...");
 	
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(MESSAGE_COLLECTION).find().sort({ date : -1 }).limit(10)
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.MESSAGE_COLLECTION).find().sort({ date : -1 }).limit(10)
 		.toArray((messageErr, messageRes) => {
 			if (messageErr) throw messageErr;
 
@@ -209,11 +202,11 @@ export const getChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, p
 	console.log("Getting chat...");
 
 	const obj = postReq.query;
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(MESSAGE_COLLECTION).aggregate(
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.MESSAGE_COLLECTION).aggregate(
 			[
 				{
 					$lookup: {
@@ -244,9 +237,9 @@ export const getChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, p
 			}
 
 			
-			dbo.collection(CHATS_COLLECTION).updateOne(
+			dbo.collection(COLLECTIONS.CHATS_COLLECTION).updateOne(
 				{ "chatID": obj.chatId },
-				{ $inc: { numberofviews: SUCCESS_STATUS_MESSAGE } }
+				{ $inc: { numberofviews: STATUS_CODE.SUCCESS } }
 			);
 
 			const messages = chatRes.map(message => {
@@ -260,7 +253,7 @@ export const getChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, p
 
 			
 
-			dbo.collection(CHATS_COLLECTION).find({ _id: new ObjectId(obj.chatId) }).toArray((chatErr, chatRes) => {
+			dbo.collection(COLLECTIONS.CHATS_COLLECTION).find({ _id: new ObjectId(obj.chatId) }).toArray((chatErr, chatRes) => {
 				if (chatErr) throw chatErr;
 	
 				const title = chatRes && chatRes[0] && chatRes[0].chatTitle;
@@ -286,11 +279,11 @@ export const getChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, p
 export const getTherapists = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting therapists...");
 	
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(THERAPISTS_COLLECTION).find().limit(3)
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.THERAPISTS_COLLECTION).find().limit(3)
 		.toArray((therapistsErr, therapistsRes) => {
 			if (therapistsErr) throw therapistsErr;
 			
@@ -312,11 +305,11 @@ export const getTherapists = (mongoClient: typeof mongodb.MongoClient, postReq: 
 export const getEvents = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting events...");
 	
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(EVENTS_COLLECTION).find().limit(3)
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.EVENTS_COLLECTION).find().limit(3)
 		.toArray((eventsErr, eventsRes) => {
 			if (eventsErr) throw eventsErr;
 			
@@ -338,11 +331,11 @@ export const getEvents = (mongoClient: typeof mongodb.MongoClient, postReq: any,
 export const getContacts = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting contacts...");
 	
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(CONTACTS_COLLECTION).find()
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.CONTACTS_COLLECTION).find()
 		.toArray((contactsErr, contactsRes) => {
 			if (contactsErr) throw contactsErr;
 			
@@ -364,11 +357,11 @@ export const getContacts = (mongoClient: typeof mongodb.MongoClient, postReq: an
 export const getNews = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
 	console.log("Getting news...");
 	
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (err, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(NEWS_COLLECTION).find()
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.NEWS_COLLECTION).find()
 		.toArray((newsErr, newsRes) => {
 			if (newsErr) throw newsErr;
 			

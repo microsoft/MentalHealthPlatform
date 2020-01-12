@@ -1,14 +1,9 @@
 import mongodb from 'mongodb';
 
 import {
-	USERS_COLLECTION,
-	CHATS_COLLECTION,
-	MESSAGE_COLLECTION,
-	CONTACTS_COLLECTION,
-	MONGO_URL,
-	DATABASE_NAME,
-	SUCCESS_STATUS_MESSAGE,
-	FAILED_STATUS_MESSAGE
+	COLLECTIONS,
+	STATUS_CODE,
+	MONGO_CONSTANTS
 } from './../constants';
 
 export const signUp = (mongoClient: typeof mongodb.MongoClient, postReq: any, postRes: any) => {
@@ -17,28 +12,28 @@ export const signUp = (mongoClient: typeof mongodb.MongoClient, postReq: any, po
 	const obj = postReq.body;
 	const username = obj.username;
 
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
 
 		// Verify if user already exists
-		const dbo = db.db(DATABASE_NAME);		
-		dbo.collection(USERS_COLLECTION).find({ username }).toArray((findErr, findRes) => {
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);		
+		dbo.collection(COLLECTIONS.USERS_COLLECTION).find({ username }).toArray((findErr, findRes) => {
 			if (findErr) throw findErr;
 
 			if (findRes.length != 0) {
 				console.log("Username already exists: " + username);
 				db.close();
-				postRes.json({ statusMessage: FAILED_STATUS_MESSAGE });
+				postRes.json({ statusMessage: STATUS_CODE.FAILURE });
 				return;
 			}
 
 			// Insert user into database
-			dbo.collection(USERS_COLLECTION).insertOne(obj, (insertErr, insertRes) => {
+			dbo.collection(COLLECTIONS.USERS_COLLECTION).insertOne(obj, (insertErr, insertRes) => {
 				if (insertErr) throw insertErr;
 
 				console.log("User created: ", username);
 				db.close();
-				postRes.json({ statusMessage: SUCCESS_STATUS_MESSAGE });
+				postRes.json({ statusMessage: STATUS_CODE.SUCCESS });
 			});
 		});
 	});
@@ -48,23 +43,23 @@ export const login = (mongoClient: typeof mongodb.MongoClient, postReq: any, pos
 	console.log("Logging in...");
 
 	const obj = postReq.body;
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
 
 		// Verify if entry exists in users collection
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(USERS_COLLECTION).find({"pass": obj["pass"]}).toArray((findErr, findRes) => {
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.USERS_COLLECTION).find({"pass": obj["pass"]}).toArray((findErr, findRes) => {
 			if (findErr) throw findErr;
 
 			if (findRes.length != 0) {
 				console.log("Login successful");
 				db.close();
-				postRes.json({ statusMessage: SUCCESS_STATUS_MESSAGE });
+				postRes.json({ statusMessage: STATUS_CODE.SUCCESS });
 				return;
 			}
 
 			console.log("Login failed");
-			postRes.json({ statusMessage: FAILED_STATUS_MESSAGE });
+			postRes.json({ statusMessage: STATUS_CODE.FAILURE });
 		});
 	});
 };
@@ -73,7 +68,7 @@ export const sendMessage = (mongoClient: typeof mongodb.MongoClient, postReq: an
 	console.log("Sending message...");
 
 	const obj = postReq.body;
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;		
 
 		const msgObj = {
@@ -85,12 +80,12 @@ export const sendMessage = (mongoClient: typeof mongodb.MongoClient, postReq: an
 		};
 
 		// Insert message into database
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(MESSAGE_COLLECTION).insertOne(msgObj, (insertErr, insertRes) => {			
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.MESSAGE_COLLECTION).insertOne(msgObj, (insertErr, insertRes) => {			
 			if (insertErr) throw insertErr;
 			
 			db.close();
-			postRes.json({ statusMessage: SUCCESS_STATUS_MESSAGE });
+			postRes.json({ statusMessage: STATUS_CODE.SUCCESS });
 		});
 	});
 };
@@ -99,7 +94,7 @@ export const createChat = (mongoClient: typeof mongodb.MongoClient, postReq: any
 	console.log("Creating chat...");
 
 	const obj = postReq.body;
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
 
 		// Create new chat object
@@ -121,15 +116,15 @@ export const createChat = (mongoClient: typeof mongodb.MongoClient, postReq: any
 		};		
 
 		// Insert newly created chat into database
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(CHATS_COLLECTION).insertOne(chatObj, (insertChatErr, insertChatRes) => {
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.CHATS_COLLECTION).insertOne(chatObj, (insertChatErr, insertChatRes) => {
 			if (insertChatErr) throw insertChatErr;
 			
 			// Insert message into database
-			dbo.collection(MESSAGE_COLLECTION).insertOne(msgObj, (insertMsgErr, insertMsgRes) => {
+			dbo.collection(COLLECTIONS.MESSAGE_COLLECTION).insertOne(msgObj, (insertMsgErr, insertMsgRes) => {
 				db.close();
 				postRes.json({
-					statusMessage: SUCCESS_STATUS_MESSAGE,
+					statusMessage: STATUS_CODE.SUCCESS,
 					chatId: insertChatRes.ops[0]._id
 				});
 			});
@@ -141,7 +136,7 @@ export const createContact = (mongoClient: typeof mongodb.MongoClient, postReq: 
 	console.log("Creating contact...");
 
 	const obj = postReq.body;
-	mongoClient.connect(MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
+	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (connerErr, db) => {
 		if (connerErr) throw connerErr;
 
 		// Create new contact object
@@ -152,13 +147,13 @@ export const createContact = (mongoClient: typeof mongodb.MongoClient, postReq: 
 		};
 
 		// Insert newly created contact into database
-		const dbo = db.db(DATABASE_NAME);
-		dbo.collection(CONTACTS_COLLECTION).insertOne(contactObj, (insertChatErr, insertChatRes) => {
+		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
+		dbo.collection(COLLECTIONS.CONTACTS_COLLECTION).insertOne(contactObj, (insertChatErr, insertChatRes) => {
 			if (insertChatErr) throw insertChatErr;
 
 			db.close();
 			postRes.json({
-				statusMessage: SUCCESS_STATUS_MESSAGE,
+				statusMessage: STATUS_CODE.SUCCESS,
 				chatId: insertChatRes.ops[0]._id
 			});
 		});

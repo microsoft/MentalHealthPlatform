@@ -13,17 +13,17 @@ const DEFAULT_COLOUR_NAME: { [key: string]: string } = {
 const getDefaultColour = (colourName: string) => {
     switch (colourName) {
         case DEFAULT_COLOUR_NAME.YELLOW:
-            return '#YELLOW';
+            return 'YELLOW';
         case DEFAULT_COLOUR_NAME.GREEN:
-            return '#GREEN';
+            return 'GREEN';
         case DEFAULT_COLOUR_NAME.RED:
-            return '#RED';
+            return 'RED';
         case DEFAULT_COLOUR_NAME.SILVER:
-            return '#SILVER';
+            return 'SILVER';
         case DEFAULT_COLOUR_NAME.PURPLE:
-            return '#PURPLE';
+            return 'PURPLE';
         case DEFAULT_COLOUR_NAME.BLUE:
-            return '#BLUE';
+            return 'BLUE';
         default:
             return '';
     }

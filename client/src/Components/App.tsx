@@ -11,7 +11,7 @@ import NavigationBar from './Navigation/navigation-bar';
 import { Topics } from './Topics/topics-provider';
 import { SignupLogin } from './SignupLogin/signup-login-provider';
 import { Forum } from './Forum/forum-provider';
-import { Chat } from './Chat/chat-provider';   
+import { Chat } from './Chat/chat-provider';
 import { CreateChat } from './CreateChat/create-chat-provider';
 import { Contacts } from './Contacts/contacts-provider';
 import { News } from './News/news-provider';
@@ -20,6 +20,7 @@ import Crisis from './Crisis/crisis';
 import Therapists from './Therapists/therapists-provider';
 import Events from './Events/events-provider';
 import { LocalizationContext } from './LocalizationProvider';
+import ColourPicker from './ColourPicker/ColourPicker';
 import * as classes from './app.css';
 
 const AppBody = () => (
@@ -61,6 +62,7 @@ const App = () => (
         <BrowserRouter>
             <div className={classes.AppContainer}>
                 <NavigationBar />
+                <ColourPicker />
                 <AppBody />
                 <AppFooter />
             </div>

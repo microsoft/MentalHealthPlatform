@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+}
+
+.item {
+    border: 2px solid black;
+}
+
+.colourCircle {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: relative;
+}

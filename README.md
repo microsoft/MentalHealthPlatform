@@ -39,13 +39,30 @@ https://nodejs.org/.
 
     https://docs.microsoft.com/en-us/azure/virtual-machines/windows/install-mongodb
 
-3.  After installing MongoDB, launch the MongoDB terminal by using the following command:
+3. Create a directory to store the data.
+
+    ```
+    mkdir <path>
+    ```
+
+4. Set the path for storing the data: 
+
+    ```
+    mongod --dbpath /data/<path>
+    ```
+5. Run the service using the following command:
+
+    ```
+    brew services start mongodb-community@4.2
+    ```
+
+6.  After installing MongoDB, launch the MongoDB terminal by using the following command:
   
     ```
     mongo
     ```
 
-4.  To add sample data, enter the commands listed in the **"docs/database_ commands.txt"** file of this repository
+7.  To add sample data, enter the commands listed in the **"docs/database_ commands.txt"** file of this repository
 
 ## Setting up the server
 
@@ -64,7 +81,7 @@ https://nodejs.org/.
 3.  Run the server:
 
     ```
-    node server.js
+    yarn start
     ```
     
     The console should then print a statement about the server running on a certain port:

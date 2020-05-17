@@ -11,18 +11,6 @@
 		"description": "Contacts menu item",
 		"value": "Contacts"
 	},
-	"NAVIGATION_BAR_NEWS": {
-		"description": "News menu item",
-		"value": "Nouvelles"
-	},
-	"NAVIGATION_BAR_EVENTS": {
-		"description": "Events menu item",
-		"value": "Événements"
-	},
-	"NAVIGATION_BAR_THERAPISTS": {
-		"description": "Therapists menu item",
-		"value": "Thérapeutes"
-	},
 	"NAVIGATION_BAR_LOGIN": {
 		"description": "Login button",
 		"value": "Connectez"

@@ -52,9 +52,6 @@ const NavigationBar = () => {
                 <Link className={classes.Link} to={`/`}>{getLocalizedString("NAVIGATION_BAR_DASHBOARD")}</Link>
                 <Link className={classes.Link} to={`/topics`}>{getLocalizedString("NAVIGATION_BAR_FORUMS")}</Link>
                 <Link className={classes.Link} to={`/contacts`}>{getLocalizedString("NAVIGATION_BAR_CONTACTS")}</Link>
-                <Link className={classes.Link} to={`/news`}>{getLocalizedString("NAVIGATION_BAR_NEWS")}</Link>
-                <Link className={classes.Link} to={`/events`}>{getLocalizedString("NAVIGATION_BAR_EVENTS")}</Link>
-                <Link className={classes.Link} to={`/therapists`}>{getLocalizedString("NAVIGATION_BAR_THERAPISTS")}</Link>
             </div>
             <div className={classes.NavigationBarRight}>
                 {renderNameField()}

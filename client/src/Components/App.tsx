@@ -14,10 +14,8 @@ import { Forum } from './Forum/forum-provider';
 import { Chat } from './Chat/chat-provider';   
 import { CreateChat } from './CreateChat/create-chat-provider';
 import { Contacts } from './Contacts/contacts-provider';
-import { News } from './News/news-provider';
 import Dashboard from './Dashboard/dashboard';
 import Crisis from './Crisis/crisis';
-import Therapists from './Therapists/therapists-provider';
 import Events from './Events/events-provider';
 import { LocalizationContext } from './LocalizationProvider';
 import * as classes from './app.css';
@@ -27,12 +25,10 @@ const AppBody = () => (
         <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/crisis" component={Crisis} />
-        <Route exact path="/therapists" component={Therapists} />
         <Route exact path="/events" component={Events} />
         <Route exact path="/topics" component={Topics} />
         <Route exact path="/login" component={SignupLogin} />
         <Route exact path="/contacts" component={Contacts} />
-        <Route exact path="/news" component={News} />
         <Route exact path="/topics/topic:topicID" component={Forum} />
         <Route exact path="/topics/topic:topicID/chat/:chatID" component={Chat} />
         <Route exact path="/topics/topic:topicID/createChat" component={CreateChat} />

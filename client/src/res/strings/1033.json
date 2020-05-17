@@ -11,18 +11,6 @@
 		"description": "Contacts menu item",
 		"value": "Contacts"
 	},
-	"NAVIGATION_BAR_NEWS": {
-		"description": "News menu item",
-		"value": "News"
-	},
-	"NAVIGATION_BAR_EVENTS": {
-		"description": "Events menu item",
-		"value": "Events"
-	},
-	"NAVIGATION_BAR_THERAPISTS": {
-		"description": "Therapists menu item",
-		"value": "Therapists"
-	},
 	"NAVIGATION_BAR_LOGIN": {
 		"description": "Login button",
 		"value": "Login"
@@ -35,26 +23,6 @@
 		"description": "Copyright label for footer; {0} date, {1} Organization name",
 		"value": "Copyright \u00A9 {0} {1} All rights reserved"
 	},
-	"DASHBOARD_PREVIEW_RESOURCES_HEADER": {
-		"description": "Header for Resources dashboard preview",
-		"value": "Resources"
-	},
-	"DASHBOARD_PREVIEW_NEWS_HEADER": {
-		"description": "Header for News dashboard preview",
-		"value": "Latest News"
-	},
-	"DASHBOARD_PREVIEW_NEWS_BUTTON": {
-		"description": "Button label for News dashboard preview",
-		"value": "View all latest news \u2192"
-	},
-	"DASHBOARD_PREVIEW_THERAPISTS_HEADER": {
-		"description": "Header for Therapists dashboard preview",
-		"value": "Find a therapist in your area"
-	},
-	"DASHBOARD_PREVIEW_THERAPISTS_BUTTON": {
-		"description": "Button label for Therapists dashboard preview",
-		"value": "Talk to someone \u2192"
-	},
 	"DASHBOARD_PREVIEW_THRENDING_POSTS_HEADER": {
 		"description": "Header for Trending Posts dashboard preview",
 		"value": "Trending posts in your network"
@@ -63,33 +31,9 @@
 		"description": "Button label for Trending Posts dashboard preview",
 		"value": "View all posts \u2192"
 	},
-	"DASHBOARD_PREVIEW_STATISTICS_HEADER": {
-		"description": "Header for Statistics dashboard preview",
-		"value": "Your statistics this week"
-	},
-	"DASHBOARD_PREVIEW_STATISTICS_BUTTON": {
-		"description": "Button label for Statistics dashboard preview",
-		"value": "View statistics \u2192"
-	},
-	"DASHBOARD_PREVIEW_STATISTICS_HOUR_LABEL": {
-		"description": "Hour unit label for Statistics dashboard preview",
-		"value": "hour"
-	},
-	"DASHBOARD_PREVIEW_STATISTICS_HOURS_LABEL": {
-		"description": "Hours unit label for Statistics dashboard preview",
-		"value": "hours"
-	},
 	"DASHBOARD_PREVIEW_TRENDING_KEYWORDS_HEADER": {
 		"description": "Header for Trending Keywords dashboard preview",
 		"value": "Trending Keywords"
-	},
-	"DASHBOARD_PREVIEW_UPCOMING_EVENTS_HEADER": {
-		"description": "Header for Upcoming Events dashboard preview",
-		"value": "Upcoming Events"
-	},
-	"DASHBOARD_PREVIEW_UPCOMING_EVENTS_BUTTON": {
-		"description": "Button label for Upcoming Events dashboard preview",
-		"value": "View all upcoming events \u2192"
 	},
 	"DASHBOARD_PREVIEW_CRISIS_BUTTON": {
 		"description": "Button label for Crisis dashboard preview",
@@ -150,18 +94,6 @@
 	"EVENTS_INPUT_PLACEHOLDER": {
 		"description": "Input placeholder for Events page",
 		"value": "Search for events by title, description, or location..."
-	},
-	"THERAPISTS_HEADER": {
-		"description": "Header for Therapists page",
-		"value": "Therapists"
-	},
-	"THERAPISTS_INPUT_PLACEHOLDER": {
-		"description": "Input placeholder for Therapists page",
-		"value": "Search for therapists by name, title, location, or description"
-	},
-	"NEWS_HEADER": {
-		"description": "Header for News page",
-		"value": "Latest News"
 	},
 	"CONTACTS_HEADER": {
 		"description": "Header for Contacts page",

@@ -9,10 +9,7 @@ db.createCollection("Users");
 db.createCollection("Topics");
 db.createCollection("Chats");
 db.createCollection("Message");
-db.createCollection("Therapists");
-db.createCollection("Events");
 db.createCollection("Contacts");
-db.createCollection("News");
 
 // Create date object for populating collections
 var myDateString = Date();
@@ -23,23 +20,9 @@ db.Users.insertOne({_id:'Eddy',pass:'Eddy',displayname:'Eddy',avatarID:'2'});
 db.Users.insertOne({_id:'Khush',pass:'Khush',displayname:'Khush',avatarID:'3'});
 db.Users.insertOne({_id:'Aileen',pass:'Aileen',displayname:'Aileen',avatarID:'4'});
 
-// CREATE NEWS
-db.News.insertOne({title:'New headspace partnership!',desc:'Employees now get 20% off any Headspace membership. Come get your discount now!',date:Date()});
-db.News.insertOne({title:'Executive Decision',desc:'Satya Nadella sits down to discuss about the importance of mental health',date:Date()});
-
 // CREATE CONTACTS
 db.Contacts.insertOne({title:'National Suicide Prevention Lifeline, 1-800-273-TALK (8255) or Live Online Chat',desc:'If you or someone you know is suicidal or in emotional distress, contact the National Suicide Prevention Lifeline.',link:'http://www.suicidepreventionlifeline.org/GetHelp/LifelineChat.aspx'});
 db.Contacts.insertOne({title:'SAMHSA\'s National Helpline – 1-800-662-HELP (4357)',desc:'SAMHSA\`s National Helpline is a free, confidential, 24/7, 365-day-a-year treatment referral and information service (in English and Spanish) for individuals and families facing mental and/or substance use disorders.',link:'https://www.samhsa.gov/find-help/national-helpline'});
-
-// CREATE THERAPISTS
-db.Therapists.insertOne({title:'Michael Johnson',subtitle:'Counselor, MA, LMHCA',desc:'I believe that one\'s mental state is as important as one\'s physical state.',phone:'(206) 456-7890',location:'Seattle, WA'});
-db.Therapists.insertOne({title:'Samantha Smith',subtitle:'Counselor, MA, LMHCA',desc:'I have over 10 years of experience in providing mental therapy.',phone:'(206) 456-7890',location:'Bellevue, WA'});
-db.Therapists.insertOne({title:'Tim Howard',subtitle:'Counselor, MA, LMHCA',desc:'If you need help with you mental health, I'm here to help.',phone:'(206) 456-7890',location:'Redmond, WA'});
-
-// CREATE EVENTS
-db.Events.insertOne({title:'Monthly Stress Forum',date:Date(),location:'Microsoft Building 321',desc:'At building 321, discussion about stress and how it affects our bodies'});
-db.Events.insertOne({title:'Picnic',date:Date(),location:'Marymour Park',desc:'Come for a picnic at Marymour park. All are welcome!'});
-db.Events.insertOne({title:'Roundtable Discussion about Anxiety',date:Date(),location:'Chatime, Bellevue',desc:'Open dialog about anxiety'});
 
 // TOPIC
 stressId = db.Topics.insertOne({topicTitle:'Stress',image:'1'}).insertedId.str;

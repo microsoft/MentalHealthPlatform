@@ -26,6 +26,9 @@ export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq
 	console.log("Getting chat previews...");
 
 	const obj = postReq.query;
+
+	const { topicId } = obj;
+
 	mongoClient.connect(MONGO_CONSTANTS.MONGO_URL, { useNewUrlParser: true }, (err, db) => {
 		if (err) throw err;
 
@@ -48,7 +51,7 @@ export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq
 				},
 				{
 					$match: {
-						topic_id: obj.topicId
+						topic_id: topicId
 					}
 				}
 			]
@@ -77,19 +80,18 @@ export const getChatPreviews = (mongoClient: typeof mongodb.MongoClient, postReq
 			dbo.collection(COLLECTIONS.TOPICS_COLLECTION).find({ _id: new ObjectId(obj.topicId) }).toArray((topicErr, topicRes) => {
 				if (topicErr) throw topicErr;
 	
-				const title = topicRes && topicRes[0] && topicRes[0].topicTitle;
+				const title = topicRes?.[0]?.topicTitle;
 				
 				if (title === undefined) {
 					console.log("Topic title cannot be found");
 				}
-				else {
-					const chatPreviewsObj = {
-						chatPreviews,
-						chatTitle: title
-					};
+				
+				const chatPreviewsObj = {
+					chatPreviews,
+					chatTitle: title ?? ""
+				};
 
-					postRes.json(chatPreviewsObj);
-				}				
+				postRes.json(chatPreviewsObj);
 			});
 
 			db.close();
@@ -264,7 +266,7 @@ export const getChat = (mongoClient: typeof mongodb.MongoClient, postReq: any, p
 
 				const chatObj = {
 					numberOfReplies: chatRes.length,
-					messages: messages,
+					messages,
 					chatTitle: title ?? ""
 				};
 

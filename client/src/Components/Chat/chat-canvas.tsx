@@ -68,55 +68,105 @@ const ChatCanvas = (props: IChatCanvasProps) => {
                 </button>
             </div>
         );
-    }    
+    }   
+    
 
-    return (
-        <div className={classes.Container}>
-            <div className={classes.ChatContainer}>
-                <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                    <div className={classes.ChatHeader}>
-                        <div className={classes.SideColumn}></div>
-                        <h1 className={classes.Title}>{title}</h1>
-                        <div className={classes.SideColumn}>
-                            <table>
-                                <tbody>
-                                    <Icon type='replies' count={replies ? replies : 0} text={getLocalizedString("CHAT_INFO_REPLIES")} />
-                                    <Icon type='views' count={views ? views : 0} text={getLocalizedString("CHAT_INFO_VIEWS")} />
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div className={classes.ChatBody}>
-                        {messages.map((message) => (
-                            <div key={message.id}>
-                                <UserDataContext.Consumer>
-                                {
-                                    (userData) => (
-                                    <Message
-                                        name={message.authorName}
-                                        date={message.date}
-                                        messageBody={message.messageBody}
-                                        isCurrentUser={message.authorName === userData.user.username} />
-                                    )
-                                }
-                                </UserDataContext.Consumer>
-                            </div>
-                        ))}
-                        <LoadingBubbles isLoading={loading}/>
-                    </div>
-                    <div className={classes.Form}>
-                        <UserDataContext.Consumer>
-                        {
-                            (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ?
-                                renderForm(userData)
-                                : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>{getLocalizedString("CHAT_LOGIN_MESSAGE")}</div>
-                        }
-                        </UserDataContext.Consumer>
-                    </div>
-                </div>
+    const fakePost = {
+        title: "I'm so sad",
+        description: "I'm sad because my cat died",
+        author: "John",
+        date: new Date()
+    };
+
+    const fakePost2 = {
+        title: "I'm very sad",
+        description: "I'm sad because my dog died",
+        author: "John II",
+        date: new Date()
+    };
+
+    const fakePost3 = {
+        title: "I'm very super sad",
+        description: "I'm sad because my whole family died",
+        author: "John III",
+        date: new Date()
+    };
+
+    const fakeData = [fakePost, fakePost2, fakePost3];
+
+    const renderPost = (post: any, index:number) => {
+        return (
+            <div className={classes.Post} key={index}>
+                <div className={classes.PostTitle}>{post.title}</div>
+                <div>{post.description}</div>
+                <div>{post.author}</div>
+                <div>{post.date.toString()}</div>
             </div>
-        </div >
-    );
+        );
+    }
+
+    const renderAllPosts = (postData: any) => {
+        const posts = [];
+        for (let i = 0; i<postData.length; i++) {
+            const currentPost = renderPost(postData[i], i);
+            posts.push(currentPost);
+        }
+        return posts;
+    }
+
+    return ( 
+        <div className={classes.PostsContainer}>
+           {renderAllPosts(fakeData)}
+        </div>
+    )
+
+    // return (
+    //     <div className={classes.Container}>
+    //         <div className={classes.ChatContainer}>
+    //             <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    //                 <div className={classes.ChatHeader}>
+    //                     <div className={classes.SideColumn}></div>
+    //                     <h1 className={classes.Title}>{title}</h1>
+    //                     <div className={classes.SideColumn}>
+    //                         <table>
+    //                             <tbody>
+    //                                 <Icon type='replies' count={replies ? replies : 0} text={getLocalizedString("CHAT_INFO_REPLIES")} />
+    //                                 <Icon type='views' count={views ? views : 0} text={getLocalizedString("CHAT_INFO_VIEWS")} />
+    //                             </tbody>
+    //                         </table>
+    //                     </div>
+    //                 </div>
+    //                 <div className={classes.ChatBody}>
+    //                     {messages.map((message) => (
+    //                         <div key={message.id}>
+    //                             <UserDataContext.Consumer>
+    //                             {
+    //                                 (userData) => (
+    //                                 <Message
+    //                                     name={message.authorName}
+    //                                     date={message.date}
+    //                                     messageBody={message.messageBody}
+    //                                     isCurrentUser={message.authorName === userData.user.username} />
+    //                                 )
+    //                             }
+    //                             </UserDataContext.Consumer>
+    //                         </div>
+    //                     ))}
+    //                     <LoadingBubbles isLoading={loading}/>
+    //                 </div>
+    //                 <div className={classes.Form}>
+    //                     <UserDataContext.Consumer>
+    //                     {
+    //                         (userData) => userData.user && userData.user.username && userData.user.username.length > 0 ?
+    //                             renderForm(userData)
+    //                             : <div className={classes.InputField} style={{ color: "#686868", textAlign: "center", flex: 1, cursor: "not-allowed" }}>{getLocalizedString("CHAT_LOGIN_MESSAGE")}</div>
+    //                     }
+    //                     </UserDataContext.Consumer>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div >
+    // );
 };
 
 export default ChatCanvas;

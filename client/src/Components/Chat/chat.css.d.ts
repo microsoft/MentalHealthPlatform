@@ -9,3 +9,6 @@ export const InputField: string;
 export const SubmitButton: string;
 export const SendIcon: string;
 export const Form: string;
+export const PostsContainer: string;
+export const Post: string;
+export const PostTitle: string;

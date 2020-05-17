@@ -89,3 +89,21 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+.PostsContainer {
+    background-color: #FFFFFF;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.Post {
+    margin: 20px 10px;
+}
+
+.PostTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+

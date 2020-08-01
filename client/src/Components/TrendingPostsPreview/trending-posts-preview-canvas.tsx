@@ -15,7 +15,7 @@ interface ITrendingPostsPreviewProps {
     isLoading: boolean
 }
 
-const NUMBER_OF_TRENDING_POSTS_PREVIEWS = 4;
+const NUMBER_OF_TRENDING_POSTS_PREVIEWS = 10;
 
 const renderPost = (postData: IPostPreviewData, key: number) => {
     const topicId = postData.topic_id;

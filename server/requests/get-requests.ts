@@ -106,7 +106,7 @@ export const getTrendingPosts = (mongoClient: typeof mongodb.MongoClient, postRe
 		if (err) throw err;
 
 		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
-		dbo.collection(COLLECTIONS.CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(5)
+		dbo.collection(COLLECTIONS.CHATS_COLLECTION).find().sort({ numberofviews : -1 }).limit(10)
 		.toArray((chatErr, chatRes) => {
 			if (chatErr) throw chatErr;
 
@@ -142,7 +142,7 @@ export const getTrendingKeywords = (mongoClient: typeof mongodb.MongoClient, pos
 		if (err) throw err;
 
 		const dbo = db.db(MONGO_CONSTANTS.DATABASE_NAME);
-		dbo.collection(COLLECTIONS.MESSAGE_COLLECTION).find().sort({ date : -1 }).limit(10)
+		dbo.collection(COLLECTIONS.MESSAGE_COLLECTION).find().sort({ date : -1 }).limit(50)
 		.toArray((messageErr, messageRes) => {
 			if (messageErr) throw messageErr;
 
@@ -187,7 +187,7 @@ export const getTrendingKeywords = (mongoClient: typeof mongodb.MongoClient, pos
 			}
 
 			countedWords.sort((a, b) => b.count - a.count);
-			countedWords = countedWords.slice(0, 10);
+			countedWords = countedWords.slice(0, 20);
 
 			const trendingKeywordsObj = {
 				trendingKeywords: countedWords

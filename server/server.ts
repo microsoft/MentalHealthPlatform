@@ -25,23 +25,35 @@ app.use((req, res, next) => {
 const port = process.env.PORT || 3000;
 app.set('port', port);
 
+const getRequestBuilder = (path: string, request: any) => {
+  return app.get(path, (postReq, postRes) =>
+    request(mongoClient, postReq, postRes)
+  );
+};
+
+const postRequestBuilder = (path: string, request: any) => {
+  return app.post(path, (postReq, postRes) =>
+    request(mongoClient, postReq, postRes)
+  );
+};
+
 // GET requests
-app.get('/gettopics', (postReq, postRes) => GetRequests.getTopics(mongoClient, postReq, postRes));
-app.get('/getchatpreviews', (postReq, postRes) => GetRequests.getChatPreviews(mongoClient, postReq, postRes));
-app.get('/getchat', (postReq, postRes) => GetRequests.getChat(mongoClient, postReq, postRes));
-app.get('/gettrendingposts', (postReq, postRes) => GetRequests.getTrendingPosts(mongoClient, postReq, postRes));
-app.get('/gettrendingkeywords', (postReq, postRes) => GetRequests.getTrendingKeywords(mongoClient, postReq, postRes));
-app.get('/gettherapists', (postReq, postRes) => GetRequests.getTherapists(mongoClient, postReq, postRes));
-app.get('/getevents', (postReq, postRes) => GetRequests.getEvents(mongoClient, postReq, postRes));
-app.get('/getcontacts', (postReq, postRes) => GetRequests.getContacts(mongoClient, postReq, postRes));
-app.get('/getnews', (postReq, postRes) => GetRequests.getNews(mongoClient, postReq, postRes));
+getRequestBuilder("/gettopics", GetRequests.getTopics);
+getRequestBuilder("/getchatpreviews", GetRequests.getChatPreviews);
+getRequestBuilder("/getchat", GetRequests.getChat);
+getRequestBuilder("/gettrendingposts", GetRequests.getTrendingPosts);
+getRequestBuilder("/gettrendingkeywords", GetRequests.getTrendingKeywords);
+getRequestBuilder("/gettherapists", GetRequests.getTherapists);
+getRequestBuilder("/getevents", GetRequests.getEvents);
+getRequestBuilder("/getcontacts", GetRequests.getContacts);
+getRequestBuilder("/getnews", GetRequests.getNews);
 
 // POST requests
-app.post('/signup', (postReq, postRes) => PostRequests.signUp(mongoClient, postReq, postRes));
-app.post('/login', (postReq, postRes) => PostRequests.login(mongoClient, postReq, postRes));
-app.post('/sendmessage', (postReq, postRes) => PostRequests.sendMessage(mongoClient, postReq, postRes));
-app.post('/createchat', (postReq, postRes) => PostRequests.createChat(mongoClient, postReq, postRes));
-app.post('/createcontact', (postReq, postRes) => PostRequests.createContact(mongoClient, postReq, postRes));
+postRequestBuilder("/signup", PostRequests.signUp);
+postRequestBuilder("/login", PostRequests.login);
+postRequestBuilder("/sendmessage", PostRequests.sendMessage);
+postRequestBuilder("/createchat", PostRequests.createChat);
+postRequestBuilder("/createcontact", PostRequests.createContact);
 
 app.listen(app.get('port'), () => {
     console.log(`Server is running on Port ${port}...`);

@@ -19,6 +19,6 @@
     "typescript": "^3.7.4"
   },
   "devDependencies": {
-    "mongodb": "^3.1.4"
+    "mongodb": "^3.1.13"
   }
 }

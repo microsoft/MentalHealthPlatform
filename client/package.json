@@ -17,7 +17,7 @@
   "homepage": "https://github.com/microsoft/MentalHealthPlatform#readme",
   "dependencies": {
     "@types/date-and-time": "^0.6.0",
-    "date-and-time": "^0.6.2",
+    "date-and-time": "^0.14.2",
     "express": "^4.16.3",
     "mongodb": "^3.1.1",
     "mysql": "^2.15.0",

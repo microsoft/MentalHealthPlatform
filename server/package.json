@@ -14,7 +14,7 @@
     "@types/mongodb": "^3.3.14",
     "@types/node": "^13.1.6",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "ts-node": "^8.6.1",
     "typescript": "^3.7.4"
   },
